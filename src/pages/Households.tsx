@@ -8,13 +8,13 @@ import DeleteHouseholdModal from "@/features/households/deleteHouseholdModal";
 import ViewHouseholdModal from "@/features/households/viewHouseholdModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash } from "lucide-react";
-import { useMemo } from "react";
+import { Trash, Home, HomeIcon, UserCheck, UserMinus } from "lucide-react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
 import { sort } from "@/service/householdSort";
-import { useState } from "react";
 import searchHousehold from "@/service/searchHousehold";
+import SummaryCard from "@/components/ui/summarycardhousehold";
 
 const filters = ["All Households", "Numerical", "Renter", "Owner"];
 
@@ -153,8 +153,20 @@ export default function Households() {
     return sortedData;
   }, [searchParams, data, searchQuery]);
 
+  const totalActive = data.filter((item) => item.status === "Active").length;
+  const totalMovedOut = data.filter((item) => item.status === "Moved Out").length;
+  const totalRenter = data.filter((item) => item.type === "Renter").length;
+  const totalOwner = data.filter((item) => item.type === "Owner").length;
+
   return (
     <>
+      <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
+        <SummaryCard title="Active Households" value={totalActive} icon={<UserCheck size={50} />} />
+        <SummaryCard title="Moved Out" value={totalMovedOut} icon={<UserMinus size={50} />} />
+        <SummaryCard title="Renter" value={totalRenter} icon={<HomeIcon size={50} />} />
+        <SummaryCard title="Owner" value={totalOwner} icon={<Home size={50} />} />
+      </div>
+
       <div className="flex gap-5 w-full items-center justify-center">
         <Searchbar
           onChange={(value) => setSearchQuery(value)}

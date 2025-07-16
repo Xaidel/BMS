@@ -9,8 +9,9 @@ import Searchbar from "@/components/ui/searchbar";
 import IssueCertificateModal from "@/features/certificate/issueCertificateModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash } from "lucide-react";
+import { Trash, FileText, CheckCircle, XCircle, ListChecks } from "lucide-react";
 import searchCertificate from "@/service/searchCertificate";
+import SummaryCard from "@/components/ui/summarycardcertificate";
 
 const filters = [
   "All Certificates",
@@ -22,7 +23,6 @@ const filters = [
   "Expired",
 ];
 
-// Certificate type definition
 type Certificate = {
   name: string;
   type: string;
@@ -31,7 +31,6 @@ type Certificate = {
   zone: string;
 };
 
-// Certificate table columns
 const columns: ColumnDef<Certificate>[] = [
   {
     id: "select",
@@ -90,7 +89,6 @@ const columns: ColumnDef<Certificate>[] = [
   },
 ];
 
-// Static data for certificates
 const date: Certificate[] = [
   {
     name: "John Cena",
@@ -122,32 +120,41 @@ const date: Certificate[] = [
   },
 ];
 
-// Main component
 export default function Certificate() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const totalCertificates = date.length;
+  const activeCertificates = date.filter(cert => {
+    const expiry = new Date(cert.date);
+    expiry.setFullYear(expiry.getFullYear() + 1);
+    return new Date() <= expiry;
+  }).length;
+  const expiredCertificates = date.filter(cert => {
+    const expiry = new Date(cert.date);
+    expiry.setFullYear(expiry.getFullYear() + 1);
+    return new Date() > expiry;
+  }).length;
+  const typeCount = date.reduce((acc, curr) => {
+    acc[curr.type] = (acc[curr.type] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+  const mostCommonType = Object.entries(typeCount).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "N/A";
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Certificates";
 
     let sorted = [...date];
 
-    // OR sorting
     if (sortValue === "OR ASC") {
       sorted.sort((a, b) => a.or.localeCompare(b.or));
     } else if (sortValue === "OR DESC") {
       sorted.sort((a, b) => b.or.localeCompare(a.or));
-    }
-
-    // Date sorting
-    else if (sortValue === "Date ASC") {
+    } else if (sortValue === "Date ASC") {
       sorted.sort((a, b) => a.date.getTime() - b.date.getTime());
     } else if (sortValue === "Date DESC") {
       sorted.sort((a, b) => b.date.getTime() - a.date.getTime());
-    }
-
-    // Status filtering
-    else if (sortValue === "Active") {
+    } else if (sortValue === "Active") {
       sorted = sorted.filter((cert) => {
         const oneYearLater = new Date(cert.date);
         oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
@@ -161,7 +168,6 @@ export default function Certificate() {
       });
     }
 
-    // Apply search if needed
     if (searchQuery.trim()) {
       return searchCertificate(searchQuery, sorted);
     }
@@ -176,6 +182,13 @@ export default function Certificate() {
 
   return (
     <>
+      <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
+        <SummaryCard title="Total Certificates" value={totalCertificates} icon={<FileText size={50} />} />
+        <SummaryCard title="Active Certificates" value={activeCertificates} icon={<CheckCircle size={50} />} />
+        <SummaryCard title="Expired Certificates" value={expiredCertificates} icon={<XCircle size={50} />} />
+        <SummaryCard title="Most Common Type" value={mostCommonType} icon={<ListChecks size={50} />} />
+      </div>
+
       <div className="flex gap-5 w-full items-center justify-center mb-4">
         <Searchbar
           onChange={(value) => setSearchQuery(value)}

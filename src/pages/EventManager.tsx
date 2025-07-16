@@ -10,29 +10,24 @@ import { sort } from "@/service/eventSort";
 import searchEvent from "@/service/searchEvent";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash } from "lucide-react";
+import { Trash, CalendarPlus, CalendarCheck, CalendarX2, CalendarClock } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import SummaryCard from "@/components/ui/summarycardeventmanager"; // or create SummaryCardEvent if needed
 
 const filters = [
-  "All Events",
-  "Date ASC",
-  "Date DESC",
-  "Venue",
-  "Upcoming",
-  "Finished",
-  "Cancelled",
-]
+  "All Events", "Date ASC", "Date DESC", "Venue", "Upcoming", "On Going", "Finished", "Cancelled",
+];
 
 type Event = {
-  name: string,
-  type: string,
-  status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled",
-  date: Date,
-  venue: string,
-  atendee: string,
-  notes: string
-}
+  name: string;
+  type: string;
+  status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled";
+  date: Date;
+  venue: string;
+  atendee: string;
+  notes: string;
+};
 
 const columns: ColumnDef<Event>[] = [
   {
@@ -275,53 +270,71 @@ const data: Event[] = [
 ]
 
 export default function EventManager() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSortChange = (sortValue: string) => {
-    searchParams.set("sort", sortValue)
-    setSearchParams(searchParams)
-  }
+    searchParams.set("sort", sortValue);
+    setSearchParams(searchParams);
+  };
 
   const handleSearch = (searchTerm: string) => {
-    setSearchQuery(searchTerm)
-  }
+    setSearchQuery(searchTerm);
+  };
+
   const filteredData = useMemo(() => {
-    if (searchQuery.trim()) {
-      const processedData = sort(data, searchParams.get("sort") ?? "All Events")
-      return searchEvent(searchQuery, processedData)
-    }
-    return sort(data, searchParams.get("sort") ?? "All Events")
-  }, [searchParams, data, searchQuery])
+    const sorted = sort(data, searchParams.get("sort") ?? "All Events");
+    return searchQuery.trim() ? searchEvent(searchQuery, sorted) : sorted;
+  }, [searchParams, data, searchQuery]);
+
+  // Summary calculations
+  const upcoming = data.filter((e) => e.status === "Upcoming").length;
+  const ongoing = data.filter((e) => e.status === "Ongoing").length;
+  const finished = data.filter((e) => e.status === "Finished").length;
+  const cancelled = data.filter((e) => e.status === "Cancelled").length;
 
   return (
     <>
+      <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
+        <SummaryCard title="Upcoming Events" value={upcoming} icon={<CalendarPlus size={50} />} />
+        <SummaryCard title="Ongoing Events" value={ongoing} icon={<CalendarClock size={50} />} />
+        <SummaryCard title="Finished Events" value={finished} icon={<CalendarCheck size={50} />} />
+        <SummaryCard title="Cancelled Events" value={cancelled} icon={<CalendarX2 size={50} />} />
+      </div>
+
       <div className="flex gap-5 w-full items-center justify-center">
         <Searchbar onChange={handleSearch} placeholder="Search Event" classname="flex flex-5" />
         <Filter onChange={handleSortChange} filters={filters} initial="All Events" classname="flex-1" />
-        <Button variant="destructive" size="lg" >
+        <Button variant="destructive" size="lg">
           <Trash />
           Delete Selected
         </Button>
         <AddEventModal />
-      </div >
+      </div>
+
       <DataTable<Event>
         classname="py-5"
-        height="43.3rem" data={filteredData} columns={[...columns,
-        {
-          id: "view",
-          header: "",
-          cell: ({ row }) => {
-            const status = row.original.status
-            return (
-              < div className="flex gap-3 ">
-                <ViewEventModal {...row.original} />
-                {status !== "Cancelled" && status !== "Finished" && <CancelEventModal {...row.original} />}
-              </div >
-            )
-          }
-        }
-        ]} />
+        height="43.3rem"
+        data={filteredData}
+        columns={[
+          ...columns,
+          {
+            id: "view",
+            header: "",
+            cell: ({ row }) => {
+              const status = row.original.status;
+              return (
+                <div className="flex gap-3">
+                  <ViewEventModal {...row.original} />
+                  {status !== "Cancelled" && status !== "Finished" && (
+                    <CancelEventModal {...row.original} />
+                  )}
+                </div>
+              );
+            },
+          },
+        ]}
+      />
     </>
-  )
+  );
 }

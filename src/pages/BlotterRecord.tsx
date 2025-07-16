@@ -6,6 +6,8 @@ import Searchbar from "@/components/ui/searchbar";
 import AddBlotterModal from "@/features/blotter/addBlotterModal";
 import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
+import SummaryCard from "@/components/ui/summarycardblotter"; // <== import this
+import { DollarSign, Eye, Users, AlarmClock, Gavel, BookOpenCheck } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Trash } from "lucide-react";
@@ -24,8 +26,7 @@ const filters = [
   "Closed",
   "Transferred to Police",
   "Date Incident",
-]
-
+];
 
 const columns: ColumnDef<Blotter>[] = [
   {
@@ -149,58 +150,83 @@ const data: Blotter[] = [
   },
 ]
 
+
 export default function Blotters() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSortChange = (sortValue: string) => {
-    searchParams.set("sort", sortValue)
-    setSearchParams(searchParams)
-  }
+    searchParams.set("sort", sortValue);
+    setSearchParams(searchParams);
+  };
 
   const handleSearch = (searchTerm: string) => {
-    setSearchQuery(searchTerm)
-  }
+    setSearchQuery(searchTerm);
+  };
 
   const filteredData = useMemo(() => {
-    const sortedData = sort(data, searchParams.get("sort") ?? "All Blotters")
+    const sortedData = sort(data, searchParams.get("sort") ?? "All Blotters");
 
     if (searchQuery.trim()) {
-      return searchBlotter(searchQuery, sortedData)
+      return searchBlotter(searchQuery, sortedData);
     }
 
-    return sortedData
-  }, [setSearchParams, data, searchQuery])
+    return sortedData;
+  }, [searchParams, data, searchQuery]);
+
+  // Summary Values
+  const total = data.length;
+  const totalFinish = data.length;
+  const active = data.filter(d => d.status === "Active").length;
+  const ongoing = data.filter(d => d.status === "On Going").length;
+  const closed = data.filter(d => d.status === "Closed").length;
+  const transferred = data.filter(d => d.status === "Transferred to Police").length;
+
   return (
     <>
+      {/* Summary Section */}
+      <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
+        <SummaryCard title="Total Blotters" value={total} icon={<Users size={50} />} />
+        <SummaryCard title="Total Finished" value={total} icon={<BookOpenCheck size={50} />} />
+        <SummaryCard title="Active" value={active} icon={<Eye size={50} />} />
+        <SummaryCard title="On Going" value={ongoing} icon={<AlarmClock size={50} />} />
+        <SummaryCard title="Closed" value={closed} icon={<Gavel size={50} />} />
+        <SummaryCard title="Transferred to Police" value={transferred} icon={<DollarSign size={50} />} />
+      </div>
+
+      {/* Search/Filter Controls */}
       <div className="flex gap-5 w-full items-center justify-center">
         <Searchbar onChange={handleSearch} placeholder="Search Blotter" classname="flex flex-5" />
         <Filter onChange={handleSortChange} filters={filters} initial="All Blotter" classname="flex-1" />
-        <Button variant="destructive" size="lg" >
+        <Button variant="destructive" size="lg">
           <Trash />
           Delete Selected
         </Button>
         <AddBlotterModal />
-      </div >
+      </div>
+
+      {/* Table */}
       <DataTable<Blotter>
         classname="py-5"
         height="43.3rem"
         data={filteredData}
-        columns={[...columns,
-        {
-          id: "view",
-          header: "",
-          cell: ({ row }) => {
-            const status = row.original.status
-            return (
-              < div className="flex gap-3 ">
-                <ViewBlotterModal {...row.original} />
-                {status !== "Active" && <DeleteBlotterModal {...row.original} />}
-              </div >
-            )
-          }
-        }
-        ]} />
+        columns={[
+          ...columns,
+          {
+            id: "view",
+            header: "",
+            cell: ({ row }) => {
+              const status = row.original.status;
+              return (
+                <div className="flex gap-3">
+                  <ViewBlotterModal {...row.original} />
+                  {status !== "Active" && <DeleteBlotterModal {...row.original} />}
+                </div>
+              );
+            },
+          },
+        ]}
+      />
     </>
-  )
+  );
 }

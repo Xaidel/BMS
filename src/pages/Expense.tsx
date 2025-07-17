@@ -14,7 +14,7 @@ import { useSearchParams } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { sort } from "@/service/expenseSort";
 import searchExpense from "@/service/searchExpense";
-import SummaryCardExpense from "@/components/ui/summarycardexpense";
+import SummaryCardExpense from "@/components/ui/summary-card/expense";
 
 const filters = [
   "All Expense",

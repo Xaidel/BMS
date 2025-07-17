@@ -10,7 +10,7 @@ import { sort } from "@/service/incomeSort";
 import type { Income } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash } from "lucide-react";
+import { Shirt, Trash } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -23,7 +23,7 @@ import {
   Wallet,
   Layers,
 } from "lucide-react"; // or custom icons
-import SummaryCardIncome from "@/components/ui/summarycardincome";
+import SummaryCardIncome from "@/components/ui/summary-card/income";
 
 const filters = [
   "All Income",
@@ -166,10 +166,10 @@ export default function Income() {
         <SummaryCardIncome title="Local Revenue" value={750} icon={<Banknote size={50} />} />
         <SummaryCardIncome title="Tax Revenue" value={300} icon={<PiggyBank size={50} />} />
         <SummaryCardIncome title="Government Grants" value={500} icon={<Gift size={50} />} />
-        <SummaryCardIncome title="Donations" value={200} icon={<Landmark size={50} />} />
         <SummaryCardIncome title="Service Revenue" value={100} icon={<Coins size={50} />} />
         <SummaryCardIncome title="Rental Income" value={100} icon={<Wallet size={50} />} />
         <SummaryCardIncome title="Government Funds (IRA)" value={100} icon={<Layers size={50} />} />
+        <SummaryCardIncome title="Others" value={200} icon={<Shirt size={50} />} />
       </div>
 
       {/* Search + Filter */}

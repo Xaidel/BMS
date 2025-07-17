@@ -14,7 +14,7 @@ import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
 import { sort } from "@/service/householdSort";
 import searchHousehold from "@/service/searchHousehold";
-import SummaryCard from "@/components/ui/summarycardhousehold";
+import SummaryCard from "@/components/ui/summary-card/household";
 
 const filters = ["All Households", "Numerical", "Renter", "Owner"];
 

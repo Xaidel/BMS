@@ -6,8 +6,15 @@ import Searchbar from "@/components/ui/searchbar";
 import AddBlotterModal from "@/features/blotter/addBlotterModal";
 import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
-import SummaryCard from "@/components/ui/summarycardblotter"; // <== import this
-import { DollarSign, Eye, Users, AlarmClock, Gavel, BookOpenCheck } from "lucide-react";
+import SummaryCard from "@/components/ui/summary-card/blotter"; // <== import this
+import {
+  DollarSign,
+  Eye,
+  Users,
+  AlarmClock,
+  Gavel,
+  BookOpenCheck,
+} from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Trash } from "lucide-react";
@@ -16,6 +23,7 @@ import { useSearchParams } from "react-router-dom";
 import { Blotter } from "@/types/types";
 import sort from "@/service/blotterSort";
 import searchBlotter from "@/service/searchBlotter";
+import SummaryCardBlotter from "@/components/ui/summary-card/blotter";
 
 const filters = [
   "All Blotter Records",
@@ -34,7 +42,11 @@ const columns: ColumnDef<Blotter>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false
+          table.getIsAllPageRowsSelected()
+            ? true
+            : table.getIsSomePageRowsSelected()
+            ? "indeterminate"
+            : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -52,7 +64,7 @@ const columns: ColumnDef<Blotter>[] = [
   },
   {
     header: "Blotter ID",
-    accessorKey: "id"
+    accessorKey: "id",
   },
   {
     header: "Type",
@@ -70,18 +82,16 @@ const columns: ColumnDef<Blotter>[] = [
     header: "Date Incident",
     accessorKey: "date",
     cell: ({ row }) => {
-      return (
-        <div>{format(row.original.date, "MMMM do, yyyy")}</div>
-      )
-    }
+      return <div>{format(row.original.date, "MMMM do, yyyy")}</div>;
+    },
   },
   {
     header: "Location",
-    accessorKey: "location"
+    accessorKey: "location",
   },
   {
     header: "Zone",
-    accessorKey: "zone"
+    accessorKey: "zone",
   },
   {
     header: "Status",
@@ -110,12 +120,10 @@ const columns: ColumnDef<Blotter>[] = [
           color = "#000000";
         }
       }
-      return (
-        <div style={{ color: color }}>{status}</div>
-      );
-    }
-  }
-]
+      return <div style={{ color: color }}>{status}</div>;
+    },
+  },
+];
 
 const data: Blotter[] = [
   {
@@ -148,8 +156,7 @@ const data: Blotter[] = [
     zone: "Zone 4",
     status: "On Going",
   },
-]
-
+];
 
 export default function Blotters() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -177,27 +184,63 @@ export default function Blotters() {
   // Summary Values
   const total = data.length;
   const totalFinish = data.length;
-  const active = data.filter(d => d.status === "Active").length;
-  const ongoing = data.filter(d => d.status === "On Going").length;
-  const closed = data.filter(d => d.status === "Closed").length;
-  const transferred = data.filter(d => d.status === "Transferred to Police").length;
+  const active = data.filter((d) => d.status === "Active").length;
+  const ongoing = data.filter((d) => d.status === "On Going").length;
+  const closed = data.filter((d) => d.status === "Closed").length;
+  const transferred = data.filter(
+    (d) => d.status === "Transferred to Police"
+  ).length;
 
   return (
     <>
       {/* Summary Section */}
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard title="Total Blotters" value={total} icon={<Users size={50} />} />
-        <SummaryCard title="Total Finished" value={total} icon={<BookOpenCheck size={50} />} />
-        <SummaryCard title="Active" value={active} icon={<Eye size={50} />} />
-        <SummaryCard title="On Going" value={ongoing} icon={<AlarmClock size={50} />} />
-        <SummaryCard title="Closed" value={closed} icon={<Gavel size={50} />} />
-        <SummaryCard title="Transferred to Police" value={transferred} icon={<DollarSign size={50} />} />
+        <SummaryCardBlotter
+          title="Total Blotters"
+          value={total}
+          icon={<Users size={50} />}
+        />
+
+        <SummaryCardBlotter
+          title="Total Finished"
+          value={total}
+          icon={<BookOpenCheck size={50} />}
+        />
+        <SummaryCardBlotter
+          title="Active"
+          value={active}
+          icon={<Eye size={50} />}
+        />
+        <SummaryCardBlotter
+          title="On Going"
+          value={ongoing}
+          icon={<AlarmClock size={50} />}
+        />
+        <SummaryCardBlotter
+          title="Closed"
+          value={closed}
+          icon={<Gavel size={50} />}
+        />
+        <SummaryCardBlotter
+          title="Transferred to Police"
+          value={transferred}
+          icon={<DollarSign size={50} />}
+        />
       </div>
 
       {/* Search/Filter Controls */}
       <div className="flex gap-5 w-full items-center justify-center">
-        <Searchbar onChange={handleSearch} placeholder="Search Blotter" classname="flex flex-5" />
-        <Filter onChange={handleSortChange} filters={filters} initial="All Blotter" classname="flex-1" />
+        <Searchbar
+          onChange={handleSearch}
+          placeholder="Search Blotter"
+          classname="flex flex-5"
+        />
+        <Filter
+          onChange={handleSortChange}
+          filters={filters}
+          initial="All Blotter"
+          classname="flex-1"
+        />
         <Button variant="destructive" size="lg">
           <Trash />
           Delete Selected
@@ -220,7 +263,9 @@ export default function Blotters() {
               return (
                 <div className="flex gap-3">
                   <ViewBlotterModal {...row.original} />
-                  {status !== "Active" && <DeleteBlotterModal {...row.original} />}
+                  {status !== "Active" && (
+                    <DeleteBlotterModal {...row.original} />
+                  )}
                 </div>
               );
             },

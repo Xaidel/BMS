@@ -15,7 +15,7 @@ import { useMemo, useState } from "react";
 import { sort } from "@/service/residentSort";
 import searchResident from "@/service/searchResident";
 import { mockResidents } from "@/mock/residents";
-import SummaryCardResidents from "@/components/ui/summarycardresidents";
+import SummaryCardResidents from "@/components/ui/summary-card/residents";
 import { Users, UserCheck, UserMinus, UserX, AlertTriangle, Mars, Venus, Vote, User } from "lucide-react";
 
 const filters = [

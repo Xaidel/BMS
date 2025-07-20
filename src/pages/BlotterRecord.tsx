@@ -6,7 +6,6 @@ import Searchbar from "@/components/ui/searchbar";
 import AddBlotterModal from "@/features/blotter/addBlotterModal";
 import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
-import SummaryCard from "@/components/ui/summary-card/blotter"; // <== import this
 import {
   DollarSign,
   Eye,
@@ -48,8 +47,8 @@ const columns: ColumnDef<Blotter>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
+              ? "indeterminate"
+              : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -175,7 +174,7 @@ export default function Blotters() {
 
   // Summary Values
   const total = data.length;
-  const totalFinish = data.length;
+  // const totalFinish = data.length;
   const active = data.filter((d) => d.status === "Active").length;
   const ongoing = data.filter((d) => d.status === "On Going").length;
   const closed = data.filter((d) => d.status === "Closed").length;

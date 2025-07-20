@@ -12,7 +12,6 @@ export type Resident = {
   isRegisteredVoter: boolean
   isPWD: boolean
   isSenior: boolean
-  type(type: any): unknown
   fullName: string,
   civilStatus: string,
   status: "Moved Out" | "Active" | "Dead" | "Missing",

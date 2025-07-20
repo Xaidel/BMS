@@ -20,11 +20,8 @@ import {
   Users,
   UserCheck,
   UserMinus,
-  UserX,
-  AlertTriangle,
   Mars,
   Venus,
-  Vote,
   User,
 } from "lucide-react";
 
@@ -46,8 +43,8 @@ const columns: ColumnDef<Resident>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
+              ? "indeterminate"
+              : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"

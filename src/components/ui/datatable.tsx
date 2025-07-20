@@ -1,43 +1,70 @@
-import { ColumnDef, flexRender, getCoreRowModel, Row, useReactTable } from "@tanstack/react-table"
-import { Table, TableCell, TableHead, TableRow } from "./table"
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  Row,
+  useReactTable,
+} from "@tanstack/react-table";
+import { Table, TableCell, TableHead, TableRow } from "./table";
 import { TableVirtuoso } from "react-virtuoso";
 import { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-const TableRowComponent = <TData,>(rows: Row<TData>[]) =>
-  function getTableRow(props: HTMLAttributes<HTMLTableRowElement>) {
-    const index = props["data-index"]
-    const row = rows[index]
-    if (!row) return null
-    return (
-      <TableRow
-        key={row.id}
-        data-state={row.getIsSelected() && "selected"}
-        {...props}
-      >
-        {row.getVisibleCells().map((cell) => (
-          <TableCell key={cell.id}>
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </TableCell>
-        ))}
-      </TableRow>
-    )
-  }
-
 type TableProps<T> = {
-  columns: ColumnDef<T>[]
-  data: T[]
-  height: string
-  classname?: string
-}
-export default function DataTable<T>({ columns, data, height, classname }: TableProps<T>) {
+  data: T[];
+  columns: ColumnDef<T>[];
+  classname?: string;
+  height?: string;
+  rowSelection?: Record<string, boolean>;
+  onRowSelectionChange?: (
+    updater:
+      | Record<string, boolean>
+      | ((old: Record<string, boolean>) => Record<string, boolean>)
+  ) => void;
+};
 
+export default function DataTable<T>({
+  columns,
+  data,
+  height,
+  classname,
+  rowSelection,
+  onRowSelectionChange,
+}: TableProps<T>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
-  const { rows } = table.getRowModel()
+    state: {
+      rowSelection, // ✅ hook up state
+    },
+    onRowSelectionChange, // ✅ hook up state updater
+    enableRowSelection: true, // ✅ explicitly enable selection
+  });
+
+  const { rows } = table.getRowModel();
+
+  const TableRowComponent = (rows: Row<T>[]) =>
+    function getTableRow(props: HTMLAttributes<HTMLTableRowElement>) {
+      const index = props["data-index"] as number;
+      const row = rows[index];
+      if (!row) return null;
+
+      return (
+        <TableRow
+          key={row.id}
+          data-state={row.getIsSelected() && "selected"}
+          {...props}
+        >
+          {row.getVisibleCells().map((cell) => (
+            <TableCell key={cell.id}>
+              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            </TableCell>
+          ))}
+        </TableRow>
+      );
+    };
+
   return (
     <div className={cn("rounded-md", classname)}>
       <TableVirtuoso
@@ -45,39 +72,30 @@ export default function DataTable<T>({ columns, data, height, classname }: Table
         totalCount={rows.length}
         components={{
           Table: Table,
-          TableRow: TableRowComponent(rows)
+          TableRow: TableRowComponent(rows),
         }}
         fixedHeaderContent={() =>
           table.getHeaderGroups().map((headerGroup) => (
             <TableRow className="z-20 bg-background" key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead
-                    key={header.id}
-                    colSpan={header.colSpan}
-                    style={{
-                      width: header.getSize()
-                    }}
-                    className="text-black bg-transparent py-4"
-                  >
-                    {header.isPlaceholder ? null : (
-                      <div
-                        className="flex items-center"
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </div>
-                    )}
-                  </TableHead>
-                )
-              })}
+              {headerGroup.headers.map((header) => (
+                <TableHead
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  style={{ width: header.getSize() }}
+                  className="text-black bg-transparent py-4"
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                </TableHead>
+              ))}
             </TableRow>
           ))
         }
       />
     </div>
-  )
+  );
 }
-

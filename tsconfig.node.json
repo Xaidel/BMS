@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "composite": true,
+    "types": ["@tauri-apps/api", "node"],
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",

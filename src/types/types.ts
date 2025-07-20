@@ -56,12 +56,20 @@ export type Certificate = {
 };
 
 export type Blotter = {
-  status: string
-  id: number,
-  type: string,
-  reportedBy: string,
-  involved: string,
-  date: Date,
-  location: string,
-  zone: string,
-}
+  id?: number;
+  type_: string;
+  reported_by: string;
+  involved: string;
+  incident_date: Date; // <- must be Date, not string
+  location: string;
+  zone: string;
+  status: string;
+  narrative: string;
+  action: string;
+  witnesses: string;
+  evidence: string;
+  resolution: string;
+  hearing_date: Date; // <- must be Date, not string
+};
+
+

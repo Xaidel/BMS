@@ -24,6 +24,9 @@ import { Blotter } from "@/types/types";
 import sort from "@/service/blotterSort";
 import searchBlotter from "@/service/searchBlotter";
 import SummaryCardBlotter from "@/components/ui/summary-card/blotter";
+import { useEffect } from "react";
+import { invoke } from "@tauri-apps/api/core";
+import { toast } from "sonner";
 
 const filters = [
   "All Blotter Records",
@@ -68,11 +71,11 @@ const columns: ColumnDef<Blotter>[] = [
   },
   {
     header: "Type",
-    accessorKey: "type",
+    accessorKey: "type_",
   },
   {
     header: "Reported By",
-    accessorKey: "reportedBy",
+    accessorKey: "reported_by",
   },
   {
     header: "Involved",
@@ -80,9 +83,9 @@ const columns: ColumnDef<Blotter>[] = [
   },
   {
     header: "Date Incident",
-    accessorKey: "date",
+    accessorKey: "incident_date",
     cell: ({ row }) => {
-      return <div>{format(row.original.date, "MMMM do, yyyy")}</div>;
+      return <div>{format(row.original.incident_date, "MMMM do, yyyy")}</div>;
     },
   },
   {
@@ -125,42 +128,31 @@ const columns: ColumnDef<Blotter>[] = [
   },
 ];
 
-const data: Blotter[] = [
-  {
-    id: 323,
-    type: "Theft",
-    reportedBy: "Jerome Patrick Tayco",
-    involved: "Sheer Jay Francisco",
-    date: new Date("June 29, 2025"),
-    location: "Brgy. Tambo",
-    zone: "Zone 4",
-    status: "On Going",
-  },
-  {
-    id: 223,
-    type: "Theft",
-    reportedBy: "Karl Abechuela",
-    involved: "Lincoln Armann Bonecile",
-    date: new Date("June 29, 2003"),
-    location: "Brgy. Tambo",
-    zone: "Zone 4",
-    status: "On Going",
-  },
-  {
-    id: 123,
-    type: "Theft",
-    reportedBy: "Karl Abechuela",
-    involved: "Lincoln Armann Bonecile",
-    date: new Date("June 29, 2003"),
-    location: "Brgy. Tambo",
-    zone: "Zone 4",
-    status: "On Going",
-  },
-];
-
 export default function Blotters() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+  const [data, setData] = useState<Blotter[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const fetchBlotters = () => {
+    invoke<Blotter[]>("fetch_all_blotters_command")
+      .then((fetched) => {
+        const parsed = fetched.map((blotter) => ({
+          ...blotter,
+          incident_date: new Date(blotter.incident_date),
+          hearing_date: new Date(blotter.hearing_date),
+        }));
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch blotters:", err));
+  };
+
+  useEffect(() => {
+    fetchBlotters();
+  }, []);
+
+  // Pass the fetch function to AddBlotterModal
+  <AddBlotterModal onSave={fetchBlotters} />;
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -190,6 +182,32 @@ export default function Blotters() {
   const transferred = data.filter(
     (d) => d.status === "Transferred to Police"
   ).length;
+
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
+
+    if (selectedIds.length === 0) {
+      toast.error("No blotters selected.");
+      return;
+    }
+
+    try {
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_blotter_command", { id });
+        }
+      }
+      toast.success("Selected blotters deleted.");
+      fetchBlotters(); // Refresh the table
+      setRowSelection({}); // Reset selection
+    } catch (err) {
+      toast.error("Failed to delete selected blotters");
+      console.error("Delete error:", err);
+    }
+  };
 
   return (
     <>
@@ -241,11 +259,17 @@ export default function Blotters() {
           initial="All Blotter"
           classname="flex-1"
         />
-        <Button variant="destructive" size="lg">
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected} // ✅ Make sure this is added
+        >
           <Trash />
           Delete Selected
         </Button>
-        <AddBlotterModal />
+
+        <AddBlotterModal onSave={fetchBlotters} />
       </div>
 
       {/* Table */}
@@ -264,13 +288,18 @@ export default function Blotters() {
                 <div className="flex gap-3">
                   <ViewBlotterModal {...row.original} />
                   {status !== "Active" && (
-                    <DeleteBlotterModal {...row.original} />
+                    <DeleteBlotterModal
+                      {...row.original}
+                      onDelete={fetchBlotters}
+                    />
                   )}
                 </div>
               );
             },
           },
         ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
       />
     </>
   );

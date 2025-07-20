@@ -162,3 +162,96 @@ export const expenseSchema = z.object({
     required_error: "Please specify the issued date"
   }),
 })
+
+export const blotterSchema = z.object({
+  type_: z
+    .string()
+    .min(2, {
+      message: "Resident name is too short",
+    })
+    .max(50, {
+      message:
+        "Resident name is too long, put other details on the 'details' form",
+    }),
+  reported_by: z
+    .string()
+    .min(2, {
+      message: "Resident type is too short",
+    })
+    .max(50, {
+      message: "Resident type is too long.",
+    }),
+  involved: z
+    .string()
+    .min(2, {
+      message: "Resident venue is too short",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  incident_date: z.date({
+    required_error: "Please specify the event date",
+  }),
+  location: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  zone: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  status: z.string().max(1000, {
+    message: "Important notes is too long",
+  }),
+  narrative: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  action: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  witnesses: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  evidence: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  resolution: z
+    .string()
+    .min(2, {
+      message: "Resident too long",
+    })
+    .max(50, {
+      message: "Resident venue is too long",
+    }),
+  hearing_date: z.date({
+    required_error: "Please specify the event date",
+  }),
+});

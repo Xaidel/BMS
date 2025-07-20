@@ -75,19 +75,6 @@ export default function IssueCertificateModal() {
             </DialogHeader>
           </div>
           <div className="flex-1 text-black px-6  ">
-            <DataTable <Certificate>
-              height="25rem"
-              columns={[...column,
-              {
-                id: "action",
-                header: "",
-                cell: ({ row }) => (
-                  <Button onClick={() => navigate(`/certificates/template/${row.original.type}`)}>Select</Button>
-                )
-              },
-              ]}
-              data={data}
-            />
           </div>
         </DialogContent>
       </Dialog>

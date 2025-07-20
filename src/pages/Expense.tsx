@@ -115,6 +115,7 @@ const data: Expense[] = [
 ];
 
 export default function Expense() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -185,6 +186,8 @@ export default function Expense() {
             ),
           },
         ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
       />
     </>
   );

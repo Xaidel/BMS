@@ -135,6 +135,7 @@ const data: Household[] = [
 ];
 
 export default function Households() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -208,6 +209,8 @@ export default function Households() {
             },
           },
         ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
       />
     </>
   );

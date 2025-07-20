@@ -16,7 +16,17 @@ import { sort } from "@/service/residentSort";
 import searchResident from "@/service/searchResident";
 import { mockResidents } from "@/mock/residents";
 import SummaryCardResidents from "@/components/ui/summary-card/residents";
-import { Users, UserCheck, UserMinus, UserX, AlertTriangle, Mars, Venus, Vote, User } from "lucide-react";
+import {
+  Users,
+  UserCheck,
+  UserMinus,
+  UserX,
+  AlertTriangle,
+  Mars,
+  Venus,
+  Vote,
+  User,
+} from "lucide-react";
 
 const filters = [
   "All Residents",
@@ -33,7 +43,11 @@ const columns: ColumnDef<Resident>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false
+          table.getIsAllPageRowsSelected()
+            ? true
+            : table.getIsSomePageRowsSelected()
+            ? "indeterminate"
+            : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -51,7 +65,7 @@ const columns: ColumnDef<Resident>[] = [
   },
   {
     header: "Full Name",
-    accessorKey: "fullName"
+    accessorKey: "fullName",
   },
   {
     header: "Civil Status",
@@ -61,18 +75,16 @@ const columns: ColumnDef<Resident>[] = [
     header: "Birthday",
     accessorKey: "birthdate",
     cell: ({ row }) => {
-      return (
-        <div>{format(row.original.birthday, "MMMM do, yyyy")}</div>
-      )
-    }
+      return <div>{format(row.original.birthday, "MMMM do, yyyy")}</div>;
+    },
   },
   {
     header: "Gender",
-    accessorKey: "gender"
+    accessorKey: "gender",
   },
   {
     header: "Zone",
-    accessorKey: "zone"
+    accessorKey: "zone",
   },
   {
     header: "Status",
@@ -101,14 +113,13 @@ const columns: ColumnDef<Resident>[] = [
           color = "#000000";
         }
       }
-      return (
-        <div style={{ color: color }}>{status}</div>
-      );
-    }
-  }
+      return <div style={{ color: color }}>{status}</div>;
+    },
+  },
 ];
 
 export default function Residents() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -122,7 +133,10 @@ export default function Residents() {
 
   const filteredData = useMemo(() => {
     if (searchQuery.trim()) {
-      const processedData = sort(mockResidents, searchParams.get("sort") ?? "All Residents");
+      const processedData = sort(
+        mockResidents,
+        searchParams.get("sort") ?? "All Residents"
+      );
       return searchResident(searchQuery, processedData);
     }
 
@@ -136,25 +150,68 @@ export default function Residents() {
   const female = mockResidents.filter((r) => r.gender === "Female").length;
   const senior = mockResidents.filter((r) => r.isSenior === true).length;
   const pwd = mockResidents.filter((r) => r.isPWD === true).length;
-  const registered = mockResidents.filter((r) => r.isRegisteredVoter === true).length;
+  const registered = mockResidents.filter(
+    (r) => r.isRegisteredVoter === true
+  ).length;
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCardResidents title="Total Residents" value={total} icon={<Users size={50} />} />
-        <SummaryCardResidents title="Male" value={male} icon={<Mars size={50} />} />
-        <SummaryCardResidents title="Female" value={female} icon={<Venus size={50} />} />
-        <SummaryCardResidents title="Senior" value={senior} icon={<User size={50} />} />
-        <SummaryCardResidents title="PWD" value={pwd} icon={<Accessibility size={50} />} />
-        <SummaryCardResidents title="Registered Voters" value={registered} icon={<Fingerprint size={50} />} />
-        <SummaryCardResidents title="Active" value={active} icon={<UserCheck size={50} />} />
-        <SummaryCardResidents title="Moved Out" value={movedOut} icon={<UserMinus size={50} />} />
+        <SummaryCardResidents
+          title="Total Residents"
+          value={total}
+          icon={<Users size={50} />}
+        />
+        <SummaryCardResidents
+          title="Male"
+          value={male}
+          icon={<Mars size={50} />}
+        />
+        <SummaryCardResidents
+          title="Female"
+          value={female}
+          icon={<Venus size={50} />}
+        />
+        <SummaryCardResidents
+          title="Senior"
+          value={senior}
+          icon={<User size={50} />}
+        />
+        <SummaryCardResidents
+          title="PWD"
+          value={pwd}
+          icon={<Accessibility size={50} />}
+        />
+        <SummaryCardResidents
+          title="Registered Voters"
+          value={registered}
+          icon={<Fingerprint size={50} />}
+        />
+        <SummaryCardResidents
+          title="Active"
+          value={active}
+          icon={<UserCheck size={50} />}
+        />
+        <SummaryCardResidents
+          title="Moved Out"
+          value={movedOut}
+          icon={<UserMinus size={50} />}
+        />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center">
-        <Searchbar onChange={handleSearch} placeholder="Search Resident" classname="flex flex-5" />
-        <Filter onChange={handleSortChange} filters={filters} initial="All Residents" classname="flex-1" />
-        <Button variant="destructive" size="lg" >
+        <Searchbar
+          onChange={handleSearch}
+          placeholder="Search Resident"
+          classname="flex flex-5"
+        />
+        <Filter
+          onChange={handleSortChange}
+          filters={filters}
+          initial="All Residents"
+          classname="flex-1"
+        />
+        <Button variant="destructive" size="lg">
           <Trash />
           Delete Selected
         </Button>
@@ -165,21 +222,27 @@ export default function Residents() {
         classname="py-5"
         data={filteredData}
         height="43.3rem"
-        columns={[...columns,
-        {
-          id: "view",
-          header: "",
-          cell: ({ row }) => {
-            const status = row.original.status;
-            return (
-              <div className="flex gap-3 ">
-                <ViewResidentModal {...row.original} />
-                {status !== "Active" && <DeleteResidentModal {...row.original} />}
-              </div>
-            );
-          }
-        }
-        ]} />
+        columns={[
+          ...columns,
+          {
+            id: "view",
+            header: "",
+            cell: ({ row }) => {
+              const status = row.original.status;
+              return (
+                <div className="flex gap-3 ">
+                  <ViewResidentModal {...row.original} />
+                  {status !== "Active" && (
+                    <DeleteResidentModal {...row.original} />
+                  )}
+                </div>
+              );
+            },
+          },
+        ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
+      />
     </>
   );
 }

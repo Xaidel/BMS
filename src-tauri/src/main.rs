@@ -8,15 +8,12 @@ use database::connection::establish_connection;
 use database::migration::migrate;
 use tauri::command;
 
-
 #[tauri::command]
 fn delete_blotter_command(id: i32) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
     delete_blotter(&conn, id).map_err(|e| e.to_string())?;
     Ok(())
-    
 }
-
 
 #[tauri::command]
 fn save_blotter(data: Blotter) -> Result<(), String> {
@@ -24,7 +21,6 @@ fn save_blotter(data: Blotter) -> Result<(), String> {
     insert_or_update_blotter(&conn, data).map_err(|e| e.to_string())?;
     Ok(())
 }
-
 
 #[tauri::command]
 fn fetch_all_blotters_command() -> Result<Vec<Blotter>, String> {

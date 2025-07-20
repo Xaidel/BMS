@@ -1,16 +1,15 @@
-use serde::{Serialize, Deserialize};
 use rusqlite::{params, Connection};
+use serde::{Deserialize, Serialize};
 
 pub fn delete_blotter(conn: &Connection, id: i32) -> rusqlite::Result<()> {
     conn.execute("DELETE FROM blotters WHERE id = ?", params![id])?;
     Ok(())
 }
 
-
-#[derive(Debug, Serialize, Deserialize)] 
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Blotter {
     pub id: Option<i32>,
-    pub type_: String, 
+    pub type_: String,
     pub reported_by: String,
     pub involved: String,
     pub incident_date: String,

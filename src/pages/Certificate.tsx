@@ -9,7 +9,13 @@ import Searchbar from "@/components/ui/searchbar";
 import IssueCertificateModal from "@/features/certificate/issueCertificateModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash, FileText, CheckCircle, XCircle, ListChecks } from "lucide-react";
+import {
+  Trash,
+  FileText,
+  CheckCircle,
+  XCircle,
+  ListChecks,
+} from "lucide-react";
 import searchCertificate from "@/service/searchCertificate";
 import SummaryCard from "@/components/ui/summary-card/certificate";
 
@@ -40,8 +46,8 @@ const columns: ColumnDef<Certificate>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-              ? "indeterminate"
-              : false
+            ? "indeterminate"
+            : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -121,16 +127,17 @@ const date: Certificate[] = [
 ];
 
 export default function Certificate() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
 
   const totalCertificates = date.length;
-  const activeCertificates = date.filter(cert => {
+  const activeCertificates = date.filter((cert) => {
     const expiry = new Date(cert.date);
     expiry.setFullYear(expiry.getFullYear() + 1);
     return new Date() <= expiry;
   }).length;
-  const expiredCertificates = date.filter(cert => {
+  const expiredCertificates = date.filter((cert) => {
     const expiry = new Date(cert.date);
     expiry.setFullYear(expiry.getFullYear() + 1);
     return new Date() > expiry;
@@ -139,7 +146,8 @@ export default function Certificate() {
     acc[curr.type] = (acc[curr.type] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
-  const mostCommonType = Object.entries(typeCount).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "N/A";
+  const mostCommonType =
+    Object.entries(typeCount).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "N/A";
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Certificates";
@@ -183,10 +191,26 @@ export default function Certificate() {
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard title="Total Certificates" value={totalCertificates} icon={<FileText size={50} />} />
-        <SummaryCard title="Active Certificates" value={activeCertificates} icon={<CheckCircle size={50} />} />
-        <SummaryCard title="Expired Certificates" value={expiredCertificates} icon={<XCircle size={50} />} />
-        <SummaryCard title="Most Common Type" value={mostCommonType} icon={<ListChecks size={50} />} />
+        <SummaryCard
+          title="Total Certificates"
+          value={totalCertificates}
+          icon={<FileText size={50} />}
+        />
+        <SummaryCard
+          title="Active Certificates"
+          value={activeCertificates}
+          icon={<CheckCircle size={50} />}
+        />
+        <SummaryCard
+          title="Expired Certificates"
+          value={expiredCertificates}
+          icon={<XCircle size={50} />}
+        />
+        <SummaryCard
+          title="Most Common Type"
+          value={mostCommonType}
+          icon={<ListChecks size={50} />}
+        />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center mb-4">
@@ -219,6 +243,8 @@ export default function Certificate() {
             cell: () => <Button>View more</Button>,
           },
         ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
         data={filteredData}
       />
     </>

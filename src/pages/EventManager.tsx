@@ -10,13 +10,26 @@ import { sort } from "@/service/eventSort";
 import searchEvent from "@/service/searchEvent";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash, CalendarPlus, CalendarCheck, CalendarX2, CalendarClock } from "lucide-react";
+import {
+  Trash,
+  CalendarPlus,
+  CalendarCheck,
+  CalendarX2,
+  CalendarClock,
+} from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import SummaryCard from "@/components/ui/summary-card/eventmanager"; // or create SummaryCardEvent if needed
 
 const filters = [
-  "All Events", "Date ASC", "Date DESC", "Venue", "Upcoming", "On Going", "Finished", "Cancelled",
+  "All Events",
+  "Date ASC",
+  "Date DESC",
+  "Venue",
+  "Upcoming",
+  "On Going",
+  "Finished",
+  "Cancelled",
 ];
 
 type Event = {
@@ -35,7 +48,11 @@ const columns: ColumnDef<Event>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false
+          table.getIsAllPageRowsSelected()
+            ? true
+            : table.getIsSomePageRowsSelected()
+            ? "indeterminate"
+            : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -53,56 +70,51 @@ const columns: ColumnDef<Event>[] = [
   },
   {
     header: "Name",
-    accessorKey: "name"
+    accessorKey: "name",
   },
   {
     header: "Type",
-    accessorKey: "type"
+    accessorKey: "type",
   },
   {
     header: "Status",
     accessorKey: "status",
     cell: ({ row }) => {
-      const status = row.original.status
+      const status = row.original.status;
       let color: string;
       switch (status) {
         case "Upcoming": {
-          color = "#00BD29"
+          color = "#00BD29";
           break;
         }
         case "Finished": {
-          color = "#000000"
+          color = "#000000";
           break;
         }
         case "Ongoing": {
-          color = "#FFB30F"
+          color = "#FFB30F";
           break;
         }
         case "Cancelled": {
-          color = "#BD0000"
+          color = "#BD0000";
           break;
         }
       }
-      return (
-        <div style={{ color: color }}>{status}</div>
-      )
-    }
+      return <div style={{ color: color }}>{status}</div>;
+    },
   },
   {
     header: "Date",
     accessorKey: "date",
     cell: ({ row }) => {
-      return (
-        <div>{format(row.original.date, "MMMM do, yyyy")}</div>
-      )
-    }
-
+      return <div>{format(row.original.date, "MMMM do, yyyy")}</div>;
+    },
   },
   {
     header: "Venue",
-    accessorKey: "venue"
+    accessorKey: "venue",
   },
-]
+];
 
 const data: Event[] = [
   {
@@ -177,99 +189,11 @@ const data: Event[] = [
     atendee: "All Officials",
     notes: "Sample Notes",
   },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for Youth Program",
-    type: "Assembly",
-    status: "Cancelled",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for Youth Program",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Quarterly Seminar",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 3, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Livelihood Program",
-    type: "Seminar",
-    status: "Finished",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Livelihood Program",
-    type: "Seminar",
-    status: "Cancelled",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Livelihood Program",
-    type: "Seminar",
-    status: "Ongoing",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Livelihood Program",
-    type: "Seminar",
-    status: "Finished",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-]
+];
 
 export default function EventManager() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -296,15 +220,40 @@ export default function EventManager() {
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard title="Upcoming Events" value={upcoming} icon={<CalendarPlus size={50} />} />
-        <SummaryCard title="Ongoing Events" value={ongoing} icon={<CalendarClock size={50} />} />
-        <SummaryCard title="Finished Events" value={finished} icon={<CalendarCheck size={50} />} />
-        <SummaryCard title="Cancelled Events" value={cancelled} icon={<CalendarX2 size={50} />} />
+        <SummaryCard
+          title="Upcoming Events"
+          value={upcoming}
+          icon={<CalendarPlus size={50} />}
+        />
+        <SummaryCard
+          title="Ongoing Events"
+          value={ongoing}
+          icon={<CalendarClock size={50} />}
+        />
+        <SummaryCard
+          title="Finished Events"
+          value={finished}
+          icon={<CalendarCheck size={50} />}
+        />
+        <SummaryCard
+          title="Cancelled Events"
+          value={cancelled}
+          icon={<CalendarX2 size={50} />}
+        />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center">
-        <Searchbar onChange={handleSearch} placeholder="Search Event" classname="flex flex-5" />
-        <Filter onChange={handleSortChange} filters={filters} initial="All Events" classname="flex-1" />
+        <Searchbar
+          onChange={handleSearch}
+          placeholder="Search Event"
+          classname="flex flex-5"
+        />
+        <Filter
+          onChange={handleSortChange}
+          filters={filters}
+          initial="All Events"
+          classname="flex-1"
+        />
         <Button variant="destructive" size="lg">
           <Trash />
           Delete Selected
@@ -334,6 +283,8 @@ export default function EventManager() {
             },
           },
         ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
       />
     </>
   );

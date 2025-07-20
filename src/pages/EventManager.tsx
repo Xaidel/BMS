@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { Trash, CalendarPlus, CalendarCheck, CalendarX2, CalendarClock } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import SummaryCard from "@/components/ui/summarycardeventmanager"; // or create SummaryCardEvent if needed
+import SummaryCard from "@/components/ui/summary-card/eventmanager"; // or create SummaryCardEvent if needed
 
 const filters = [
   "All Events", "Date ASC", "Date DESC", "Venue", "Upcoming", "On Going", "Finished", "Cancelled",

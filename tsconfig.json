@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["@tauri-apps/api", "node"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],

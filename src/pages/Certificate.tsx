@@ -11,7 +11,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Trash, FileText, CheckCircle, XCircle, ListChecks } from "lucide-react";
 import searchCertificate from "@/service/searchCertificate";
-import SummaryCard from "@/components/ui/summarycardcertificate";
+import SummaryCard from "@/components/ui/summary-card/certificate";
 
 const filters = [
   "All Certificates",

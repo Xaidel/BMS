@@ -6,8 +6,15 @@ import Searchbar from "@/components/ui/searchbar";
 import AddBlotterModal from "@/features/blotter/addBlotterModal";
 import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
-import SummaryCard from "@/components/ui/summarycardblotter"; // <== import this
-import { DollarSign, Eye, Users, AlarmClock, Gavel, BookOpenCheck } from "lucide-react";
+import SummaryCard from "@/components/ui/summary-card/blotter"; // <== import this
+import {
+  DollarSign,
+  Eye,
+  Users,
+  AlarmClock,
+  Gavel,
+  BookOpenCheck,
+} from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Trash } from "lucide-react";
@@ -16,6 +23,10 @@ import { useSearchParams } from "react-router-dom";
 import { Blotter } from "@/types/types";
 import sort from "@/service/blotterSort";
 import searchBlotter from "@/service/searchBlotter";
+import SummaryCardBlotter from "@/components/ui/summary-card/blotter";
+import { useEffect } from "react";
+import { invoke } from "@tauri-apps/api/core";
+import { toast } from "sonner";
 
 const filters = [
   "All Blotter Records",
@@ -34,7 +45,11 @@ const columns: ColumnDef<Blotter>[] = [
     header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ? true : table.getIsSomePageRowsSelected() ? "indeterminate" : false
+          table.getIsAllPageRowsSelected()
+            ? true
+            : table.getIsSomePageRowsSelected()
+            ? "indeterminate"
+            : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -52,15 +67,15 @@ const columns: ColumnDef<Blotter>[] = [
   },
   {
     header: "Blotter ID",
-    accessorKey: "id"
+    accessorKey: "id",
   },
   {
     header: "Type",
-    accessorKey: "type",
+    accessorKey: "type_",
   },
   {
     header: "Reported By",
-    accessorKey: "reportedBy",
+    accessorKey: "reported_by",
   },
   {
     header: "Involved",
@@ -68,20 +83,18 @@ const columns: ColumnDef<Blotter>[] = [
   },
   {
     header: "Date Incident",
-    accessorKey: "date",
+    accessorKey: "incident_date",
     cell: ({ row }) => {
-      return (
-        <div>{format(row.original.date, "MMMM do, yyyy")}</div>
-      )
-    }
+      return <div>{format(row.original.incident_date, "MMMM do, yyyy")}</div>;
+    },
   },
   {
     header: "Location",
-    accessorKey: "location"
+    accessorKey: "location",
   },
   {
     header: "Zone",
-    accessorKey: "zone"
+    accessorKey: "zone",
   },
   {
     header: "Status",
@@ -110,50 +123,36 @@ const columns: ColumnDef<Blotter>[] = [
           color = "#000000";
         }
       }
-      return (
-        <div style={{ color: color }}>{status}</div>
-      );
-    }
-  }
-]
-
-const data: Blotter[] = [
-  {
-    id: 323,
-    type: "Theft",
-    reportedBy: "Jerome Patrick Tayco",
-    involved: "Sheer Jay Francisco",
-    date: new Date("June 29, 2025"),
-    location: "Brgy. Tambo",
-    zone: "Zone 4",
-    status: "On Going",
+      return <div style={{ color: color }}>{status}</div>;
+    },
   },
-  {
-    id: 223,
-    type: "Theft",
-    reportedBy: "Karl Abechuela",
-    involved: "Lincoln Armann Bonecile",
-    date: new Date("June 29, 2003"),
-    location: "Brgy. Tambo",
-    zone: "Zone 4",
-    status: "On Going",
-  },
-  {
-    id: 123,
-    type: "Theft",
-    reportedBy: "Karl Abechuela",
-    involved: "Lincoln Armann Bonecile",
-    date: new Date("June 29, 2003"),
-    location: "Brgy. Tambo",
-    zone: "Zone 4",
-    status: "On Going",
-  },
-]
-
+];
 
 export default function Blotters() {
+  const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
+  const [data, setData] = useState<Blotter[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const fetchBlotters = () => {
+    invoke<Blotter[]>("fetch_all_blotters_command")
+      .then((fetched) => {
+        const parsed = fetched.map((blotter) => ({
+          ...blotter,
+          incident_date: new Date(blotter.incident_date),
+          hearing_date: new Date(blotter.hearing_date),
+        }));
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch blotters:", err));
+  };
+
+  useEffect(() => {
+    fetchBlotters();
+  }, []);
+
+  // Pass the fetch function to AddBlotterModal
+  <AddBlotterModal onSave={fetchBlotters} />;
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -177,32 +176,100 @@ export default function Blotters() {
   // Summary Values
   const total = data.length;
   const totalFinish = data.length;
-  const active = data.filter(d => d.status === "Active").length;
-  const ongoing = data.filter(d => d.status === "On Going").length;
-  const closed = data.filter(d => d.status === "Closed").length;
-  const transferred = data.filter(d => d.status === "Transferred to Police").length;
+  const active = data.filter((d) => d.status === "Active").length;
+  const ongoing = data.filter((d) => d.status === "On Going").length;
+  const closed = data.filter((d) => d.status === "Closed").length;
+  const transferred = data.filter(
+    (d) => d.status === "Transferred to Police"
+  ).length;
+
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
+
+    if (selectedIds.length === 0) {
+      toast.error("No blotters selected.");
+      return;
+    }
+
+    try {
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_blotter_command", { id });
+        }
+      }
+      toast.success("Selected blotters deleted.");
+      fetchBlotters(); // Refresh the table
+      setRowSelection({}); // Reset selection
+    } catch (err) {
+      toast.error("Failed to delete selected blotters");
+      console.error("Delete error:", err);
+    }
+  };
 
   return (
     <>
       {/* Summary Section */}
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard title="Total Blotters" value={total} icon={<Users size={50} />} />
-        <SummaryCard title="Total Finished" value={total} icon={<BookOpenCheck size={50} />} />
-        <SummaryCard title="Active" value={active} icon={<Eye size={50} />} />
-        <SummaryCard title="On Going" value={ongoing} icon={<AlarmClock size={50} />} />
-        <SummaryCard title="Closed" value={closed} icon={<Gavel size={50} />} />
-        <SummaryCard title="Transferred to Police" value={transferred} icon={<DollarSign size={50} />} />
+        <SummaryCardBlotter
+          title="Total Blotters"
+          value={total}
+          icon={<Users size={50} />}
+        />
+
+        <SummaryCardBlotter
+          title="Total Finished"
+          value={total}
+          icon={<BookOpenCheck size={50} />}
+        />
+        <SummaryCardBlotter
+          title="Active"
+          value={active}
+          icon={<Eye size={50} />}
+        />
+        <SummaryCardBlotter
+          title="On Going"
+          value={ongoing}
+          icon={<AlarmClock size={50} />}
+        />
+        <SummaryCardBlotter
+          title="Closed"
+          value={closed}
+          icon={<Gavel size={50} />}
+        />
+        <SummaryCardBlotter
+          title="Transferred to Police"
+          value={transferred}
+          icon={<DollarSign size={50} />}
+        />
       </div>
 
       {/* Search/Filter Controls */}
       <div className="flex gap-5 w-full items-center justify-center">
-        <Searchbar onChange={handleSearch} placeholder="Search Blotter" classname="flex flex-5" />
-        <Filter onChange={handleSortChange} filters={filters} initial="All Blotter" classname="flex-1" />
-        <Button variant="destructive" size="lg">
+        <Searchbar
+          onChange={handleSearch}
+          placeholder="Search Blotter"
+          classname="flex flex-5"
+        />
+        <Filter
+          onChange={handleSortChange}
+          filters={filters}
+          initial="All Blotter"
+          classname="flex-1"
+        />
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected} // ✅ Make sure this is added
+        >
           <Trash />
           Delete Selected
         </Button>
-        <AddBlotterModal />
+
+        <AddBlotterModal onSave={fetchBlotters} />
       </div>
 
       {/* Table */}
@@ -220,12 +287,19 @@ export default function Blotters() {
               return (
                 <div className="flex gap-3">
                   <ViewBlotterModal {...row.original} />
-                  {status !== "Active" && <DeleteBlotterModal {...row.original} />}
+                  {status !== "Active" && (
+                    <DeleteBlotterModal
+                      {...row.original}
+                      onDelete={fetchBlotters}
+                    />
+                  )}
                 </div>
               );
             },
           },
         ]}
+        rowSelection={rowSelection}
+        onRowSelectionChange={setRowSelection}
       />
     </>
   );

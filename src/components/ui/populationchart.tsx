@@ -25,7 +25,7 @@ export default function PopulationChart({ data }: ChartProps) {
         <CardDescription>Resident Distribution by Zone</CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
-        <ChartContainer config={chartConfig} className="h-[13.6rem] w-full">
+        <ChartContainer config={chartConfig} className="h-[16rem] w-full">
           <BarChart accessibilityLayer data={data} >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -35,7 +35,7 @@ export default function PopulationChart({ data }: ChartProps) {
               axisLine={false}
               tickFormatter={(value) => `Zone ${value}`}
             />
-            <Bar dataKey="population" fill="#5165F6" radius={25} barSize={75} />
+            <Bar dataKey="population" fill="#5165F6" radius={20} barSize={150} />
             <YAxis
               tickMargin={10}
               dataKey="population"

@@ -20,17 +20,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { datetimeRegex, z } from "zod";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import { useRef, useState } from "react";
@@ -38,32 +31,39 @@ import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { id } from "date-fns/locale";
 
-const statusOption = ["Active", "On going", "Transferred to Police", "Closed"] as const;
+type Props = {
+  onSave?: () => void;
+};
+
+const statusOption = [
+  "Active",
+  "On going",
+  "Transferred to Police",
+  "Closed",
+] as const;
 
 const formSchema = z.object({
-  id: z.number(), 
-  type: z.string(), 
+  id: z.number(),
+  type: z.string(),
   reportedBy: z.string(),
-  involved: z.string(), 
-  date: z.date(), 
-  location: z.string(), 
-  zone: z.string(), 
-  status: z.enum(statusOption), 
+  involved: z.string(),
+  incident_date: z.date(),
+  location: z.string(),
+  zone: z.string(),
+  status: z.enum(statusOption),
   narrative: z.string(),
   action: z.string(),
   witnesses: z.string(),
   evidence: z.string(),
   resolution: z.string(),
   hearingDate: z.date(),
-
 });
 
-export default function AddBlotterModal() {
+export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [capturedImage] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -72,10 +72,10 @@ export default function AddBlotterModal() {
       type: "",
       reportedBy: "",
       involved: "",
-      date: new Date(),
+      incident_date: new Date(),
       location: "",
       zone: "",
-      status: "Active",   
+      status: "Active",
       narrative: "",
       action: "",
       witnesses: "",
@@ -85,13 +85,44 @@ export default function AddBlotterModal() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Blotter added successfully", {
-      description: `${values.id} ${values.type}`,
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+  try {
+    await invoke("save_blotter", {
+      data: {
+        type_: values.type,
+        reported_by: values.reportedBy,
+        involved: values.involved,
+        incident_date: values.incident_date.toISOString(),
+        location: values.location,
+        zone: values.zone,
+        status: values.status,
+        narrative: values.narrative,
+        action: values.action,
+        witnesses: values.witnesses,
+        evidence: values.evidence,
+        resolution: values.resolution,
+        hearing_date: values.hearingDate.toISOString(),
+      },
     });
+
+    toast.success("Blotter added successfully", {
+      description: `${values.reportedBy} vs ${values.involved}`,
+    });
+
     setOpenModal(false);
-    invoke("save_blotter", { data: values });
+    form.reset();
+
+    // 🔄 Force full reload like in ViewBlotterModal
+    window.location.reload();
+  } catch (error) {
+    console.error("Failed to insert blotter:", error);
+    toast.error("Failed to add blotter.");
   }
+}
+
+
+
+
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
@@ -116,7 +147,6 @@ export default function AddBlotterModal() {
                   Blotter Information
                 </h2>
                 <div className="grid grid-cols-1 gap-4">
-
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
@@ -128,7 +158,7 @@ export default function AddBlotterModal() {
                             <Input
                               id="type"
                               type="text"
-                              placeholder="Enter first name"
+                              placeholder="Enter crime type"
                               required
                               {...field}
                               className="text-black"
@@ -186,7 +216,7 @@ export default function AddBlotterModal() {
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
-                      name="date"
+                      name="incident_date"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Date of Incident</FormLabel>
@@ -280,7 +310,6 @@ export default function AddBlotterModal() {
                   Blotter Information
                 </h2>
                 <div className="grid grid-cols-1 gap-4">
-                  
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
@@ -429,7 +458,6 @@ export default function AddBlotterModal() {
                       )}
                     />
                   </div>
-
                 </div>
                 <div className="flex justify-between pt-4">
                   <Button type="button" onClick={() => setStep(1)}>

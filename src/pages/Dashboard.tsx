@@ -7,6 +7,7 @@ import CustomPWD from "@/components/icons/CustomPWD";
 import CustomSenior from "@/components/icons/CustomSenior";
 import CustomVoters from "@/components/icons/CustomVoters";
 import CategoryCard from "@/components/ui/categorycard";
+import ExpenseChart from "@/components/ui/expensechart";
 import Greet from "@/components/ui/greetings";
 import IncomeChart from "@/components/ui/incomechart";
 import PopulationChart from "@/components/ui/populationchart";
@@ -83,42 +84,95 @@ const PopulationData = [
 
 const IncomeData = [
   {
-    source: "Internal Revenue Allotment",
-    description: "Largest source of income",
+    source: "Local Revenue",
+    description: "Income from barangay permits, and services",
     fill: "#7F50CC",
-    value: 43.7,
+    value: 37, // (750 / 2050) * 100 ≈ 36.59
   },
   {
-    source: "Share from Local Taxes",
-    description: "Real Property Tax/Community Tax",
+    source: "Tax Revenue",
+    description: "Collected community and property taxes",
     fill: "#440987",
-    value: 21.1,
+    value: 15, // (300 / 2050) * 100 ≈ 14.63
   },
   {
-    source: "Fees and Charges for Services",
-    description: "Barangay Clearance/Permit Fees",
+    source: "Government Grants",
+    description: "National or local government financial support",
     fill: "#3830CE",
-    value: 14.1,
+    value: 24, // (500 / 2050) * 100 ≈ 24.39
   },
   {
-    source: "Other Services",
-    description: "Cockfighting/Permit to Operate",
+    source: "Service Revenue",
+    description: "Barangay clearances, document fees, etc.",
     fill: "#8D9BFF",
-    value: 7,
+    value: 5, // (100 / 2050) * 100 ≈ 4.88
   },
   {
-    source: "Economic Enterprise",
-    description: "Barangay Market/Livelihood Projects",
+    source: "Rental Income",
+    description: "Rental of barangay properties/facilities",
     fill: "#5165F6",
-    value: 10.6,
+    value: 5, // (100 / 2050) * 100 ≈ 4.88
   },
   {
-    source: "Other Income",
-    description: "Donations and Grants/Sale of Assets or Properties",
+    source: "Government Funds (IRA)",
+    description: "Internal Revenue Allotment (IRA)",
     fill: "#4E3D8F",
-    value: 3.5,
+    value: 5, // (100 / 2050) * 100 ≈ 4.88
+  },
+  {
+    source: "Others",
+    description: "Donations, grants, or other income",
+    fill: "#9A8CFF",
+    value: 10, // (200 / 2050) * 100 ≈ 9.76
   },
 ];
+
+
+const ExpenseData = [
+  {
+    source: "Infrastructure Expenses",
+    description: "Spending on buildings, and roads",
+    fill: "#7F50CC",
+    value: 37, // (750 / 2050) * 100 ≈ 36.59
+  },
+  {
+    source: "Honoraria",
+    description: "Payments given to public servants or officials",
+    fill: "#440987",
+    value: 15, // (300 / 2050) * 100 ≈ 14.63
+  },
+  {
+    source: "Utilities",
+    description: "Electricity, water, communication, etc.",
+    fill: "#3830CE",
+    value: 24, // (500 / 2050) * 100 ≈ 24.39
+  },
+  {
+    source: "Local Funds Used",
+    description: "Expenses covered by the local fund",
+    fill: "#8D9BFF",
+    value: 10, // (200 / 2050) * 100 ≈ 9.76
+  },
+  {
+    source: "Foods",
+    description: "Food expenses for programs, meetings, etc.",
+    fill: "#5165F6",
+    value: 5, // (100 / 2050) * 100 ≈ 4.88
+  },
+  {
+    source: "IRA Used",
+    description: "Portion of Internal Revenue Allotment spent",
+    fill: "#4E3D8F",
+    value: 5, // (100 / 2050) * 100 ≈ 4.88
+  },
+  {
+    source: "Others",
+    description: "Miscellaneous or unclassified expenses",
+    fill: "#9A8CFF",
+    value: 5, // (100 / 2050) * 100 ≈ 4.88
+  },
+];
+
 
 export default function Dashboard() {
   return (
@@ -138,14 +192,19 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
-
-        <div className="flex flex-row gap-5 ml-3 mr-0 w-full">
-          <div className="w-[50%] min-w-[300px]">
+        
+        <div className="flex flex-col gap-5 ml-3 mr-0 w-full">
+          <div className="w-[100%] min-w-[300px]">
             <PopulationChart data={PopulationData} />
           </div>
-          <div className="w-[50%] min-w-[300px]">
-            <IncomeChart data={IncomeData} />
-          </div>
+            <div className="flex flex-row gap-5 w-full">
+            <div className="w-[50%] min-w-[300px]">
+              <IncomeChart data={IncomeData} />
+            </div>
+            <div className="w-[50%] min-w-[300px]">
+              <ExpenseChart data={ExpenseData} />
+            </div>
+            </div>
         </div>
       </div>
     </div>

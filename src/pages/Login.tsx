@@ -9,6 +9,8 @@ import logo from "../assets/new_logo_small.png";
 import { useNavigate } from "react-router-dom";
 import { loginSchema } from "@/types/formSchema";
 import { toast } from "sonner";
+import { invoke } from "@tauri-apps/api/core";
+import { useEffect } from "react";
 
 
 export default function LoginPage() {
@@ -21,13 +23,31 @@ export default function LoginPage() {
     }
   })
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    toast.message("Hello!", {
-      description: <p>Welcome to BMS <span className="font-bold">John Cena</span></p>
-    })
-    navigate("/dashboard")
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+  try {
+    const response = await invoke<string>("greet", { name: values.name }); // 👈 call backend greet
+    toast.success("Login Successful!", {
+      description: <p>{response}</p>,
+    });
+    navigate("/dashboard");
+  } catch (error) {
+    console.error("Failed to invoke greet:", error);
+    toast.error("Login failed. Please try again.");
   }
+}
+
+useEffect(() => {
+  invoke("test_db_connection")
+    .then((res) => {
+      console.log("✅ DB test:", res);
+    })
+    .catch((err) => {
+      console.error("❌ DB test error:", err);
+    });
+}, []);
+
+
+
   return (
     <div className="min-w-screen min-h-screen bg-background flex flex-col items-center justify-center ">
       <Card className="w-full max-w-[41rem] h-[42rem] max-h-[47rem] py-[3rem]">

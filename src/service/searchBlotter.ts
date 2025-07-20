@@ -8,7 +8,8 @@ export default function searchBlotter(term: string, data: Blotter[]): Blotter[] 
   return data.filter(blotter =>
     pattern.test(blotter.id.toString()) ||
     pattern.test(blotter.involved) ||
-    pattern.test(blotter.type) ||
-    pattern.test(blotter.location)
+    pattern.test(blotter.type_) ||
+    pattern.test(blotter.location) ||
+    pattern.test(blotter.reported_by)
   )
 }

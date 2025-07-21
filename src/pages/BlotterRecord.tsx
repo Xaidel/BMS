@@ -6,6 +6,7 @@ import Searchbar from "@/components/ui/searchbar";
 import AddBlotterModal from "@/features/blotter/addBlotterModal";
 import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
+import { PDFViewer } from "@react-pdf/renderer"
 import {
   DollarSign,
   Eye,
@@ -26,6 +27,7 @@ import SummaryCardBlotter from "@/components/ui/summary-card/blotter";
 import { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
+import { BlotterPDF } from "@/components/pdf/blotterpdf";
 
 const filters = [
   "All Blotter Records",
@@ -172,9 +174,7 @@ export default function Blotters() {
     return sortedData;
   }, [searchParams, data, searchQuery]);
 
-  // Summary Values
   const total = data.length;
-  // const totalFinish = data.length;
   const active = data.filter((d) => d.status === "Active").length;
   const ongoing = data.filter((d) => d.status === "On Going").length;
   const closed = data.filter((d) => d.status === "Closed").length;
@@ -210,7 +210,6 @@ export default function Blotters() {
 
   return (
     <>
-      {/* Summary Section */}
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCardBlotter
           title="Total Blotters"
@@ -300,6 +299,9 @@ export default function Blotters() {
         rowSelection={rowSelection}
         onRowSelectionChange={setRowSelection}
       />
+      <PDFViewer className="w-full h-full">
+        <BlotterPDF filter="Test" />
+      </PDFViewer>
     </>
   );
 }

@@ -6,7 +6,7 @@ import Searchbar from "@/components/ui/searchbar";
 import AddBlotterModal from "@/features/blotter/addBlotterModal";
 import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
-import { PDFViewer } from "@react-pdf/renderer"
+import { pdf } from "@react-pdf/renderer"
 import {
   DollarSign,
   Eye,
@@ -28,6 +28,7 @@ import { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
 import { BlotterPDF } from "@/components/pdf/blotterpdf";
+import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs"
 
 const filters = [
   "All Blotter Records",
@@ -129,11 +130,13 @@ const columns: ColumnDef<Blotter>[] = [
   },
 ];
 
+
 export default function Blotters() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [data, setData] = useState<Blotter[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [printData, setPrintData] = useState<Blotter[]>([])
 
   const fetchBlotters = () => {
     invoke<Blotter[]>("fetch_all_blotters_command")
@@ -215,33 +218,143 @@ export default function Blotters() {
         <SummaryCardBlotter
           title="Total Blotters"
           value={total}
-          icon={<Users size={50} />}
+          icon={<Users size={50}
+          />}
+          onClick={async () => {
+            setPrintData(data)
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data} />).toBlob()
+            const buffer = await blob.arrayBuffer()
+            const contents = new Uint8Array(buffer)
+            try {
+              await writeFile('BlotterRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document
+              })
+              toast.success("Blotter Record successfully downloaded", {
+                description: "Blotter record is saved in Documents folder"
+              })
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Blotter record"
+              })
+            }
+          }}
         />
 
         <SummaryCardBlotter
           title="Total Finished"
           value={finished}
           icon={<BookOpenCheck size={50} />}
+          onClick={async () => {
+            setPrintData(data)
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Finished")} />).toBlob()
+            const buffer = await blob.arrayBuffer()
+            const contents = new Uint8Array(buffer)
+            try {
+              await writeFile('BlotterRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document
+              })
+              toast.success("Blotter Record successfully downloaded", {
+                description: "Blotter record is saved in Documents folder"
+              })
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Blotter record"
+              })
+            }
+          }}
         />
         <SummaryCardBlotter
           title="Active"
           value={active}
           icon={<Eye size={50} />}
+          onClick={async () => {
+            setPrintData(data)
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Active")} />).toBlob()
+            const buffer = await blob.arrayBuffer()
+            const contents = new Uint8Array(buffer)
+            try {
+              await writeFile('BlotterRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document
+              })
+              toast.success("Blotter Record successfully downloaded", {
+                description: "Blotter record is saved in Documents folder"
+              })
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Blotter record"
+              })
+            }
+
+          }}
         />
         <SummaryCardBlotter
           title="On Going"
           value={ongoing}
           icon={<AlarmClock size={50} />}
+          onClick={async () => {
+            setPrintData(data)
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "On Going")} />).toBlob()
+            const buffer = await blob.arrayBuffer()
+            const contents = new Uint8Array(buffer)
+            try {
+              await writeFile('BlotterRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document
+              })
+              toast.success("Blotter Record successfully downloaded", {
+                description: "Blotter record is saved in Documents folder"
+              })
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Blotter record"
+              })
+            }
+          }}
         />
         <SummaryCardBlotter
           title="Closed"
           value={closed}
           icon={<Gavel size={50} />}
+          onClick={async () => {
+            setPrintData(data)
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Closed")} />).toBlob()
+            const buffer = await blob.arrayBuffer()
+            const contents = new Uint8Array(buffer)
+            try {
+              await writeFile('BlotterRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document
+              })
+              toast.success("Blotter Record successfully downloaded", {
+                description: "Blotter record is saved in Documents folder"
+              })
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Blotter record"
+              })
+            }
+          }}
         />
         <SummaryCardBlotter
           title="Transferred to Police"
           value={transferred}
           icon={<DollarSign size={50} />}
+          onClick={async () => {
+            setPrintData(data)
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Closed")} />).toBlob()
+            const buffer = await blob.arrayBuffer()
+            const contents = new Uint8Array(buffer)
+            try {
+              await writeFile('BlotterRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document
+              })
+              toast.success("Blotter Record successfully downloaded", {
+                description: "Blotter record is saved in Documents folder"
+              })
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Blotter record"
+              })
+            }
+          }}
         />
       </div>
 
@@ -300,9 +413,10 @@ export default function Blotters() {
         rowSelection={rowSelection}
         onRowSelectionChange={setRowSelection}
       />
-      <PDFViewer className="w-full h-full">
-        <BlotterPDF filter="Test" />
-      </PDFViewer>
     </>
   );
 }
+
+/**
+ *
+ * **/

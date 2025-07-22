@@ -37,6 +37,7 @@ fn main() {
     }
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
         .invoke_handler(tauri::generate_handler![
             greet,
             test_db_connection,

@@ -1,6 +1,6 @@
+use dirs_next::data_local_dir;
 use rusqlite::{Connection, Result};
 use std::{fs, path::PathBuf};
-use dirs_next::data_local_dir;
 
 pub fn establish_connection() -> Result<Connection> {
     let db_dir: PathBuf = data_local_dir()

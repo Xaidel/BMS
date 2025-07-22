@@ -101,7 +101,6 @@ pub fn update_income_command(income: Income) -> Result<(), String> {
 
 #[tauri::command]
 pub fn save_income_command(income: Income) -> Result<(), String> {
-    let conn = establish_connection().map_err(|e| e.to_string())?;
     if let Some(_) = income.id {
         update_income_command(income)
     } else {

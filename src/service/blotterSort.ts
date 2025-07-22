@@ -22,14 +22,14 @@ export default function sort(data: Blotter[], term: string): Blotter[] {
 }
 
 function sortAlphabetical(data: Blotter[]): Blotter[] {
-  return [...data].sort((a, b) => a.type.localeCompare(b.type, undefined, { sensitivity: "base" }))
+  return [...data].sort((a, b) => a.type_.localeCompare(b.type_, undefined, { sensitivity: "base" }))
 }
 
 function sortByID(data: Blotter[]): Blotter[] {
   return [...data].sort((a, b) => a.id - b.id)
 }
 function sortByDate(data: Blotter[]): Blotter[] {
-  return [...data].sort((a, b) => a.date.getTime() - b.date.getTime())
+  return [...data].sort((a, b) => a.incident_date.getTime() - b.incident_date.getTime())
 }
 
 function filterActive(data: Blotter[]): Blotter[] {

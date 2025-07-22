@@ -24,6 +24,8 @@ import {
   Layers,
 } from "lucide-react"; // or custom icons
 import SummaryCardIncome from "@/components/ui/summary-card/income";
+import { invoke } from "@tauri-apps/api/core";
+import { useEffect } from "react";
 
 const filters = [
   "All Income",
@@ -59,80 +61,31 @@ const columns: ColumnDef<Income>[] = [
       />
     ),
   },
-  { header: "Type", accessorKey: "type" },
+  { header: "Type", accessorKey: "type_" },
+  { header: "OR Number", accessorKey: "or_number" },
   { header: "Amount", accessorKey: "amount" },
-  { header: "Received From", accessorKey: "receivedFrom" },
-  { header: "Received By", accessorKey: "receivedBy" },
+  { header: "Received From", accessorKey: "received_from" },
+  { header: "Received By", accessorKey: "received_by" },
+  { header: "Category", accessorKey: "category" },
   {
     header: "Date Issued",
     accessorKey: "date",
-    cell: ({ row }) => <div>{format(row.original.date, "MMMM do, yyyy")}</div>,
+    cell: ({ row }) => (
+      <div>
+        {row.original.date
+          ? format(row.original.date, "MMMM do, yyyy")
+          : "Invalid Date"}
+      </div>
+    ),
   },
 ];
 
-const data: Income[] = [
-  {
-    type: "Business Permit",
-    amount: 150,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date("July 1, 2025"),
-  },
-  {
-    type: "Business Permit",
-    amount: 150,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date(),
-  },
-  {
-    type: "Business Permit",
-    amount: 150,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date("June 29, 2023"),
-  },
-  {
-    type: "Business Permit",
-    amount: 1500,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date("June 29, 2023"),
-  },
-  {
-    type: "Business Permit",
-    amount: 1500,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date("June 29, 2023"),
-  },
-  {
-    type: "Business Permit",
-    amount: 1500,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date("June 29, 2023"),
-  },
-  {
-    type: "Business Permit",
-    amount: 1500,
-    or: 123456,
-    receivedFrom: "Treasurer Office",
-    receivedBy: "John Doe",
-    date: new Date("June 29, 2023"),
-  },
-];
 
-export default function Income() {
+export default function IncomePage(){
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+ const [data, setData] = useState([]); // 
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -151,13 +104,58 @@ export default function Income() {
       const query = searchQuery.toLowerCase();
       sorted = sorted.filter(
         (item) =>
-          item.type.toLowerCase().includes(query) ||
-          item.receivedFrom.toLowerCase().includes(query)
+          item.type_?.toLowerCase().includes(query) ||
+          item.received_from?.toLowerCase().includes(query)
       );
     }
 
     return sorted;
-  }, [searchParams, searchQuery]);
+  }, [searchParams, searchQuery, data]);
+
+  const fetchIncomes = () => {
+  invoke<Income[]>("fetch_all_incomes_command")
+    .then((fetched) => {
+      const parsed = fetched.map((income) => ({
+        ...income,
+        date: new Date(income.date),
+        category: income.category,
+      }));
+      setData(parsed);
+    })
+    .catch((err) => console.error("Failed to fetch incomes:", err));
+};
+
+useEffect(() => {
+  fetchIncomes();
+}, []);
+
+ // Pass the fetch function to AddBlotterModal
+  <AddIncomeModal onSave={fetchIncomes} />;
+
+const handleDeleteSelected = async () => {
+  const selectedIds = Object.keys(rowSelection)
+    .map((key) => filteredData[parseInt(key)])
+    .filter((row) => !!row)
+    .map((row) => row.id);
+
+  if (selectedIds.length === 0) {
+    console.error("No income records selected.");
+    return;
+  }
+
+  try {
+    for (const id of selectedIds) {
+      if (id !== undefined) {
+        await invoke("delete_income_command", { id });
+      }
+    }
+    console.log("Selected incomes deleted.");
+    fetchIncomes();
+    setRowSelection({});
+  } catch (err) {
+    console.error("Failed to delete selected incomes", err);
+  }
+};
 
   return (
     <>
@@ -165,42 +163,42 @@ export default function Income() {
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCardIncome
           title="Total Revenue"
-          value={2050}
+          value={data.reduce((acc, item) => acc + item.amount, 0)}
           icon={<DollarSign size={50} />}
         />
         <SummaryCardIncome
           title="Local Revenue"
-          value={750}
+          value={data.filter((d) => d.category === "Local Revenue").reduce((acc, item) => acc + item.amount, 0)}
           icon={<Banknote size={50} />}
         />
         <SummaryCardIncome
           title="Tax Revenue"
-          value={300}
+          value={data.filter((d) => d.category === "Tax Revenue").reduce((acc, item) => acc + item.amount, 0)}
           icon={<PiggyBank size={50} />}
         />
         <SummaryCardIncome
           title="Government Grants"
-          value={500}
+          value={data.filter((d) => d.category === "Government Grants").reduce((acc, item) => acc + item.amount, 0)}
           icon={<Gift size={50} />}
         />
         <SummaryCardIncome
           title="Service Revenue"
-          value={100}
+          value={data.filter((d) => d.category === "Service Revenue").reduce((acc, item) => acc + item.amount, 0)}
           icon={<Coins size={50} />}
         />
         <SummaryCardIncome
           title="Rental Income"
-          value={100}
+          value={data.filter((d) => d.category === "Rental Income").reduce((acc, item) => acc + item.amount, 0)}
           icon={<Wallet size={50} />}
         />
         <SummaryCardIncome
           title="Government Funds (IRA)"
-          value={100}
+          value={data.filter((d) => d.category === "Government Funds").reduce((acc, item) => acc + item.amount, 0)}
           icon={<Layers size={50} />}
         />
         <SummaryCardIncome
           title="Others"
-          value={200}
+          value={data.filter((d) => d.category === "Others").reduce((acc, item) => acc + item.amount, 0)}
           icon={<Shirt size={50} />}
         />
       </div>
@@ -218,11 +216,16 @@ export default function Income() {
           initial="All Income"
           classname="flex-1"
         />
-        <Button variant="destructive" size="lg">
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected}
+        >
           <Trash />
           Delete Selected
         </Button>
-        <AddIncomeModal />
+        <AddIncomeModal onSave={fetchIncomes} />
       </div>
 
       {/* Data Table */}
@@ -238,7 +241,12 @@ export default function Income() {
             cell: ({ row }) => (
               <div className="flex gap-3">
                 <ViewIncomeModal {...row.original} />
-                <DeleteIncomeModal {...row.original} />
+                <DeleteIncomeModal
+                  id={row.original.id!}
+                  type_={row.original.type_}
+                  category={row.original.category}
+                  onDelete={fetchIncomes}
+                />
               </div>
             ),
           },

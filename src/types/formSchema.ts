@@ -102,35 +102,39 @@ export const householdSchema = z.object({
 })
 
 export const incomeSchema = z.object({
-  type: z.string().min(2, {
-    message: "Type name is too short"
-  }).max(50, {
-    message: "Type name is too long, put other details on the 'details' form"
-  }),
-  amount: z.number().min(0, {
-    message: "Amount is too short"
-  }).max(50, {
-    message: "Amount type is too long."
-  }),
-  or: z.number().min(0, {
-    message: "OR$ is too short"
-  }).max(50, {
-    message: "OR# type is too long."
-  }),
-  paidFrom: z.string().min(2, {
-    message: "Name too long"
-  }).max(50, {
-    message: "Name venue is too long"
-  }),
-  paidBy: z.string().min(2, {
-    message: "Name too long"
-  }).max(50, {
-    message: "Name venue is too long"
-  }),
+  type_: z
+    .string()
+    .min(2, { message: "Type is too short" })
+    .max(50, { message: "Type is too long. Add extra details in the remarks." }),
+
+  category: z
+    .string()
+    .min(1, { message: "Category is required" }),
+
+  amount: z
+    .number({ invalid_type_error: "Amount must be a number" })
+    .min(0.01, { message: "Amount must be greater than zero" })
+    .max(1_000_000, { message: "Amount exceeds maximum allowed value" }),
+
+  or_number: z
+    .number({ invalid_type_error: "OR# must be a number" })
+    .min(1, { message: "OR# is required" }),
+
+  received_from: z
+    .string()
+    .min(2, { message: "Received From name is too short" })
+    .max(50, { message: "Received From name is too long" }),
+
+  received_by: z
+    .string()
+    .min(2, { message: "Received By name is too short" })
+    .max(50, { message: "Received By name is too long" }),
+
   date: z.date({
-    required_error: "Please specify the issued date"
+    required_error: "Please specify the date received",
+    invalid_type_error: "Invalid date format",
   }),
-})
+});
 
 export const expenseSchema = z.object({
   type: z.string().min(2, {
@@ -167,91 +171,90 @@ export const blotterSchema = z.object({
   type_: z
     .string()
     .min(2, {
-      message: "Resident name is too short",
+      message: "Blotter type is too short",
     })
     .max(50, {
-      message:
-        "Resident name is too long, put other details on the 'details' form",
+      message: "Blotter type is too long, put other details in the narrative",
     }),
   reported_by: z
     .string()
     .min(2, {
-      message: "Resident type is too short",
+      message: "Reporter name is too short",
     })
     .max(50, {
-      message: "Resident type is too long.",
+      message: "Reporter name is too long",
     }),
   involved: z
     .string()
     .min(2, {
-      message: "Resident venue is too short",
+      message: "Involved persons description is too short",
     })
     .max(50, {
-      message: "Resident venue is too long",
+      message: "Involved persons description is too long",
     }),
   incident_date: z.date({
-    required_error: "Please specify the event date",
+    required_error: "Please specify the incident date",
   }),
   location: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Location is too short",
     })
     .max(50, {
-      message: "Resident venue is too long",
+      message: "Location is too long",
     }),
   zone: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Zone is too short",
     })
     .max(50, {
-      message: "Resident venue is too long",
+      message: "Zone is too long",
     }),
   status: z.string().max(1000, {
-    message: "Important notes is too long",
+    message: "Status is too long",
   }),
   narrative: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Narrative is too short",
     })
-    .max(50, {
-      message: "Resident venue is too long",
+    .max(1000, {
+      message: "Narrative is too long",
     }),
   action: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Action taken is too short",
     })
-    .max(50, {
-      message: "Resident venue is too long",
+    .max(1000, {
+      message: "Action taken is too long",
     }),
   witnesses: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Witness list is too short",
     })
-    .max(50, {
-      message: "Resident venue is too long",
+    .max(1000, {
+      message: "Witness list is too long",
     }),
   evidence: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Evidence description is too short",
     })
-    .max(50, {
-      message: "Resident venue is too long",
+    .max(1000, {
+      message: "Evidence description is too long",
     }),
   resolution: z
     .string()
     .min(2, {
-      message: "Resident too long",
+      message: "Resolution is too short",
     })
-    .max(50, {
-      message: "Resident venue is too long",
+    .max(1000, {
+      message: "Resolution is too long",
     }),
   hearing_date: z.date({
-    required_error: "Please specify the event date",
+    required_error: "Please specify the hearing date",
   }),
 });

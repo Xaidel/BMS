@@ -7,7 +7,7 @@ export default function searchIncome(term: string, data: Income[]) {
 
   return data.filter((income) =>
     pattern.test(income.type) ||
-    pattern.test(income.or.toString()) ||  // 🔧 fixed here
-    pattern.test(income.receivedFrom)
+    pattern.test(income.or_number.toString()) ||  // 🔧 fixed here
+    pattern.test(income.received_from)
   );
 }

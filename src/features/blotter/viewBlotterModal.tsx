@@ -307,11 +307,6 @@ export default function ViewBlotterModal(props: Blotter) {
                         )}
                       />
                     </div>
-                  </>
-                )}
-
-                {step === 2 && (
-                  <>
                     <div>
                       <FormField
                         control={form.control}
@@ -348,6 +343,14 @@ export default function ViewBlotterModal(props: Blotter) {
                         )}
                       />
                     </div>
+                  </>
+                )}
+
+                {step === 2 && (
+                  <>
+                    <div>
+                    </div>
+
                     <div>
                       <FormField
                         control={form.control}
@@ -558,7 +561,7 @@ export default function ViewBlotterModal(props: Blotter) {
                       Next
                     </Button>
                   )}
-                  {step === 2 && props.status === "Active" && (
+                  {step === 2 && (
                     <Button type="submit">Save Blotter</Button>
                   )}
                 </div>

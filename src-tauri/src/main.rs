@@ -1,32 +1,15 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod database;
+mod commands;
 
-use crate::database::blotters::{delete_blotter, fetch_all_blotters, insert_or_update_blotter};
-use database::blotters::Blotter;
+
+use commands::income::{save_income_command, insert_income_command, fetch_all_incomes_command, delete_income_command, update_income_command};
+use crate::commands::blotters::{delete_blotter_command, fetch_all_blotters_command, save_blotter};
 use database::connection::establish_connection;
 use database::migration::migrate;
 use tauri::command;
 
-#[tauri::command]
-fn delete_blotter_command(id: i32) -> Result<(), String> {
-    let conn = establish_connection().map_err(|e| e.to_string())?;
-    delete_blotter(&conn, id).map_err(|e| e.to_string())?;
-    Ok(())
-}
-
-#[tauri::command]
-fn save_blotter(data: Blotter) -> Result<(), String> {
-    let conn = establish_connection().map_err(|e| e.to_string())?;
-    insert_or_update_blotter(&conn, data).map_err(|e| e.to_string())?;
-    Ok(())
-}
-
-#[tauri::command]
-fn fetch_all_blotters_command() -> Result<Vec<Blotter>, String> {
-    let conn = establish_connection().map_err(|e| e.to_string())?;
-    fetch_all_blotters(&conn).map_err(|e| e.to_string())
-}
 
 #[command]
 fn greet(name: &str) -> String {
@@ -61,6 +44,11 @@ fn main() {
             save_blotter,
             fetch_all_blotters_command,
             delete_blotter_command,
+            insert_income_command,
+            fetch_all_incomes_command,
+            delete_income_command,
+            update_income_command,
+            save_income_command,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

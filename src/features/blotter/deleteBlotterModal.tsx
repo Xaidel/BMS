@@ -50,7 +50,7 @@ export default function DeleteBlotterModal({ id, type_, onDelete }: DeleteBlotte
         </div>
         <div className="flex w-full gap-3 justify-end">
           <DialogClose asChild>
-            <Button variant="ghost">Cancel</Button>
+            <Button variant="ghost" className="text-black">Cancel</Button>
           </DialogClose>
           <DialogClose asChild>
             <Button variant="destructive" onClick={onConfirm}>

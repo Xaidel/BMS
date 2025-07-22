@@ -44,8 +44,8 @@ const statusOption = [
 
 const formSchema = z.object({
   id: z.number(),
-  type: z.string(),
-  reportedBy: z.string(),
+  type_: z.string(),
+  reported_by: z.string(),
   involved: z.string(),
   incident_date: z.date(),
   location: z.string(),
@@ -56,7 +56,7 @@ const formSchema = z.object({
   witnesses: z.string(),
   evidence: z.string(),
   resolution: z.string(),
-  hearingDate: z.date(),
+  hearing_date: z.date(),
 });
 
 export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
@@ -69,8 +69,8 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       id: 0,
-      type: "",
-      reportedBy: "",
+      type_: "",
+      reported_by: "",
       involved: "",
       incident_date: new Date(),
       location: "",
@@ -81,7 +81,7 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
       witnesses: "",
       evidence: "",
       resolution: "",
-      hearingDate: new Date(),
+      hearing_date: new Date(),
     },
   });
 
@@ -89,8 +89,8 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   try {
     await invoke("save_blotter", {
       data: {
-        type_: values.type,
-        reported_by: values.reportedBy,
+        type_: values.type_,
+        reported_by: values.reported_by,
         involved: values.involved,
         incident_date: values.incident_date.toISOString(),
         location: values.location,
@@ -101,12 +101,12 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
         witnesses: values.witnesses,
         evidence: values.evidence,
         resolution: values.resolution,
-        hearing_date: values.hearingDate.toISOString(),
+        hearing_date: values.hearing_date.toISOString(),
       },
     });
 
     toast.success("Blotter added successfully", {
-      description: `${values.reportedBy} vs ${values.involved}`,
+      description: `${values.reported_by} vs ${values.involved}`,
     });
 
     setOpenModal(false);
@@ -150,13 +150,13 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
-                      name="type"
+                      name="type_"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Type</FormLabel>
                           <FormControl>
                             <Input
-                              id="type"
+                              id="type_"
                               type="text"
                               placeholder="Enter crime type"
                               required
@@ -172,13 +172,13 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
-                      name="reportedBy"
+                      name="reported_by"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Reported By</FormLabel>
                           <FormControl>
                             <Input
-                              id="reportedBy"
+                              id="reported_by"
                               type="text"
                               placeholder="Enter middle name"
                               required
@@ -424,7 +424,7 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
-                      name="hearingDate"
+                      name="hearing_date"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Date of Hearing</FormLabel>

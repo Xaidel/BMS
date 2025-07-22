@@ -1,5 +1,7 @@
 use rusqlite::{params, Connection};
 use serde::{Deserialize, Serialize};
+use crate::database::connection::establish_connection;
+
 
 pub fn delete_blotter(conn: &Connection, id: i32) -> rusqlite::Result<()> {
     conn.execute("DELETE FROM blotters WHERE id = ?", params![id])?;
@@ -28,7 +30,7 @@ pub struct Blotter {
 pub fn insert_blotter(conn: &Connection, blotter: Blotter) -> rusqlite::Result<usize> {
     conn.execute(
         "INSERT INTO blotters (
-            type,
+            type_,
             reported_by,
             involved,
             incident_date,
@@ -63,7 +65,7 @@ pub fn insert_or_update_blotter(conn: &Connection, blotter: Blotter) -> rusqlite
     if let Some(id) = blotter.id {
         conn.execute(
             "UPDATE blotters SET
-                type = ?1,
+                type_ = ?1,
                 reported_by = ?2,
                 involved = ?3,
                 incident_date = ?4,
@@ -101,7 +103,7 @@ pub fn insert_or_update_blotter(conn: &Connection, blotter: Blotter) -> rusqlite
 
 pub fn fetch_all_blotters(conn: &Connection) -> rusqlite::Result<Vec<Blotter>> {
     let mut stmt = conn.prepare(
-        "SELECT id, type, reported_by, involved, incident_date, location, zone, status, narrative, action, witnesses, evidence, resolution, hearing_date FROM blotters",
+        "SELECT id, type_, reported_by, involved, incident_date, location, zone, status, narrative, action, witnesses, evidence, resolution, hearing_date FROM blotters",
     )?;
 
     let blotters = stmt
@@ -126,4 +128,24 @@ pub fn fetch_all_blotters(conn: &Connection) -> rusqlite::Result<Vec<Blotter>> {
         .collect();
 
     blotters
+}
+
+#[tauri::command]
+pub fn delete_blotter_command(id: i32) -> Result<(), String> {
+    let conn = establish_connection().map_err(|e| e.to_string())?;
+    super::blotters::delete_blotter(&conn, id).map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+#[tauri::command]
+pub fn save_blotter(data: super::blotters::Blotter) -> Result<(), String> {
+    let conn = establish_connection().map_err(|e| e.to_string())?;
+    super::blotters::insert_or_update_blotter(&conn, data).map_err(|e| e.to_string())?;
+    Ok(())
+}
+
+#[tauri::command]
+pub fn fetch_all_blotters_command() -> Result<Vec<super::blotters::Blotter>, String> {
+    let conn = establish_connection().map_err(|e| e.to_string())?;
+    super::blotters::fetch_all_blotters(&conn).map_err(|e| e.to_string())
 }

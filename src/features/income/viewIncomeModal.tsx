@@ -3,52 +3,87 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { incomeSchema } from "@/types/formSchema";
 import { CalendarIcon, Eye } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { z } from "zod";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { format } from "date-fns"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format } from "date-fns";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
+import { invoke } from "@tauri-apps/api/core";
 
 type ViewPropsIncome = {
-  type: string,
-  amount: number,
-  or: number,
-  receivedFrom: string,
-  receivedBy: string,
-  date: Date,
-}
+  id?: number;
+  type_: string;
+  amount: number;
+  or_number: number;
+  received_from: string;
+  received_by: string;
+  date: Date;
+  category: string;
+};
 
-export default function ViewExpenseModal(props: ViewPropsIncome) {
-  const [openCalendar, setOpenCalendar] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
+export default function ViewIncomeModal(props: ViewPropsIncome) {
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const form = useForm<z.infer<typeof incomeSchema>>({
     resolver: zodResolver(incomeSchema),
     defaultValues: {
-      type: props.type,
-      amount: props.amount, 
-      or: props.or, 
-      receivedFrom: props.receivedFrom,
-      receivedBy: props.receivedBy,
+      type_: props.type_,
+      amount: props.amount,
+      or_number: props.or_number,
+      received_from: props.received_from,
+      received_by: props.received_by,
       date: props.date,
-    }
-  })
+      category: props.category,
+    },
+  });
 
-  function onSubmit(values: z.infer<typeof incomeSchema>) {
-    toast.success("Income updated successfully", {
-      description: `${values.type} was updated`
-    })
-    setOpenModal(false)
+  async function onSubmit(values: z.infer<typeof incomeSchema>) {
+    try {
+      const incomeWithId = {
+        ...values,
+        id: props.id,
+        date: values.date.toISOString(), // ensure date is formatted
+      };
+
+      await invoke("save_income_command", { income: incomeWithId });
+
+      toast.success("Income updated successfully", {
+        description: `${values.type_} was updated.`,
+      });
+
+      setOpenModal(false);
+      window.location.reload(); // refresh table if needed
+    } catch (error) {
+      toast.error("Update failed", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
   }
   return (
     <>
-      <Dialog
-        open={openModal}
-        onOpenChange={setOpenModal}
-      >
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>
           <Button>
             <Eye />
@@ -63,19 +98,26 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
-                <p className="text-md font-bold text-black">Basic Income Information</p>
+                <p className="text-md font-bold text-black">
+                  Basic Income Information
+                </p>
               </DialogHeader>
               <div className="flex flex-col gap-3">
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Income</FormLabel>
+                        <FormLabel
+                          htmlFor="type"
+                          className="text-black font-bold text-xs"
+                        >
+                          Income
+                        </FormLabel>
                         <FormControl>
                           <Input
-                            id="type"
+                            id="type_"
                             type="text"
                             placeholder="Enter Income name"
                             required
@@ -88,13 +130,18 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                     )}
                   />
                 </div>
-                 <div>
+                <div>
                   <FormField
                     control={form.control}
                     name="amount"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="amount" className="text-black font-bold text-xs">Amount</FormLabel>
+                        <FormLabel
+                          htmlFor="amount"
+                          className="text-black font-bold text-xs"
+                        >
+                          Amount
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="amount"
@@ -111,16 +158,55 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                     )}
                   />
                 </div>
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-bold text-xs">
+                        Category
+                      </FormLabel>
+                      <FormControl>
+                        <select
+                          className="text-black border rounded p-2 w-full"
+                          value={field.value}
+                          onChange={field.onChange}
+                        >
+                          <option value="">Select category</option>
+                          <option value="Local Revenue">Local Revenue</option>
+                          <option value="Tax Revenue">Tax Revenue</option>
+                          <option value="Government Grants">
+                            Government Grants
+                          </option>
+                          <option value="Service Revenue">
+                            Service Revenue
+                          </option>
+                          <option value="Rental Income">Rental Income</option>
+                          <option value="Government Funds">
+                            Government Funds
+                          </option>
+                          <option value="Others">Others</option>
+                        </select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div>
                   <FormField
                     control={form.control}
-                    name="or"
+                    name="or_number"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="or" className="text-black font-bold text-xs">OR#</FormLabel>
+                        <FormLabel
+                          htmlFor="or"
+                          className="text-black font-bold text-xs"
+                        >
+                          OR#
+                        </FormLabel>
                         <FormControl>
                           <Input
-                            id="or"
+                            id="or_number"
                             type="text"
                             placeholder="Enter OR#"
                             required
@@ -134,16 +220,21 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                     )}
                   />
                 </div>
-                  <div>
+                <div>
                   <FormField
                     control={form.control}
-                    name="receivedFrom"
+                    name="received_from"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="receivedFrom" className="text-black font-bold text-xs">Received From</FormLabel>
+                        <FormLabel
+                          htmlFor="received_from"
+                          className="text-black font-bold text-xs"
+                        >
+                          Received From
+                        </FormLabel>
                         <FormControl>
                           <Input
-                            id="receivedFrom"
+                            id="received_from"
                             type="string"
                             placeholder="Enter Received From"
                             required
@@ -157,16 +248,21 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                     )}
                   />
                 </div>
-                  <div>
+                <div>
                   <FormField
                     control={form.control}
-                    name="receivedBy"
+                    name="received_by"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="receivedBy" className="text-black font-bold text-xs">Received By</FormLabel>
+                        <FormLabel
+                          htmlFor="received_by"
+                          className="text-black font-bold text-xs"
+                        >
+                          Received By
+                        </FormLabel>
                         <FormControl>
                           <Input
-                            id="receivedBy"
+                            id="received_by"
                             type="string"
                             placeholder="Enter Received From"
                             required
@@ -186,16 +282,22 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="date" className="text-black font-bold text-xs">Date Issued</FormLabel>
+                        <FormLabel
+                          htmlFor="date"
+                          className="text-black font-bold text-xs"
+                        >
+                          Date Issued
+                        </FormLabel>
                         <Popover
                           open={openCalendar}
                           onOpenChange={setOpenCalendar}
                         >
                           <FormControl>
-                            <PopoverTrigger asChild className="w-full text-black hover:bg-primary hover:text-white">
-                              <Button
-                                variant="outline"
-                              >
+                            <PopoverTrigger
+                              asChild
+                              className="w-full text-black hover:bg-primary hover:text-white"
+                            >
+                              <Button variant="outline">
                                 {field.value ? (
                                   format(field.value, "PPP")
                                 ) : (
@@ -222,12 +324,12 @@ export default function ViewExpenseModal(props: ViewPropsIncome) {
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
-                <Button>Save Income</Button>
+                <Button type="submit">Save Income</Button>
               </div>
             </form>
           </Form>
         </DialogContent>
-      </Dialog >
+      </Dialog>
     </>
-  )
+  );
 }

@@ -30,13 +30,16 @@ export type Household = {
 }
 
 export type Income = {
-  type: string,
+  id?: number;
+  category: string,
+  type_: string,
   amount: number,
-  or: number,
-  receivedFrom: string,
-  receivedBy: string,
+  or_number: number,
+  received_from: string,
+  received_by: string,
   date: Date,
 }
+
 export type Expense = {
   type: string,
   amount: number,

@@ -175,6 +175,7 @@ export default function Blotters() {
   }, [searchParams, data, searchQuery]);
 
   const total = data.length;
+  const finished = data.filter((d) => d.status === "Closed" || d.status === "Transferred to Police").length;
   const active = data.filter((d) => d.status === "Active").length;
   const ongoing = data.filter((d) => d.status === "On Going").length;
   const closed = data.filter((d) => d.status === "Closed").length;
@@ -219,7 +220,7 @@ export default function Blotters() {
 
         <SummaryCardBlotter
           title="Total Finished"
-          value={total}
+          value={finished}
           icon={<BookOpenCheck size={50} />}
         />
         <SummaryCardBlotter

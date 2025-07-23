@@ -136,7 +136,6 @@ export default function Blotters() {
   const [data, setData] = useState<Blotter[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
-  const [printData, setPrintData] = useState<Blotter[]>([])
 
   const fetchBlotters = () => {
     invoke<Blotter[]>("fetch_all_blotters_command")
@@ -339,7 +338,7 @@ export default function Blotters() {
           icon={<DollarSign size={50} />}
           onClick={async () => {
             setPrintData(data)
-            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Closed")} />).toBlob()
+            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Transferred to Police")} />).toBlob()
             const buffer = await blob.arrayBuffer()
             const contents = new Uint8Array(buffer)
             try {

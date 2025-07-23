@@ -3,7 +3,6 @@ use rusqlite::{Connection, Result};
 pub fn migrate(conn: &Connection) -> Result<()> {
     conn.execute_batch(
         "
-        // DROP TABLE IF EXISTS blotters;
         CREATE TABLE IF NOT EXISTS blotters (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             type_ TEXT NOT NULL,
@@ -21,7 +20,6 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             hearing_date TEXT NOT NULL
         );
 
-        // DROP TABLE IF EXISTS incomes;
         CREATE TABLE IF NOT EXISTS incomes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             type_ TEXT NOT NULL,

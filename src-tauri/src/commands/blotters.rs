@@ -1,32 +1,14 @@
 use rusqlite::{params, Connection};
 use serde::{Deserialize, Serialize};
 use crate::database::connection::establish_connection;
-
+mod blotter;
 
 pub fn delete_blotter(conn: &Connection, id: i32) -> rusqlite::Result<()> {
     conn.execute("DELETE FROM blotters WHERE id = ?", params![id])?;
     Ok(())
 }
 
-#[derive(Debug, Serialize, Deserialize)]
-pub struct Blotter {
-    pub id: Option<i32>,
-    pub type_: String,
-    pub reported_by: String,
-    pub involved: String,
-    pub incident_date: String,
-    pub location: String,
-    pub zone: String,
-    pub status: String,
-    pub narrative: String,
-    pub action: String,
-    pub witnesses: String,
-    pub evidence: String,
-    pub resolution: String,
-    pub hearing_date: String,
-}
 
-// ✅ Insert a new blotter record into the database
 pub fn insert_blotter(conn: &Connection, blotter: Blotter) -> rusqlite::Result<usize> {
     conn.execute(
         "INSERT INTO blotters (

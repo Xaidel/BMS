@@ -11,7 +11,6 @@ pub fn establish_connection() -> Result<Connection> {
     let db_path = db_dir.join("bms.db");
     let conn = Connection::open(db_path)?;
 
-    // 👉 Enable WAL mode to prevent database locking
     conn.pragma_update(None, "journal_mode", &"WAL")?;
 
     Ok(conn)

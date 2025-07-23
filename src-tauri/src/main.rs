@@ -2,7 +2,7 @@
 
 mod database;
 mod commands;
-
+mod models;
 
 use commands::income::{save_income_command, insert_income_command, fetch_all_incomes_command, delete_income_command, update_income_command};
 use crate::commands::blotters::{delete_blotter_command, fetch_all_blotters_command, save_blotter};

@@ -1,7 +1,6 @@
 use rusqlite::{params, Connection};
-use serde::{Deserialize, Serialize};
 use crate::database::connection::establish_connection;
-mod blotter;
+use crate::models::blotter::Blotter;
 
 pub fn delete_blotter(conn: &Connection, id: i32) -> rusqlite::Result<()> {
     conn.execute("DELETE FROM blotters WHERE id = ?", params![id])?;
@@ -120,14 +119,14 @@ pub fn delete_blotter_command(id: i32) -> Result<(), String> {
 }
 
 #[tauri::command]
-pub fn save_blotter(data: super::blotters::Blotter) -> Result<(), String> {
+pub fn save_blotter(data: Blotter) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
-    super::blotters::insert_or_update_blotter(&conn, data).map_err(|e| e.to_string())?;
+    insert_or_update_blotter(&conn, data).map_err(|e| e.to_string())?;
     Ok(())
 }
 
 #[tauri::command]
-pub fn fetch_all_blotters_command() -> Result<Vec<super::blotters::Blotter>, String> {
+pub fn fetch_all_blotters_command() -> Result<Vec<Blotter>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
-    super::blotters::fetch_all_blotters(&conn).map_err(|e| e.to_string())
+    fetch_all_blotters(&conn).map_err(|e| e.to_string())
 }

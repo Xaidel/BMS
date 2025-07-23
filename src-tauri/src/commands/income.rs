@@ -1,6 +1,6 @@
 use crate::database::connection::establish_connection;
 use rusqlite::params;
-
+use crate::models::income::Income;
 
 #[tauri::command]
 pub fn delete_income_command(id: i32) -> Result<(), String> {
@@ -14,17 +14,6 @@ pub fn delete_income_command(id: i32) -> Result<(), String> {
     Ok(())
 }
 
-#[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
-pub struct Income {
-    pub id: Option<i32>,
-    pub type_: String,
-    pub amount: f64,
-    pub or_number: i32,
-    pub received_from: String,
-    pub received_by: String,
-    pub category: String,
-    pub date: String, // Stored as ISO 8601 string (e.g., "2025-07-21")
-}
 
 #[tauri::command]
 pub fn fetch_all_incomes_command() -> Result<Vec<Income>, String> {

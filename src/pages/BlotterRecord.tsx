@@ -136,6 +136,7 @@ export default function Blotters() {
   const [data, setData] = useState<Blotter[]>([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [printData, setPrintDataState] = useState<Blotter[] | null>(null);
 
   const fetchBlotters = () => {
     invoke<Blotter[]>("fetch_all_blotters_command")
@@ -210,6 +211,10 @@ export default function Blotters() {
       console.error("Delete error:", err);
     }
   };
+
+  function setPrintData(data: Blotter[]) {
+    setPrintDataState(data);
+  }
 
   return (
     <>

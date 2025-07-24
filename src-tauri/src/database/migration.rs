@@ -31,8 +31,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             date TEXT NOT NULL
         );
 
-        // DROP TABLE IF EXISTS expenses;
-        CREATE TABLE expenses (
+        CREATE TABLE IF NOT EXISTS expenses (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             type_ TEXT NOT NULL,
             amount REAL NOT NULL,

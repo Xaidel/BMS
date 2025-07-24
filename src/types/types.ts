@@ -1,6 +1,6 @@
 export type Event = {
   name: string,
-  type: string,
+  type_: string,
   status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled",
   date: Date,
   venue: string,
@@ -12,7 +12,7 @@ export type Resident = {
   isRegisteredVoter: boolean
   isPWD: boolean
   isSenior: boolean
-  fullName: string,
+  full_name: string,
   civilStatus: string,
   status: "Moved Out" | "Active" | "Dead" | "Missing",
   birthday: Date,
@@ -20,14 +20,15 @@ export type Resident = {
   zone: string,
 }
 export type Household = {
-  householdNumber: number,
-  type: string,
-  members: number,
-  head: string,
-  zone: string,
-  date: Date,
-  status: "Moved Out" | "Active",
-}
+  id?: number;
+  household_number: number;
+  type_: string;
+  members: number;
+  head: string;
+  zone: string;
+  date: Date;
+  status: "Moved Out" | "Active";
+};
 
 export type Income = {
   id?: number;
@@ -41,7 +42,7 @@ export type Income = {
 }
 
 export type Expense = {
-  id?: number; 
+  id?: number;
   type_: string;
   category: string;
   amount: number;
@@ -53,7 +54,7 @@ export type Expense = {
 
 export type Certificate = {
   name: string;
-  type: string;
+  type_: string;
   or: string;
   date: Date;
   zone: string;

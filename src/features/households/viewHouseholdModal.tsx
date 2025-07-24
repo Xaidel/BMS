@@ -14,10 +14,13 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Household } from "@/types/types";
+import { invoke } from "@tauri-apps/api/core";
+
 
 
 const selectOption: string[] = [
   "Renter",
+  "Owner",
 ]
 
 const zone: string[] = [
@@ -34,14 +37,14 @@ const status: string[] = [
   "Moved Out"
 ]
 
-export default function ViewResidentModal(props: Household) {
+export default function ViewHouseholdModal(props: Household & { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const form = useForm<z.infer<typeof householdSchema>>({
     resolver: zodResolver(householdSchema),
     defaultValues: {
-      householdNumber: props.householdNumber,
-      type: props.type,
+      household_number: props.household_number,
+      type_: props.type_,
       head: props.head,
       members: props.members,
       zone: props.zone,
@@ -50,11 +53,18 @@ export default function ViewResidentModal(props: Household) {
     }
   })
 
-  function onSubmit(values: z.infer<typeof householdSchema>) {
+  async function onSubmit(values: z.infer<typeof householdSchema>) {
+    const householdWithId = {
+      ...values,
+      id: props.id,
+      date: values.date.toISOString(),
+    };
+    await invoke("save_household_command", { household: householdWithId });
     toast.success("Household updated successfully", {
-      description: `${values.householdNumber} was updated`
-    })
-    setOpenModal(false)
+      description: `${values.household_number} was updated`
+    });
+    setOpenModal(false);
+    props.onSave();
   }
   return (
     <>
@@ -72,7 +82,7 @@ export default function ViewResidentModal(props: Household) {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <DialogHeader>
-                <DialogTitle className="text-black">Create Household</DialogTitle>
+                <DialogTitle className="text-black">View/Edit Household</DialogTitle>
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
@@ -82,18 +92,19 @@ export default function ViewResidentModal(props: Household) {
                 <div>
                   <FormField
                     control={form.control}
-                    name="householdNumber"
+                    name="household_number"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel htmlFor="name" className="text-black font-bold text-xs">Household Number</FormLabel>
                         <FormControl>
                           <Input
                             id="name"
-                            type="text"
+                            type="number"
                             placeholder="Enter Household name"
                             required
                             {...field}
                             className="text-black"
+                            onChange={(e) => field.onChange(+e.target.value)}
                           />
                         </FormControl>
                         <FormMessage />
@@ -104,7 +115,7 @@ export default function ViewResidentModal(props: Household) {
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel htmlFor="type" className="text-black font-bold text-xs">Type</FormLabel>
@@ -260,7 +271,7 @@ export default function ViewResidentModal(props: Household) {
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
-                <Button>Save Household</Button>
+                <Button type="submit">Save Household</Button>
               </div>
             </form>
           </Form>

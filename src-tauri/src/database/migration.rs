@@ -41,6 +41,17 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             category TEXT NOT NULL,
             or_number INTEGER NOT NULL
         );
+
+        CREATE TABLE IF NOT EXISTS households (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            household_number INTEGER NOT NULL,
+            type_ TEXT NOT NULL,
+            members INTEGER NOT NULL,
+            head TEXT NOT NULL,
+            zone TEXT NOT NULL,
+            date TEXT NOT NULL,
+            status TEXT NOT NULL
+        );
         ",
     )?;
     Ok(())

@@ -15,7 +15,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 type ViewPropsResident = {
-  fullName: string,
+  full_name: string,
   civilStatus: string,
   status: string,
   birthday: Date,
@@ -44,7 +44,7 @@ export default function ViewResidentModal(props: ViewPropsResident) {
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
     defaultValues: {
-      fullName: props.fullName,
+      full_name: props.full_name,
       civilStatus: props.civilStatus,
       birthday: props.birthday,
       gender: props.gender,
@@ -55,7 +55,7 @@ export default function ViewResidentModal(props: ViewPropsResident) {
 
   function onSubmit(values: z.infer<typeof residentSchema>) {
     toast.success("Resident updated successfully", {
-      description: `${values.fullName} was updated`
+      description: `${values.full_name} was updated`
     })
     setOpenModal(false)
   }
@@ -85,13 +85,13 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                 <div>
                   <FormField
                     control={form.control}
-                    name="fullName"
+                    name="full_name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="fullName" className="text-black font-bold text-xs">Name</FormLabel>
+                        <FormLabel htmlFor="full_name" className="text-black font-bold text-xs">Name</FormLabel>
                         <FormControl>
                           <Input
-                            id="fullName"
+                            id="full_name"
                             type="text"
                             placeholder="Enter full name"
                             required

@@ -62,7 +62,7 @@ const columns: ColumnDef<Resident>[] = [
   },
   {
     header: "Full Name",
-    accessorKey: "fullName",
+    accessorKey: "full_name",
   },
   {
     header: "Civil Status",

@@ -6,7 +6,7 @@ export default function searchIncome(term: string, data: Income[]) {
   const pattern = new RegExp(sanitizedQuery, "i");
 
   return data.filter((income) =>
-    pattern.test(income.type) ||
+    pattern.test(income.type_) ||
     pattern.test(income.or_number.toString()) ||  // 🔧 fixed here
     pattern.test(income.received_from)
   );

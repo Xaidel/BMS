@@ -250,7 +250,7 @@ export default function Blotters() {
           icon={<BookOpenCheck size={50} />}
           onClick={async () => {
             setPrintData(data)
-            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Finished")} />).toBlob()
+            const blob = await pdf(<BlotterPDF filter="Finished Blotters" blotters={data.filter((d) => d.status === "Finished")} />).toBlob()
             const buffer = await blob.arrayBuffer()
             const contents = new Uint8Array(buffer)
             try {
@@ -273,7 +273,7 @@ export default function Blotters() {
           icon={<Eye size={50} />}
           onClick={async () => {
             setPrintData(data)
-            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Active")} />).toBlob()
+            const blob = await pdf(<BlotterPDF filter="Active Blotters" blotters={data.filter((d) => d.status === "Active")} />).toBlob()
             const buffer = await blob.arrayBuffer()
             const contents = new Uint8Array(buffer)
             try {
@@ -297,7 +297,7 @@ export default function Blotters() {
           icon={<AlarmClock size={50} />}
           onClick={async () => {
             setPrintData(data)
-            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "On Going")} />).toBlob()
+            const blob = await pdf(<BlotterPDF filter="On Going Blotters" blotters={data.filter((d) => d.status === "On Going")} />).toBlob()
             const buffer = await blob.arrayBuffer()
             const contents = new Uint8Array(buffer)
             try {
@@ -320,7 +320,7 @@ export default function Blotters() {
           icon={<Gavel size={50} />}
           onClick={async () => {
             setPrintData(data)
-            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Closed")} />).toBlob()
+            const blob = await pdf(<BlotterPDF filter="Closed Blotters" blotters={data.filter((d) => d.status === "Closed")} />).toBlob()
             const buffer = await blob.arrayBuffer()
             const contents = new Uint8Array(buffer)
             try {
@@ -343,7 +343,7 @@ export default function Blotters() {
           icon={<DollarSign size={50} />}
           onClick={async () => {
             setPrintData(data)
-            const blob = await pdf(<BlotterPDF filter="All Blotters" blotters={data.filter((d) => d.status === "Transferred to Police")} />).toBlob()
+            const blob = await pdf(<BlotterPDF filter="Blotters that are transferred to police" blotters={data.filter((d) => d.status === "Transferred to Police")} />).toBlob()
             const buffer = await blob.arrayBuffer()
             const contents = new Uint8Array(buffer)
             try {
@@ -362,7 +362,6 @@ export default function Blotters() {
         />
       </div>
 
-      {/* Search/Filter Controls */}
       <div className="flex gap-5 w-full items-center justify-center">
         <Searchbar
           onChange={handleSearch}
@@ -379,7 +378,7 @@ export default function Blotters() {
           variant="destructive"
           size="lg"
           disabled={Object.keys(rowSelection).length === 0}
-          onClick={handleDeleteSelected} // ✅ Make sure this is added
+          onClick={handleDeleteSelected}
         >
           <Trash />
           Delete Selected
@@ -388,7 +387,6 @@ export default function Blotters() {
         <AddBlotterModal onSave={fetchBlotters} />
       </div>
 
-      {/* Table */}
       <DataTable<Blotter>
         classname="py-5"
         height="43.3rem"

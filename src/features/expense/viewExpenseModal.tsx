@@ -41,6 +41,7 @@ type ViewPropsExpense = {
   paid_to: string;
   paid_by: string;
   date: Date;
+  onSave: () => void;
 };
 
 export default function ViewExpenseModal(props: ViewPropsExpense) {
@@ -64,17 +65,17 @@ export default function ViewExpenseModal(props: ViewPropsExpense) {
       const expenseWithId = {
         ...values,
         id: props.id,
-        date: values.date.toISOString(),
+        date: values.date.toISOString(), // ensure date is formatted
       };
 
-      await invoke("save_expense_command", { data: expenseWithId });
+      await invoke("save_expense_command", { expense: expenseWithId });
 
       toast.success("Expense updated successfully", {
         description: `${values.type_} was updated.`,
       });
 
       setOpenModal(false);
-      window.location.reload();
+      props.onSave(); // refresh the data in parent
     } catch (error) {
       toast.error("Update failed", {
         description: error instanceof Error ? error.message : "Unknown error",
@@ -119,13 +120,13 @@ export default function ViewExpenseModal(props: ViewPropsExpense) {
                           onChange={field.onChange}
                         >
                           <option value="">Select category</option>
-                        <option value="Local Revenue">Infrastructure Expense</option>
-                        <option value="Tax Revenue">Honoraria</option>
-                        <option value="Government Grants">Utilities</option>
-                        <option value="Service Revenue">Local Funds Used</option>
-                        <option value="Rental Income">Foods</option>
-                        <option value="Government Funds">IRA Used</option>
-                        <option value="Others">Others</option>
+                          <option value="Infrastructure">Infrastructure</option>
+                          <option value="Honoraria">Honoraria</option>
+                          <option value="Utilities">Utilities</option>
+                          <option value="Local Funds">Local Funds</option>
+                          <option value="Foods">Foods</option>
+                          <option value="IRA">IRA</option>
+                          <option value="Others">Others</option>
                         </select>
                       </FormControl>
                       <FormMessage />

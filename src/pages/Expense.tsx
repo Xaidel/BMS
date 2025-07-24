@@ -247,7 +247,7 @@ export default function Expense() {
             header: "",
             cell: ({ row }) => (
               <div className="flex gap-3">
-                <ViewExpenseModal {...row.original} />
+                <ViewExpenseModal {...row.original} onSave={fetchExpenses} />
                 <DeleteExpenseModal 
                   id={row.original.id!}
                   type_={row.original.type_}

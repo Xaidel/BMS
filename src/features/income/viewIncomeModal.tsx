@@ -41,6 +41,7 @@ type ViewPropsIncome = {
   received_by: string;
   date: Date;
   category: string;
+  onSave: () => void;
 };
 
 export default function ViewIncomeModal(props: ViewPropsIncome) {
@@ -74,7 +75,7 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
       });
 
       setOpenModal(false);
-      window.location.reload(); // refresh table if needed
+      props.onSave();
     } catch (error) {
       toast.error("Update failed", {
         description: error instanceof Error ? error.message : "Unknown error",

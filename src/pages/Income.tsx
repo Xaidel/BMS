@@ -252,7 +252,7 @@ export default function IncomePage() {
             header: "",
             cell: ({ row }) => (
               <div className="flex gap-3">
-                <ViewIncomeModal {...row.original} />
+                <ViewIncomeModal {...row.original} onSave={fetchIncomes} />
                 <DeleteIncomeModal
                   id={row.original.id!}
                   type_={row.original.type_}

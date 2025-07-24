@@ -41,6 +41,7 @@ type ViewPropsIncome = {
   received_by: string;
   date: Date;
   category: string;
+  onSave: () => void;
 };
 
 export default function ViewIncomeModal(props: ViewPropsIncome) {
@@ -74,7 +75,7 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
       });
 
       setOpenModal(false);
-      window.location.reload(); // refresh table if needed
+      props.onSave();
     } catch (error) {
       toast.error("Update failed", {
         description: error instanceof Error ? error.message : "Unknown error",
@@ -103,6 +104,34 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
                 </p>
               </DialogHeader>
               <div className="flex flex-col gap-3">
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-bold text-xs">
+                        Category
+                      </FormLabel>
+                      <FormControl>
+                        <select
+                          className="text-black border rounded p-2 w-full"
+                          value={field.value}
+                          onChange={field.onChange}
+                        >
+                          <option value="">Select category</option>
+                          <option value="Infrastructure">Infrastructure</option>
+                          <option value="Honoraria">Honoraria</option>
+                          <option value="Utilities">Utilities</option>
+                          <option value="Local Funds">Local Funds</option>
+                          <option value="Foods">Foods</option>
+                          <option value="IRA">IRA</option>
+                          <option value="Others">Others</option>
+                        </select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div>
                   <FormField
                     control={form.control}
@@ -158,40 +187,6 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
                     )}
                   />
                 </div>
-                <FormField
-                  control={form.control}
-                  name="category"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-black font-bold text-xs">
-                        Category
-                      </FormLabel>
-                      <FormControl>
-                        <select
-                          className="text-black border rounded p-2 w-full"
-                          value={field.value}
-                          onChange={field.onChange}
-                        >
-                          <option value="">Select category</option>
-                          <option value="Local Revenue">Local Revenue</option>
-                          <option value="Tax Revenue">Tax Revenue</option>
-                          <option value="Government Grants">
-                            Government Grants
-                          </option>
-                          <option value="Service Revenue">
-                            Service Revenue
-                          </option>
-                          <option value="Rental Income">Rental Income</option>
-                          <option value="Government Funds">
-                            Government Funds
-                          </option>
-                          <option value="Others">Others</option>
-                        </select>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 <div>
                   <FormField
                     control={form.control}
@@ -235,12 +230,11 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
                         <FormControl>
                           <Input
                             id="received_from"
-                            type="string"
+                            type="text"
                             placeholder="Enter Received From"
                             required
                             {...field}
                             className="text-black"
-                            onChange={(e) => field.onChange(+e.target.value)}
                           />
                         </FormControl>
                         <FormMessage />
@@ -263,12 +257,11 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
                         <FormControl>
                           <Input
                             id="received_by"
-                            type="string"
-                            placeholder="Enter Received From"
+                            type="text"
+                            placeholder="Enter Received By"
                             required
                             {...field}
                             className="text-black"
-                            onChange={(e) => field.onChange(+e.target.value)}
                           />
                         </FormControl>
                         <FormMessage />

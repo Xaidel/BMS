@@ -30,7 +30,19 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             category TEXT NOT NULL,
             date TEXT NOT NULL
         );
-        "
+
+        // DROP TABLE IF EXISTS expenses;
+        CREATE TABLE expenses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            type_ TEXT NOT NULL,
+            amount REAL NOT NULL,
+            paid_to TEXT NOT NULL,
+            paid_by TEXT NOT NULL,
+            date TEXT NOT NULL,
+            category TEXT NOT NULL,
+            or_number INTEGER NOT NULL
+        );
+        ",
     )?;
     Ok(())
 }

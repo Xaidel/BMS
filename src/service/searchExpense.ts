@@ -6,9 +6,9 @@ export default function searchExpense(term: string, data: Expense[]): Expense[] 
   const pattern = new RegExp(sanitizedQuery, "i");
 
   return data.filter(expense =>
-    pattern.test(expense.type) ||
-    pattern.test(expense.or.toString()) ||
-    pattern.test(expense.paidFrom) ||
-    pattern.test(expense.paidBy)
+    pattern.test(expense.type_) ||
+    pattern.test(expense.or_number.toString()) ||
+    pattern.test(expense.paid_to) ||
+    pattern.test(expense.paid_by)
   );
 }

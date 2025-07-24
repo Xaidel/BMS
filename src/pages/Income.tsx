@@ -62,11 +62,11 @@ const columns: ColumnDef<Income>[] = [
     ),
   },
   { header: "Type", accessorKey: "type_" },
+  { header: "Category", accessorKey: "category" },
   { header: "OR Number", accessorKey: "or_number" },
   { header: "Amount", accessorKey: "amount" },
   { header: "Received From", accessorKey: "received_from" },
   { header: "Received By", accessorKey: "received_by" },
-  { header: "Category", accessorKey: "category" },
   {
     header: "Date Issued",
     accessorKey: "date",
@@ -80,12 +80,11 @@ const columns: ColumnDef<Income>[] = [
   },
 ];
 
-
-export default function IncomePage(){
+export default function IncomePage() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
- const [data, setData] = useState([]); // 
+  const [data, setData] = useState([]); //
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -113,49 +112,48 @@ export default function IncomePage(){
   }, [searchParams, searchQuery, data]);
 
   const fetchIncomes = () => {
-  invoke<Income[]>("fetch_all_incomes_command")
-    .then((fetched) => {
-      const parsed = fetched.map((income) => ({
-        ...income,
-        date: new Date(income.date),
-        category: income.category,
-      }));
-      setData(parsed);
-    })
-    .catch((err) => console.error("Failed to fetch incomes:", err));
-};
+    invoke<Income[]>("fetch_all_incomes_command")
+      .then((fetched) => {
+        const parsed = fetched.map((income) => ({
+          ...income,
+          date: new Date(income.date),
+          category: income.category,
+        }));
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch incomes:", err));
+  };
 
-useEffect(() => {
-  fetchIncomes();
-}, []);
+  useEffect(() => {
+    fetchIncomes();
+  }, []);
 
- // Pass the fetch function to AddBlotterModal
   <AddIncomeModal onSave={fetchIncomes} />;
 
-const handleDeleteSelected = async () => {
-  const selectedIds = Object.keys(rowSelection)
-    .map((key) => filteredData[parseInt(key)])
-    .filter((row) => !!row)
-    .map((row) => row.id);
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
 
-  if (selectedIds.length === 0) {
-    console.error("No income records selected.");
-    return;
-  }
-
-  try {
-    for (const id of selectedIds) {
-      if (id !== undefined) {
-        await invoke("delete_income_command", { id });
-      }
+    if (selectedIds.length === 0) {
+      console.error("No income records selected.");
+      return;
     }
-    console.log("Selected incomes deleted.");
-    fetchIncomes();
-    setRowSelection({});
-  } catch (err) {
-    console.error("Failed to delete selected incomes", err);
-  }
-};
+
+    try {
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_income_command", { id });
+        }
+      }
+      console.log("Selected incomes deleted.");
+      fetchIncomes();
+      setRowSelection({});
+    } catch (err) {
+      console.error("Failed to delete selected incomes", err);
+    }
+  };
 
   return (
     <>
@@ -168,37 +166,51 @@ const handleDeleteSelected = async () => {
         />
         <SummaryCardIncome
           title="Local Revenue"
-          value={data.filter((d) => d.category === "Local Revenue").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Local Revenue")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Banknote size={50} />}
         />
         <SummaryCardIncome
           title="Tax Revenue"
-          value={data.filter((d) => d.category === "Tax Revenue").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Tax Revenue")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<PiggyBank size={50} />}
         />
         <SummaryCardIncome
           title="Government Grants"
-          value={data.filter((d) => d.category === "Government Grants").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Government Grants")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Gift size={50} />}
         />
         <SummaryCardIncome
           title="Service Revenue"
-          value={data.filter((d) => d.category === "Service Revenue").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Service Revenue")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Coins size={50} />}
         />
         <SummaryCardIncome
           title="Rental Income"
-          value={data.filter((d) => d.category === "Rental Income").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Rental Income")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Wallet size={50} />}
         />
         <SummaryCardIncome
           title="Government Funds (IRA)"
-          value={data.filter((d) => d.category === "Government Funds").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Government Funds")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Layers size={50} />}
         />
         <SummaryCardIncome
           title="Others"
-          value={data.filter((d) => d.category === "Others").reduce((acc, item) => acc + item.amount, 0)}
+          value={data
+            .filter((d) => d.category === "Others")
+            .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Shirt size={50} />}
         />
       </div>
@@ -240,7 +252,7 @@ const handleDeleteSelected = async () => {
             header: "",
             cell: ({ row }) => (
               <div className="flex gap-3">
-                <ViewIncomeModal {...row.original} />
+                <ViewIncomeModal {...row.original} onSave={fetchIncomes} />
                 <DeleteIncomeModal
                   id={row.original.id!}
                   type_={row.original.type_}

@@ -31,9 +31,6 @@ import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { id } from "date-fns/locale";
 
-type Props = {
-  onSave?: () => void;
-};
 
 const statusOption = [
   "Active",
@@ -86,39 +83,27 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-  try {
-    await invoke("save_blotter", {
-      data: {
-        type_: values.type_,
-        reported_by: values.reported_by,
-        involved: values.involved,
-        incident_date: values.incident_date.toISOString(),
-        location: values.location,
-        zone: values.zone,
-        status: values.status,
-        narrative: values.narrative,
-        action: values.action,
-        witnesses: values.witnesses,
-        evidence: values.evidence,
-        resolution: values.resolution,
-        hearing_date: values.hearing_date.toISOString(),
-      },
-    });
+    try {
+      await invoke("insert_blotter_command", {
+        blotter: {
+          ...values,
+          incident_date: values.incident_date.toISOString(),
+          hearing_date: values.hearing_date.toISOString(),
+        },
+      });
 
-    toast.success("Blotter added successfully", {
-      description: `${values.reported_by} vs ${values.involved}`,
-    });
+      toast.success("Blotter added successfully", {
+        description: `${values.reported_by} vs ${values.involved}`,
+      });
 
-    setOpenModal(false);
-    form.reset();
-
-    // 🔄 Force full reload like in ViewBlotterModal
-    window.location.reload();
-  } catch (error) {
-    console.error("Failed to insert blotter:", error);
-    toast.error("Failed to add blotter.");
+      setOpenModal(false);
+      form.reset();
+      onSave?.(); // trigger refresh
+    } catch (error) {
+      console.error("Insert blotter failed:", error);
+      toast.error("Failed to add blotter.");
+    }
   }
-}
 
 
 

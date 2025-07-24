@@ -51,7 +51,7 @@ const selectStatus: string[] = [
 
 
 
-export default function ViewBlotterModal(props: Blotter) {
+export default function ViewBlotterModal(props: Blotter & { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
@@ -75,27 +75,28 @@ export default function ViewBlotterModal(props: Blotter) {
   });
 
   async function onSubmit(values: z.infer<typeof blotterSchema>) {
-  try {
-    // Inject the original ID from the `props`
-    const blotterWithId = {
-      ...values,
-      id: props.id, // Important for UPDATE
-    };
+    try {
+      const blotterWithId = {
+        ...values,
+        id: props.id,
+        incident_date: values.incident_date.toISOString(),
+        hearing_date: values.hearing_date.toISOString(),
+      };
 
-    await invoke("save_blotter", { data: blotterWithId });
+      await invoke("save_blotter_command", { blotter: blotterWithId });
 
-    toast.success("Blotter updated successfully", {
-      description: `${values.type_} was updated.`,
-    });
+      toast.success("Blotter updated successfully", {
+        description: `${values.type_} was updated.`,
+      });
 
-    setOpenModal(false); // close modal
-    window.location.reload(); // refresh table — replace with a state update if you prefer
-  } catch (error) {
-    toast.error("Update failed", {
-      description: error instanceof Error ? error.message : "Unknown error",
-    });
+      setOpenModal(false);
+      props.onSave();
+    } catch (error) {
+      toast.error("Update failed", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
   }
-}
 
   return (
     <>

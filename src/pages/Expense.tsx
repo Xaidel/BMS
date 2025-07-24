@@ -11,7 +11,8 @@ import { format } from "date-fns";
 import { Trash, Banknote, Coins, Gift, Landmark, Layers, PiggyBank, DollarSign, Wallet, Home, Salad, Shirt } from "lucide-react";
 import type { Expense } from "@/types/types";
 import { useSearchParams } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { invoke } from "@tauri-apps/api/core";
 import { sort } from "@/service/expenseSort";
 import searchExpense from "@/service/searchExpense";
 import SummaryCardExpense from "@/components/ui/summary-card/expense";
@@ -54,7 +55,11 @@ const columns: ColumnDef<Expense>[] = [
   },
   {
     header: "Type",
-    accessorKey: "type",
+    accessorKey: "type_",
+  },
+  {
+    header: "Category",
+    accessorKey: "category",
   },
   {
     header: "Amount",
@@ -62,11 +67,11 @@ const columns: ColumnDef<Expense>[] = [
   },
   {
     header: "Paid From",
-    accessorKey: "paidFrom",
+    accessorKey: "paid_to",
   },
   {
     header: "Paid By",
-    accessorKey: "paidBy",
+    accessorKey: "paid_by",
   },
   {
     header: "Date Issued",
@@ -79,45 +84,31 @@ const columns: ColumnDef<Expense>[] = [
   },
 ];
 
-const data: Expense[] = [
-  {
-    type: "Certificate",
-    amount: 150,
-    or: 123456,
-    paidFrom: "Kagawad Office",
-    paidBy: "John John",
-    date: new Date("June 29, 2023"),
-  },
-  {
-    type: "Business Permit",
-    amount: 150,
-    or: 123456,
-    paidFrom: "Treasurer Office",
-    paidBy: "John Doe",
-    date: new Date(),
-  },
-  {
-    type: "Infrastructure",
-    amount: 150,
-    or: 123456,
-    paidFrom: "IRA",
-    paidBy: "John Doe",
-    date: new Date("July 1, 2025"),
-  },
-  {
-    type: "Honorarium",
-    amount: 1500,
-    or: 123456,
-    paidFrom: "Local Fund",
-    paidBy: "John Doe",
-    date: new Date("June 29, 2023"),
-  },
-];
 
 export default function Expense() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState<Expense[]>([]);
+
+  const fetchExpenses = () => {
+    invoke<Expense[]>("fetch_all_expenses_command")
+      .then((fetched) => {
+        const parsed = fetched.map((expense) => ({
+          ...expense,
+          date: new Date(expense.date),
+          category: expense.category,
+        }));
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch expenses:", err));
+  };
+
+  useEffect(() => {
+    fetchExpenses();
+  }, []);
+
+    <AddExpenseModal onSave={fetchExpenses} />;
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -136,17 +127,88 @@ export default function Expense() {
     return sorted;
   }, [searchParams, data, searchQuery]);
 
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
+
+    if (selectedIds.length === 0) {
+      console.error("No expense records selected.");
+      return;
+    }
+
+    try {
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_expense_command", { id });
+        }
+      }
+      console.log("Selected expenses deleted.");
+      fetchExpenses();
+      setRowSelection({});
+    } catch (err) {
+      console.error("Failed to delete selected expenses", err);
+    }
+  };
+
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCardExpense title="Total Expenditure" value={2050} icon={<DollarSign size={50} />} />
-        <SummaryCardExpense title="Infrastructure Expenses" value={750} icon={<Landmark size={50} />} />
-        <SummaryCardExpense title="Honoraria" value={300} icon={<PiggyBank size={50} />} />
-        <SummaryCardExpense title="Utilities" value={500} icon={<Wallet size={50} />} />
-        <SummaryCardExpense title="Local Funds Used" value={200} icon={<Banknote size={50} />} />
-        <SummaryCardExpense title="Foods" value={100} icon={<Salad size={50} />} />
-        <SummaryCardExpense title="IRA Used" value={100} icon={<Layers size={50} />} />
-        <SummaryCardExpense title="Others" value={100} icon={<Shirt size={50} />} />
+        <SummaryCardExpense
+          title="Total Expenditure"
+          value={data.reduce((acc, item) => acc + item.amount, 0)}
+          icon={<DollarSign size={50} />}
+        />
+        <SummaryCardExpense
+          title="Infrastructure Expenses"
+          value={data
+            .filter((d) => d.category === "Infrastructure")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<Landmark size={50} />}
+        />
+        <SummaryCardExpense
+          title="Honoraria"
+          value={data
+            .filter((d) => d.category === "Honoraria")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<PiggyBank size={50} />}
+        />
+        <SummaryCardExpense
+          title="Utilities"
+          value={data
+            .filter((d) => d.category === "Utilities")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<Wallet size={50} />}
+        />
+        <SummaryCardExpense
+          title="Local Funds Used"
+          value={data
+            .filter((d) => d.category === "Local Funds")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<Banknote size={50} />}
+        />
+        <SummaryCardExpense
+          title="Foods"
+          value={data
+            .filter((d) => d.category === "Foods")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<Salad size={50} />}
+        />
+        <SummaryCardExpense
+          title="IRA Used"
+          value={data
+            .filter((d) => d.category === "IRA")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<Layers size={50} />}
+        />
+        <SummaryCardExpense
+          title="Others"
+          value={data
+            .filter((d) => d.category === "Others")
+            .reduce((acc, item) => acc + item.amount, 0)}
+          icon={<Shirt size={50} />}
+        />
       </div>
 
 
@@ -162,11 +224,16 @@ export default function Expense() {
           initial="All Expense"
           classname="flex-1"
         />
-        <Button variant="destructive" size="lg">
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected}
+        >
           <Trash />
           Delete Selected
         </Button>
-        <AddExpenseModal />
+        <AddExpenseModal onSave={fetchExpenses}/>
       </div>
 
       <DataTable<Expense>
@@ -181,7 +248,12 @@ export default function Expense() {
             cell: ({ row }) => (
               <div className="flex gap-3">
                 <ViewExpenseModal {...row.original} />
-                <DeleteExpenseModal {...row.original} />
+                <DeleteExpenseModal 
+                  id={row.original.id!}
+                  type_={row.original.type_}
+                  category={row.original.category}
+                  onDelete={fetchExpenses}                
+                />
               </div>
             ),
           },

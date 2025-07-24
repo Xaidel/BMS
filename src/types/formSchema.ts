@@ -137,35 +137,47 @@ export const incomeSchema = z.object({
 });
 
 export const expenseSchema = z.object({
-  type: z.string().min(2, {
-    message: "Type name is too short"
+  type_: z.string().min(2, {
+    message: "Type name is too short",
   }).max(50, {
-    message: "Type name is too long, put other details on the 'details' form"
+    message: "Type name is too long, put other details on the 'details' form",
   }),
-  amount: z.number().min(0, {
-    message: "Amount is too short"
+
+  category: z.string().min(1, {
+    message: "Category is required",
+  }),
+
+  amount: z.number({
+    invalid_type_error: "Amount must be a number",
+  }).min(0.01, {
+    message: "Amount must be greater than zero",
+  }).max(1_000_000, {
+    message: "Amount exceeds maximum allowed value",
+  }),
+
+  or_number: z.number({
+    invalid_type_error: "OR# must be a number",
+  }).min(1, {
+    message: "OR# is required",
+  }),
+
+  paid_to: z.string().min(2, {
+    message: "Paid From name is too short",
   }).max(50, {
-    message: "Amount type is too long."
+    message: "Paid From name is too long",
   }),
-  or: z.number().min(0, {
-    message: "OR$ is too short"
+
+  paid_by: z.string().min(2, {
+    message: "Paid By name is too short",
   }).max(50, {
-    message: "OR# type is too long."
+    message: "Paid By name is too long",
   }),
-  paidFrom: z.string().min(2, {
-    message: "Name too long"
-  }).max(50, {
-    message: "Name venue is too long"
-  }),
-  paidBy: z.string().min(2, {
-    message: "Name too long"
-  }).max(50, {
-    message: "Name venue is too long"
-  }),
+
   date: z.date({
-    required_error: "Please specify the issued date"
+    required_error: "Please specify the issued date",
+    invalid_type_error: "Invalid date format",
   }),
-})
+});
 
 export const blotterSchema = z.object({
   type_: z

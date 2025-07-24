@@ -14,27 +14,42 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 
-export default function AddExpenseModal() {
+export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
     defaultValues: {
-      type: "",
+      type_: "",
       amount: 0,
-      or: 0,
-      paidFrom: "",
-      paidBy: "",
+      or_number: 0,
+      paid_to: "",
+      paid_by: "",
+      category: "",
       date: undefined,
     }
   })
 
-  function onSubmit(values: z.infer<typeof expenseSchema>) {
-    toast.success("Expense added sucessfully", {
-      description: `${values.type} was added`
-    })
-    setOpenModal(false)
-    invoke("greet")
+  async function onSubmit(values: z.infer<typeof expenseSchema>) {
+    try {
+      await invoke("insert_expense_command", {
+        expense: {
+          ...values,
+          date: values.date.toISOString(), // must be string for Rust
+        },
+      });
+
+      toast.success("Expense added successfully", {
+        description: `${values.type_} was added.`,
+      });
+
+      setOpenModal(false);
+      form.reset();
+      onSave(); // refresh the data in parent
+    } catch (err) {
+      console.error("Insert expense failed:", err);
+      toast.error("Failed to add expense");
+    }
   }
 
   return (
@@ -60,16 +75,46 @@ export default function AddExpenseModal() {
                 <p className="text-md font-bold text-black">Basic Expense Information</p>
               </DialogHeader>
               <div className="flex flex-col gap-3">
+                {/* Category */}
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black font-bold text-xs">
+                      Category
+                    </FormLabel>
+                    <FormControl>
+                      <select
+                        className="text-black border rounded p-2 w-full"
+                        value={field.value}
+                        onChange={field.onChange}
+                      >
+                        <option value="">Select category</option>
+                        <option value="Infrastructure">Infrastructure</option>
+                        <option value="Honoraria">Honoraria</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Local Funds">Local Funds</option>
+                        <option value="Foods">Foods</option>
+                        <option value="IRA">IRA</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* Type */}
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Expense Number</FormLabel>
+                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Expense Name</FormLabel>
                         <FormControl>
                           <Input
-                            id="type"
+                            id="type_"
                             type="text"
                             placeholder="Enter expense name"
                             required
@@ -82,60 +127,65 @@ export default function AddExpenseModal() {
                     )}
                   />
                 </div>
+                {/* Amount */}
+              <FormField
+                control={form.control}
+                name="amount"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black font-bold text-xs">
+                      Amount
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.value === "" ? undefined : +e.target.value
+                          )
+                        }
+                        value={field.value ?? ""}
+                        className="text-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+                <FormField
+                control={form.control}
+                name="or_number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-black font-bold text-xs">
+                      OR#
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.value === "" ? undefined : +e.target.value
+                          )
+                        }
+                        value={field.value ?? ""}
+                        className="text-black"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
                 <div>
                   <FormField
                     control={form.control}
-                    name="amount"
+                    name="paid_to"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="amount" className="text-black font-bold text-xs">Amount</FormLabel>
+                        <FormLabel htmlFor="paid_to" className="text-black font-bold text-xs">Paid To</FormLabel>
                         <FormControl>
                           <Input
-                            id="amount"
-                            type="text"
-                            placeholder="Enter Income name"
-                            required
-                            {...field}
-                            className="text-black"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="or"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel htmlFor="or" className="text-black font-bold text-xs">OR#</FormLabel>
-                        <FormControl>
-                          <Input
-                            id="or"
-                            type="text"
-                            placeholder="Enter OR#"
-                            required
-                            {...field}
-                            className="text-black"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div>
-                  <FormField
-                    control={form.control}
-                    name="paidFrom"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel htmlFor="paidFrom" className="text-black font-bold text-xs">Paid From</FormLabel>
-                        <FormControl>
-                          <Input
-                            id="paidFrom"
+                            id="paid_to"
                             type="text"
                             placeholder="Enter Paid From"
                             required
@@ -151,13 +201,13 @@ export default function AddExpenseModal() {
                 <div>
                   <FormField
                     control={form.control}
-                    name="paidBy"
+                    name="paid_by"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="paidBy" className="text-black font-bold text-xs">Paid From</FormLabel>
+                        <FormLabel htmlFor="paid_by" className="text-black font-bold text-xs">Paid By</FormLabel>
                         <FormControl>
                           <Input
-                            id="paidBy"
+                            id="paid_by"
                             type="text"
                             placeholder="Enter Paid By"
                             required
@@ -176,7 +226,7 @@ export default function AddExpenseModal() {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="date" className="text-black font-bold text-xs">Date of Residency</FormLabel>
+                        <FormLabel htmlFor="date" className="text-black font-bold text-xs">Date of Expense</FormLabel>
                         <Popover
                           open={openCalendar}
                           onOpenChange={setOpenCalendar}
@@ -213,7 +263,7 @@ export default function AddExpenseModal() {
             
               </div>
               <div className="mt-4 flex justify-end">
-                <Button>Save Expense</Button>
+                <Button type="submit">Save Expense</Button>
               </div>
             </form>
           </Form>
@@ -222,4 +272,3 @@ export default function AddExpenseModal() {
     </>
   )
 }
-

@@ -2,53 +2,89 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Eye } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { z } from "zod";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { format } from "date-fns"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format } from "date-fns";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
 import { expenseSchema } from "@/types/formSchema";
+import { invoke } from "@tauri-apps/api/core";
 
 type ViewPropsExpense = {
-  type: string,
-  amount: number,
-  or: number,
-  paidFrom: string,
-  paidBy: string,
-  date: Date,
-}
+  id?: number;
+  type_: string;
+  category: string;
+  amount: number;
+  or_number: number;
+  paid_to: string;
+  paid_by: string;
+  date: Date;
+};
 
-export default function ViewResidentModal(props: ViewPropsExpense) {
-  const [openCalendar, setOpenCalendar] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
+export default function ViewExpenseModal(props: ViewPropsExpense) {
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
     defaultValues: {
-      type: props.type,
-      amount: props.amount, 
-      or: props.or, 
-      paidFrom: props.paidFrom,
-      paidBy: props.paidBy,
+      type_: props.type_,
+      amount: props.amount,
+      or_number: props.or_number,
+      paid_to: props.paid_to,
+      paid_by: props.paid_by,
       date: props.date,
-    }
-  })
+      category: props.category,
+    },
+  });
 
-  function onSubmit(values: z.infer<typeof expenseSchema>) {
-    toast.success("Expense updated successfully", {
-      description: `${values.type} was updated`
-    })
-    setOpenModal(false)
+  async function onSubmit(values: z.infer<typeof expenseSchema>) {
+    try {
+      const expenseWithId = {
+        ...values,
+        id: props.id,
+        date: values.date.toISOString(),
+      };
+
+      await invoke("save_expense_command", { data: expenseWithId });
+
+      toast.success("Expense updated successfully", {
+        description: `${values.type_} was updated.`,
+      });
+
+      setOpenModal(false);
+      window.location.reload();
+    } catch (error) {
+      toast.error("Update failed", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
   }
+
   return (
     <>
-      <Dialog
-        open={openModal}
-        onOpenChange={setOpenModal}
-      >
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>
           <Button>
             <Eye />
@@ -63,16 +99,51 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
-                <p className="text-md font-bold text-black">Basic Expense Information</p>
+                <p className="text-md font-bold text-black">
+                  Basic Expense Information
+                </p>
               </DialogHeader>
               <div className="flex flex-col gap-3">
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-bold text-xs">
+                        Category
+                      </FormLabel>
+                      <FormControl>
+                        <select
+                          className="text-black border rounded p-2 w-full"
+                          value={field.value}
+                          onChange={field.onChange}
+                        >
+                          <option value="">Select category</option>
+                        <option value="Local Revenue">Infrastructure Expense</option>
+                        <option value="Tax Revenue">Honoraria</option>
+                        <option value="Government Grants">Utilities</option>
+                        <option value="Service Revenue">Local Funds Used</option>
+                        <option value="Rental Income">Foods</option>
+                        <option value="Government Funds">IRA Used</option>
+                        <option value="Others">Others</option>
+                        </select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Expense</FormLabel>
+                        <FormLabel
+                          htmlFor="type"
+                          className="text-black font-bold text-xs"
+                        >
+                          Expense Name
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="type"
@@ -88,13 +159,18 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                     )}
                   />
                 </div>
-                 <div>
+                <div>
                   <FormField
                     control={form.control}
                     name="amount"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="amount" className="text-black font-bold text-xs">Amount</FormLabel>
+                        <FormLabel
+                          htmlFor="amount"
+                          className="text-black font-bold text-xs"
+                        >
+                          Amount
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="amount"
@@ -114,10 +190,15 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                 <div>
                   <FormField
                     control={form.control}
-                    name="or"
+                    name="or_number"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="or" className="text-black font-bold text-xs">OR#</FormLabel>
+                        <FormLabel
+                          htmlFor="or"
+                          className="text-black font-bold text-xs"
+                        >
+                          OR#
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="or"
@@ -134,22 +215,26 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                     )}
                   />
                 </div>
-                  <div>
+                <div>
                   <FormField
                     control={form.control}
-                    name="paidFrom"
+                    name="paid_to"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="paidFrom" className="text-black font-bold text-xs">Paid From</FormLabel>
+                        <FormLabel
+                          htmlFor="paid_to"
+                          className="text-black font-bold text-xs"
+                        >
+                          Paid From
+                        </FormLabel>
                         <FormControl>
                           <Input
-                            id="paidFrom"
-                            type="string"
+                            id="paid_to"
+                            type="text"
                             placeholder="Enter Paid From"
                             required
                             {...field}
                             className="text-black"
-                            onChange={(e) => field.onChange(+e.target.value)}
                           />
                         </FormControl>
                         <FormMessage />
@@ -157,22 +242,26 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                     )}
                   />
                 </div>
-                  <div>
+                <div>
                   <FormField
                     control={form.control}
-                    name="paidBy"
+                    name="paid_by"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="paidBy" className="text-black font-bold text-xs">Paid By</FormLabel>
+                        <FormLabel
+                          htmlFor="paid_by"
+                          className="text-black font-bold text-xs"
+                        >
+                          Paid By
+                        </FormLabel>
                         <FormControl>
                           <Input
-                            id="paidBy"
-                            type="string"
+                            id="paid_by"
+                            type="text"
                             placeholder="Enter Paid From"
                             required
                             {...field}
                             className="text-black"
-                            onChange={(e) => field.onChange(+e.target.value)}
                           />
                         </FormControl>
                         <FormMessage />
@@ -186,16 +275,22 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="date" className="text-black font-bold text-xs">Date of Residency</FormLabel>
+                        <FormLabel
+                          htmlFor="date"
+                          className="text-black font-bold text-xs"
+                        >
+                          Date of Residency
+                        </FormLabel>
                         <Popover
                           open={openCalendar}
                           onOpenChange={setOpenCalendar}
                         >
                           <FormControl>
-                            <PopoverTrigger asChild className="w-full text-black hover:bg-primary hover:text-white">
-                              <Button
-                                variant="outline"
-                              >
+                            <PopoverTrigger
+                              asChild
+                              className="w-full text-black hover:bg-primary hover:text-white"
+                            >
+                              <Button variant="outline">
                                 {field.value ? (
                                   format(field.value, "PPP")
                                 ) : (
@@ -222,12 +317,12 @@ export default function ViewResidentModal(props: ViewPropsExpense) {
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
-                <Button>Save Expense</Button>
+                <Button type="submit">Save Expense</Button>
               </div>
             </form>
           </Form>
         </DialogContent>
-      </Dialog >
+      </Dialog>
     </>
-  )
+  );
 }

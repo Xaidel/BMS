@@ -41,13 +41,15 @@ export type Income = {
 }
 
 export type Expense = {
-  type: string,
-  amount: number,
-  or: number,
-  paidFrom: string,
-  paidBy: string,
-  date: Date,
-}
+  id?: number; 
+  type_: string;
+  category: string;
+  amount: number;
+  or_number: number;
+  paid_to: string;
+  paid_by: string;
+  date: Date;
+};
 
 export type Certificate = {
   name: string;

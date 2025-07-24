@@ -44,7 +44,7 @@ export default function AddIncomeModal({ onSave }: { onSave: () => void }) {
       or_number: 0,
       received_from: "",
       received_by: "",
-      category: "", // Set to "" so it matches the select default option
+      category: "",
       date: undefined,
     },
   });
@@ -141,8 +141,6 @@ export default function AddIncomeModal({ onSave }: { onSave: () => void }) {
                   </FormItem>
                 )}
               />
-
-              {/* Amount */}
               <FormField
                 control={form.control}
                 name="amount"
@@ -167,8 +165,6 @@ export default function AddIncomeModal({ onSave }: { onSave: () => void }) {
                   </FormItem>
                 )}
               />
-
-              {/* OR Number */}
               <FormField
                 control={form.control}
                 name="or_number"

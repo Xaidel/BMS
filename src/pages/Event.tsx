@@ -3,11 +3,12 @@ import { Checkbox } from "@/components/ui/checkbox";
 import DataTable from "@/components/ui/datatable";
 import Filter from "@/components/ui/filter";
 import Searchbar from "@/components/ui/searchbar";
-import AddEventModal from "@/features/event-manager/addEventModal";
-import CancelEventModal from "@/features/event-manager/cancelEventModal";
-import ViewEventModal from "@/features/event-manager/viewEventModal";
-import { sort } from "@/service/eventSort";
-import searchEvent from "@/service/searchEvent";
+import SummaryCardEvent from "@/components/ui/summary-card/event";
+import AddEventModal from "@/features/event/addEventModal";
+import DeleteEventModal from "@/features/event/deleteEventModal";
+import ViewEventModal from "@/features/event/viewEventModal";
+import { sort } from "@/service/event/eventSort";
+import searchEvent from "@/service/event/searchEvent";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import {
@@ -17,9 +18,11 @@ import {
   CalendarX2,
   CalendarClock,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import SummaryCard from "@/components/ui/summary-card/eventmanager"; // or create SummaryCardEvent if needed
+import { invoke } from "@tauri-apps/api/core";
+import { toast } from "sonner";
+
 
 const filters = [
   "All Events",
@@ -27,18 +30,19 @@ const filters = [
   "Date DESC",
   "Venue",
   "Upcoming",
-  "On Going",
+  "Ongoing",
   "Finished",
   "Cancelled",
 ];
 
 type Event = {
+  id: number;
   name: string;
-  type: string;
+  type_: string;
   status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled";
   date: Date;
   venue: string;
-  atendee: string;
+  attendee: string;
   notes: string;
 };
 
@@ -74,34 +78,7 @@ const columns: ColumnDef<Event>[] = [
   },
   {
     header: "Type",
-    accessorKey: "type",
-  },
-  {
-    header: "Status",
-    accessorKey: "status",
-    cell: ({ row }) => {
-      const status = row.original.status;
-      let color: string;
-      switch (status) {
-        case "Upcoming": {
-          color = "#00BD29";
-          break;
-        }
-        case "Finished": {
-          color = "#000000";
-          break;
-        }
-        case "Ongoing": {
-          color = "#FFB30F";
-          break;
-        }
-        case "Cancelled": {
-          color = "#BD0000";
-          break;
-        }
-      }
-      return <div style={{ color: color }}>{status}</div>;
-    },
+    accessorKey: "type_",
   },
   {
     header: "Date",
@@ -114,88 +91,62 @@ const columns: ColumnDef<Event>[] = [
     header: "Venue",
     accessorKey: "venue",
   },
-];
-
-const data: Event[] = [
   {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 12, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 10, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Session",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Session",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
-  },
-  {
-    name: "Meeting for event",
-    type: "Assembly",
-    status: "Upcoming",
-    date: new Date("June 2, 2025"),
-    venue: "Barangay Hall",
-    atendee: "All Officials",
-    notes: "Sample Notes",
+    header: "Status",
+    accessorKey: "status",
+    cell: ({ row }) => {
+      const status = row.original.status;
+      let color: string;
+      switch (status) {
+        case "Upcoming": {
+          color = "#BD0000";
+          break;
+        }
+        case "Ongoing": {
+          color = "#00BD29";
+          break;
+        }
+        case "Cancelled": {
+          color = "#000000";
+          break;
+        }
+        case "Finished": {
+          color = "#FFB30F";
+          break;
+        }
+        default: {
+          color = "#000000";
+        }
+      }
+      return <div style={{ color: color }}>{status}</div>;
+    },
   },
 ];
 
-export default function EventManager() {
+export default function Events() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
-
+  const [printData, setPrintDataState] = useState<Event[] | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState<Event[]>([]);
+
+  const fetchEvents = () => {
+    invoke<Event[]>("fetch_all_events_command")
+      .then((fetched) => {
+        const parsed = fetched.map((event) => ({
+          ...event,
+          date: new Date(event.date),
+        }));
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch events:", err));
+  };
+
+  useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  <AddEventModal onSave={fetchEvents} />;
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -207,35 +158,70 @@ export default function EventManager() {
   };
 
   const filteredData = useMemo(() => {
-    const sorted = sort(data, searchParams.get("sort") ?? "All Events");
-    return searchQuery.trim() ? searchEvent(searchQuery, sorted) : sorted;
+    const sortedData = sort(data, searchParams.get("sort") ?? "All Events");
+
+    if (searchQuery.trim()) {
+      return searchEvent(searchQuery, sortedData);
+    }
+
+    return sortedData;
   }, [searchParams, data, searchQuery]);
 
-  // Summary calculations
-  const upcoming = data.filter((e) => e.status === "Upcoming").length;
-  const ongoing = data.filter((e) => e.status === "Ongoing").length;
-  const finished = data.filter((e) => e.status === "Finished").length;
-  const cancelled = data.filter((e) => e.status === "Cancelled").length;
+  const total = data.length;
+  const finished = data.filter((d) => d.status === "Finished").length;
+  const upcoming = data.filter((d) => d.status === "Upcoming").length;
+  const ongoing = data.filter((d) => d.status === "Ongoing").length;
+  const cancelled = data.filter((d) => d.status === "Cancelled").length;
+
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
+
+    if (selectedIds.length === 0) {
+      toast.error("No events selected.");
+      return;
+    }
+
+    try {
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_event_command", { id });
+        }
+      }
+      toast.success("Selected events deleted.");
+      fetchEvents(); // Refresh the table
+      setRowSelection({}); // Reset selection
+    } catch (err) {
+      toast.error("Failed to delete selected events");
+      console.error("Delete error:", err);
+    }
+  };
+
+  function setPrintData(data: Event[]) {
+    setPrintDataState(data);
+  }
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard
+        <SummaryCardEvent
           title="Upcoming Events"
           value={upcoming}
           icon={<CalendarPlus size={50} />}
         />
-        <SummaryCard
+        <SummaryCardEvent
           title="Ongoing Events"
           value={ongoing}
           icon={<CalendarClock size={50} />}
         />
-        <SummaryCard
+        <SummaryCardEvent
           title="Finished Events"
           value={finished}
           icon={<CalendarCheck size={50} />}
         />
-        <SummaryCard
+        <SummaryCardEvent
           title="Cancelled Events"
           value={cancelled}
           icon={<CalendarX2 size={50} />}
@@ -254,11 +240,16 @@ export default function EventManager() {
           initial="All Events"
           classname="flex-1"
         />
-        <Button variant="destructive" size="lg">
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected}
+        >
           <Trash />
           Delete Selected
         </Button>
-        <AddEventModal />
+        <AddEventModal onSave={fetchEvents} />
       </div>
 
       <DataTable<Event>
@@ -274,9 +265,12 @@ export default function EventManager() {
               const status = row.original.status;
               return (
                 <div className="flex gap-3">
-                  <ViewEventModal {...row.original} />
-                  {status !== "Cancelled" && status !== "Finished" && (
-                    <CancelEventModal {...row.original} />
+                  <ViewEventModal {...row.original} onSave={fetchEvents} />
+                  {status !== "Upcoming" && status !== "Ongoing" && status !== "Finished" &&  (
+                    <DeleteEventModal
+                      {...row.original}
+                      onDelete={fetchEvents}
+                    />
                   )}
                 </div>
               );

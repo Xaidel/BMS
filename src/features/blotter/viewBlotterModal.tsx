@@ -40,16 +40,12 @@ import { toast } from "sonner";
 import { Blotter } from "@/types/types";
 import { invoke } from '@tauri-apps/api/core';
 
-
-
 const selectStatus: string[] = [
   "On Going",
   "Active",
   "Transferred to Police",
   "Closed",
 ];
-
-
 
 export default function ViewBlotterModal(props: Blotter & { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);

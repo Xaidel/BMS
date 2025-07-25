@@ -1,9 +1,9 @@
-import sanitize from "./sanitize";
+import sanitize from "../sanitize";
 
 
 type Certificate = {
   name: string;
-  type: string;
+  type_: string;
   or: string;
   date: Date;
   zone: string;
@@ -19,7 +19,7 @@ export default function searchCertificate(
   return data.filter(
     (item) =>
       pattern.test(item.name) ||
-      pattern.test(item.type) ||
+      pattern.test(item.type_) ||
       pattern.test(item.or)
   );
 }

@@ -15,9 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 
-const selectOption: string[] = [
-  "Renter",
-]
+const selectOption: string[] = ["Renter", "Owner"];
 
 const zone: string[] = [
   "Zone 1",
@@ -33,15 +31,15 @@ const status: string[] = [
   "Moved Out"
 ]
 
-export default function AddHouseholdModal() {
+export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const form = useForm<z.infer<typeof householdSchema>>({
     resolver: zodResolver(householdSchema),
     defaultValues: {
-      householdNumber: "",
-      type: "",
-      members: 1,
+      household_number: 0,
+      type_: "",
+      members: 0,
       head: "",
       zone: "",
       date: undefined,
@@ -49,12 +47,19 @@ export default function AddHouseholdModal() {
     }
   })
 
-  function onSubmit(values: z.infer<typeof householdSchema>) {
+  async function onSubmit(values: z.infer<typeof householdSchema>) {
     toast.success("Household added sucessfully", {
-      description: `${values.householdNumber} was added`
-    })
-    setOpenModal(false)
-    invoke("greet")
+      description: `${values.household_number} was added`
+    });
+    setOpenModal(false);
+    await invoke("insert_household_command", {
+      household: {
+        ...values,
+        date: values.date.toISOString(),
+      },
+    });
+    onSave();
+    form.reset();
   }
 
   return (
@@ -83,18 +88,19 @@ export default function AddHouseholdModal() {
                 <div>
                   <FormField
                     control={form.control}
-                    name="householdNumber"
+                    name="household_number"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel htmlFor="name" className="text-black font-bold text-xs">Household Number</FormLabel>
                         <FormControl>
                           <Input
                             id="name"
-                            type="text"
+                            type="number"
                             placeholder="Enter Household name"
                             required
                             {...field}
                             className="text-black"
+                            onChange={(e) => field.onChange(+e.target.value)}
                           />
                         </FormControl>
                         <FormMessage />
@@ -105,7 +111,7 @@ export default function AddHouseholdModal() {
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel htmlFor="type" className="text-black font-bold text-xs">Type</FormLabel>
@@ -270,4 +276,3 @@ export default function AddHouseholdModal() {
     </>
   )
 }
-

@@ -4,6 +4,8 @@ mod database;
 mod commands;
 mod models;
 
+use commands::events::{save_event_command, insert_event_command, fetch_all_events_command, delete_event_command, update_event_command};
+use commands::households::{save_household_command, insert_household_command, fetch_all_households_command, delete_household_command, update_household_command};
 use commands::expense::{save_expense_command, insert_expense_command, fetch_all_expenses_command, delete_expense_command, update_expense_command};
 use commands::income::{save_income_command, insert_income_command, fetch_all_incomes_command, delete_income_command, update_income_command};
 use commands::blotters::{save_blotter_command, insert_blotter_command, fetch_all_blotters_command, delete_blotter_command, update_blotter_command};
@@ -43,21 +45,17 @@ fn main() {
             greet,
             test_db_connection,
 
-            // save_blotter,
-            // fetch_all_blotters_command,
-            // delete_blotter_command,
+            insert_event_command,
+            fetch_all_events_command,
+            delete_event_command,
+            update_event_command,
+            save_event_command,
 
-            insert_blotter_command,
-            fetch_all_blotters_command,
-            delete_blotter_command,
-            update_blotter_command,
-            save_blotter_command,
-
-            insert_income_command,
-            fetch_all_incomes_command,
-            delete_income_command,
-            update_income_command,
-            save_income_command,
+            insert_household_command,
+            fetch_all_households_command,
+            delete_household_command,
+            update_household_command,
+            save_household_command,
 
             insert_expense_command,
             fetch_all_expenses_command,
@@ -65,6 +63,17 @@ fn main() {
             update_expense_command,
             save_expense_command,
 
+            insert_income_command,
+            fetch_all_incomes_command,
+            delete_income_command,
+            update_income_command,
+            save_income_command,
+
+            insert_blotter_command,
+            fetch_all_blotters_command,
+            delete_blotter_command,
+            update_blotter_command,
+            save_blotter_command,
 
         ])
         .run(tauri::generate_context!())

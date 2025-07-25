@@ -14,11 +14,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from '@tauri-apps/api/core'
+import type { Event } from "@/types/types";
 
 const selectOption: string[] = [
   "Seminar",
   "Assembly",
 ]
+
+const statusOption = ["Upcoming", "Ongoing", "Finished", "Cancelled"] as const;
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -26,7 +29,7 @@ const formSchema = z.object({
   }).max(50, {
     message: "Event name is too long, put other details on the 'details' form"
   }),
-  type: z.string().min(2, {
+  type_: z.string().min(2, {
     message: "Event type is too short"
   }).max(50, {
     message: "Event type is too long."
@@ -39,37 +42,57 @@ const formSchema = z.object({
   }).max(50, {
     message: "Event venue is too long"
   }),
-  atendee: z.string().min(2, {
-    message: "Atendee too long"
+  attendee: z.string().min(2, {
+    message: "Attendee too long"
   }).max(50, {
     message: "Event venue is too long"
   }),
   notes: z.string().max(1000, {
     message: "Important notes is too long"
-  })
+  }),
+  status: z.enum(statusOption)
 })
 
-export default function AddEventModal() {
+type AddEventModalProps = {
+  onSave?: () => void;
+};
+
+export default function AddEventModal({ onSave }: AddEventModalProps) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      type: "",
+      type_: "",
       date: undefined,
       venue: "",
-      atendee: "",
-      notes: ""
+      attendee: "",
+      notes: "",
+      status: "Upcoming"
     }
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success("Event added sucessfully", {
-      description: `${values.name} was added`
-    })
-    setOpenModal(false)
-    invoke("greet")
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      await invoke("insert_event_command", {
+        event: {
+          ...values,
+          date: values.date.toISOString()
+        }
+      });
+
+      toast.success("Event added successfully", {
+        description: `${values.name} was added`
+      });
+
+      setOpenModal(false);
+      form.reset();
+      onSave?.();
+    } catch (error) {
+      console.error("Insert event failed:", error);
+      toast.error("Failed to add event.");
+    }
   }
 
   return (
@@ -120,10 +143,10 @@ export default function AddEventModal() {
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Type</FormLabel>
+                        <FormLabel htmlFor="type_" className="text-black font-bold text-xs">Type</FormLabel>
                         <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
                             <SelectTrigger className="w-full text-black border-black/15">
@@ -209,15 +232,15 @@ export default function AddEventModal() {
                 <div>
                   <FormField
                     control={form.control}
-                    name="atendee"
+                    name="attendee"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="name" className="text-black font-bold text-xs">Atendee</FormLabel>
+                        <FormLabel htmlFor="name" className="text-black font-bold text-xs">Attendee</FormLabel>
                         <FormControl>
                           <Input
-                            id="atendee"
+                            id="attendee"
                             type="text"
-                            placeholder="Enter Atendees"
+                            placeholder="Enter Attendees"
                             required
                             {...field}
                             className="text-black"
@@ -250,6 +273,29 @@ export default function AddEventModal() {
                     )}
                   />
                 </div>
+                <div>
+                  <FormField
+                    control={form.control}
+                    name="status"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel htmlFor="status" className="text-black font-bold text-xs">Status</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="w-full text-black border-black/15">
+                              <SelectValue placeholder={"Select event status"} />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {statusOption.map((option, i) => (
+                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
               <div className="mt-4 flex justify-end">
                 <Button>Save Event</Button>
@@ -261,4 +307,3 @@ export default function AddEventModal() {
     </>
   )
 }
-

@@ -1,3 +1,4 @@
+import type { Event as EventType } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { eventSchema } from "@/types/formSchema";
@@ -14,43 +15,55 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
-
-type ViewProps = {
-  name: string,
-  type: string,
-  status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled",
-  date: Date,
-  venue: string,
-  atendee: string,
-  notes: string,
-}
+import { invoke } from "@tauri-apps/api/core";
 
 const selectOption: string[] = [
   "Seminar",
   "Assembly",
 ]
 
-export default function ViewEventModal(props: ViewProps) {
+export default function ViewEventModal(props: EventType & { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
   const form = useForm<z.infer<typeof eventSchema>>({
     resolver: zodResolver(eventSchema),
     defaultValues: {
       name: props.name,
-      type: props.type,
-      date: props.date,
+      type_: props.type_,
+      status: props.status,
+      // Ensure date is always a Date object, even if props.date is already a Date or a string
+      date: props.date instanceof Date ? props.date : new Date(props.date),
       venue: props.venue,
-      atendee: props.atendee,
+      attendee: props.attendee,
       notes: props.notes
     }
   })
 
-  function onSubmit(values: z.infer<typeof eventSchema>) {
-    toast.success("Event updated successfully", {
-      description: `${values.name} was updated`
-    })
-    setOpenModal(false)
+  async function onSubmit(values: z.infer<typeof eventSchema>) {
+    try {
+      // Ensure date is passed as ISO string, and id is attached
+      const eventWithId = {
+        ...values,
+        id: props.id,
+        date: values.date instanceof Date ? values.date.toISOString() : new Date(values.date).toISOString(),
+        status: values.status,
+      };
+
+      await invoke("save_event_command", { event: eventWithId });
+
+      toast.success("Event updated successfully", {
+        description: `${values.name} was updated.`,
+      });
+
+      setOpenModal(false);
+      props.onSave();
+    } catch (error) {
+      toast.error("Update failed", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
   }
+  
   return (
     <>
       <Dialog
@@ -60,19 +73,20 @@ export default function ViewEventModal(props: ViewProps) {
         <DialogTrigger asChild>
           <Button>
             <Eye />
-            View More
+            View Event
           </Button>
         </DialogTrigger>
         <DialogContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit((onSubmit))}>
               <DialogHeader>
-                <DialogTitle className="text-black">View More Details</DialogTitle>
+                <DialogTitle className="text-black">Event Details</DialogTitle>
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
                 <p className="text-md font-bold text-black">Basic Event Information</p>
               </DialogHeader>
+                {/* Status field - only show if NOT Finished */}
               <div className="flex flex-col gap-3">
                 <div>
                   <FormField
@@ -89,7 +103,6 @@ export default function ViewEventModal(props: ViewProps) {
                             required
                             {...field}
                             className="text-black"
-                            disabled={props.status === "Finished"}
                           />
                         </FormControl>
                         <FormMessage />
@@ -100,14 +113,13 @@ export default function ViewEventModal(props: ViewProps) {
                 <div>
                   <FormField
                     control={form.control}
-                    name="type"
+                    name="type_"
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel htmlFor="type" className="text-black font-bold text-xs">Type</FormLabel>
                         <Select
                           onValueChange={field.onChange}
                           defaultValue={field.value}
-                          disabled={props.status === "Finished"}
                         >
                           <FormControl>
                             <SelectTrigger className="w-full text-black border-black/15">
@@ -140,7 +152,6 @@ export default function ViewEventModal(props: ViewProps) {
                             <PopoverTrigger
                               asChild
                               className="w-full text-black hover:bg-primary hover:text-white"
-                              disabled={props.status === "Finished"}
                             >
                               <Button
                                 variant="outline"
@@ -186,7 +197,6 @@ export default function ViewEventModal(props: ViewProps) {
                             placeholder="Enter Venue Location"
                             required
                             className="text-black"
-                            disabled={props.status === "Finished"}
                             {...field}
                           />
                         </FormControl>
@@ -198,18 +208,17 @@ export default function ViewEventModal(props: ViewProps) {
                 <div>
                   <FormField
                     control={form.control}
-                    name="atendee"
+                    name="attendee"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="name" className="text-black font-bold text-xs">Atendee</FormLabel>
+                        <FormLabel htmlFor="name" className="text-black font-bold text-xs">Attendee</FormLabel>
                         <FormControl>
                           <Input
-                            id="atendee"
+                            id="attendee"
                             type="text"
-                            placeholder="Enter Atendees"
+                            placeholder="Enter Attendees"
                             required
                             className="text-black"
-                            disabled={props.status === "Finished"}
                             {...field}
                           />
                         </FormControl>
@@ -232,7 +241,6 @@ export default function ViewEventModal(props: ViewProps) {
                             placeholder="Enter important notes"
                             required
                             className="text-black"
-                            disabled={props.status === "Finished"}
                             {...field}
                           />
                         </FormControl>
@@ -240,10 +248,44 @@ export default function ViewEventModal(props: ViewProps) {
                       </FormItem>
                     )}
                   />
+                  <div>
+                    <FormField
+                      control={form.control}
+                      name="status"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel htmlFor="status" className="text-black font-bold text-xs">Status</FormLabel>
+                          <Select
+                            defaultValue={field.value}
+                            onValueChange={(value) => {
+                              field.onChange(value);
+                              form.setValue("status", value as any);
+                            }}
+                          >
+                            <FormControl>
+                              <SelectTrigger className="w-full text-black border-black/15">
+                                <SelectValue placeholder="Select status" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Upcoming">Upcoming</SelectItem>
+                              <SelectItem value="Ongoing">Ongoing</SelectItem>
+                              <SelectItem value="Cancelled">Cancelled</SelectItem>
+                              <SelectItem value="Finished">Finished</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                
                 </div>
               </div>
               <div className="mt-4 flex justify-end">
-                {props.status !== "Finished" && <Button type="submit">Save Event</Button>}
+                  <Button type="submit">
+                    Save
+                  </Button>
               </div>
             </form>
           </Form>

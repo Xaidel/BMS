@@ -17,12 +17,15 @@ export const eventSchema = z.object({
   name: z.string().min(2, {
     message: "Event name is too short"
   }).max(50, {
-    message: "Event name is too long, put other details on the 'details' form"
+    message: "Event name is too long, put other details in the notes"
   }),
-  type: z.string().min(2, {
+  type_: z.string().min(2, {
     message: "Event type is too short"
   }).max(50, {
-    message: "Event type is too long."
+    message: "Event type is too long"
+  }),
+  status: z.enum(["Upcoming", "Finished", "Ongoing", "Cancelled"], {
+    required_error: "Status is required"
   }),
   date: z.date({
     required_error: "Please specify the event date"
@@ -32,18 +35,18 @@ export const eventSchema = z.object({
   }).max(50, {
     message: "Event venue is too long"
   }),
-  atendee: z.string().min(2, {
-    message: "Atendee too long"
+  attendee: z.string().min(2, {
+    message: "Attendee name is too short"
   }).max(50, {
-    message: "Event venue is too long"
+    message: "Attendee name is too long"
   }),
   notes: z.string().max(1000, {
-    message: "Important notes is too long"
+    message: "Notes field is too long"
   })
 })
 
 export const residentSchema = z.object({
-  fullName: z.string().min(2, {
+  full_name: z.string().min(2, {
     message: "Resident name is too short"
   }).max(50, {
     message: "Resident name is too long, put other details on the 'details' form"
@@ -72,32 +75,28 @@ export const residentSchema = z.object({
 })
 
 export const householdSchema = z.object({
-  householdNumber: z.number().min(2, {
-    message: "Household name is too short"
-  }).max(50, {
-    message: "Household name is too long, put other details on the 'details' form"
-  }),
-  type: z.string().min(2, {
+  household_number: z.number().min(1),
+  type_: z.string().min(2, {
     message: "Household type is too short"
   }).max(50, {
     message: "Household type is too long."
   }),
   members: z.number().min(1),
   head: z.string().min(2, {
-    message: "Household venue is too short"
+    message: "Household head name is too short"
   }).max(50, {
-    message: "Household venue is too long"
+    message: "Household head name is too long"
   }),
   zone: z.string().min(2, {
-    message: "Atendee too long"
+    message: "Zone is too short"
   }).max(50, {
-    message: "Household venue is too long"
+    message: "Zone is too long"
   }),
   date: z.date({
-    required_error: "Please specify the event date"
+    required_error: "Please specify the registration date"
   }),
   status: z.string().max(1000, {
-    message: "Important notes is too long"
+    message: "Status is too long"
   })
 })
 

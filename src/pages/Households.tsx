@@ -9,12 +9,13 @@ import ViewHouseholdModal from "@/features/households/viewHouseholdModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Trash, Home, HomeIcon, UserCheck, UserMinus } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
-import { sort } from "@/service/householdSort";
-import searchHousehold from "@/service/searchHousehold";
+import { sort } from "@/service/household/householdSort";
+import searchHousehold from "@/service/household/searchHousehold";
 import SummaryCard from "@/components/ui/summary-card/household";
+import { invoke } from "@tauri-apps/api/core";
 
 const filters = ["All Households", "Numerical", "Renter", "Owner"];
 
@@ -27,8 +28,8 @@ const columns: ColumnDef<Household>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-              ? "indeterminate"
-              : false
+            ? "indeterminate"
+            : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -46,11 +47,11 @@ const columns: ColumnDef<Household>[] = [
   },
   {
     header: "House Number",
-    accessorKey: "householdNumber",
+    accessorKey: "household_number",
   },
   {
     header: "Type of Household",
-    accessorKey: "type",
+    accessorKey: "type_",
   },
   {
     header: "Family Members",
@@ -95,77 +96,111 @@ const columns: ColumnDef<Household>[] = [
   },
 ];
 
-const data: Household[] = [
-  {
-    householdNumber: 1232,
-    type: "Renter",
-    members: 15,
-    head: "Jerome Tayco",
-    zone: "Zone 1",
-    date: new Date("June 29, 2023"),
-    status: "Active",
-  },
-  {
-    householdNumber: 1242,
-    type: "Owner",
-    members: 5,
-    head: "Karl Abechuela",
-    zone: "Zone 1",
-    date: new Date("June 29, 2023"),
-    status: "Active",
-  },
-  {
-    householdNumber: 1132,
-    type: "Renter",
-    members: 5,
-    head: "Sheerjay FranciscoS",
-    zone: "Zone 1",
-    date: new Date("June 29, 2023"),
-    status: "Active",
-  },
-  {
-    householdNumber: 1432,
-    type: "Renter",
-    members: 5,
-    head: "Karl Abechuela",
-    zone: "Zone 1",
-    date: new Date("June 29, 2023"),
-    status: "Moved Out",
-  },
-];
-
 export default function Households() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState<Household[]>([]);
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
     setSearchParams(searchParams);
   };
 
+  const handleSearch = (term: string) => {
+    setSearchQuery(term);
+  };
+
   const filteredData = useMemo(() => {
-    const sortedData = sort(data, searchParams.get("sort") ?? "All Households");
+    const sortValue = searchParams.get("sort") ?? "All Households";
+    let sorted = sort(data, sortValue);
 
     if (searchQuery.trim()) {
-      return searchHousehold(searchQuery, sortedData);
+      const query = searchQuery.toLowerCase();
+      sorted = sorted.filter(
+        (item) =>
+          item.type_?.toLowerCase().includes(query) ||
+          item.head?.toLowerCase().includes(query)
+      );
     }
 
-    return sortedData;
-  }, [searchParams, data, searchQuery]);
+    return sorted;
+  }, [searchParams, searchQuery, data]);
 
+  const fetchHouseholds = () => {
+    invoke<Household[]>("fetch_all_households_command")
+      .then((fetched) => {
+        const parsed = fetched.map((household) => ({
+          ...household,
+          date: new Date(household.date),
+        }));
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch households:", err));
+  };
+
+  useEffect(() => {
+    fetchHouseholds();
+  }, []);
+
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
+
+    if (selectedIds.length === 0) {
+      console.error("No household records selected.");
+      return;
+    }
+
+    try {
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_household_command", { id });
+        }
+      }
+      console.log("Selected households deleted.");
+      fetchHouseholds();
+      setRowSelection({});
+    } catch (err) {
+      console.error("Failed to delete selected households", err);
+    }
+  };
+
+  <AddHouseholdModal onSave={fetchHouseholds} />;
+
+    
   const totalActive = data.filter((item) => item.status === "Active").length;
-  const totalMovedOut = data.filter((item) => item.status === "Moved Out").length;
-  const totalRenter = data.filter((item) => item.type === "Renter").length;
-  const totalOwner = data.filter((item) => item.type === "Owner").length;
+  const totalMovedOut = data.filter(
+    (item) => item.status === "Moved Out"
+  ).length;
+  const totalRenter = data.filter((item) => item.type_ === "Renter").length;
+  const totalOwner = data.filter((item) => item.type_ === "Owner").length;
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard title="Active Households" value={totalActive} icon={<UserCheck size={50} />} />
-        <SummaryCard title="Moved Out" value={totalMovedOut} icon={<UserMinus size={50} />} />
-        <SummaryCard title="Renter" value={totalRenter} icon={<HomeIcon size={50} />} />
-        <SummaryCard title="Owner" value={totalOwner} icon={<Home size={50} />} />
+        <SummaryCard
+          title="Active Households"
+          value={totalActive}
+          icon={<UserCheck size={50} />}
+        />
+        <SummaryCard
+          title="Moved Out"
+          value={totalMovedOut}
+          icon={<UserMinus size={50} />}
+        />
+        <SummaryCard
+          title="Renter"
+          value={totalRenter}
+          icon={<HomeIcon size={50} />}
+        />
+        <SummaryCard
+          title="Owner"
+          value={totalOwner}
+          icon={<Home size={50} />}
+        />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center">
@@ -181,11 +216,16 @@ export default function Households() {
           initial="All Households"
           classname="flex-1"
         />
-        <Button variant="destructive" size="lg">
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected}
+        >
           <Trash />
           Delete Selected
         </Button>
-        <AddHouseholdModal />
+        <AddHouseholdModal onSave={fetchHouseholds} />
       </div>
       <DataTable<Household>
         classname="py-5"
@@ -196,17 +236,17 @@ export default function Households() {
           {
             id: "view",
             header: "",
-            cell: ({ row }) => {
-              const status = row.original.status;
-              return (
-                <div className="flex gap-3 ">
-                  <ViewHouseholdModal {...row.original} />
-                  {status == "Moved Out" && (
-                    <DeleteHouseholdModal {...row.original} />
-                  )}
-                </div>
-              );
-            },
+            cell: ({ row }) => (
+              <div className="flex gap-3">
+                <ViewHouseholdModal {...row.original} onSave={fetchHouseholds} />
+                <DeleteHouseholdModal
+                  id={row.original.id!}
+                  type_={row.original.type_}
+                  household_number={row.original.household_number}
+                  onDelete={fetchHouseholds}
+                />
+              </div>
+            ),
           },
         ]}
         rowSelection={rowSelection}

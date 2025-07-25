@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
   try {
-    const response = await invoke<string>("greet", { name: values.name }); // 👈 call backend greet
+    const response = await invoke<string>("greet", { name: values.name }); 
     toast.success("Login Successful!", {
       description: <p>{response}</p>,
     });

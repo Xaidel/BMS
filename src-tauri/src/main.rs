@@ -4,6 +4,7 @@ mod database;
 mod commands;
 mod models;
 
+use commands::settings::{save_settings_command, fetch_settings_command, fetch_logo_command};
 use commands::events::{save_event_command, insert_event_command, fetch_all_events_command, delete_event_command, update_event_command};
 use commands::households::{save_household_command, insert_household_command, fetch_all_households_command, delete_household_command, update_household_command};
 use commands::expense::{save_expense_command, insert_expense_command, fetch_all_expenses_command, delete_expense_command, update_expense_command};
@@ -74,6 +75,10 @@ fn main() {
             delete_blotter_command,
             update_blotter_command,
             save_blotter_command,
+
+            fetch_settings_command,
+            save_settings_command,
+            fetch_logo_command,
 
         ])
         .run(tauri::generate_context!())

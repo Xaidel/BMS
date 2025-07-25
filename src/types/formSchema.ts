@@ -269,3 +269,13 @@ export const blotterSchema = z.object({
     required_error: "Please specify the hearing date",
   }),
 });
+
+export const settingsSchema = z.object({
+  id: z.number().optional(),
+  barangay: z.string().min(1),
+  municipality: z.string().min(1),
+  province: z.string().min(1),
+  phone_number: z.string().min(1),
+  email: z.string().email(),
+  logo: z.string(),
+});

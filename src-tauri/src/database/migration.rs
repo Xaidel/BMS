@@ -62,6 +62,15 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             attendee TEXT NOT NULL,
             notes TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS settings (
+            id INTEGER PRIMARY KEY CHECK (id = 1), -- only one row
+            barangay TEXT,
+            municipality TEXT,
+            province TEXT,
+            phone_number TEXT,
+            email TEXT,
+            logo TEXT  -- base64 or file path
+            );
         ",
     )?;
     Ok(())

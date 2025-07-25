@@ -52,6 +52,16 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             date TEXT NOT NULL,
             status TEXT NOT NULL
         );
+        CREATE TABLE IF NOT EXISTS events (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            type_ TEXT NOT NULL,
+            status TEXT NOT NULL,
+            date TEXT NOT NULL,
+            venue TEXT NOT NULL,
+            attendee TEXT NOT NULL,
+            notes TEXT NOT NULL
+        );
         ",
     )?;
     Ok(())

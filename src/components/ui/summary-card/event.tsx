@@ -1,11 +1,11 @@
 // @/components/ui/summarycardEventManager.tsx
-type SummaryCardEventManagerProps = {
+type SummaryCardEventProps = {
   title: string;
   value: number | string;
   icon: JSX.Element;
 };
 
-export default function SummaryCardEventManager({ title, value, icon }: SummaryCardEventManagerProps) {
+export default function SummaryCardEvent({ title, value, icon }: SummaryCardEventProps) {
   return (
     <div className="flex justify-between items-center p-3 bg-white shadow-md rounded-lg w-[270px] h-[100px]">
       <div>

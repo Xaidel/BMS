@@ -1,6 +1,6 @@
 // src/service/searchHousehold.ts
 import { Household } from "@/types/types";
-import sanitize from "./sanitize";
+import sanitize from "../sanitize";
 
 export default function searchHousehold(term: string, data: Household[]): Household[] {
   const sanitized = sanitize(term);

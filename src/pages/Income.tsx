@@ -6,7 +6,7 @@ import Searchbar from "@/components/ui/searchbar";
 import AddIncomeModal from "@/features/income/addIncomeModal";
 import DeleteIncomeModal from "@/features/income/deleteIncomeModal";
 import ViewIncomeModal from "@/features/income/viewIncomeModal";
-import { sort } from "@/service/incomeSort";
+import { sort } from "@/service/income/incomeSort";
 import type { Income } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";

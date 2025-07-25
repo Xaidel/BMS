@@ -1,5 +1,5 @@
 import { Income } from "@/types/types";
-import sanitize from "./sanitize";
+import sanitize from "../sanitize";
 
 export default function searchIncome(term: string, data: Income[]) {
   const sanitizedQuery = sanitize(term);

@@ -9,8 +9,8 @@ const items = [
     icon: LayoutDashboard
   },
   {
-    title: "Event Manager",
-    url: "/event-manager",
+    title: "Event",
+    url: "/event",
     icon: Calendar
   },
   {

@@ -1,10 +1,11 @@
 export type Event = {
+  id: number;
   name: string,
   type_: string,
   status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled",
   date: Date,
   venue: string,
-  atendee: string,
+  attendee: string,
   notes: string
 }
 
@@ -76,5 +77,3 @@ export type Blotter = {
   resolution: string;
   hearing_date: Date; // <- must be Date, not string
 };
-
-

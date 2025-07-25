@@ -8,7 +8,7 @@ import {
 import LoginPage from './pages/Login';
 import AppLayout from './components/ui/applayout';
 import Dashboard from './pages/Dashboard';
-import EventManager from './pages/EventManager';
+import Event from './pages/Event';
 import Residents from './pages/Residents';
 import Households from './pages/Households';
 import Certificate from './pages/Certificate';
@@ -36,7 +36,7 @@ function App() {
             element={<AppLayout />}
           >
             <Route path='dashboard' element={<Dashboard />} />
-            <Route path='event-manager' element={<EventManager />} />
+            <Route path='event' element={<Event />} />
             <Route path='residents' element={<Residents />} />
             <Route path='households' element={<Households />} />
             <Route path='certificates' element={<Certificate />} />

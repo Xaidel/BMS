@@ -12,8 +12,8 @@ import { Accessibility, Fingerprint, Trash } from "lucide-react";
 import { Resident } from "@/types/types";
 import { useSearchParams } from "react-router-dom";
 import { useMemo, useState } from "react";
-import { sort } from "@/service/residentSort";
-import searchResident from "@/service/searchResident";
+import { sort } from "@/service/resident/residentSort";
+import searchResident from "@/service/resident/searchResident";
 import { mockResidents } from "@/mock/residents";
 import SummaryCardResidents from "@/components/ui/summary-card/residents";
 import {

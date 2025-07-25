@@ -16,7 +16,7 @@ import {
   XCircle,
   ListChecks,
 } from "lucide-react";
-import searchCertificate from "@/service/searchCertificate";
+import searchCertificate from "@/service/certificate/searchCertificate";
 import SummaryCard from "@/components/ui/summary-card/certificate";
 
 const filters = [

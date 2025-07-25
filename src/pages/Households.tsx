@@ -12,8 +12,8 @@ import { Trash, Home, HomeIcon, UserCheck, UserMinus } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
-import { sort } from "@/service/householdSort";
-import searchHousehold from "@/service/searchHousehold";
+import { sort } from "@/service/household/householdSort";
+import searchHousehold from "@/service/household/searchHousehold";
 import SummaryCard from "@/components/ui/summary-card/household";
 import { invoke } from "@tauri-apps/api/core";
 

@@ -17,12 +17,15 @@ export const eventSchema = z.object({
   name: z.string().min(2, {
     message: "Event name is too short"
   }).max(50, {
-    message: "Event name is too long, put other details on the 'details' form"
+    message: "Event name is too long, put other details in the notes"
   }),
   type_: z.string().min(2, {
     message: "Event type is too short"
   }).max(50, {
-    message: "Event type is too long."
+    message: "Event type is too long"
+  }),
+  status: z.enum(["Upcoming", "Finished", "Ongoing", "Cancelled"], {
+    required_error: "Status is required"
   }),
   date: z.date({
     required_error: "Please specify the event date"
@@ -32,13 +35,13 @@ export const eventSchema = z.object({
   }).max(50, {
     message: "Event venue is too long"
   }),
-  atendee: z.string().min(2, {
-    message: "Atendee too long"
+  attendee: z.string().min(2, {
+    message: "Attendee name is too short"
   }).max(50, {
-    message: "Event venue is too long"
+    message: "Attendee name is too long"
   }),
   notes: z.string().max(1000, {
-    message: "Important notes is too long"
+    message: "Notes field is too long"
   })
 })
 

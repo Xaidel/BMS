@@ -17,8 +17,8 @@ type mock = {
 
 const residents = (): mock[] => {
   return mockResidents.map((res) => ({
-    value: res.fullName.toLowerCase(),
-    label: res.fullName
+    value: res.full_name.toLowerCase(),
+    label: res.full_name
   }))
 }
 

@@ -18,7 +18,7 @@ import BlotterRecord from './pages/BlotterRecord';
 import Official from './pages/Official';
 import Settings from './pages/Settings';
 import { Toaster } from './components/ui/sonner';
-import CertificateTemplate from './pages/CertificateTemplate';
+import IssueCertificate from './pages/IssueCertificate';
 function App() {
   const queryClient: QueryClient = new QueryClient({
     defaultOptions: {
@@ -40,7 +40,7 @@ function App() {
             <Route path='residents' element={<Residents />} />
             <Route path='households' element={<Households />} />
             <Route path='certificates' element={<Certificate />} />
-            <Route path='/certificates/template/:template' element={<CertificateTemplate />} />
+            <Route path='/certificates/template/:template' element={<IssueCertificate />} />
             <Route path='income' element={<Income />} />
             <Route path='expense' element={<Expense />} />
             <Route path='blotter' element={<BlotterRecord />} />

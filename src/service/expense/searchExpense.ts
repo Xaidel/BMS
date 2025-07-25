@@ -1,5 +1,5 @@
 import { Expense } from "@/types/types";
-import sanitize from "./sanitize";
+import sanitize from "../sanitize";
 
 export default function searchExpense(term: string, data: Expense[]): Expense[] {
   const sanitizedQuery = sanitize(term);

@@ -18,7 +18,7 @@ export function sort(data: Resident[], term: string): Resident[] {
 }
 
 function sortAlphabetical(data: Resident[]): Resident[] {
-  return [...data].sort((a, b) => a.fullName.localeCompare(b.fullName, undefined, { sensitivity: "base" }))
+  return [...data].sort((a, b) => a.full_name.localeCompare(b.full_name, undefined, { sensitivity: "base" }))
 }
 function filterMovedOut(data: Resident[]): Resident[] {
   return data.filter((resident) => resident.status === "Moved Out")

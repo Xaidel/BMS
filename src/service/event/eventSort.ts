@@ -14,6 +14,8 @@ export function sort(data: Event[], term: string): Event[] {
       return filterByFinished(data)
     case "Cancelled":
       return filterByCancelled(data)
+    case "Ongoing":
+      return filterByOngoing(data)
     default:
       return data
   }
@@ -36,4 +38,7 @@ function filterByFinished(data: Event[]): Event[] {
 }
 function filterByCancelled(data: Event[]): Event[] {
   return data.filter((event) => event.status === "Cancelled")
+}
+function filterByOngoing(data: Event[]): Event[] {
+  return data.filter((event) => event.status === "Ongoing")
 }

@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 import { toast } from "sonner";
 
 type Resident = {
-  fullName: string,
+  full_name: string,
   civilStatus: string,
   status: "Moved Out" | "Active" | "Dead" | "Missing",
   birthday: Date,
@@ -15,7 +15,7 @@ export default function DeleteResidentModal(resident: Resident) {
 
   function onConfirm() {
     toast.success("Event deleted succesfully", {
-      description: `${resident.fullName} was deleted`
+      description: `${resident.full_name} was deleted`
     })
 
   }

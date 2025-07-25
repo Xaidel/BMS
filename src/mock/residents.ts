@@ -2,12003 +2,16503 @@ import { Resident } from "@/types/types";
 
 export const mockResidents: Resident[] = [
   {
-    fullName: "Jennifer Cruz",
+    full_name: "Jennifer Cruz",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1939-03-09"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Brown",
+    full_name: "Heather Brown",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1974-11-16"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cynthia Parsons",
+    full_name: "Cynthia Parsons",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1997-03-16"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Caldwell",
+    full_name: "Melissa Caldwell",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2023-05-18"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Austin Moran",
+    full_name: "Austin Moran",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1988-08-29"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paul Dixon",
+    full_name: "Paul Dixon",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2013-08-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Douglas Ford",
+    full_name: "Douglas Ford",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1981-02-03"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cameron Joseph",
+    full_name: "Cameron Joseph",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1956-03-05"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Peter Smith",
+    full_name: "Peter Smith",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2012-01-06"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Mckenzie",
+    full_name: "Kevin Mckenzie",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1937-05-10"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Sellers",
+    full_name: "Jessica Sellers",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1987-06-03"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Martin Harrison",
+    full_name: "Martin Harrison",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1949-07-13"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Anderson",
+    full_name: "Jason Anderson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1925-02-10"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Madison Ruiz",
+    full_name: "Madison Ruiz",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1953-10-08"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Philip Carey",
+    full_name: "Philip Carey",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2005-07-22"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Bowers",
+    full_name: "Linda Bowers",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1941-12-27"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Craig Munoz",
+    full_name: "Craig Munoz",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1981-01-15"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Johnson",
+    full_name: "Anthony Johnson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1943-07-14"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Stewart",
+    full_name: "Hannah Stewart",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1953-06-27"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kayla Wilkinson",
+    full_name: "Kayla Wilkinson",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2006-06-10"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Gallegos",
+    full_name: "Jennifer Gallegos",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1950-02-14"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Sanford",
+    full_name: "Thomas Sanford",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1955-09-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Wilson",
+    full_name: "Timothy Wilson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1952-08-28"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Davis",
+    full_name: "Danielle Davis",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1937-03-13"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Caleb Perez",
+    full_name: "Caleb Perez",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2022-12-16"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alfred Nguyen",
+    full_name: "Alfred Nguyen",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1973-07-13"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Pamela Lutz",
+    full_name: "Pamela Lutz",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1965-09-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Derek Burns",
+    full_name: "Derek Burns",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1945-04-17"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Hernandez",
+    full_name: "Kevin Hernandez",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2001-02-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William James",
+    full_name: "William James",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1997-09-24"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sean Caldwell",
+    full_name: "Sean Caldwell",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1976-08-30"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Juan Atkinson",
+    full_name: "Juan Atkinson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1951-07-13"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Karen Wise",
+    full_name: "Karen Wise",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1994-03-17"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ms. Jacqueline Stuart MD",
+    full_name: "Ms. Jacqueline Stuart MD",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1949-09-10"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Schneider",
+    full_name: "Sarah Schneider",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1954-08-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Mcgee",
+    full_name: "Benjamin Mcgee",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2017-02-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kayla Mcmillan",
+    full_name: "Kayla Mcmillan",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1944-09-05"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Chen",
+    full_name: "Michael Chen",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1963-10-01"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Benson",
+    full_name: "Elizabeth Benson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1978-03-21"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dawn Leonard",
+    full_name: "Dawn Leonard",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1969-09-02"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Crawford",
+    full_name: "Susan Crawford",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1951-09-14"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Joseph",
+    full_name: "John Joseph",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2011-07-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gina Newman",
+    full_name: "Gina Newman",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1975-04-17"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Hardy MD",
+    full_name: "Danielle Hardy MD",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2008-07-27"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Carol Miller",
+    full_name: "Carol Miller",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1937-10-29"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paige Garcia MD",
+    full_name: "Paige Garcia MD",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1959-09-13"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rebecca Brooks",
+    full_name: "Rebecca Brooks",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1934-12-22"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Trevino",
+    full_name: "Stephanie Trevino",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1948-11-19"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Pham",
+    full_name: "Kimberly Pham",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1955-02-01"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sharon Henry",
+    full_name: "Sharon Henry",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1956-12-26"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Brown",
+    full_name: "Christopher Brown",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1992-06-19"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Angela Martinez",
+    full_name: "Angela Martinez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1977-04-09"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gregory Snyder",
+    full_name: "Gregory Snyder",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2010-11-21"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Vargas",
+    full_name: "Jason Vargas",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1969-03-23"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Bowman",
+    full_name: "Melissa Bowman",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1931-08-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary Nelson",
+    full_name: "Mary Nelson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1999-11-07"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Brown",
+    full_name: "Lisa Brown",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1997-11-27"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Page",
+    full_name: "Sarah Page",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1977-11-10"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Bennett",
+    full_name: "Matthew Bennett",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1981-10-28"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Spencer Hammond",
+    full_name: "Spencer Hammond",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1964-02-10"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Jones",
+    full_name: "Jason Jones",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1974-08-07"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patrick Kennedy",
+    full_name: "Patrick Kennedy",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1934-12-05"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marie Brown",
+    full_name: "Marie Brown",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1929-05-02"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sabrina Hensley",
+    full_name: "Sabrina Hensley",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1928-01-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Perry",
+    full_name: "Matthew Perry",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1968-12-24"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Davis",
+    full_name: "Lisa Davis",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1933-06-23"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Horne",
+    full_name: "Brandon Horne",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1987-03-28"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Bates",
+    full_name: "Matthew Bates",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2002-10-18"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bryan Edwards",
+    full_name: "Bryan Edwards",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1924-10-08"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kyle Macdonald",
+    full_name: "Kyle Macdonald",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2001-05-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Chelsea Ewing",
+    full_name: "Chelsea Ewing",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1962-04-13"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Phillip Jones",
+    full_name: "Phillip Jones",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1964-11-18"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Alvarado",
+    full_name: "Kevin Alvarado",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1931-03-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dean Martinez",
+    full_name: "Dean Martinez",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2011-07-16"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Byrd",
+    full_name: "Robert Byrd",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1950-03-16"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Williams",
+    full_name: "Nicole Williams",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1939-10-31"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Williams",
+    full_name: "Nicholas Williams",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2012-10-22"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Lewis",
+    full_name: "Ashley Lewis",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1981-12-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Jones",
+    full_name: "Jason Jones",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1992-10-10"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Keith Henry",
+    full_name: "Keith Henry",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2012-09-20"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Black",
+    full_name: "Nicole Black",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2001-04-19"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alejandro Cabrera",
+    full_name: "Alejandro Cabrera",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1930-09-06"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joanna Nicholson",
+    full_name: "Joanna Nicholson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1972-09-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Veronica Owens",
+    full_name: "Veronica Owens",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2002-06-10"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alison Harris",
+    full_name: "Alison Harris",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1958-02-14"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kylie Howard",
+    full_name: "Kylie Howard",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1989-06-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Haley Bartlett",
+    full_name: "Haley Bartlett",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1981-01-27"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jon Berger",
+    full_name: "Jon Berger",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1945-07-29"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Juan Hartman",
+    full_name: "Juan Hartman",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1950-05-04"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shawn Leonard",
+    full_name: "Shawn Leonard",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1929-03-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Williamson",
+    full_name: "Andrew Williamson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2024-01-11"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Singh",
+    full_name: "Benjamin Singh",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1980-01-06"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Hobbs",
+    full_name: "Justin Hobbs",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1988-02-08"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Marks",
+    full_name: "Christopher Marks",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2002-07-21"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Micheal Rosales",
+    full_name: "Micheal Rosales",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1935-05-12"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Ford",
+    full_name: "Kevin Ford",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1984-12-22"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Rodriguez",
+    full_name: "David Rodriguez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2010-12-26"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Walker",
+    full_name: "Richard Walker",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2005-07-29"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Taylor Scott",
+    full_name: "Taylor Scott",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1939-05-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Montgomery",
+    full_name: "Elizabeth Montgomery",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2007-07-18"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathy Hall",
+    full_name: "Kathy Hall",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1989-08-01"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Troy Lee",
+    full_name: "Troy Lee",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2010-06-16"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Allen Miller",
+    full_name: "Allen Miller",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1973-04-05"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Hernandez",
+    full_name: "Linda Hernandez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1956-09-13"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Henry Gibson",
+    full_name: "Henry Gibson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2010-12-30"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Perry",
+    full_name: "Brittany Perry",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2019-01-11"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shannon Brown",
+    full_name: "Shannon Brown",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1980-01-15"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Emily Mays",
+    full_name: "Emily Mays",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1971-09-01"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Davidson",
+    full_name: "John Davidson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1959-07-05"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donna Scott",
+    full_name: "Donna Scott",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2017-04-08"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Chase Holder",
+    full_name: "Chase Holder",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2009-11-03"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rebecca Smith",
+    full_name: "Rebecca Smith",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1972-03-15"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Mckinney",
+    full_name: "Jason Mckinney",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2024-02-20"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Griffin",
+    full_name: "Timothy Griffin",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1956-08-30"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Abigail Simmons",
+    full_name: "Abigail Simmons",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2009-03-23"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Hernandez",
+    full_name: "Jennifer Hernandez",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1975-01-28"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Guzman",
+    full_name: "Lisa Guzman",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1966-02-22"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Lowery",
+    full_name: "Kimberly Lowery",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1942-03-07"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gary Marquez",
+    full_name: "Gary Marquez",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2015-05-07"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cheryl Jones",
+    full_name: "Cheryl Jones",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1980-04-14"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laura Smith",
+    full_name: "Laura Smith",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1932-06-08"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan King",
+    full_name: "Susan King",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1975-03-13"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Medina",
+    full_name: "Timothy Medina",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1959-12-06"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jerry Horton",
+    full_name: "Jerry Horton",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2008-09-25"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly White",
+    full_name: "Kimberly White",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1954-01-24"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Holland",
+    full_name: "Justin Holland",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1983-04-12"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amber Cummings",
+    full_name: "Amber Cummings",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1991-10-24"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Roy Adams",
+    full_name: "Roy Adams",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2019-09-27"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lori Stewart",
+    full_name: "Lori Stewart",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1978-07-17"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cheryl Green",
+    full_name: "Cheryl Green",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1996-07-30"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eileen Simpson",
+    full_name: "Eileen Simpson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1999-10-17"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jesse Townsend",
+    full_name: "Jesse Townsend",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1993-02-04"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sheri Nunez",
+    full_name: "Sheri Nunez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1956-11-16"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Simon",
+    full_name: "Nicholas Simon",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1932-04-19"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Petty",
+    full_name: "Brittany Petty",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1934-07-13"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Terry Kim",
+    full_name: "Terry Kim",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2011-07-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jasmine Hernandez",
+    full_name: "Jasmine Hernandez",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2017-07-08"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Webster",
+    full_name: "Heather Webster",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1977-05-24"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katherine Blevins",
+    full_name: "Katherine Blevins",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1930-12-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha Williams",
+    full_name: "Samantha Williams",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1984-06-26"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Powers",
+    full_name: "Elizabeth Powers",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1984-04-06"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Terry Rowe",
+    full_name: "Terry Rowe",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1960-03-22"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Johnathan Russell",
+    full_name: "Johnathan Russell",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1956-09-30"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Natasha Lewis",
+    full_name: "Natasha Lewis",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1996-06-30"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Flores",
+    full_name: "Justin Flores",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1948-10-23"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Odom",
+    full_name: "Stephanie Odom",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1953-03-20"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Travis Wilkinson",
+    full_name: "Travis Wilkinson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1968-09-12"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Monique Cooper",
+    full_name: "Monique Cooper",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1926-05-20"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jared Lopez",
+    full_name: "Jared Lopez",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1968-04-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Courtney Rasmussen",
+    full_name: "Courtney Rasmussen",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2006-04-13"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laura Gonzalez",
+    full_name: "Laura Gonzalez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1989-06-23"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Perry",
+    full_name: "Julie Perry",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1979-08-05"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Williams",
+    full_name: "Nicole Williams",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2000-03-11"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Donovan",
+    full_name: "James Donovan",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1963-11-16"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shane Saunders",
+    full_name: "Shane Saunders",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2018-04-03"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Guzman",
+    full_name: "Eric Guzman",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1952-06-02"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Wilson",
+    full_name: "Brittany Wilson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1953-12-17"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jaime Barnes",
+    full_name: "Jaime Barnes",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1941-07-27"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Lee",
+    full_name: "Benjamin Lee",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1953-10-03"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Scott Brooks",
+    full_name: "Scott Brooks",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1982-01-05"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Vincent",
+    full_name: "Nicole Vincent",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2024-03-10"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha Jones",
+    full_name: "Samantha Jones",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1956-01-11"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Benson DDS",
+    full_name: "Matthew Benson DDS",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1937-11-17"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Mcguire",
+    full_name: "Michelle Mcguire",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1992-01-30"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Garcia MD",
+    full_name: "Ashley Garcia MD",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1978-06-28"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary Barber",
+    full_name: "Mary Barber",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2021-03-13"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Meyer",
+    full_name: "John Meyer",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1967-02-14"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laurie Thomas",
+    full_name: "Laurie Thomas",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1959-04-12"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Willie Adams",
+    full_name: "Willie Adams",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1975-06-29"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Davis",
+    full_name: "Timothy Davis",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1968-06-18"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bradley French",
+    full_name: "Bradley French",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1942-10-27"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brent Edwards",
+    full_name: "Brent Edwards",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2010-02-24"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Meadows",
+    full_name: "Jessica Meadows",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1944-11-04"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Phillip Tanner",
+    full_name: "Phillip Tanner",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1973-01-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gabrielle Delgado",
+    full_name: "Gabrielle Delgado",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1995-01-20"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Vanessa Mack",
+    full_name: "Vanessa Mack",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1968-04-15"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Johnson",
+    full_name: "Joseph Johnson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1933-01-07"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lee Cruz",
+    full_name: "Lee Cruz",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1972-02-21"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jacob Patterson",
+    full_name: "Jacob Patterson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2008-07-28"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Holmes",
+    full_name: "Aaron Holmes",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1956-07-24"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary Santiago",
+    full_name: "Mary Santiago",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1983-01-29"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jerry Morris",
+    full_name: "Jerry Morris",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2002-03-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Combs",
+    full_name: "James Combs",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1931-02-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Madison Miller",
+    full_name: "Madison Miller",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2005-05-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gabriel Yang",
+    full_name: "Gabriel Yang",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1970-05-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Cain",
+    full_name: "Jennifer Cain",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1978-03-19"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Abigail Norris",
+    full_name: "Abigail Norris",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1926-08-26"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Fred Rivera",
+    full_name: "Fred Rivera",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1935-10-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Carr",
+    full_name: "Benjamin Carr",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1967-04-12"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Barr",
+    full_name: "Michael Barr",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1944-05-22"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anna Bell",
+    full_name: "Anna Bell",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2013-03-18"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Chad Frank",
+    full_name: "Chad Frank",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1953-12-07"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Drew Miller",
+    full_name: "Drew Miller",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1972-12-26"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Ponce",
+    full_name: "Susan Ponce",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1930-09-05"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Silva",
+    full_name: "Amy Silva",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1934-05-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Randall",
+    full_name: "Stephanie Randall",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1931-08-18"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Moreno",
+    full_name: "Joseph Moreno",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1984-04-15"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Nicholson",
+    full_name: "John Nicholson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2018-04-30"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "April Thomas",
+    full_name: "April Thomas",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1977-05-13"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Hart",
+    full_name: "Jason Hart",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1930-09-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Todd Cook",
+    full_name: "Todd Cook",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1997-09-12"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jordan Kim",
+    full_name: "Jordan Kim",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1999-02-13"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Martinez",
+    full_name: "Justin Martinez",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1940-11-22"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anne Foster",
+    full_name: "Anne Foster",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1998-06-25"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Catherine Blevins",
+    full_name: "Catherine Blevins",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1934-10-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Louis Wu",
+    full_name: "Louis Wu",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2009-10-07"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Cordova II",
+    full_name: "Timothy Cordova II",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2007-08-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Green",
+    full_name: "Jessica Green",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1992-12-01"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Miller",
+    full_name: "Rachel Miller",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1981-02-14"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katie Martin",
+    full_name: "Katie Martin",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1927-06-23"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Janice Mckinney",
+    full_name: "Janice Mckinney",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1984-08-31"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anita Ward",
+    full_name: "Anita Ward",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1974-06-05"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Diamond Yates",
+    full_name: "Diamond Yates",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1971-01-02"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Hall",
+    full_name: "Edward Hall",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1985-05-04"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Karen Jackson",
+    full_name: "Karen Jackson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2001-08-30"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Noah Kim",
+    full_name: "Noah Kim",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2013-08-10"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Adam Calhoun",
+    full_name: "Adam Calhoun",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1987-11-22"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Garcia",
+    full_name: "John Garcia",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1939-11-21"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Terrell",
+    full_name: "David Terrell",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1957-09-16"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Hickman",
+    full_name: "Tyler Hickman",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1984-05-03"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Courtney Brock",
+    full_name: "Courtney Brock",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1933-01-11"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Simpson",
+    full_name: "James Simpson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1956-12-04"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Pham",
+    full_name: "Edward Pham",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2015-01-10"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Deborah Wilson",
+    full_name: "Deborah Wilson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2014-10-01"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Williams",
+    full_name: "Lisa Williams",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1985-10-18"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jay Peterson",
+    full_name: "Jay Peterson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1990-10-02"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Ross",
+    full_name: "Hannah Ross",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1941-04-08"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Clinton Dominguez",
+    full_name: "Clinton Dominguez",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1978-03-04"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dalton Gibson",
+    full_name: "Dalton Gibson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1927-11-17"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Trevor Rubio",
+    full_name: "Trevor Rubio",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1993-12-24"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sara Hanson",
+    full_name: "Sara Hanson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1933-12-29"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dawn Suarez",
+    full_name: "Dawn Suarez",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1956-11-20"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laura Terry",
+    full_name: "Laura Terry",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1956-10-14"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Corey Brooks",
+    full_name: "Corey Brooks",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1926-08-29"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Teresa Miles",
+    full_name: "Teresa Miles",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1968-02-14"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Manuel Johnson",
+    full_name: "Manuel Johnson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1941-11-01"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Smith",
+    full_name: "Michael Smith",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1932-01-15"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dana Sullivan",
+    full_name: "Dana Sullivan",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1983-05-19"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Diana Whitaker",
+    full_name: "Diana Whitaker",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2007-04-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Karen Bolton",
+    full_name: "Karen Bolton",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2021-07-14"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Kirk Ewing",
+    full_name: "Mr. Kirk Ewing",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2019-11-26"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Curtis",
+    full_name: "Jennifer Curtis",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1935-07-09"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Wilson",
+    full_name: "Justin Wilson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1987-07-06"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Vargas",
+    full_name: "Matthew Vargas",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1973-12-01"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Hinton",
+    full_name: "John Hinton",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1998-10-19"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lori Davis",
+    full_name: "Lori Davis",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2013-05-07"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Carroll",
+    full_name: "Edward Carroll",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2010-02-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Randall",
+    full_name: "Robert Randall",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1951-07-12"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Gould",
+    full_name: "Robert Gould",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1943-01-10"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Roberts",
+    full_name: "Michael Roberts",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1950-09-15"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald Case",
+    full_name: "Donald Case",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1994-01-12"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Adam Griffin",
+    full_name: "Adam Griffin",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1925-03-13"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Jennings MD",
+    full_name: "Edward Jennings MD",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2003-07-16"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary Sanchez",
+    full_name: "Mary Sanchez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1979-07-18"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Janet Downs",
+    full_name: "Janet Downs",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2001-06-27"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mrs. Natalie Jackson",
+    full_name: "Mrs. Natalie Jackson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1945-11-25"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Justin Moore",
+    full_name: "Mr. Justin Moore",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1992-11-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Jones",
+    full_name: "Jennifer Jones",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1975-09-17"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristina Mays",
+    full_name: "Kristina Mays",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2013-02-05"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Carly Pennington",
+    full_name: "Carly Pennington",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1955-12-24"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Juan Knight",
+    full_name: "Juan Knight",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1940-12-19"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Salas",
+    full_name: "Michael Salas",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2000-05-06"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Philip Lewis",
+    full_name: "Philip Lewis",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2021-09-23"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bethany Grant",
+    full_name: "Bethany Grant",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1973-04-29"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Caitlin King",
+    full_name: "Caitlin King",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1938-03-22"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Ware",
+    full_name: "Kimberly Ware",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1968-12-28"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Austin Mcgee",
+    full_name: "Austin Mcgee",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1962-02-03"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Young",
+    full_name: "Aaron Young",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1934-12-15"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Phillips",
+    full_name: "Joseph Phillips",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1934-06-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rebecca Mitchell",
+    full_name: "Rebecca Mitchell",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1939-03-06"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mathew Clark",
+    full_name: "Mathew Clark",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2006-02-04"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Jennings",
+    full_name: "Timothy Jennings",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1974-04-07"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alicia Alvarez",
+    full_name: "Alicia Alvarez",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1928-04-19"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patrick Snyder",
+    full_name: "Patrick Snyder",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1983-10-12"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Harris",
+    full_name: "William Harris",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1971-06-02"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Clarke",
+    full_name: "Elizabeth Clarke",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1966-05-25"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brooke Cruz",
+    full_name: "Brooke Cruz",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1963-08-23"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shawn Nunez",
+    full_name: "Shawn Nunez",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1975-01-27"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Mckinney",
+    full_name: "Hannah Mckinney",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1927-12-27"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Mason",
+    full_name: "William Mason",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1975-07-23"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Porter",
+    full_name: "Amanda Porter",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2000-06-22"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexander Gibson",
+    full_name: "Alexander Gibson",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1964-11-04"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Farrell",
+    full_name: "Jessica Farrell",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1957-01-17"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Keller",
+    full_name: "Sarah Keller",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2012-07-31"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Ramirez",
+    full_name: "Elizabeth Ramirez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1981-10-17"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dana Walker",
+    full_name: "Dana Walker",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1974-04-18"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathy Wong",
+    full_name: "Kathy Wong",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2014-06-14"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Allen",
+    full_name: "Heather Allen",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1967-09-07"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Caleb Anderson",
+    full_name: "Caleb Anderson",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1928-05-16"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andre Turner",
+    full_name: "Andre Turner",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1930-09-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Cooper",
+    full_name: "Joshua Cooper",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1956-12-25"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Howard",
+    full_name: "Timothy Howard",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1953-03-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Parker",
+    full_name: "Robert Parker",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1938-09-02"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Maria Morales",
+    full_name: "Maria Morales",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2004-07-26"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jared Weiss",
+    full_name: "Jared Weiss",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1976-05-28"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Reed",
+    full_name: "Anthony Reed",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1930-05-17"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Becky Miller",
+    full_name: "Becky Miller",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1996-04-04"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mrs. Katherine Harris",
+    full_name: "Mrs. Katherine Harris",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1965-01-23"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Garcia",
+    full_name: "Jennifer Garcia",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1950-11-19"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nathan Bridges",
+    full_name: "Nathan Bridges",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1931-12-31"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Mcconnell",
+    full_name: "Michael Mcconnell",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1964-05-25"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Neal",
+    full_name: "James Neal",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1950-06-30"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Webb",
+    full_name: "Sarah Webb",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2010-06-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Roberts",
+    full_name: "Andrew Roberts",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1926-12-27"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tracy Fisher",
+    full_name: "Tracy Fisher",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1964-06-23"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Garcia",
+    full_name: "Richard Garcia",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2014-01-08"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Baldwin",
+    full_name: "Melissa Baldwin",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1952-10-21"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Gonzalez",
+    full_name: "Danielle Gonzalez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2015-06-13"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Clayton White",
+    full_name: "Clayton White",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1940-01-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Fox",
+    full_name: "Susan Fox",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2008-03-16"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joy Nguyen",
+    full_name: "Joy Nguyen",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1977-11-23"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nichole Williams",
+    full_name: "Nichole Williams",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1959-08-19"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Wright",
+    full_name: "Jessica Wright",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2003-08-20"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patricia Roberts MD",
+    full_name: "Patricia Roberts MD",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1989-04-02"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melody Cline",
+    full_name: "Melody Cline",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1965-05-30"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Zachary Stevens",
+    full_name: "Zachary Stevens",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1950-06-25"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Fletcher",
+    full_name: "Eric Fletcher",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1976-06-08"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Todd Maldonado",
+    full_name: "Todd Maldonado",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1966-01-08"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Moreno",
+    full_name: "Thomas Moreno",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1983-09-04"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gary Moore",
+    full_name: "Gary Moore",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2011-09-08"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Savage DDS",
+    full_name: "Joshua Savage DDS",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1976-01-18"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Delacruz",
+    full_name: "Amy Delacruz",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1938-03-08"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Swanson",
+    full_name: "Matthew Swanson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1991-01-30"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Mcdaniel",
+    full_name: "Aaron Mcdaniel",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2018-04-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Griffith",
+    full_name: "David Griffith",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1938-07-21"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Hicks",
+    full_name: "Steven Hicks",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1968-01-05"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Clarke",
+    full_name: "Nicholas Clarke",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1999-09-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Wheeler",
+    full_name: "Rachel Wheeler",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2005-04-10"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Walters",
+    full_name: "Stephanie Walters",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1973-04-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Walter Lee",
+    full_name: "Walter Lee",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1926-12-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrea Woods",
+    full_name: "Andrea Woods",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1980-04-14"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jamie Schaefer",
+    full_name: "Jamie Schaefer",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1946-01-05"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Yolanda Burns",
+    full_name: "Yolanda Burns",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2018-06-09"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rose Kemp",
+    full_name: "Rose Kemp",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2012-10-23"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shannon Wood",
+    full_name: "Shannon Wood",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1959-06-15"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Orr",
+    full_name: "Ryan Orr",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1969-08-09"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Marks",
+    full_name: "David Marks",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1958-12-16"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paul Mendoza",
+    full_name: "Paul Mendoza",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1982-08-16"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dustin Hayes",
+    full_name: "Dustin Hayes",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1961-01-02"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Deborah Peterson",
+    full_name: "Deborah Peterson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1998-02-18"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Fisher DDS",
+    full_name: "Matthew Fisher DDS",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1988-02-19"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jill Ortiz",
+    full_name: "Jill Ortiz",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1997-09-03"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tina James",
+    full_name: "Tina James",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1955-03-06"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christina Reyes",
+    full_name: "Christina Reyes",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2023-03-19"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Thomas",
+    full_name: "Steven Thomas",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1933-02-14"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Charlene Mcclure",
+    full_name: "Charlene Mcclure",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1983-11-19"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Jackson",
+    full_name: "James Jackson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1950-04-16"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Walter Morgan",
+    full_name: "Walter Morgan",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2016-12-05"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Philip Watson",
+    full_name: "Philip Watson",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1941-07-11"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melanie Campbell",
+    full_name: "Melanie Campbell",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1933-08-17"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Hicks",
+    full_name: "Benjamin Hicks",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1957-11-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Cobb",
+    full_name: "Michael Cobb",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1998-07-10"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tonya Flowers",
+    full_name: "Tonya Flowers",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2016-11-05"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jackson Mcdaniel",
+    full_name: "Jackson Mcdaniel",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1985-11-23"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jay Richard",
+    full_name: "Jay Richard",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1973-08-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Cruz",
+    full_name: "Tyler Cruz",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1999-01-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Ward",
+    full_name: "John Ward",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1956-12-13"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Maureen Ferrell",
+    full_name: "Maureen Ferrell",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1960-08-16"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Riley",
+    full_name: "Rachel Riley",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1928-04-12"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Frank Rodriguez",
+    full_name: "Frank Rodriguez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1925-01-29"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Billy Boyer",
+    full_name: "Billy Boyer",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1930-04-16"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tina Olson",
+    full_name: "Tina Olson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1933-05-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Escobar",
+    full_name: "Heather Escobar",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1940-07-16"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Campbell",
+    full_name: "Daniel Campbell",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1955-04-04"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Tran",
+    full_name: "Amy Tran",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1978-09-05"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Skinner",
+    full_name: "Justin Skinner",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2019-01-05"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ray Johnston",
+    full_name: "Ray Johnston",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2017-06-25"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Richardson",
+    full_name: "Jennifer Richardson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1982-02-05"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Sanders",
+    full_name: "Amy Sanders",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1972-08-11"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brian Nolan",
+    full_name: "Brian Nolan",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2008-08-08"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristina Collins",
+    full_name: "Kristina Collins",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1980-02-22"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alejandra Brown",
+    full_name: "Alejandra Brown",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2010-03-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Ross",
+    full_name: "Kenneth Ross",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2013-03-28"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Harrison",
+    full_name: "Jennifer Harrison",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2003-06-15"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Brian Ellis",
+    full_name: "Mr. Brian Ellis",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1950-11-27"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Frederick Hill",
+    full_name: "Frederick Hill",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1967-03-07"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katie Galloway",
+    full_name: "Katie Galloway",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1927-12-15"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erica Williams",
+    full_name: "Erica Williams",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1974-12-30"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Flores",
+    full_name: "Michael Flores",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1940-09-12"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tamara Fowler",
+    full_name: "Tamara Fowler",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1930-06-19"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephen Stout",
+    full_name: "Stephen Stout",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2015-03-05"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Taylor Jensen",
+    full_name: "Taylor Jensen",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1960-12-26"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mason Sampson",
+    full_name: "Mason Sampson",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2020-07-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Deborah Baldwin",
+    full_name: "Deborah Baldwin",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2002-09-12"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Charlene Davenport",
+    full_name: "Charlene Davenport",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1954-03-15"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christina Williams",
+    full_name: "Christina Williams",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1976-03-08"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Walter",
+    full_name: "Kevin Walter",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2013-05-16"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gilbert Blanchard",
+    full_name: "Gilbert Blanchard",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2007-08-11"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anne Williams",
+    full_name: "Anne Williams",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1962-02-19"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Yvonne Hall",
+    full_name: "Yvonne Hall",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1992-08-18"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Mitchell",
+    full_name: "Michael Mitchell",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2022-08-18"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Mckinney",
+    full_name: "David Mckinney",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2023-06-25"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Weber",
+    full_name: "Linda Weber",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1941-12-26"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Scott",
+    full_name: "Michelle Scott",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1980-09-29"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael White",
+    full_name: "Michael White",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1926-09-28"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Deanna Bray",
+    full_name: "Deanna Bray",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1973-05-18"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erika Branch",
+    full_name: "Erika Branch",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1998-08-29"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Stafford",
+    full_name: "Daniel Stafford",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1948-08-19"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Harris",
+    full_name: "Lisa Harris",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2015-06-19"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph James",
+    full_name: "Joseph James",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1955-01-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marcus Bennett",
+    full_name: "Marcus Bennett",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1957-01-23"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sheila Bowers",
+    full_name: "Sheila Bowers",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1989-03-28"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Turner",
+    full_name: "Justin Turner",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1993-11-17"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Small",
+    full_name: "Benjamin Small",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1944-02-22"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rodney Smith",
+    full_name: "Rodney Smith",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1944-07-20"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nathaniel Santiago",
+    full_name: "Nathaniel Santiago",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1984-11-30"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jamie Moyer",
+    full_name: "Jamie Moyer",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1935-02-01"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Vargas",
+    full_name: "Michael Vargas",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1968-01-05"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Vincent Jackson",
+    full_name: "Vincent Jackson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2003-09-24"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Simpson",
+    full_name: "Justin Simpson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1998-08-25"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cheryl Neal",
+    full_name: "Cheryl Neal",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1950-09-01"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Todd Adams",
+    full_name: "Todd Adams",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2014-05-27"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dawn Farmer",
+    full_name: "Dawn Farmer",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2002-07-04"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Ramirez",
+    full_name: "William Ramirez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1995-01-08"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Roger Chavez",
+    full_name: "Roger Chavez",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1968-09-29"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Jordan Allen",
+    full_name: "Mr. Jordan Allen",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1990-01-26"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Johnson",
+    full_name: "John Johnson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2016-01-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Gross",
+    full_name: "Daniel Gross",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2010-12-14"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Allen",
+    full_name: "Linda Allen",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1982-11-23"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Steele",
+    full_name: "Christopher Steele",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1992-03-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Devon Smith",
+    full_name: "Devon Smith",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1963-04-15"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristen Sparks",
+    full_name: "Kristen Sparks",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1943-01-25"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Smith",
+    full_name: "Brittany Smith",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1994-12-05"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Denise Christian",
+    full_name: "Denise Christian",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1940-11-06"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Frazier",
+    full_name: "Tyler Frazier",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1995-08-04"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "George Delacruz",
+    full_name: "George Delacruz",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2016-04-07"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alyssa Miller",
+    full_name: "Alyssa Miller",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2005-08-20"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Karen Graham",
+    full_name: "Karen Graham",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1995-03-31"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tina Clayton",
+    full_name: "Tina Clayton",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1942-05-05"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Robinson",
+    full_name: "Aaron Robinson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2001-02-24"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sherry Brock",
+    full_name: "Sherry Brock",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2022-10-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Christopher Nelson DVM",
+    full_name: "Dr. Christopher Nelson DVM",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2010-11-28"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Bailey",
+    full_name: "Kimberly Bailey",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2006-07-26"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Bradley",
+    full_name: "Amy Bradley",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1950-11-13"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shannon Williams",
+    full_name: "Shannon Williams",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1940-01-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ariana Gomez",
+    full_name: "Ariana Gomez",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1940-05-29"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Walters",
+    full_name: "Michael Walters",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1944-01-11"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Anderson",
+    full_name: "Jeffrey Anderson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1956-07-10"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jerome Rosario",
+    full_name: "Jerome Rosario",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2011-06-16"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrea Larson",
+    full_name: "Andrea Larson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2007-09-18"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alicia Hughes",
+    full_name: "Alicia Hughes",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1975-10-31"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Garcia",
+    full_name: "Christopher Garcia",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2006-04-06"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Taylor",
+    full_name: "Michael Taylor",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1978-09-26"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Emily Bishop",
+    full_name: "Emily Bishop",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1952-04-29"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald Ellis",
+    full_name: "Donald Ellis",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2011-03-25"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Martin",
+    full_name: "Joshua Martin",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1936-08-26"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Harris",
+    full_name: "Andrew Harris",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1960-10-17"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Randall Rowe",
+    full_name: "Randall Rowe",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2014-05-23"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Adam Abbott",
+    full_name: "Adam Abbott",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1973-08-14"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jordan Chambers",
+    full_name: "Jordan Chambers",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1945-05-06"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jose Williams",
+    full_name: "Jose Williams",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1931-03-15"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joel Anderson",
+    full_name: "Joel Anderson",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1947-09-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nancy Freeman",
+    full_name: "Nancy Freeman",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1936-02-24"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Audrey Jenkins",
+    full_name: "Audrey Jenkins",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1995-11-02"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Lee",
+    full_name: "Michelle Lee",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1978-12-14"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Archer",
+    full_name: "Jessica Archer",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1957-03-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Zachary Gonzalez",
+    full_name: "Zachary Gonzalez",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1957-12-28"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debbie Richardson",
+    full_name: "Debbie Richardson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1929-04-09"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Diana Mcintosh",
+    full_name: "Diana Mcintosh",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1986-11-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Rivera",
+    full_name: "Heather Rivera",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2012-08-10"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Austin Dean",
+    full_name: "Austin Dean",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2005-08-14"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Watts",
+    full_name: "Michael Watts",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1950-05-24"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Regina Brandt",
+    full_name: "Regina Brandt",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1950-08-01"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Boyer",
+    full_name: "Tyler Boyer",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1940-03-10"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christine Allen",
+    full_name: "Christine Allen",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1941-06-12"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Bennett",
+    full_name: "Robert Bennett",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1998-06-04"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Downs",
+    full_name: "Michael Downs",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1961-12-09"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Frank",
+    full_name: "Lisa Frank",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1982-01-06"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Rojas",
+    full_name: "Lisa Rojas",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2023-01-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tiffany Nelson",
+    full_name: "Tiffany Nelson",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1960-03-11"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Poole",
+    full_name: "Kimberly Poole",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1964-08-17"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Anderson",
+    full_name: "Thomas Anderson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1958-08-23"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Jarvis",
+    full_name: "Brandon Jarvis",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1982-07-06"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Ali",
+    full_name: "Christopher Ali",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1974-03-20"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patricia Davis",
+    full_name: "Patricia Davis",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1973-08-21"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Wilson",
+    full_name: "Eric Wilson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1967-02-27"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Ortega",
+    full_name: "Christopher Ortega",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2024-05-01"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald Larson",
+    full_name: "Donald Larson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1997-11-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Patton",
+    full_name: "Jeffrey Patton",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1968-01-28"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Hernandez",
+    full_name: "Nicole Hernandez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2022-11-01"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Guerra",
+    full_name: "Nicholas Guerra",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2014-05-10"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Emily Wilson",
+    full_name: "Emily Wilson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1971-05-02"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Anderson",
+    full_name: "David Anderson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2001-09-04"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Renee Ramos",
+    full_name: "Renee Ramos",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2000-05-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Martin",
+    full_name: "William Martin",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1938-09-08"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christine Patterson",
+    full_name: "Christine Patterson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1999-12-22"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Teresa Walker",
+    full_name: "Teresa Walker",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2009-02-10"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Obrien",
+    full_name: "William Obrien",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2014-08-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Roy Brooks",
+    full_name: "Roy Brooks",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2017-11-02"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Nelson",
+    full_name: "Joshua Nelson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1993-02-10"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shawn Lester",
+    full_name: "Shawn Lester",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1957-09-22"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Stephens",
+    full_name: "James Stephens",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2010-03-09"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Wallace",
+    full_name: "Amanda Wallace",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2021-11-30"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Swanson",
+    full_name: "Michael Swanson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1951-07-27"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brian Levy",
+    full_name: "Brian Levy",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1998-10-02"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dillon Jackson",
+    full_name: "Dillon Jackson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2011-10-14"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jerry Marshall",
+    full_name: "Jerry Marshall",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2018-08-27"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Courtney Mayo",
+    full_name: "Courtney Mayo",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1961-10-08"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Travis Wiggins",
+    full_name: "Travis Wiggins",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2020-02-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Gonzales",
+    full_name: "Anthony Gonzales",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2017-06-29"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erika Page",
+    full_name: "Erika Page",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2001-09-01"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dale Burnett",
+    full_name: "Dale Burnett",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1947-02-01"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Scott",
+    full_name: "Michelle Scott",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1972-11-24"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Perez",
+    full_name: "Linda Perez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1927-07-16"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Clark",
+    full_name: "Justin Clark",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1945-02-28"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Martinez",
+    full_name: "Brittany Martinez",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1948-12-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jonathan Jones",
+    full_name: "Jonathan Jones",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1934-11-05"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lee Murphy",
+    full_name: "Lee Murphy",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1981-09-11"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shelley Wallace",
+    full_name: "Shelley Wallace",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1976-03-18"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Osborne",
+    full_name: "Thomas Osborne",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1959-04-03"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Knight",
+    full_name: "Ashley Knight",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1943-12-09"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jordan Brown",
+    full_name: "Jordan Brown",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1995-12-28"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Darrell Smith",
+    full_name: "Darrell Smith",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1974-11-08"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Philip Ayala",
+    full_name: "Philip Ayala",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2014-08-24"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Roth",
+    full_name: "Joshua Roth",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2009-03-27"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Hughes",
+    full_name: "James Hughes",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2012-02-22"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Dennis",
+    full_name: "Jason Dennis",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2018-08-22"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Patterson",
+    full_name: "Matthew Patterson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2021-01-30"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ms. Stephanie Armstrong",
+    full_name: "Ms. Stephanie Armstrong",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2007-12-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Arias",
+    full_name: "Sarah Arias",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2010-10-23"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Wilkins",
+    full_name: "Anthony Wilkins",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1970-11-25"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Carey MD",
+    full_name: "Michael Carey MD",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1968-05-10"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Jacobs",
+    full_name: "Edward Jacobs",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1928-06-03"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julian Nguyen",
+    full_name: "Julian Nguyen",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1981-10-31"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Stevenson",
+    full_name: "Melissa Stevenson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1934-10-14"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Randy Watkins",
+    full_name: "Randy Watkins",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1990-09-22"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tara Garcia",
+    full_name: "Tara Garcia",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1982-06-19"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Caleb Lin",
+    full_name: "Caleb Lin",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1996-03-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Mccarthy",
+    full_name: "Steven Mccarthy",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1969-03-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Warner",
+    full_name: "Brittany Warner",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1937-03-28"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cody Branch",
+    full_name: "Cody Branch",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1931-11-09"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Hooper",
+    full_name: "Nicholas Hooper",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2023-02-25"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Annette Mcguire",
+    full_name: "Annette Mcguire",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1970-07-21"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Murphy",
+    full_name: "David Murphy",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1975-11-24"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Saunders",
+    full_name: "Linda Saunders",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1986-02-11"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hector Palmer",
+    full_name: "Hector Palmer",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1938-04-14"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jesse Jones",
+    full_name: "Jesse Jones",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1941-07-07"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Watson",
+    full_name: "David Watson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1975-10-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Bullock",
+    full_name: "Stephanie Bullock",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2014-04-17"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Teresa Brown",
+    full_name: "Teresa Brown",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2007-06-29"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Cummings",
+    full_name: "David Cummings",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1969-06-26"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Young",
+    full_name: "Steven Young",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1952-08-19"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexander Byrd",
+    full_name: "Alexander Byrd",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1983-03-15"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Gonzales",
+    full_name: "John Gonzales",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1990-07-26"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tammy Brown",
+    full_name: "Tammy Brown",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1940-05-22"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Allen",
+    full_name: "Jessica Allen",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2007-02-26"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dylan Sandoval",
+    full_name: "Dylan Sandoval",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2006-09-02"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Miranda",
+    full_name: "Hannah Miranda",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1962-07-08"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Warren",
+    full_name: "Susan Warren",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1979-01-08"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erika Anderson",
+    full_name: "Erika Anderson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1969-12-31"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Burke",
+    full_name: "Stephanie Burke",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1931-08-03"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathy Oneill",
+    full_name: "Kathy Oneill",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1989-09-26"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Keith Hall",
+    full_name: "Keith Hall",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1947-07-14"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Travis Craig",
+    full_name: "Travis Craig",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1990-06-12"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Pitts",
+    full_name: "Mark Pitts",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1951-11-30"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jillian Maxwell",
+    full_name: "Jillian Maxwell",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1965-08-04"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeremy Dixon",
+    full_name: "Jeremy Dixon",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2020-08-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sharon Morse",
+    full_name: "Sharon Morse",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1991-08-04"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cindy Wallace",
+    full_name: "Cindy Wallace",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1992-05-10"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Zachary Mcfarland",
+    full_name: "Zachary Mcfarland",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2023-11-08"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Medina",
+    full_name: "Joseph Medina",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1928-03-10"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Caitlyn Turner",
+    full_name: "Caitlyn Turner",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2009-04-03"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Leah Martin",
+    full_name: "Leah Martin",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1984-07-15"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jenna Castro",
+    full_name: "Jenna Castro",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1941-02-12"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Vaughan",
+    full_name: "Jennifer Vaughan",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2000-01-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joe Carter",
+    full_name: "Joe Carter",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1944-04-02"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tiffany Rodriguez",
+    full_name: "Tiffany Rodriguez",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1962-09-09"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Williams",
+    full_name: "Christopher Williams",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1988-05-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Natalie Bray",
+    full_name: "Natalie Bray",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1972-01-29"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Luis Booker",
+    full_name: "Luis Booker",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1998-10-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Watkins",
+    full_name: "Joshua Watkins",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1926-12-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Stone",
+    full_name: "Melissa Stone",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1977-05-24"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Baird",
+    full_name: "Michelle Baird",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1925-07-14"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Tucker",
+    full_name: "Christopher Tucker",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2007-11-20"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Coffey",
+    full_name: "Steven Coffey",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1939-04-19"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Holly Dean",
+    full_name: "Holly Dean",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1930-09-28"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Norman",
+    full_name: "Sarah Norman",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1946-08-25"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Gutierrez",
+    full_name: "Robert Gutierrez",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1930-05-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Perez",
+    full_name: "Matthew Perez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2008-01-31"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Grant",
+    full_name: "Amanda Grant",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2022-03-20"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Williams",
+    full_name: "Jessica Williams",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2000-06-17"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "George Parks",
+    full_name: "George Parks",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2016-04-10"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Darren Vega",
+    full_name: "Darren Vega",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2011-11-02"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Lynch",
+    full_name: "David Lynch",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1946-11-04"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Grant Wilson",
+    full_name: "Grant Wilson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1959-05-21"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Moore",
+    full_name: "Joseph Moore",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1961-08-29"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Summer Nunez",
+    full_name: "Summer Nunez",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1924-09-08"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ellen Watson",
+    full_name: "Ellen Watson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1999-02-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tanya Pace",
+    full_name: "Tanya Pace",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1966-04-13"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Hall DDS",
+    full_name: "Kenneth Hall DDS",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1958-11-30"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Harris",
+    full_name: "Hannah Harris",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1976-06-09"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Brown",
+    full_name: "Kevin Brown",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1983-07-04"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Mcdonald",
+    full_name: "Daniel Mcdonald",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2023-10-06"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Francis Singleton",
+    full_name: "Francis Singleton",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1976-08-13"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Waters",
+    full_name: "Aaron Waters",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1936-08-21"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephen Fox",
+    full_name: "Stephen Fox",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1979-11-25"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Martin",
+    full_name: "Richard Martin",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1990-01-14"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rhonda Martinez",
+    full_name: "Rhonda Martinez",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1931-06-24"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Jacobs",
+    full_name: "Richard Jacobs",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1929-06-11"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sandra Page",
+    full_name: "Sandra Page",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2011-01-09"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Travis Willis",
+    full_name: "Travis Willis",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2020-07-15"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Austin Patrick",
+    full_name: "Austin Patrick",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1987-05-19"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrea Fitzpatrick",
+    full_name: "Andrea Fitzpatrick",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2009-02-26"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gloria Watson",
+    full_name: "Gloria Watson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2015-07-03"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Powers",
+    full_name: "Andrew Powers",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1999-11-26"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Todd Morales",
+    full_name: "Todd Morales",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1968-10-24"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Davies",
+    full_name: "David Davies",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1937-06-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Walker",
+    full_name: "Thomas Walker",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2023-04-24"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nancy Alexander",
+    full_name: "Nancy Alexander",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1953-11-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "April Fowler",
+    full_name: "April Fowler",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1977-03-18"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Victoria Gentry",
+    full_name: "Victoria Gentry",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2017-05-10"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tina Olson",
+    full_name: "Tina Olson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1949-05-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Wood",
+    full_name: "Melissa Wood",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1997-04-17"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Schmidt",
+    full_name: "Ryan Schmidt",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2016-10-09"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Kevin Santana",
+    full_name: "Dr. Kevin Santana",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1955-07-05"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Patel",
+    full_name: "Robert Patel",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1951-04-20"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Angela Doyle",
+    full_name: "Angela Doyle",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1968-04-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Tran",
+    full_name: "Melissa Tran",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1953-10-08"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Rodriguez",
+    full_name: "Michael Rodriguez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1958-08-31"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paul Riggs",
+    full_name: "Paul Riggs",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1990-04-06"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Veronica Johnson",
+    full_name: "Veronica Johnson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1966-06-27"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bradley Ruiz",
+    full_name: "Bradley Ruiz",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1964-01-06"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christian Pierce",
+    full_name: "Christian Pierce",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1940-08-28"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Williamson",
+    full_name: "Ryan Williamson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1936-05-23"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joanne Rivera",
+    full_name: "Joanne Rivera",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1947-10-06"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "George Williams",
+    full_name: "George Williams",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1983-04-08"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Yolanda Kent",
+    full_name: "Yolanda Kent",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1943-12-11"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Woodward",
+    full_name: "Sarah Woodward",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2019-02-19"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Chad Griffin",
+    full_name: "Chad Griffin",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1928-02-15"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cassandra Jones",
+    full_name: "Cassandra Jones",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1964-12-23"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Angel Woodward",
+    full_name: "Angel Woodward",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1945-03-15"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stacey Riley DVM",
+    full_name: "Stacey Riley DVM",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1966-05-17"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jesse Wilson",
+    full_name: "Jesse Wilson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1960-08-26"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bradley Scott",
+    full_name: "Bradley Scott",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1945-09-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Rodriguez",
+    full_name: "Elizabeth Rodriguez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1965-10-16"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Deborah Martin",
+    full_name: "Deborah Martin",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2015-01-29"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha Ruiz",
+    full_name: "Samantha Ruiz",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2011-12-23"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Terry Roberts",
+    full_name: "Terry Roberts",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1993-02-16"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tara Velazquez",
+    full_name: "Tara Velazquez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1949-12-03"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Thomas",
+    full_name: "Ryan Thomas",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1952-01-20"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Sanchez",
+    full_name: "Michelle Sanchez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1974-04-01"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Hernandez",
+    full_name: "Stephanie Hernandez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2011-03-18"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly Walsh",
+    full_name: "Kelly Walsh",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1991-12-31"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Molina",
+    full_name: "Michael Molina",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2017-07-07"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Leslie Kelley",
+    full_name: "Leslie Kelley",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1926-03-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Todd Brooks",
+    full_name: "Todd Brooks",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1957-10-22"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Keith Church",
+    full_name: "Keith Church",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1989-12-23"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Parsons",
+    full_name: "John Parsons",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1999-07-09"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Weaver",
+    full_name: "Justin Weaver",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1937-11-16"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Janice Bird",
+    full_name: "Janice Bird",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1979-08-19"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Morgan Vance",
+    full_name: "Morgan Vance",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1989-05-27"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aimee Jackson",
+    full_name: "Aimee Jackson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1996-03-04"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bradley Lopez",
+    full_name: "Bradley Lopez",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1936-02-27"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Flores",
+    full_name: "Kenneth Flores",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1969-08-02"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Megan Thompson",
+    full_name: "Megan Thompson",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1939-01-03"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Reynolds",
+    full_name: "Jessica Reynolds",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1947-08-14"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Hoffman",
+    full_name: "Danielle Hoffman",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2005-09-26"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Elliott",
+    full_name: "Michael Elliott",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1932-02-26"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Ramirez",
+    full_name: "Christopher Ramirez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1958-12-04"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Allen",
+    full_name: "Amy Allen",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1966-03-28"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Hicks",
+    full_name: "Kenneth Hicks",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1973-01-12"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristina Ortiz",
+    full_name: "Kristina Ortiz",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1925-08-23"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Barnett",
+    full_name: "Brandon Barnett",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2011-06-03"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexander Pitts",
+    full_name: "Alexander Pitts",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1943-09-06"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alicia Lee",
+    full_name: "Alicia Lee",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1969-05-24"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Wendy Edwards MD",
+    full_name: "Wendy Edwards MD",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2005-05-23"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Benjamin",
+    full_name: "Heather Benjamin",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2004-03-22"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Jordan",
+    full_name: "Jennifer Jordan",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1999-04-10"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Lewis",
+    full_name: "Melissa Lewis",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1970-01-05"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Billy Howell",
+    full_name: "Billy Howell",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1939-06-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cody Taylor",
+    full_name: "Cody Taylor",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1966-09-15"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Lee",
+    full_name: "William Lee",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2001-03-12"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Johnson",
+    full_name: "David Johnson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1981-10-15"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Peterson",
+    full_name: "Brandon Peterson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1983-05-18"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katherine Morrison",
+    full_name: "Katherine Morrison",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1981-04-08"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Turner",
+    full_name: "Brittany Turner",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1966-05-25"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Nelson",
+    full_name: "Jennifer Nelson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1992-01-29"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Gonzalez",
+    full_name: "Amanda Gonzalez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2000-07-05"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Madison Carlson",
+    full_name: "Madison Carlson",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1966-01-02"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Peterson",
+    full_name: "Daniel Peterson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1980-07-22"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laura Nelson",
+    full_name: "Laura Nelson",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2014-04-19"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Quinn",
+    full_name: "Thomas Quinn",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1940-07-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Neal",
+    full_name: "Linda Neal",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1977-10-14"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Morales",
+    full_name: "James Morales",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1952-06-07"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Wilson",
+    full_name: "Richard Wilson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1926-04-25"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erin Brown",
+    full_name: "Erin Brown",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1929-07-30"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Gilbert",
+    full_name: "Daniel Gilbert",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1948-04-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jonathan Cruz",
+    full_name: "Jonathan Cruz",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1983-03-01"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Thomas",
+    full_name: "Amanda Thomas",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1949-09-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Larry Gillespie",
+    full_name: "Larry Gillespie",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1970-03-12"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Jacobson",
+    full_name: "Stephanie Jacobson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1951-07-26"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gerald Bailey",
+    full_name: "Gerald Bailey",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1927-09-16"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joann Bailey",
+    full_name: "Joann Bailey",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1977-04-06"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Avila",
+    full_name: "Kevin Avila",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1993-07-01"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marcus Gillespie PhD",
+    full_name: "Marcus Gillespie PhD",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1970-07-06"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Suzanne Fields",
+    full_name: "Suzanne Fields",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1996-11-04"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Cohen",
+    full_name: "Benjamin Cohen",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1991-01-08"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Carol Archer",
+    full_name: "Carol Archer",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1946-04-28"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexis Lopez",
+    full_name: "Alexis Lopez",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1938-04-18"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debbie Evans",
+    full_name: "Debbie Evans",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1954-08-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patrick Williams",
+    full_name: "Patrick Williams",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1949-11-05"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Howard",
+    full_name: "Joseph Howard",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2018-02-20"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katherine Dalton",
+    full_name: "Katherine Dalton",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1958-08-26"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Davis",
+    full_name: "John Davis",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1972-03-11"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Brown DDS",
+    full_name: "Andrew Brown DDS",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2003-11-29"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Wallace",
+    full_name: "Eric Wallace",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1938-01-02"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Duke",
+    full_name: "Susan Duke",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2012-01-15"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jamie Lopez",
+    full_name: "Jamie Lopez",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1969-08-31"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katie Flores",
+    full_name: "Katie Flores",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1967-02-24"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elijah Stout",
+    full_name: "Elijah Stout",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1934-03-31"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Natalie Schroeder",
+    full_name: "Natalie Schroeder",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1993-04-18"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Gray",
+    full_name: "Heather Gray",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1966-06-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Evans",
+    full_name: "Joshua Evans",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1965-05-11"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Corey Garcia",
+    full_name: "Corey Garcia",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1949-01-12"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Montgomery",
+    full_name: "Melissa Montgomery",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1951-10-31"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Lloyd",
+    full_name: "James Lloyd",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1984-12-23"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Tyler",
+    full_name: "Julie Tyler",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1999-02-07"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly Brown",
+    full_name: "Kelly Brown",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1959-01-31"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Denise Lewis",
+    full_name: "Denise Lewis",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2008-05-04"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paula Campbell",
+    full_name: "Paula Campbell",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1925-10-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Murphy",
+    full_name: "Michael Murphy",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1983-06-06"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laura Smith",
+    full_name: "Laura Smith",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1949-07-17"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Ellis",
+    full_name: "Michael Ellis",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2013-10-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Gutierrez",
+    full_name: "Jennifer Gutierrez",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1933-01-10"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Holmes",
+    full_name: "Nicholas Holmes",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2000-06-19"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dennis Burton",
+    full_name: "Dennis Burton",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1969-03-23"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joanna Edwards",
+    full_name: "Joanna Edwards",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2003-05-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Short",
+    full_name: "Robert Short",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1995-12-19"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Turner",
+    full_name: "William Turner",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1950-02-09"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brianna Cabrera",
+    full_name: "Brianna Cabrera",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1957-05-09"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Maria Nunez",
+    full_name: "Maria Nunez",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1971-01-27"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "George Schroeder",
+    full_name: "George Schroeder",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1965-02-19"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Swanson",
+    full_name: "Kevin Swanson",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1924-10-27"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Henry",
+    full_name: "James Henry",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1929-06-27"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Lawrence",
+    full_name: "Brittany Lawrence",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2003-11-25"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Jackson",
+    full_name: "David Jackson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1968-06-24"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Contreras",
+    full_name: "Melissa Contreras",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1937-11-13"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "George Smith",
+    full_name: "George Smith",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2012-06-06"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Walker",
+    full_name: "David Walker",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1989-04-14"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Johnston",
+    full_name: "David Johnston",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1955-01-27"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Edwards",
+    full_name: "Daniel Edwards",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1976-03-11"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Adrienne Ponce",
+    full_name: "Adrienne Ponce",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1937-06-10"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bruce Jones",
+    full_name: "Bruce Jones",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1974-06-16"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Mckenzie",
+    full_name: "John Mckenzie",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1988-09-19"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sara Rice",
+    full_name: "Sara Rice",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2016-06-24"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Baker",
+    full_name: "Amanda Baker",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1953-02-12"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Manuel Manning",
+    full_name: "Manuel Manning",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1954-12-30"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shawn Dominguez",
+    full_name: "Shawn Dominguez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1965-01-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Peter Hughes",
+    full_name: "Peter Hughes",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1979-09-13"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dennis Schmidt",
+    full_name: "Dennis Schmidt",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1969-12-19"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jonathan Williams",
+    full_name: "Jonathan Williams",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2016-05-11"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Derek Delgado",
+    full_name: "Derek Delgado",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1986-10-03"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gabrielle Smith",
+    full_name: "Gabrielle Smith",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1997-05-25"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Denise Nguyen",
+    full_name: "Denise Nguyen",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2005-10-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Zachary Escobar",
+    full_name: "Zachary Escobar",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1987-08-07"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Collins",
+    full_name: "Joseph Collins",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1959-03-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Barnett",
+    full_name: "David Barnett",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1933-01-01"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Morris",
+    full_name: "David Morris",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2017-10-07"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Neal",
+    full_name: "Melissa Neal",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1951-05-29"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "George Clark",
+    full_name: "George Clark",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1973-05-15"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shane Farmer",
+    full_name: "Shane Farmer",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1954-08-02"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tara Harvey",
+    full_name: "Tara Harvey",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1976-03-04"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Williams",
+    full_name: "Kenneth Williams",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1940-03-30"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly Dickson",
+    full_name: "Kelly Dickson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2022-08-18"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joann Wilson",
+    full_name: "Joann Wilson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1985-04-18"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey James",
+    full_name: "Jeffrey James",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1934-05-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Connor Hammond",
+    full_name: "Connor Hammond",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2001-11-15"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Natalie Buckley",
+    full_name: "Natalie Buckley",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1938-11-22"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Rodgers",
+    full_name: "Sarah Rodgers",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2014-01-16"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Lewis",
+    full_name: "Sarah Lewis",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1949-10-20"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Leon",
+    full_name: "Ashley Leon",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1946-04-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brian Carter",
+    full_name: "Brian Carter",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2020-04-27"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shelley Smith",
+    full_name: "Shelley Smith",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1925-02-11"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Roberta Ortega",
+    full_name: "Roberta Ortega",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1948-08-23"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexis Gonzalez DVM",
+    full_name: "Alexis Gonzalez DVM",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2021-04-24"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Crystal Montgomery",
+    full_name: "Crystal Montgomery",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1938-08-16"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Johnson",
+    full_name: "Melissa Johnson",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1970-06-06"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Holt",
+    full_name: "Jennifer Holt",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1959-12-08"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Sims",
+    full_name: "John Sims",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1986-03-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erik Mann",
+    full_name: "Erik Mann",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1951-03-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jacob Jones",
+    full_name: "Jacob Jones",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1988-10-21"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Todd Martinez MD",
+    full_name: "Todd Martinez MD",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1950-12-12"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Chad Arnold",
+    full_name: "Chad Arnold",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1946-03-26"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shelby Carson",
+    full_name: "Shelby Carson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1968-02-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Powell",
+    full_name: "Anthony Powell",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1991-11-11"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Leslie Jones",
+    full_name: "Leslie Jones",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1953-03-12"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Casey Hunter",
+    full_name: "Casey Hunter",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2007-05-17"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joe Jackson",
+    full_name: "Joe Jackson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1973-04-22"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gina Suarez",
+    full_name: "Gina Suarez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2019-08-26"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Hunter",
+    full_name: "Brandon Hunter",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1927-01-02"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Burch MD",
+    full_name: "Kevin Burch MD",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2014-04-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Lewis",
+    full_name: "Jennifer Lewis",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1925-07-07"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Hunt",
+    full_name: "Anthony Hunt",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2002-05-19"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rebecca Tyler",
+    full_name: "Rebecca Tyler",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1938-11-15"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Martinez",
+    full_name: "Heather Martinez",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2018-04-24"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jackie Hansen",
+    full_name: "Jackie Hansen",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2007-02-11"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ralph Medina",
+    full_name: "Ralph Medina",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2020-12-21"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristi Johnson",
+    full_name: "Kristi Johnson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1990-05-27"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jonathan Carter",
+    full_name: "Jonathan Carter",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2015-01-28"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Mahoney",
+    full_name: "Timothy Mahoney",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1952-06-01"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Collins",
+    full_name: "Kevin Collins",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1953-01-08"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Jackson",
+    full_name: "Kimberly Jackson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2015-03-11"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Susan Pace DDS",
+    full_name: "Dr. Susan Pace DDS",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1991-02-06"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jacqueline Krause",
+    full_name: "Jacqueline Krause",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1975-08-15"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Catherine Johnston",
+    full_name: "Catherine Johnston",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1934-07-31"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandi Carter",
+    full_name: "Brandi Carter",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1944-10-23"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Garrett",
+    full_name: "Nicholas Garrett",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1945-01-20"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Madison Marshall",
+    full_name: "Madison Marshall",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1993-05-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Stewart",
+    full_name: "Melissa Stewart",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1933-01-08"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Mcmillan",
+    full_name: "James Mcmillan",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1984-06-24"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Elliott",
+    full_name: "Jessica Elliott",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1978-05-30"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Albert Martin",
+    full_name: "Albert Martin",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1929-06-25"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Sanford",
+    full_name: "Hannah Sanford",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1953-06-29"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Johnson",
+    full_name: "Christopher Johnson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1940-02-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Emily Miranda",
+    full_name: "Emily Miranda",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1993-09-30"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Bradley Burton",
+    full_name: "Mr. Bradley Burton",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1954-05-29"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Latasha Ramos",
+    full_name: "Latasha Ramos",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1955-07-15"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Wagner",
+    full_name: "Christopher Wagner",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1982-09-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debbie Rivera",
+    full_name: "Debbie Rivera",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1957-12-08"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marilyn Simmons",
+    full_name: "Marilyn Simmons",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1952-09-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Norman Garcia",
+    full_name: "Norman Garcia",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1927-02-09"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sabrina Sanchez",
+    full_name: "Sabrina Sanchez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1991-12-16"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Brown",
+    full_name: "Mark Brown",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1954-03-14"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Beverly Ayala",
+    full_name: "Beverly Ayala",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2010-07-23"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Lee",
+    full_name: "James Lee",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1940-01-30"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Foster",
+    full_name: "Kevin Foster",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1942-08-30"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cynthia Lewis",
+    full_name: "Cynthia Lewis",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1992-05-27"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dalton Acosta",
+    full_name: "Dalton Acosta",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2007-03-19"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Vickie Potter",
+    full_name: "Vickie Potter",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1928-09-02"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristy Campbell",
+    full_name: "Kristy Campbell",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1940-08-10"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gilbert Miller",
+    full_name: "Gilbert Miller",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1934-11-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nichole Conrad",
+    full_name: "Nichole Conrad",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1940-05-04"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michele Barker",
+    full_name: "Michele Barker",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1948-04-24"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joel Blackwell",
+    full_name: "Joel Blackwell",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1932-03-14"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Whitney Bass",
+    full_name: "Whitney Bass",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2020-06-14"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Hoffman",
+    full_name: "William Hoffman",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2022-11-15"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Palmer",
+    full_name: "Benjamin Palmer",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1990-06-25"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Casey Gallegos",
+    full_name: "Casey Gallegos",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1979-02-18"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Dalton",
+    full_name: "Andrew Dalton",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2016-03-14"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Russell Watson",
+    full_name: "Russell Watson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1924-09-15"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Taylor",
+    full_name: "Robert Taylor",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2005-01-16"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Larry Kelly",
+    full_name: "Larry Kelly",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1984-08-03"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Dorsey",
+    full_name: "Michelle Dorsey",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1952-07-08"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Whitney Castillo",
+    full_name: "Whitney Castillo",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1982-10-19"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ronald Davis",
+    full_name: "Ronald Davis",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1981-11-05"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Emily Kennedy",
+    full_name: "Emily Kennedy",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2021-10-04"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tom Skinner",
+    full_name: "Tom Skinner",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1955-05-12"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sean Stein",
+    full_name: "Sean Stein",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1941-10-22"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Molly Stark",
+    full_name: "Molly Stark",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1948-03-18"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Howard MD",
+    full_name: "Robert Howard MD",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1986-07-28"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Perry",
+    full_name: "William Perry",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1955-11-17"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stacey Davis",
+    full_name: "Stacey Davis",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2014-04-04"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Angela Gonzalez",
+    full_name: "Angela Gonzalez",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1999-01-19"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Brewer DVM",
+    full_name: "Lisa Brewer DVM",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2004-12-22"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jodi Mejia",
+    full_name: "Jodi Mejia",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1994-05-07"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Colleen Cantu",
+    full_name: "Colleen Cantu",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1932-10-22"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sandra Dorsey DDS",
+    full_name: "Sandra Dorsey DDS",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1936-08-27"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Miguel Cowan",
+    full_name: "Miguel Cowan",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1976-05-17"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hailey Villanueva",
+    full_name: "Hailey Villanueva",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2018-08-14"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dennis Morris",
+    full_name: "Dennis Morris",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1975-10-05"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Brown",
+    full_name: "Joseph Brown",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1977-02-17"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Audrey Wilcox",
+    full_name: "Audrey Wilcox",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1951-03-07"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Roberts",
+    full_name: "Brittany Roberts",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2017-05-01"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Young",
+    full_name: "Melissa Young",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1960-01-08"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Becky Martinez",
+    full_name: "Becky Martinez",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1947-10-31"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sandra Wade",
+    full_name: "Sandra Wade",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1967-07-19"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Pollard",
+    full_name: "Timothy Pollard",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1977-07-08"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gary Baker",
+    full_name: "Gary Baker",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1930-04-26"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Marquez",
+    full_name: "Michael Marquez",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1964-10-10"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kayla Johns",
+    full_name: "Kayla Johns",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1980-02-02"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erik Moreno",
+    full_name: "Erik Moreno",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1969-08-26"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Obrien",
+    full_name: "Edward Obrien",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1943-11-19"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Harmon",
+    full_name: "Julie Harmon",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1971-01-10"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Rivera Jr.",
+    full_name: "Joseph Rivera Jr.",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1940-10-26"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathy Carter",
+    full_name: "Kathy Carter",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2009-11-21"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Theresa Clark",
+    full_name: "Theresa Clark",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2011-08-04"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Thompson IV",
+    full_name: "William Thompson IV",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1946-04-16"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lori Caldwell",
+    full_name: "Lori Caldwell",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1982-07-13"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Williams",
+    full_name: "James Williams",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1972-12-08"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Wendy Gray",
+    full_name: "Wendy Gray",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1954-03-30"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Brown",
+    full_name: "Stephanie Brown",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1938-12-28"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Linda Benton",
+    full_name: "Linda Benton",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2023-06-26"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Megan Villanueva",
+    full_name: "Megan Villanueva",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1964-05-05"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristen Allen",
+    full_name: "Kristen Allen",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1994-12-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Roger Smith",
+    full_name: "Roger Smith",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1950-06-18"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christian Winters",
+    full_name: "Christian Winters",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1963-10-27"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patricia Cooper",
+    full_name: "Patricia Cooper",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2015-03-02"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jose Johnston",
+    full_name: "Jose Johnston",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1927-04-22"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly Little",
+    full_name: "Kelly Little",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1997-09-09"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Reeves",
+    full_name: "Mark Reeves",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1980-06-26"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Leon",
+    full_name: "Ashley Leon",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1948-06-29"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Heath",
+    full_name: "Edward Heath",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1968-04-14"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Solis",
+    full_name: "Michelle Solis",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1986-12-04"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kurt Bailey",
+    full_name: "Kurt Bailey",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1996-07-26"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alex Adams",
+    full_name: "Alex Adams",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1931-01-25"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tina Howell",
+    full_name: "Tina Howell",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1951-09-12"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christine Robbins",
+    full_name: "Christine Robbins",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1979-09-25"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ray Gray",
+    full_name: "Ray Gray",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1971-07-03"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Natasha Benson",
+    full_name: "Natasha Benson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1939-01-06"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Luis Becker",
+    full_name: "Luis Becker",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1940-07-06"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Horne DVM",
+    full_name: "Ashley Horne DVM",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1993-12-06"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Charles Sandoval",
+    full_name: "Charles Sandoval",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1987-01-17"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sharon Booth",
+    full_name: "Sharon Booth",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2005-10-18"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Gibson",
+    full_name: "Christopher Gibson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1945-12-29"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sandy French",
+    full_name: "Sandy French",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1947-02-02"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Chan",
+    full_name: "Daniel Chan",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1940-12-22"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erica Hughes",
+    full_name: "Erica Hughes",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1990-03-19"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Chad Wilson",
+    full_name: "Chad Wilson",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1947-09-23"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Reed",
+    full_name: "Joseph Reed",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1986-10-10"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Davis",
+    full_name: "Joshua Davis",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2012-02-19"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mrs. Amy Parker",
+    full_name: "Mrs. Amy Parker",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2019-11-06"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Hopkins",
+    full_name: "Lisa Hopkins",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1944-11-23"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brett Mueller",
+    full_name: "Brett Mueller",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1945-06-04"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Randy Scott",
+    full_name: "Mr. Randy Scott",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1999-08-29"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Harris",
+    full_name: "Julie Harris",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1961-12-04"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha Dorsey",
+    full_name: "Samantha Dorsey",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2006-04-08"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Garcia",
+    full_name: "Joshua Garcia",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1998-12-17"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Janet Lopez",
+    full_name: "Janet Lopez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1962-12-15"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Crawford",
+    full_name: "Joseph Crawford",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1970-01-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Santiago",
+    full_name: "Stephanie Santiago",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1938-03-13"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Weaver",
+    full_name: "Lisa Weaver",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1973-07-18"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katherine Martin",
+    full_name: "Katherine Martin",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1974-04-02"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joe Ramsey",
+    full_name: "Joe Ramsey",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1999-03-12"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Nunez",
+    full_name: "Danielle Nunez",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1987-06-11"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Thompson",
+    full_name: "Melissa Thompson",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1997-04-02"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tiffany Wagner",
+    full_name: "Tiffany Wagner",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2004-12-02"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Keith Henry",
+    full_name: "Keith Henry",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1967-10-15"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Nicholson",
+    full_name: "Michael Nicholson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1950-10-17"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Austin",
+    full_name: "Joseph Austin",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1953-04-19"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Veronica Bryant",
+    full_name: "Veronica Bryant",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1964-01-19"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Taylor Knox DDS",
+    full_name: "Taylor Knox DDS",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1959-04-09"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Victoria Lewis",
+    full_name: "Victoria Lewis",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1946-11-01"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paige Jimenez",
+    full_name: "Paige Jimenez",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1936-10-26"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tammy Silva",
+    full_name: "Tammy Silva",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1951-11-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Hamilton",
+    full_name: "David Hamilton",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1936-09-18"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erica Carlson",
+    full_name: "Erica Carlson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1954-12-19"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ronald Perry",
+    full_name: "Ronald Perry",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2004-09-18"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Connie Hall",
+    full_name: "Connie Hall",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2013-10-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Charles Erickson",
+    full_name: "Charles Erickson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2024-03-02"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Carey",
+    full_name: "Michael Carey",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1968-06-05"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jake Bell",
+    full_name: "Jake Bell",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2023-01-25"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Geoffrey Hernandez",
+    full_name: "Geoffrey Hernandez",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1979-10-18"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Moore",
+    full_name: "Sarah Moore",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1952-12-13"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dennis Miller",
+    full_name: "Dennis Miller",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1949-06-29"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Jackson",
+    full_name: "John Jackson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1977-01-04"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Lynn",
+    full_name: "Jennifer Lynn",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1962-07-26"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lauren Hughes",
+    full_name: "Lauren Hughes",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2003-08-15"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Hernandez",
+    full_name: "Tyler Hernandez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2021-06-12"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Wood",
+    full_name: "Jason Wood",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1998-11-04"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Campbell",
+    full_name: "Heather Campbell",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1947-10-14"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cindy Hopkins",
+    full_name: "Cindy Hopkins",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1942-02-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Mcintosh",
+    full_name: "Rachel Mcintosh",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2016-01-12"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Rodriguez",
+    full_name: "Timothy Rodriguez",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1983-11-24"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Krista Bowman",
+    full_name: "Krista Bowman",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1987-08-04"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amber Davidson",
+    full_name: "Amber Davidson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1986-10-28"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Randall Schroeder",
+    full_name: "Randall Schroeder",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1973-08-25"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erica Howell",
+    full_name: "Erica Howell",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1988-06-14"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Miller",
+    full_name: "Jennifer Miller",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1938-06-07"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Reid",
+    full_name: "Mark Reid",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2005-02-10"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ethan Hughes",
+    full_name: "Ethan Hughes",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1970-08-22"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rodney Gutierrez",
+    full_name: "Rodney Gutierrez",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1987-01-02"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jaclyn Kramer",
+    full_name: "Jaclyn Kramer",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2022-10-27"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Molly Dominguez",
+    full_name: "Molly Dominguez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1993-12-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Roberts",
+    full_name: "Nicole Roberts",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1953-12-26"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald Browning",
+    full_name: "Donald Browning",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1972-08-27"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Megan Goodman",
+    full_name: "Megan Goodman",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1952-03-03"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Helen Anderson",
+    full_name: "Helen Anderson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2022-08-30"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Craig Cruz",
+    full_name: "Craig Cruz",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1940-05-20"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christine Ochoa",
+    full_name: "Christine Ochoa",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2021-04-25"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Weber",
+    full_name: "Christopher Weber",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1957-05-07"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Guerrero",
+    full_name: "Anthony Guerrero",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2000-01-12"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Casey",
+    full_name: "Andrew Casey",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2021-06-18"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Lopez",
+    full_name: "Jeffrey Lopez",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2023-01-27"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Foster",
+    full_name: "Daniel Foster",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1990-09-15"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Faith Whitehead",
+    full_name: "Faith Whitehead",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1982-12-22"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stacey Johnson",
+    full_name: "Stacey Johnson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1938-06-08"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Wilson",
+    full_name: "William Wilson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2019-01-01"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathryn Chapman",
+    full_name: "Kathryn Chapman",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1977-04-21"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kiara Thompson",
+    full_name: "Kiara Thompson",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1932-10-24"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erin Collins",
+    full_name: "Erin Collins",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1941-04-24"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Harold Holt",
+    full_name: "Harold Holt",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1993-11-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Cummings",
+    full_name: "William Cummings",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1940-11-10"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Catherine Nelson DDS",
+    full_name: "Catherine Nelson DDS",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1962-12-29"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jamie Payne",
+    full_name: "Jamie Payne",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1932-02-20"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Carr",
+    full_name: "Matthew Carr",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1972-02-04"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sierra Wilson",
+    full_name: "Sierra Wilson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2010-09-29"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Weber",
+    full_name: "John Weber",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1924-10-11"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Philip Carroll",
+    full_name: "Philip Carroll",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1953-11-20"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Kirby",
+    full_name: "Robert Kirby",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1963-06-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ellen Guzman",
+    full_name: "Ellen Guzman",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1982-03-09"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Sullivan",
+    full_name: "Thomas Sullivan",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1991-07-30"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paula Sellers DDS",
+    full_name: "Paula Sellers DDS",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1964-07-12"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jesse Brown",
+    full_name: "Jesse Brown",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1958-01-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Taylor",
+    full_name: "Kimberly Taylor",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2009-11-18"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly Brewer",
+    full_name: "Kelly Brewer",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1982-12-31"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Taylor",
+    full_name: "Ryan Taylor",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1978-08-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Leonard",
+    full_name: "Michael Leonard",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1924-12-02"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Daniel Bailey",
+    full_name: "Daniel Bailey",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2002-01-02"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nathaniel Johnson",
+    full_name: "Nathaniel Johnson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2013-03-13"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alison Matthews",
+    full_name: "Alison Matthews",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2002-01-22"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Denise Jones",
+    full_name: "Denise Jones",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1995-10-22"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Stevenson",
+    full_name: "Brandon Stevenson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2021-07-27"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Long",
+    full_name: "Brandon Long",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1933-02-17"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laurie Young",
+    full_name: "Laurie Young",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2020-02-25"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Booth MD",
+    full_name: "Lisa Booth MD",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2020-02-17"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Freeman",
+    full_name: "Michelle Freeman",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1985-01-03"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tracy Tucker",
+    full_name: "Tracy Tucker",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1940-11-21"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lee Ford",
+    full_name: "Lee Ford",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1993-02-05"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brian Mercer",
+    full_name: "Brian Mercer",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1948-06-14"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Anthony",
+    full_name: "Rachel Anthony",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1960-05-17"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Lewis",
+    full_name: "Stephanie Lewis",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2017-12-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sheila Garcia",
+    full_name: "Sheila Garcia",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1929-11-24"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Reilly",
+    full_name: "Edward Reilly",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1929-08-28"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary Hill",
+    full_name: "Mary Hill",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1978-10-06"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sean Beard",
+    full_name: "Sean Beard",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2004-11-04"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Green",
+    full_name: "Joseph Green",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2016-07-10"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Kim MD",
+    full_name: "William Kim MD",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1958-05-25"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Thompson",
+    full_name: "Robert Thompson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1987-12-07"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Sarah Lee",
+    full_name: "Dr. Sarah Lee",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2004-09-01"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michaela Rogers",
+    full_name: "Michaela Rogers",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2016-03-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Ball",
+    full_name: "Danielle Ball",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1998-01-22"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Edward Russo",
+    full_name: "Edward Russo",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1961-06-27"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Church",
+    full_name: "Heather Church",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2022-12-01"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Obrien",
+    full_name: "Jennifer Obrien",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2011-07-21"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Burns",
+    full_name: "Kimberly Burns",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1928-04-05"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Morris",
+    full_name: "Sarah Morris",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1926-10-18"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jamie Burton",
+    full_name: "Jamie Burton",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2019-08-15"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patrick Raymond",
+    full_name: "Patrick Raymond",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1986-01-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Meagan Lambert DDS",
+    full_name: "Meagan Lambert DDS",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1986-01-11"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Davis",
+    full_name: "Jennifer Davis",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1924-12-05"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Hall",
+    full_name: "William Hall",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1957-07-05"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Harold Griffin",
+    full_name: "Harold Griffin",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2006-01-15"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dana Chavez",
+    full_name: "Dana Chavez",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1931-08-21"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Brown",
+    full_name: "John Brown",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2018-11-10"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brenda Marks",
+    full_name: "Brenda Marks",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2008-07-22"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tony Hill",
+    full_name: "Tony Hill",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2010-10-03"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Mcintosh",
+    full_name: "Nicole Mcintosh",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2012-05-12"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Bell",
+    full_name: "Benjamin Bell",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1989-11-26"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lauren Dalton",
+    full_name: "Lauren Dalton",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1979-08-16"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Greene",
+    full_name: "David Greene",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2015-12-14"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brianna Pineda",
+    full_name: "Brianna Pineda",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("2013-05-12"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cassandra Poole",
+    full_name: "Cassandra Poole",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1987-05-23"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Valerie Wong",
+    full_name: "Valerie Wong",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1975-07-24"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Victor White",
+    full_name: "Victor White",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1928-11-03"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Simon",
+    full_name: "Elizabeth Simon",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1976-09-17"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marie Lane",
+    full_name: "Marie Lane",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1961-01-13"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anna Sandoval",
+    full_name: "Anna Sandoval",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2000-04-18"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ruth Cruz",
+    full_name: "Ruth Cruz",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1980-07-20"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Cardenas IV",
+    full_name: "David Cardenas IV",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1957-10-09"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cory Fields",
+    full_name: "Cory Fields",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1976-03-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gary Peterson",
+    full_name: "Gary Peterson",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2022-09-19"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lori Ashley",
+    full_name: "Lori Ashley",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1960-05-30"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christina Lewis",
+    full_name: "Christina Lewis",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1976-10-19"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michelle Taylor",
+    full_name: "Michelle Taylor",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2013-01-31"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Johnson",
+    full_name: "Brittany Johnson",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2003-02-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Snyder",
+    full_name: "David Snyder",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1941-12-28"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Valentine",
+    full_name: "Robert Valentine",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1981-09-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Laura Jones",
+    full_name: "Laura Jones",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1978-09-10"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ronald Collins",
+    full_name: "Ronald Collins",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2022-02-15"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Wright",
+    full_name: "Eric Wright",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1988-06-25"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Rodriguez",
+    full_name: "Richard Rodriguez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2002-03-26"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Karen Baker",
+    full_name: "Karen Baker",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1988-04-16"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Janet Foster",
+    full_name: "Janet Foster",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1968-08-09"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Courtney Huang",
+    full_name: "Courtney Huang",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1940-09-03"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Graham",
+    full_name: "Ashley Graham",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2000-04-24"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tiffany Richardson",
+    full_name: "Tiffany Richardson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1977-02-23"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brent Johnson",
+    full_name: "Brent Johnson",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1925-06-14"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Fleming",
+    full_name: "Michael Fleming",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1938-04-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexis Everett",
+    full_name: "Alexis Everett",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2005-08-20"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Regina Brennan",
+    full_name: "Regina Brennan",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1936-04-02"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bryan Lloyd",
+    full_name: "Bryan Lloyd",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1976-06-13"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Margaret Medina",
+    full_name: "Margaret Medina",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1979-03-17"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrea Smith",
+    full_name: "Andrea Smith",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1957-01-15"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Harris",
+    full_name: "Mark Harris",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1991-04-09"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Jones",
+    full_name: "Stephanie Jones",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1955-09-05"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Roger Newman",
+    full_name: "Roger Newman",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2011-03-05"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Miller",
+    full_name: "James Miller",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2013-12-28"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Virginia Henry",
+    full_name: "Virginia Henry",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2012-03-17"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katrina Mendez",
+    full_name: "Katrina Mendez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1926-08-18"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Medina",
+    full_name: "William Medina",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1982-06-06"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeff Davidson",
+    full_name: "Jeff Davidson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1937-02-08"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Sandoval",
+    full_name: "Joshua Sandoval",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1943-10-28"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lee Martinez",
+    full_name: "Lee Martinez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1926-08-20"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Guy Parker",
+    full_name: "Guy Parker",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1988-03-31"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary Rios",
+    full_name: "Mary Rios",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1959-10-31"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Hardin",
+    full_name: "Joshua Hardin",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1944-11-25"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Monica Blair",
+    full_name: "Monica Blair",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1993-04-20"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Levi Fitzgerald",
+    full_name: "Levi Fitzgerald",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1988-03-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Holt",
+    full_name: "Jessica Holt",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2001-12-28"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Johnson",
+    full_name: "Brandon Johnson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1955-01-24"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Castillo",
+    full_name: "Rachel Castillo",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1961-11-12"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Johnson",
+    full_name: "Danielle Johnson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2014-12-28"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jane Nelson",
+    full_name: "Jane Nelson",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1999-09-14"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Esparza",
+    full_name: "Michael Esparza",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1925-10-07"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cynthia Frazier",
+    full_name: "Cynthia Frazier",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1958-04-07"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rita Greene",
+    full_name: "Rita Greene",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1956-06-21"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeremiah Sanders",
+    full_name: "Jeremiah Sanders",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1997-10-25"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald White",
+    full_name: "Donald White",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2018-08-31"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gail Rodriguez",
+    full_name: "Gail Rodriguez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1955-11-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandy Davis",
+    full_name: "Brandy Davis",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1955-10-20"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melinda Larsen",
+    full_name: "Melinda Larsen",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1943-03-16"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Leslie James",
+    full_name: "Leslie James",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1945-05-27"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Moore",
+    full_name: "Jason Moore",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1983-05-16"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tammy Mendoza",
+    full_name: "Tammy Mendoza",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1982-09-01"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Smith",
+    full_name: "David Smith",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1945-03-09"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Booker",
+    full_name: "Eric Booker",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1972-08-23"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gregory Ruiz",
+    full_name: "Gregory Ruiz",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1955-10-10"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Swanson",
+    full_name: "Michael Swanson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1926-11-13"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Destiny Sloan",
+    full_name: "Destiny Sloan",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1948-09-29"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Miller",
+    full_name: "Julie Miller",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1943-12-29"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathleen Marsh",
+    full_name: "Kathleen Marsh",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1973-12-04"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Kelly",
+    full_name: "Stephanie Kelly",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1924-08-05"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Vega",
+    full_name: "Robert Vega",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1942-07-06"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jacob Smith",
+    full_name: "Jacob Smith",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1999-08-19"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Maynard",
+    full_name: "Nicole Maynard",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2018-04-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lindsey Holt",
+    full_name: "Lindsey Holt",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1952-10-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patricia Rodriguez",
+    full_name: "Patricia Rodriguez",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1970-10-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Zoe Duke",
+    full_name: "Zoe Duke",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1951-09-06"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Barbara Brown",
+    full_name: "Barbara Brown",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1970-02-25"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Shaw",
+    full_name: "Tyler Shaw",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1971-12-23"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Mcdaniel",
+    full_name: "John Mcdaniel",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1991-03-26"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tracy May",
+    full_name: "Tracy May",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1996-07-11"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Barnett",
+    full_name: "Jessica Barnett",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1993-05-16"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Barbara Fuentes",
+    full_name: "Barbara Fuentes",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1961-09-22"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Wilson",
+    full_name: "Jessica Wilson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1992-05-20"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shannon Price",
+    full_name: "Shannon Price",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2018-10-23"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jesse Johnson",
+    full_name: "Jesse Johnson",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2005-02-21"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kathy Huynh",
+    full_name: "Kathy Huynh",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1986-04-14"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Seth Martinez PhD",
+    full_name: "Seth Martinez PhD",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1983-05-26"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Harris",
+    full_name: "Rachel Harris",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1977-07-21"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marissa Miller",
+    full_name: "Marissa Miller",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1939-07-11"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephen Ochoa",
+    full_name: "Stephen Ochoa",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1947-06-30"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ms. April Thomas",
+    full_name: "Ms. April Thomas",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1928-09-03"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicole Gonzales",
+    full_name: "Nicole Gonzales",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1986-01-26"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald Velazquez",
+    full_name: "Donald Velazquez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1931-06-30"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Johnson",
+    full_name: "Michael Johnson",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1989-05-01"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Moore",
+    full_name: "Aaron Moore",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1998-10-03"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Kent",
+    full_name: "Amanda Kent",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1963-12-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Thomas",
+    full_name: "Benjamin Thomas",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1950-03-21"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Sullivan",
+    full_name: "John Sullivan",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1926-03-18"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gregory Martin",
+    full_name: "Gregory Martin",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2002-03-23"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jose Montoya",
+    full_name: "Jose Montoya",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1993-08-09"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christian Fleming",
+    full_name: "Christian Fleming",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1979-06-08"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Washington",
+    full_name: "Julie Washington",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1936-02-21"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Simmons",
+    full_name: "Nicholas Simmons",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2004-10-23"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Pamela Glover",
+    full_name: "Pamela Glover",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1940-09-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Theresa Gonzalez",
+    full_name: "Theresa Gonzalez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1945-08-09"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Lutz",
+    full_name: "Eric Lutz",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1959-08-18"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marcus Whitaker",
+    full_name: "Marcus Whitaker",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1942-06-25"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Hood",
+    full_name: "Christopher Hood",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1999-06-01"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Martha Smith",
+    full_name: "Martha Smith",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1931-11-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alex Moss",
+    full_name: "Alex Moss",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2016-10-09"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katherine Moore PhD",
+    full_name: "Katherine Moore PhD",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2016-02-23"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexis Pittman",
+    full_name: "Alexis Pittman",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2001-10-13"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Thompson",
+    full_name: "Nicholas Thompson",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2023-06-17"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexis Smith",
+    full_name: "Alexis Smith",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2010-09-06"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Kelly",
+    full_name: "Brandon Kelly",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2020-12-15"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shannon Tran",
+    full_name: "Shannon Tran",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1983-06-01"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kirk Brown",
+    full_name: "Kirk Brown",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1969-11-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jesse Jacobs",
+    full_name: "Jesse Jacobs",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1999-11-06"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Darrell Sanders",
+    full_name: "Darrell Sanders",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1958-10-20"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Breanna Jennings",
+    full_name: "Breanna Jennings",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2014-12-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Renee Harris",
+    full_name: "Renee Harris",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1977-01-04"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Darlene Snyder",
+    full_name: "Darlene Snyder",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2016-07-10"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Miles Jr.",
+    full_name: "Ryan Miles Jr.",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1984-04-07"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Guerrero",
+    full_name: "Joseph Guerrero",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2023-04-29"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gina Beard",
+    full_name: "Gina Beard",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1975-11-04"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Lane",
+    full_name: "Robert Lane",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1956-07-01"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tiffany Hansen",
+    full_name: "Tiffany Hansen",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2016-05-03"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tina Pugh",
+    full_name: "Tina Pugh",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1971-03-25"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Reyes",
+    full_name: "Christopher Reyes",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2018-12-19"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Nguyen",
+    full_name: "Mark Nguyen",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1965-01-17"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Hernandez",
+    full_name: "Matthew Hernandez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1948-02-19"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Velasquez",
+    full_name: "Amy Velasquez",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1956-01-07"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mackenzie Jones",
+    full_name: "Mackenzie Jones",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1971-05-25"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brittany Ballard",
+    full_name: "Brittany Ballard",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2017-06-29"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Zachary Soto",
+    full_name: "Zachary Soto",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2013-04-03"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dean Duffy",
+    full_name: "Dean Duffy",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1975-11-04"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Aguilar",
+    full_name: "Aaron Aguilar",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1973-01-31"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Thomas Snyder",
+    full_name: "Thomas Snyder",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1942-01-18"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Darlene Harris",
+    full_name: "Darlene Harris",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1954-12-04"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paula Ellis",
+    full_name: "Paula Ellis",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1991-02-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Taylor",
+    full_name: "Eric Taylor",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1945-01-30"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mckenzie Owens",
+    full_name: "Mckenzie Owens",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1959-10-10"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Brooks",
+    full_name: "Danielle Brooks",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1931-10-21"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Simmons",
+    full_name: "Lisa Simmons",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1993-01-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debbie Rivas",
+    full_name: "Debbie Rivas",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1976-12-04"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bryan Jackson",
+    full_name: "Bryan Jackson",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2003-02-20"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Spears",
+    full_name: "Eric Spears",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2004-08-28"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kayla Morton",
+    full_name: "Kayla Morton",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1981-09-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Compton",
+    full_name: "Lisa Compton",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1984-12-16"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Mejia",
+    full_name: "Jennifer Mejia",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2018-03-04"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Wilson",
+    full_name: "Jennifer Wilson",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2010-12-15"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Whitney Hunt DDS",
+    full_name: "Whitney Hunt DDS",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1943-09-19"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Devin White MD",
+    full_name: "Dr. Devin White MD",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2009-12-29"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Taylor Butler",
+    full_name: "Taylor Butler",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1968-02-28"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Nelson",
+    full_name: "Nicholas Nelson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2023-07-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tabitha Evans",
+    full_name: "Tabitha Evans",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1988-10-16"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Derek Everett",
+    full_name: "Derek Everett",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1987-03-06"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Jones",
+    full_name: "Aaron Jones",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1989-10-16"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Rodriguez",
+    full_name: "Michael Rodriguez",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1992-08-23"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brad Mullins",
+    full_name: "Brad Mullins",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1962-01-16"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin Daniels",
+    full_name: "Justin Daniels",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1954-01-25"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Flowers",
+    full_name: "Robert Flowers",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1968-09-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha White",
+    full_name: "Samantha White",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2006-05-31"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lance Gonzales",
+    full_name: "Lance Gonzales",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1972-12-30"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cynthia Smith",
+    full_name: "Cynthia Smith",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2023-06-24"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Catherine Patterson",
+    full_name: "Catherine Patterson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1986-07-23"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katelyn Briggs",
+    full_name: "Katelyn Briggs",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1948-11-03"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Catherine Middleton",
+    full_name: "Catherine Middleton",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1963-11-05"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Bridges",
+    full_name: "Matthew Bridges",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1967-08-15"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Martinez",
+    full_name: "James Martinez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1969-05-22"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Jones",
+    full_name: "Nicholas Jones",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1967-06-29"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christian Johnson",
+    full_name: "Christian Johnson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1990-08-08"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Miranda Dunn",
+    full_name: "Miranda Dunn",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1979-03-14"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Corey Nelson",
+    full_name: "Corey Nelson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1971-12-14"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Stewart",
+    full_name: "Elizabeth Stewart",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1990-07-28"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Arellano",
+    full_name: "Michael Arellano",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1967-10-13"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Briana Evans",
+    full_name: "Briana Evans",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1950-02-15"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tracey Matthews",
+    full_name: "Tracey Matthews",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1927-04-05"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sheila Carpenter",
+    full_name: "Sheila Carpenter",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("2005-08-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Aaron Moore",
+    full_name: "Aaron Moore",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2012-08-30"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Watkins",
+    full_name: "Jennifer Watkins",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2012-11-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Raven French",
+    full_name: "Raven French",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1995-08-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Green",
+    full_name: "Joseph Green",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1990-05-17"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Craig",
+    full_name: "Susan Craig",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1935-10-01"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Anderson",
+    full_name: "David Anderson",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1975-03-04"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Holly Malone",
+    full_name: "Holly Malone",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2007-08-22"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Foster",
+    full_name: "Kenneth Foster",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1937-09-25"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sharon Hampton",
+    full_name: "Sharon Hampton",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1936-05-02"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Lewis",
+    full_name: "Ashley Lewis",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1999-06-16"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Green",
+    full_name: "Melissa Green",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1967-01-21"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joshua Garcia",
+    full_name: "Joshua Garcia",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1929-11-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shawn Fowler",
+    full_name: "Shawn Fowler",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("2013-09-22"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandon Watson",
+    full_name: "Brandon Watson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1989-01-31"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Clarence Brown",
+    full_name: "Clarence Brown",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2007-07-08"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Knight",
+    full_name: "Matthew Knight",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1981-02-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Underwood",
+    full_name: "John Underwood",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1998-07-30"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Casey Carter",
+    full_name: "Casey Carter",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1952-06-12"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Luis Cooper",
+    full_name: "Luis Cooper",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1996-12-22"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Miss Samantha Taylor",
+    full_name: "Miss Samantha Taylor",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1954-10-15"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Noah Palmer",
+    full_name: "Noah Palmer",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1954-07-30"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Le",
+    full_name: "Stephanie Le",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1958-05-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kyle Orozco",
+    full_name: "Kyle Orozco",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1964-07-02"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debra Chandler",
+    full_name: "Debra Chandler",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1977-01-22"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dakota Mitchell",
+    full_name: "Dakota Mitchell",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1932-04-12"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dean Wise",
+    full_name: "Dean Wise",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1969-03-05"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dawn Butler",
+    full_name: "Dawn Butler",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1947-09-02"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Katherine Patterson",
+    full_name: "Katherine Patterson",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1947-06-05"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amanda Young",
+    full_name: "Amanda Young",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1988-12-20"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristin King",
+    full_name: "Kristin King",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1925-12-29"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Caitlin Moss",
+    full_name: "Caitlin Moss",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1971-02-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Vasquez",
+    full_name: "Amy Vasquez",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1995-06-26"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shane Tate",
+    full_name: "Shane Tate",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1978-04-20"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Teresa Wright",
+    full_name: "Teresa Wright",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1953-08-02"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Crystal Gonzalez",
+    full_name: "Crystal Gonzalez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1937-12-03"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patrick Bullock",
+    full_name: "Patrick Bullock",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1990-09-05"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Simpson",
+    full_name: "Andrew Simpson",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1940-12-05"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Ryan Lopez DDS",
+    full_name: "Dr. Ryan Lopez DDS",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1943-02-23"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Isaac Hopkins",
+    full_name: "Isaac Hopkins",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1942-05-09"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alex Schwartz",
+    full_name: "Alex Schwartz",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1971-01-17"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Bell",
+    full_name: "Richard Bell",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2019-06-01"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Travis Atkinson",
+    full_name: "Travis Atkinson",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1941-02-01"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tracy Watts",
+    full_name: "Tracy Watts",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2002-12-07"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Jackson",
+    full_name: "James Jackson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2017-11-30"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mrs. Caitlyn Holmes",
+    full_name: "Mrs. Caitlyn Holmes",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1927-03-31"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Ross",
+    full_name: "Kevin Ross",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1984-03-25"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Courtney Rich",
+    full_name: "Courtney Rich",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1988-12-30"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Keith Rose",
+    full_name: "Keith Rose",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("2014-05-16"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Perez",
+    full_name: "Lisa Perez",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2018-04-05"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Deborah Castro",
+    full_name: "Deborah Castro",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1994-04-12"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lindsay Johnson",
+    full_name: "Lindsay Johnson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1930-02-06"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Reilly",
+    full_name: "Robert Reilly",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1937-10-21"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Chan",
+    full_name: "Joseph Chan",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2013-10-16"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Eric Smith",
+    full_name: "Eric Smith",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1989-08-10"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erik Mendez",
+    full_name: "Erik Mendez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1957-12-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Terry",
+    full_name: "Stephanie Terry",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1941-10-31"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandy Sanchez",
+    full_name: "Brandy Sanchez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1960-02-13"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Cook",
+    full_name: "Christopher Cook",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1942-12-06"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristen Prince PhD",
+    full_name: "Kristen Prince PhD",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1938-11-21"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Drew Green",
+    full_name: "Drew Green",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1962-08-22"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Derek Beck",
+    full_name: "Derek Beck",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1930-07-13"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Felicia Rice",
+    full_name: "Felicia Rice",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1943-07-27"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Richards",
+    full_name: "Matthew Richards",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2018-05-08"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Taylor Lewis",
+    full_name: "Taylor Lewis",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1929-06-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Baird",
+    full_name: "Kevin Baird",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2017-01-14"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kara Watkins",
+    full_name: "Kara Watkins",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1925-08-21"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Jackson",
+    full_name: "Michael Jackson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1984-03-14"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Thompson",
+    full_name: "Jeffrey Thompson",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1982-12-09"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jason Weber",
+    full_name: "Jason Weber",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1980-05-04"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Cameron Pennington DDS",
+    full_name: "Dr. Cameron Pennington DDS",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1947-06-25"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Teresa Ryan",
+    full_name: "Teresa Ryan",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1961-05-30"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Cooley",
+    full_name: "Jeffrey Cooley",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1959-04-23"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christina Walker",
+    full_name: "Christina Walker",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1956-11-13"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Hernandez DDS",
+    full_name: "Steven Hernandez DDS",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1946-10-09"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melanie Williams",
+    full_name: "Melanie Williams",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1947-06-14"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sarah Lopez",
+    full_name: "Sarah Lopez",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2000-07-28"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Terry Salazar",
+    full_name: "Terry Salazar",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1982-12-09"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alyssa Fuller",
+    full_name: "Alyssa Fuller",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1979-11-23"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Charles Salinas",
+    full_name: "Charles Salinas",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1969-08-30"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Bridges",
+    full_name: "Robert Bridges",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1942-12-03"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Vazquez",
+    full_name: "Jennifer Vazquez",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2011-02-06"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Amanda Davis",
+    full_name: "Dr. Amanda Davis",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2004-05-22"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Mcclure",
+    full_name: "Robert Mcclure",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1998-12-19"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patty Wilson",
+    full_name: "Patty Wilson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("2005-08-15"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dillon Anderson",
+    full_name: "Dillon Anderson",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1988-09-13"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ariana Drake",
+    full_name: "Ariana Drake",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1951-12-04"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Pierce",
+    full_name: "Heather Pierce",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1935-09-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Emily Moreno",
+    full_name: "Emily Moreno",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1994-12-15"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Nunez",
+    full_name: "Matthew Nunez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("2018-05-18"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Rogers",
+    full_name: "Jeffrey Rogers",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1986-07-13"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrea Heath",
+    full_name: "Andrea Heath",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1977-09-17"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Taylor Fleming",
+    full_name: "Mr. Taylor Fleming",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1985-05-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Palmer",
+    full_name: "Robert Palmer",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1980-02-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly James",
+    full_name: "Kelly James",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1932-11-18"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sara Lara",
+    full_name: "Sara Lara",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1984-02-08"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Spencer",
+    full_name: "Danielle Spencer",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1994-07-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melanie Tran",
+    full_name: "Melanie Tran",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2017-08-02"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melinda Gonzalez",
+    full_name: "Melinda Gonzalez",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1934-02-18"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Luis Sandoval",
+    full_name: "Luis Sandoval",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2014-10-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Thompson",
+    full_name: "Melissa Thompson",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1962-04-16"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gary Holmes",
+    full_name: "Gary Holmes",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1943-05-19"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Peterson",
+    full_name: "Robert Peterson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1980-09-10"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brendan Sawyer",
+    full_name: "Brendan Sawyer",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1984-12-24"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sara Jimenez",
+    full_name: "Sara Jimenez",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1928-11-09"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Greg Moran",
+    full_name: "Greg Moran",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1926-06-15"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Suarez",
+    full_name: "Melissa Suarez",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1933-01-13"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gary Jones",
+    full_name: "Gary Jones",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1939-03-14"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "William Jones",
+    full_name: "William Jones",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1933-11-28"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rhonda Gutierrez",
+    full_name: "Rhonda Gutierrez",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1967-05-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alicia Johnston",
+    full_name: "Alicia Johnston",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("2024-01-20"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nathaniel Page",
+    full_name: "Nathaniel Page",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1966-03-22"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Justin White",
+    full_name: "Justin White",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1985-01-07"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jacob Jensen",
+    full_name: "Jacob Jensen",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1995-06-22"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Rodriguez",
+    full_name: "Joseph Rodriguez",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1970-10-12"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexandria Edwards",
+    full_name: "Alexandria Edwards",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1961-02-22"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christopher Richmond",
+    full_name: "Christopher Richmond",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2002-09-28"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Courtney Green",
+    full_name: "Courtney Green",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("2014-02-05"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joel Martinez",
+    full_name: "Joel Martinez",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("2009-09-09"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Grace Barrett",
+    full_name: "Grace Barrett",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1984-11-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Miranda Mack",
+    full_name: "Miranda Mack",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1927-11-06"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Walker",
+    full_name: "Jeffrey Walker",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1973-08-23"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Eaton",
+    full_name: "Jeffrey Eaton",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2007-02-04"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jose Stephens",
+    full_name: "Jose Stephens",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1984-12-03"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Edwards",
+    full_name: "John Edwards",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1975-01-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa White",
+    full_name: "Melissa White",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2018-04-28"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cynthia Taylor",
+    full_name: "Cynthia Taylor",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1933-12-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "April Perkins MD",
+    full_name: "April Perkins MD",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1996-12-17"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Thornton",
+    full_name: "Jessica Thornton",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2012-09-29"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nathan Petersen PhD",
+    full_name: "Nathan Petersen PhD",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1941-06-07"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Denise Nichols",
+    full_name: "Denise Nichols",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1925-08-21"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hannah Riley",
+    full_name: "Hannah Riley",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1991-11-07"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Sutton",
+    full_name: "Jennifer Sutton",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2012-07-28"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Adam Rogers",
+    full_name: "Adam Rogers",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1983-04-25"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gregg Townsend",
+    full_name: "Gregg Townsend",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1958-03-01"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Maria Hayes",
+    full_name: "Maria Hayes",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1985-12-04"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa West",
+    full_name: "Lisa West",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1983-04-09"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Carrillo",
+    full_name: "Michael Carrillo",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1975-08-30"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dr. Heather Gallagher",
+    full_name: "Dr. Heather Gallagher",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1969-10-01"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Shannon Smith",
+    full_name: "Shannon Smith",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1948-04-02"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexander May",
+    full_name: "Alexander May",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1953-03-09"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kyle Campbell",
+    full_name: "Kyle Campbell",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2018-07-12"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Smith",
+    full_name: "Robert Smith",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1926-07-02"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Scott",
+    full_name: "Kevin Scott",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1947-01-24"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Paul Lopez",
+    full_name: "Paul Lopez",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1928-04-16"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Ellis",
+    full_name: "Elizabeth Ellis",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1987-11-03"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Danielle Stewart",
+    full_name: "Danielle Stewart",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1970-09-27"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Natasha Smith",
+    full_name: "Natasha Smith",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1969-01-06"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amber Lloyd",
+    full_name: "Amber Lloyd",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2013-08-12"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Andrade",
+    full_name: "Kevin Andrade",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1956-03-10"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Greg Miller",
+    full_name: "Greg Miller",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1975-08-19"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debra Robinson",
+    full_name: "Debra Robinson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1958-07-10"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marissa Bentley",
+    full_name: "Marissa Bentley",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1938-02-01"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Rivera",
+    full_name: "John Rivera",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1936-12-06"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joel Ramirez",
+    full_name: "Joel Ramirez",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1963-05-12"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Martha Norman",
+    full_name: "Martha Norman",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1937-08-26"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Ellis",
+    full_name: "Lisa Ellis",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1995-10-24"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andrew Wilkinson",
+    full_name: "Andrew Wilkinson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("1974-07-06"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kelly Nguyen",
+    full_name: "Kelly Nguyen",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2021-12-27"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Richard Wallace",
+    full_name: "Richard Wallace",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1940-02-26"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha Gentry",
+    full_name: "Samantha Gentry",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1972-04-19"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mrs. Crystal Tyler",
+    full_name: "Mrs. Crystal Tyler",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1950-01-08"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Misty Stanley",
+    full_name: "Misty Stanley",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1984-01-25"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brenda Hubbard",
+    full_name: "Brenda Hubbard",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2015-01-02"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Holly Huerta",
+    full_name: "Holly Huerta",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1970-10-20"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Mitchell",
+    full_name: "Jennifer Mitchell",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1963-02-06"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Patrick Hull",
+    full_name: "Patrick Hull",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1990-10-21"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Calvin Parker",
+    full_name: "Calvin Parker",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1995-05-01"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michele Alvarez",
+    full_name: "Michele Alvarez",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1944-09-16"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alexander Mann",
+    full_name: "Alexander Mann",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1982-01-31"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ms. Michelle Gonzalez MD",
+    full_name: "Ms. Michelle Gonzalez MD",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1967-03-11"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Elizabeth Ashley",
+    full_name: "Elizabeth Ashley",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1944-05-12"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Hector Garcia",
+    full_name: "Hector Garcia",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2019-04-30"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Adams",
+    full_name: "Matthew Adams",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2021-02-16"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Robert Wood",
+    full_name: "Robert Wood",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1973-08-04"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Petty",
+    full_name: "Michael Petty",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1937-10-29"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Nelson",
+    full_name: "Kevin Nelson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2012-07-29"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Rivera",
+    full_name: "Joseph Rivera",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1994-11-14"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anna Vincent",
+    full_name: "Anna Vincent",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("2022-09-03"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristen Meyer",
+    full_name: "Kristen Meyer",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1937-11-29"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Megan Parks",
+    full_name: "Megan Parks",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1953-09-22"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lawrence Kaiser",
+    full_name: "Lawrence Kaiser",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1990-12-06"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Steven Dixon",
+    full_name: "Steven Dixon",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("2016-03-11"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Heather Evans",
+    full_name: "Heather Evans",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1944-04-01"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mary White",
+    full_name: "Mary White",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1938-05-07"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Juan Price",
+    full_name: "Juan Price",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1924-08-03"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Gonzalez",
+    full_name: "James Gonzalez",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1931-04-25"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Maldonado",
+    full_name: "Jennifer Maldonado",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1953-10-03"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Monique Roberts",
+    full_name: "Monique Roberts",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1928-06-23"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Vaughn",
+    full_name: "David Vaughn",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1966-05-19"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lisa Hernandez",
+    full_name: "Lisa Hernandez",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1949-02-14"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Nelson",
+    full_name: "Matthew Nelson",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1999-03-25"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jennifer Saunders",
+    full_name: "Jennifer Saunders",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2013-03-22"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Krystal Smith",
+    full_name: "Krystal Smith",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1949-09-13"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Jones",
+    full_name: "Amy Jones",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1949-04-13"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jonathan Johnson",
+    full_name: "Jonathan Johnson",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1966-12-07"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Luis Ramsey",
+    full_name: "Luis Ramsey",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("2015-06-26"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "David Ward",
+    full_name: "David Ward",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1957-03-08"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joanne Summers",
+    full_name: "Joanne Summers",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1925-08-03"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Mann",
+    full_name: "Amy Mann",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1924-12-07"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samantha Goodman",
+    full_name: "Samantha Goodman",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1991-10-28"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristen Lane",
+    full_name: "Kristen Lane",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1952-03-21"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Donald Savage",
+    full_name: "Donald Savage",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1982-05-16"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Diaz",
+    full_name: "John Diaz",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1931-03-12"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Matthew Rice",
+    full_name: "Matthew Rice",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1974-02-15"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Dawn Martinez",
+    full_name: "Dawn Martinez",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1947-06-04"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jon Murillo",
+    full_name: "Jon Murillo",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2010-04-07"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ashley Hall",
+    full_name: "Ashley Hall",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1969-10-10"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Erika Anthony",
+    full_name: "Erika Anthony",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1950-04-27"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Julie Garcia",
+    full_name: "Julie Garcia",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1979-08-04"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ricky Floyd",
+    full_name: "Ricky Floyd",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1928-05-25"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Lee",
+    full_name: "Mark Lee",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1980-04-30"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Timothy Fitzgerald",
+    full_name: "Timothy Fitzgerald",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1951-12-10"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Schwartz",
+    full_name: "Anthony Schwartz",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1987-03-01"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Wilkinson",
+    full_name: "Mark Wilkinson",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1952-01-22"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Carol Greer",
+    full_name: "Carol Greer",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1951-06-19"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ryan Alvarado",
+    full_name: "Ryan Alvarado",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1926-05-13"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brian Gibbs",
+    full_name: "Brian Gibbs",
     civilStatus: "Divorced",
     status: "Active",
     birthday: new Date("1971-11-14"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sharon Davis",
+    full_name: "Sharon Davis",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1965-06-05"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Brandy Wright",
+    full_name: "Brandy Wright",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2024-06-08"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Larry Baker",
+    full_name: "Larry Baker",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1998-08-17"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Green",
+    full_name: "Stephanie Green",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("2018-06-09"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michael Joseph",
+    full_name: "Michael Joseph",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1935-03-04"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Melissa Young",
+    full_name: "Melissa Young",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1989-07-17"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mikayla Benson",
+    full_name: "Mikayla Benson",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2009-11-04"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Amy Johnson",
+    full_name: "Amy Johnson",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1965-05-22"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Gonzales",
+    full_name: "James Gonzales",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1940-03-21"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mark Floyd",
+    full_name: "Mark Floyd",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1968-07-11"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Andre Hernandez",
+    full_name: "Andre Hernandez",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1992-05-20"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Taylor Collins",
+    full_name: "Taylor Collins",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1943-06-14"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Sean Solomon",
+    full_name: "Sean Solomon",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1993-01-16"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Cole",
+    full_name: "Rachel Cole",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1951-07-07"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Michele Price",
+    full_name: "Michele Price",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1940-09-30"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jacob Brown",
+    full_name: "Jacob Brown",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1985-10-20"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Benjamin Hunt",
+    full_name: "Benjamin Hunt",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1943-12-15"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lauren Williams",
+    full_name: "Lauren Williams",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1954-11-15"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Joseph Roberson",
+    full_name: "Joseph Roberson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2021-07-06"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Vincent",
+    full_name: "Kimberly Vincent",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1980-06-21"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kenneth Blanchard",
+    full_name: "Kenneth Blanchard",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1982-04-10"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mr. Jesus Greene",
+    full_name: "Mr. Jesus Greene",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1999-08-28"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gregory Warren",
+    full_name: "Gregory Warren",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1943-03-17"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kimberly Spence",
+    full_name: "Kimberly Spence",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1932-06-12"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephanie Anderson",
+    full_name: "Stephanie Anderson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1971-03-03"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Mathew Rodriguez",
+    full_name: "Mathew Rodriguez",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("1931-03-10"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Tyler Ray",
+    full_name: "Tyler Ray",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1998-01-17"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Lori Davis",
+    full_name: "Lori Davis",
     civilStatus: "Married",
     status: "Dead",
     birthday: new Date("2001-08-25"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Gerald Clayton",
+    full_name: "Gerald Clayton",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1996-11-23"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marcus Payne",
+    full_name: "Marcus Payne",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1971-11-09"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "James Hansen",
+    full_name: "James Hansen",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1988-04-18"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stacy Garcia",
+    full_name: "Stacy Garcia",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1956-11-09"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Rachel Hayes",
+    full_name: "Rachel Hayes",
     civilStatus: "Single",
     status: "Missing",
     birthday: new Date("2015-06-26"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Anthony Bailey",
+    full_name: "Anthony Bailey",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1976-12-29"),
     gender: "Female",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Debbie Goodman",
+    full_name: "Debbie Goodman",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1980-12-09"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Carolyn Baker",
+    full_name: "Carolyn Baker",
     civilStatus: "Separated",
     status: "Missing",
     birthday: new Date("1998-04-26"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Christina Decker",
+    full_name: "Christina Decker",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2022-12-26"),
     gender: "Female",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jeffrey Smith",
+    full_name: "Jeffrey Smith",
     civilStatus: "Divorced",
     status: "Dead",
     birthday: new Date("1962-03-04"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kevin Evans",
+    full_name: "Kevin Evans",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1954-05-27"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jessica Henderson",
+    full_name: "Jessica Henderson",
     civilStatus: "Married",
     status: "Moved Out",
     birthday: new Date("1978-12-05"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jamie Lynch",
+    full_name: "Jamie Lynch",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("1968-12-31"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Angela Johnson",
+    full_name: "Angela Johnson",
     civilStatus: "Married",
     status: "Active",
     birthday: new Date("1993-08-29"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Megan Richard",
+    full_name: "Megan Richard",
     civilStatus: "Divorced",
     status: "Moved Out",
     birthday: new Date("1979-05-16"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kristen Cardenas",
+    full_name: "Kristen Cardenas",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("2001-11-09"),
     gender: "Other",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Pamela Johnson",
+    full_name: "Pamela Johnson",
     civilStatus: "Married",
     status: "Missing",
     birthday: new Date("1935-05-12"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Megan Ali",
+    full_name: "Megan Ali",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("2000-02-15"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Jonathan Smith",
+    full_name: "Jonathan Smith",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1979-04-03"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Kyle Gay",
+    full_name: "Kyle Gay",
     civilStatus: "Separated",
     status: "Moved Out",
     birthday: new Date("1948-11-21"),
     gender: "Other",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "John Rice",
+    full_name: "John Rice",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1979-03-28"),
     gender: "Male",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Stephen Walker",
+    full_name: "Stephen Walker",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("1985-01-05"),
     gender: "Other",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ethan Thomas",
+    full_name: "Ethan Thomas",
     civilStatus: "Widowed",
     status: "Missing",
     birthday: new Date("2008-10-17"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Bobby Nguyen",
+    full_name: "Bobby Nguyen",
     civilStatus: "Single",
     status: "Moved Out",
     birthday: new Date("1928-12-21"),
     gender: "Other",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Alyssa Acosta",
+    full_name: "Alyssa Acosta",
     civilStatus: "Widowed",
     status: "Moved Out",
     birthday: new Date("1968-11-13"),
     gender: "Female",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Trevor Burnett",
+    full_name: "Trevor Burnett",
     civilStatus: "Separated",
     status: "Active",
     birthday: new Date("1993-03-04"),
     gender: "Female",
-    zone: "Zone 2"
+    zone: "Zone 2",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Ian Snyder",
+    full_name: "Ian Snyder",
     civilStatus: "Single",
     status: "Dead",
     birthday: new Date("1942-04-09"),
     gender: "Male",
-    zone: "Zone 4"
+    zone: "Zone 4",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Susan Benitez",
+    full_name: "Susan Benitez",
     civilStatus: "Divorced",
     status: "Missing",
     birthday: new Date("1955-08-17"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Marc Brewer",
+    full_name: "Marc Brewer",
     civilStatus: "Separated",
     status: "Dead",
     birthday: new Date("2016-08-20"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Samuel Johnson",
+    full_name: "Samuel Johnson",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1957-11-26"),
     gender: "Male",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Teresa Sparks",
+    full_name: "Teresa Sparks",
     civilStatus: "Widowed",
     status: "Dead",
     birthday: new Date("1958-02-17"),
     gender: "Male",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Cheryl Mejia",
+    full_name: "Cheryl Mejia",
     civilStatus: "Widowed",
     status: "Active",
     birthday: new Date("1951-10-23"),
     gender: "Female",
-    zone: "Zone 5"
+    zone: "Zone 5",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Blake Walters",
+    full_name: "Blake Walters",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("2024-06-05"),
     gender: "Male",
-    zone: "Zone 1"
+    zone: "Zone 1",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
   {
-    fullName: "Nicholas Peterson",
+    full_name: "Nicholas Peterson",
     civilStatus: "Single",
     status: "Active",
     birthday: new Date("1942-07-08"),
     gender: "Other",
-    zone: "Zone 3"
+    zone: "Zone 3",
+    isRegisteredVoter: false,
+    isPWD: false,
+    isSenior: false
   },
 ];

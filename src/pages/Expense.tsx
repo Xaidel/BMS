@@ -13,8 +13,8 @@ import type { Expense } from "@/types/types";
 import { useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { sort } from "@/service/expenseSort";
-import searchExpense from "@/service/searchExpense";
+import { sort } from "@/service/expense/expenseSort";
+import searchExpense from "@/service/expense/searchExpense";
 import SummaryCardExpense from "@/components/ui/summary-card/expense";
 
 const filters = [

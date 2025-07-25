@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 
@@ -98,7 +98,6 @@ export default function AddResidentModal() {
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -161,41 +160,6 @@ export default function AddResidentModal() {
     invoke("save_resident", { data: values });
   }
 
-  const capturePhotoDirectly = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-      const video = document.createElement("video");
-      video.srcObject = stream;
-      await video.play();
-
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-
-      const context = canvas.getContext("2d");
-      if (context) {
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const dataUrl = canvas.toDataURL("image/png");
-
-        // 👇 Set captured image to state so it renders below
-        setCapturedImage(dataUrl);
-
-        // Optional: store blob to form field
-        canvas.toBlob((blob) => {
-          if (blob) {
-            form.setValue("photo", blob);
-          }
-        }, "image/png");
-
-        // Stop webcam
-        stream.getTracks().forEach((track) => track.stop());
-      }
-    } catch (err) {
-      console.error("Camera access error:", err);
-    }
-  };
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
@@ -250,24 +214,35 @@ export default function AddResidentModal() {
                   </div>
 
                   <div className="col-span-2">
-                    <FormLabel>Resident Photo</FormLabel>
-                    <div className="flex flex-col gap-2">
-                      <Button type="button" onClick={capturePhotoDirectly}>
-                        Take Photo
-                      </Button>
-
-                      {/* 👇 Display the captured photo if exists */}
-                      {capturedImage && (
-                        <img
-                          src={capturedImage}
-                          alt="Captured"
-                          className="w-48 h-auto rounded-md border object-cover"
-                        />
+                    <FormField
+                      control={form.control}
+                      name="photo"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Upload Profile Picture</FormLabel>
+                          <FormControl>
+                            <>
+                              <Input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    field.onChange(file);
+                                    const reader = new FileReader();
+                                    reader.onload = () => {
+                                      setCapturedImage(reader.result as string);
+                                    };
+                                    reader.readAsDataURL(file);
+                                  }
+                                }}
+                                className="mt-2"
+                              />
+                            </>
+                          </FormControl>
+                        </FormItem>
                       )}
-
-                      {/* Canvas is hidden, used only for internal capture */}
-                      <canvas ref={canvasRef} className="hidden" />
-                    </div>
+                    />
                   </div>
 
                   <div className="col-span-2">

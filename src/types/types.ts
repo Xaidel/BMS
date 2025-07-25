@@ -77,3 +77,13 @@ export type Blotter = {
   resolution: string;
   hearing_date: Date; // <- must be Date, not string
 };
+
+export type Settings = {
+  id?: number;
+  barangay: string;
+  municipality: string;
+  province: string;
+  phone_number: string;
+  email: string;
+  logo?: string;
+};

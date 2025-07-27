@@ -11,10 +11,9 @@ import { format } from "date-fns";
 import { Accessibility, Fingerprint, Trash } from "lucide-react";
 import { Resident } from "@/types/types";
 import { useSearchParams } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { sort } from "@/service/resident/residentSort";
 import searchResident from "@/service/resident/searchResident";
-import { mockResidents } from "@/mock/residents";
 import SummaryCardResidents from "@/components/ui/summary-card/residents";
 import {
   Users,
@@ -24,6 +23,7 @@ import {
   Venus,
   User,
 } from "lucide-react";
+import { invoke } from "@tauri-apps/api/core";
 
 const filters = [
   "All Residents",
@@ -62,18 +62,21 @@ const columns: ColumnDef<Resident>[] = [
   },
   {
     header: "Full Name",
-    accessorKey: "full_name",
+    cell: ({ row }) => {
+      const r = row.original;
+      return `${r.first_name} ${r.middle_name ?? ""} ${r.last_name}`;
+    },
   },
   {
     header: "Civil Status",
-    accessorKey: "civilStatus",
+    accessorKey: "civil_status",
   },
   {
     header: "Birthday",
-    accessorKey: "birthdate",
-    cell: ({ row }) => {
-      return <div>{format(row.original.birthday, "MMMM do, yyyy")}</div>;
-    },
+    accessorKey: "date_of_birth",
+    cell: ({ row }) => (
+      <div>{format(new Date(row.original.date_of_birth), "MMMM do, yyyy")}</div>
+    ),
   },
   {
     header: "Gender",
@@ -88,29 +91,13 @@ const columns: ColumnDef<Resident>[] = [
     accessorKey: "status",
     cell: ({ row }) => {
       const status = row.original.status;
-      let color: string;
-      switch (status) {
-        case "Moved Out": {
-          color = "#BD0000";
-          break;
-        }
-        case "Active": {
-          color = "#00BD29";
-          break;
-        }
-        case "Dead": {
-          color = "#000000";
-          break;
-        }
-        case "Missing": {
-          color = "#FFB30F";
-          break;
-        }
-        default: {
-          color = "#000000";
-        }
-      }
-      return <div style={{ color: color }}>{status}</div>;
+      let color = {
+        "Moved Out": "#BD0000",
+        "Active": "#00BD29",
+        "Dead": "#000000",
+        "Missing": "#FFB30F"
+      }[status] || "#000000";
+      return <div style={{ color }}>{status}</div>;
     },
   },
 ];
@@ -119,6 +106,14 @@ export default function Residents() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const [residents, setResidents] = useState<Resident[]>([]);
+
+  useEffect(() => {
+    invoke("fetch_all_residents_command")
+      .then((res: any) => setResidents(res))
+      .catch((err) => console.error("Failed to fetch residents:", err));
+  }, []);
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -131,23 +126,23 @@ export default function Residents() {
   const filteredData = useMemo(() => {
     if (searchQuery.trim()) {
       const processedData = sort(
-        mockResidents,
+        residents,
         searchParams.get("sort") ?? "All Residents"
       );
       return searchResident(searchQuery, processedData);
     }
 
-    return sort(mockResidents, searchParams.get("sort") ?? "All Residents");
-  }, [searchParams, mockResidents, searchQuery]);
+    return sort(residents, searchParams.get("sort") ?? "All Residents");
+  }, [searchParams, residents, searchQuery]);
 
-  const total = mockResidents.length;
-  const active = mockResidents.filter((r) => r.status === "Active").length;
-  const movedOut = mockResidents.filter((r) => r.status === "Moved Out").length;
-  const male = mockResidents.filter((r) => r.gender === "Male").length;
-  const female = mockResidents.filter((r) => r.gender === "Female").length;
-  const senior = mockResidents.filter((r) => r.isSenior === true).length;
-  const pwd = mockResidents.filter((r) => r.isPWD === true).length;
-  const registered = mockResidents.filter(
+  const total = residents.length;
+  const active = residents.filter((r) => r.status === "Active").length;
+  const movedOut = residents.filter((r) => r.status === "Moved Out").length;
+  const male = residents.filter((r) => r.gender === "Male").length;
+  const female = residents.filter((r) => r.gender === "Female").length;
+  const senior = residents.filter((r) => r.isSenior === true).length;
+  const pwd = residents.filter((r) => r.isPWD === true).length;
+  const registered = residents.filter(
     (r) => r.isRegisteredVoter === true
   ).length;
 

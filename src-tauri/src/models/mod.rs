@@ -4,3 +4,4 @@ pub mod expense;
 pub mod household;
 pub mod event;
 pub mod settings;
+pub mod resident;

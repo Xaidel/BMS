@@ -46,33 +46,34 @@ export const eventSchema = z.object({
 })
 
 export const residentSchema = z.object({
-  full_name: z.string().min(2, {
-    message: "Resident name is too short"
-  }).max(50, {
-    message: "Resident name is too long, put other details on the 'details' form"
-  }),
-  civilStatus: z.string().min(2, {
-    message: "Resident type is too short"
-  }).max(50, {
-    message: "Resident type is too long."
-  }),
-  birthday: z.date({
-    required_error: "Please specify the event date"
-  }),
-  gender: z.string().min(2, {
-    message: "Resident venue is too short"
-  }).max(50, {
-    message: "Resident venue is too long"
-  }),
-  Zone: z.string().min(2, {
-    message: "Resident too long"
-  }).max(50, {
-    message: "Resident venue is too long"
-  }),
-  status: z.string().max(1000, {
-    message: "Important notes is too long"
-  })
-})
+  prefix: z.string(),
+  first_name: z.string().min(1),
+  middle_name: z.string().optional(),
+  last_name: z.string().min(1),
+  suffix: z.string().optional(),
+  civil_status: z.string().min(1),
+  gender: z.string().min(1),
+  nationality: z.string().min(1),
+  mobile_number: z.string().min(1),
+  date_of_birth: z.date(),
+  town_of_birth: z.string().min(1),
+  province_of_birth: z.string().min(1),
+  zone: z.string().min(1),
+  barangay: z.string().min(1),
+  town: z.string().min(1),
+  province: z.string().min(1),
+  father_prefix: z.string().min(1),
+  father_first_name: z.string().min(1),
+  father_middle_name: z.string().min(1),
+  father_last_name: z.string().min(1),
+  father_suffix: z.string().min(1),
+  mother_prefix: z.string().min(1),
+  mother_first_name: z.string().min(1),
+  mother_middle_name: z.string().min(1),
+  mother_last_name: z.string().min(1),
+  status: z.string().min(1),
+  photo: z.any(),
+});
 
 export const householdSchema = z.object({
   household_number: z.number().min(1),

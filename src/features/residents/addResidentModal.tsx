@@ -69,28 +69,10 @@ const formSchema = z.object({
   motherFirstName: z.string(), //done
   motherMiddleName: z.string(), //done
   motherLastName: z.string(), //done
-  siblingsAlive: z.string(),
-  siblingsDOB: z.string(),
-  children: z.string(),
-  height: z.string(),
-  weight: z.string(),
-  medicalConditions: z.string(),
-  privateDoctor: z.string(),
-  employer: z.string(),
-  employerAddress: z.string(),
-  employerCity: z.string(),
-  employerProvince: z.string(),
-  employerZip: z.string(),
-  beneficiaryName: z.string(),
-  beneficiaryRelation: z.string(),
-  beneficiaryContact: z.string(),
-  beneficiaryDOB: z.string(),
-  beneficiaryGender: z.string(),
-  beneficiaryType: z.string(),
-  beneficiarySameAddress: z.string(),
-  additionalBeneficiaries: z.string(),
   status: z.string(),
   photo: z.any(),
+
+  
 });
 
 export default function AddResidentModal() {
@@ -128,26 +110,6 @@ export default function AddResidentModal() {
       motherFirstName: "",
       motherMiddleName: "",
       motherLastName: "",
-      siblingsAlive: "",
-      siblingsDOB: "",
-      children: "",
-      height: "",
-      weight: "",
-      medicalConditions: "",
-      privateDoctor: "",
-      employer: "",
-      employerAddress: "",
-      employerCity: "",
-      employerProvince: "",
-      employerZip: "",
-      beneficiaryName: "",
-      beneficiaryRelation: "",
-      beneficiaryContact: "",
-      beneficiaryDOB: "",
-      beneficiaryGender: "",
-      beneficiaryType: "",
-      beneficiarySameAddress: "",
-      additionalBeneficiaries: "",
       photo: null,
     },
   });
@@ -157,7 +119,15 @@ export default function AddResidentModal() {
       description: `${values.firstName} ${values.lastName}`,
     });
     setOpenModal(false);
-    invoke("save_resident", { data: values });
+    invoke("insert_resident_command", {
+      resident: {
+        ...values,
+        photo: capturedImage || "", // convert image to base64 string
+        dateOfBirth: values.dateOfBirth
+          ? values.dateOfBirth.toISOString().split("T")[0]
+          : "", // convert to YYYY-MM-DD string
+      }
+    });
   }
 
 

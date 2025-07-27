@@ -10,16 +10,39 @@ export type Event = {
 }
 
 export type Resident = {
-  isRegisteredVoter: boolean
-  isPWD: boolean
-  isSenior: boolean
-  full_name: string,
-  civilStatus: string,
-  status: "Moved Out" | "Active" | "Dead" | "Missing",
-  birthday: Date,
-  gender: string,
-  zone: string,
-}
+  is_registered_voter: boolean;
+  is_pwd: boolean;
+  is_senior: boolean;
+  prefix: string;
+  first_name: string;
+  middle_name?: string;
+  last_name: string;
+  suffix?: string;
+  full_name?: string; // can be generated later
+  civil_status: string;
+  gender: string;
+  nationality: string;
+  mobile_number: string;
+  date_of_birth: Date;
+  town_of_birth: string;
+  province_of_birth: string;
+  zone: string;
+  barangay: string;
+  town: string;
+  province: string;
+  father_prefix: string;
+  father_first_name: string;
+  father_middle_name: string;
+  father_last_name: string;
+  father_suffix: string;
+  mother_prefix: string;
+  mother_first_name: string;
+  mother_middle_name: string;
+  mother_last_name: string;
+  status: "Moved Out" | "Active" | "Dead" | "Missing";
+  photo?: any;
+};
+
 export type Household = {
   id?: number;
   household_number: number;

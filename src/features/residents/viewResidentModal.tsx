@@ -43,9 +43,9 @@ type ViewPropsResident = {
   id: number;
   prefix: string;
   first_name: string;
-  middle_name: string;
+  middle_name?: string; // ← Make optional
   last_name: string;
-  suffix: string;
+  suffix?: string; // ← Make optional
   civil_status: string;
   gender: string;
   mobile_number: string;
@@ -65,7 +65,7 @@ type ViewPropsResident = {
   mother_first_name: string;
   mother_middle_name: string;
   mother_last_name: string;
-  photo: File | null;
+  photo?: File | null; // ← Make optional
   status: string;
   onSave: () => void;
 };

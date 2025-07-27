@@ -45,7 +45,7 @@ const suffixOptions = ["Jr.", "Sr.", "II", "III"];
 const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
 
-export default function AddResidentModal() {
+export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
@@ -96,7 +96,10 @@ export default function AddResidentModal() {
           ? values.date_of_birth.toISOString().split("T")[0]
           : "",
       },
-    }).then(() => window.location.reload());
+    }).then(() => {
+      onSave();
+      window.location.reload();
+    });
   }
 
 

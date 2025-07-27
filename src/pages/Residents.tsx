@@ -1,3 +1,6 @@
+// Residents page implemented by mirroring Household logic
+// (Code inserted here reflects working data table, filter, summary, and modal handling for Resident records)
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTable from "@/components/ui/datatable";
@@ -8,31 +11,16 @@ import DeleteResidentModal from "@/features/residents/deleteResidentModal";
 import ViewResidentModal from "@/features/residents/viewResidentModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Accessibility, Fingerprint, Trash } from "lucide-react";
-import { Resident } from "@/types/types";
-import { useSearchParams } from "react-router-dom";
+import { Trash, Users, UserCheck, UserMinus, Mars, Venus, User, Accessibility, Fingerprint } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { Resident } from "@/types/types";
 import { sort } from "@/service/resident/residentSort";
 import searchResident from "@/service/resident/searchResident";
 import SummaryCardResidents from "@/components/ui/summary-card/residents";
-import {
-  Users,
-  UserCheck,
-  UserMinus,
-  Mars,
-  Venus,
-  User,
-} from "lucide-react";
 import { invoke } from "@tauri-apps/api/core";
 
-const filters = [
-  "All Residents",
-  "Alphabetical",
-  "Moved Out",
-  "Active",
-  "Dead",
-  "Missing",
-];
+const filters = ["All Residents", "Alphabetical", "Moved Out", "Active", "Dead", "Missing"];
 
 const columns: ColumnDef<Resident>[] = [
   {
@@ -105,131 +93,117 @@ const columns: ColumnDef<Resident>[] = [
 export default function Residents() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState<string>("");
-
-  const [residents, setResidents] = useState<Resident[]>([]);
-
-  useEffect(() => {
-    invoke("fetch_all_residents_command")
-      .then((res: any) => setResidents(res))
-      .catch((err) => console.error("Failed to fetch residents:", err));
-  }, []);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState<Resident[]>([]);
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
     setSearchParams(searchParams);
   };
-  const handleSearch = (searchTerm: string) => {
-    setSearchQuery(searchTerm);
+
+  const handleSearch = (term: string) => {
+    setSearchQuery(term);
   };
 
   const filteredData = useMemo(() => {
+    const sortValue = searchParams.get("sort") ?? "All Residents";
+    let sorted = sort(data, sortValue);
+
     if (searchQuery.trim()) {
-      const processedData = sort(
-        residents,
-        searchParams.get("sort") ?? "All Residents"
-      );
-      return searchResident(searchQuery, processedData);
+      const query = searchQuery.toLowerCase();
+      sorted = searchResident(query, sorted);
     }
 
-    return sort(residents, searchParams.get("sort") ?? "All Residents");
-  }, [searchParams, residents, searchQuery]);
+    return sorted;
+  }, [searchParams, searchQuery, data]);
 
-  const total = residents.length;
-  const active = residents.filter((r) => r.status === "Active").length;
-  const movedOut = residents.filter((r) => r.status === "Moved Out").length;
-  const male = residents.filter((r) => r.gender === "Male").length;
-  const female = residents.filter((r) => r.gender === "Female").length;
-  const senior = residents.filter((r) => r.isSenior === true).length;
-  const pwd = residents.filter((r) => r.isPWD === true).length;
-  const registered = residents.filter(
-    (r) => r.isRegisteredVoter === true
-  ).length;
+  const fetchResidents = () => {
+    invoke<Resident[]>("fetch_all_residents_command")
+      .then((fetched) => {
+        setData(fetched);
+      })
+      .catch((err) => console.error("Failed to fetch residents:", err));
+  };
+
+  useEffect(() => {
+    fetchResidents();
+  }, []);
+
+  const handleDeleteSelected = async () => {
+    const selectedIds = Object.keys(rowSelection)
+      .map((key) => filteredData[parseInt(key)])
+      .filter((row) => !!row)
+      .map((row) => row.id);
+
+    if (selectedIds.length === 0) {
+      console.error("No resident records selected.");
+      return;
+    }
+
+    try {
+      await invoke("delete_residents_command", { ids: selectedIds });
+      fetchResidents();
+      setRowSelection({});
+    } catch (err) {
+      console.error("Failed to delete selected residents", err);
+    }
+  };
+
+  const total = data.length;
+  const active = data.filter((r) => r.status === "Active").length;
+  const movedOut = data.filter((r) => r.status === "Moved Out").length;
+  const male = data.filter((r) => r.gender === "Male").length;
+  const female = data.filter((r) => r.gender === "Female").length;
+  const senior = data.filter((r) => r.is_senior).length;
+  const pwd = data.filter((r) => r.is_pwd).length;
+  const registered = data.filter((r) => r.is_registered_voter).length;
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCardResidents
-          title="Total Residents"
-          value={total}
-          icon={<Users size={50} />}
-        />
-        <SummaryCardResidents
-          title="Male"
-          value={male}
-          icon={<Mars size={50} />}
-        />
-        <SummaryCardResidents
-          title="Female"
-          value={female}
-          icon={<Venus size={50} />}
-        />
-        <SummaryCardResidents
-          title="Senior"
-          value={senior}
-          icon={<User size={50} />}
-        />
-        <SummaryCardResidents
-          title="PWD"
-          value={pwd}
-          icon={<Accessibility size={50} />}
-        />
-        <SummaryCardResidents
-          title="Registered Voters"
-          value={registered}
-          icon={<Fingerprint size={50} />}
-        />
-        <SummaryCardResidents
-          title="Active"
-          value={active}
-          icon={<UserCheck size={50} />}
-        />
-        <SummaryCardResidents
-          title="Moved Out"
-          value={movedOut}
-          icon={<UserMinus size={50} />}
-        />
+        <SummaryCardResidents title="Total Residents" value={total} icon={<Users size={50} />} />
+        <SummaryCardResidents title="Male" value={male} icon={<Mars size={50} />} />
+        <SummaryCardResidents title="Female" value={female} icon={<Venus size={50} />} />
+        <SummaryCardResidents title="Senior" value={senior} icon={<User size={50} />} />
+        <SummaryCardResidents title="PWD" value={pwd} icon={<Accessibility size={50} />} />
+        <SummaryCardResidents title="Registered Voters" value={registered} icon={<Fingerprint size={50} />} />
+        <SummaryCardResidents title="Active" value={active} icon={<UserCheck size={50} />} />
+        <SummaryCardResidents title="Moved Out" value={movedOut} icon={<UserMinus size={50} />} />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center">
-        <Searchbar
-          onChange={handleSearch}
-          placeholder="Search Resident"
-          classname="flex flex-5"
-        />
-        <Filter
-          onChange={handleSortChange}
-          filters={filters}
-          initial="All Residents"
-          classname="flex-1"
-        />
-        <Button variant="destructive" size="lg">
-          <Trash />
-          Delete Selected
+        <Searchbar onChange={(value) => setSearchQuery(value)} placeholder="Search Resident" classname="flex flex-5" />
+        <Filter onChange={handleSortChange} filters={filters} initial="All Residents" classname="flex-1" />
+        <Button variant="destructive" size="lg" disabled={Object.keys(rowSelection).length === 0} onClick={handleDeleteSelected}>
+          <Trash /> Delete Selected
         </Button>
-        <AddResidentModal />
+        <AddResidentModal onSave={fetchResidents} />
       </div>
 
       <DataTable<Resident>
         classname="py-5"
-        data={filteredData}
         height="43.3rem"
+        data={filteredData}
         columns={[
           ...columns,
           {
             id: "view",
             header: "",
-            cell: ({ row }) => {
-              const status = row.original.status;
-              return (
-                <div className="flex gap-3 ">
-                  <ViewResidentModal {...row.original} />
-                  {status !== "Active" && (
-                    <DeleteResidentModal {...row.original} />
-                  )}
-                </div>
-              );
-            },
+            cell: ({ row }) => (
+              <div className="flex gap-3">
+                <ViewResidentModal {...row.original} onSave={fetchResidents} />
+                <DeleteResidentModal
+                  id={row.original.id}
+                  full_name={row.original.full_name}
+                  civilStatus={row.original.civil_status}
+                  status={row.original.status}
+                  birthday={new Date(row.original.date_of_birth)}
+                  gender={row.original.gender}
+                  zone={row.original.zone}
+                  onDelete={fetchResidents}
+                />
+              </div>
+            ),
           },
         ]}
         rowSelection={rowSelection}

@@ -10,6 +10,7 @@ export type Event = {
 }
 
 export type Resident = {
+  id: number;
   is_registered_voter: boolean;
   is_pwd: boolean;
   is_senior: boolean;

@@ -13,7 +13,7 @@ type Resident = {
   gender: string;
   zone: string;
 };
-export default function DeleteResidentModal(resident: Resident) {
+export default function DeleteResidentModal({ onDelete, ...resident }: Resident & { onDelete: () => void }) {
 
   async function onConfirm() {
     try {
@@ -22,6 +22,7 @@ export default function DeleteResidentModal(resident: Resident) {
         description: `${resident.full_name} was deleted`
       });
       window.location.reload(); // Optional: Refresh the page
+      onDelete();
     } catch (error) {
       toast.error("Failed to delete resident");
       console.error("Delete error:", error);

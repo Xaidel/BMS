@@ -36,6 +36,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
+import { residentSchema } from "@/types/formSchema";
 
 const civilStatusOptions = ["Single", "Married", "Widowed", "Separated"];
 const statusOption = ["Active", "Dead", "Missing", "Moved Out"];
@@ -43,37 +44,6 @@ const genderOptions = ["Male", "Female"];
 const suffixOptions = ["Jr.", "Sr.", "II", "III"];
 const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
-const formSchema = z.object({
-  prefix: z.string(), //done
-  firstName: z.string().min(1), //done
-  middleName: z.string().optional(), //done
-  lastName: z.string(), //done
-  suffix: z.string().optional(), //done
-  civilStatus: z.string(), //done
-  gender: z.string(), //done
-  nationality: z.string(),
-  mobileNumber: z.string(), //done
-  dateOfBirth: z.date(), //done
-  townOfBirth: z.string(), //done
-  provinceOfBirth: z.string(), //done
-  zone: z.string(), //done
-  barangay: z.string(), //done
-  town: z.string(), //done
-  province: z.string(), //done
-  fatherPrefix: z.string(), //done
-  fatherFirstName: z.string(), //done
-  fatherMiddleName: z.string(), //done
-  fatherLastName: z.string(), //done
-  fatherSuffix: z.string(), //done
-  motherPrefix: z.string(), //done
-  motherFirstName: z.string(), //done
-  motherMiddleName: z.string(), //done
-  motherLastName: z.string(), //done
-  status: z.string(),
-  photo: z.any(),
-
-  
-});
 
 export default function AddResidentModal() {
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -81,53 +51,52 @@ export default function AddResidentModal() {
   const [step, setStep] = useState(1);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof residentSchema>>({
+    resolver: zodResolver(residentSchema),
     defaultValues: {
       prefix: "",
-      firstName: "",
-      middleName: "",
-      lastName: "",
+      first_name: "",
+      middle_name: "",
+      last_name: "",
       suffix: "",
-      civilStatus: "",
+      civil_status: "",
       status: "",
       gender: "",
-      mobileNumber: "",
-      dateOfBirth: undefined,
-      townOfBirth: "",
-      provinceOfBirth: "",
+      mobile_number: "",
+      date_of_birth: undefined,
+      town_of_birth: "",
+      province_of_birth: "",
       nationality: "",
       zone: "",
       barangay: "",
       town: "",
       province: "",
-      fatherPrefix: "",
-      fatherFirstName: "",
-      fatherMiddleName: "",
-      fatherLastName: "",
-      fatherSuffix: "",
-      motherPrefix: "",
-      motherFirstName: "",
-      motherMiddleName: "",
-      motherLastName: "",
+      father_first_name: "",
+      father_middle_name: "",
+      father_last_name: "",
+      father_prefix: "",
+      mother_prefix: "",
+      mother_first_name: "",
+      mother_middle_name: "",
+      mother_last_name: "",
       photo: null,
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof residentSchema>) {
     toast.success("Resident added successfully", {
-      description: `${values.firstName} ${values.lastName}`,
+      description: `${values.first_name} ${values.last_name}`,
     });
     setOpenModal(false);
     invoke("insert_resident_command", {
       resident: {
         ...values,
-        photo: capturedImage || "", // convert image to base64 string
-        dateOfBirth: values.dateOfBirth
-          ? values.dateOfBirth.toISOString().split("T")[0]
-          : "", // convert to YYYY-MM-DD string
-      }
-    });
+        photo: capturedImage || "",
+        dateOfBirth: values.date_of_birth
+          ? values.date_of_birth.toISOString().split("T")[0]
+          : "",
+      },
+    }).then(() => window.location.reload());
   }
 
 
@@ -218,13 +187,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="firstName"
+                      name="first_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="firstName"
+                              id="first_name"
                               type="text"
                               placeholder="Enter first name"
                               required
@@ -240,13 +209,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="middleName"
+                      name="middle_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Middle Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="middleName"
+                              id="middle_name"
                               type="text"
                               placeholder="Enter middle name"
                               required
@@ -262,13 +231,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="lastName"
+                      name="last_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Last Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="lastName"
+                              id="last_name"
                               type="text"
                               placeholder="Enter last name"
                               required
@@ -313,7 +282,7 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="civilStatus"
+                      name="civil_status"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Civil Status</FormLabel>
@@ -393,7 +362,7 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="mobileNumber"
+                      name="mobile_number"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Mobile Number</FormLabel>
@@ -415,7 +384,7 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="dateOfBirth"
+                      name="date_of_birth"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Date of Birth</FormLabel>
@@ -496,7 +465,7 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="townOfBirth"
+                      name="town_of_birth"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>City/Town</FormLabel>
@@ -517,7 +486,7 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="provinceOfBirth"
+                      name="province_of_birth"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Province</FormLabel>
@@ -647,7 +616,7 @@ export default function AddResidentModal() {
                   <div className="col-span-4">
                     <FormField
                       control={form.control}
-                      name="fatherPrefix"
+                      name="father_prefix"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Prefix</FormLabel>
@@ -676,13 +645,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="fatherFirstName"
+                      name="father_first_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="fatherFirstName"
+                              id="father_firstName"
                               type="text"
                               placeholder="Enter first name"
                               required
@@ -698,13 +667,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="fatherMiddleName"
+                      name="father_middle_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Middle Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="fatherMiddleName"
+                              id="father_middleName"
                               type="text"
                               placeholder="Enter middle name"
                               required
@@ -720,13 +689,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="fatherLastName"
+                      name="father_last_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Last Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="fatherlastName"
+                              id="father_last_name"
                               type="text"
                               placeholder="Enter last name"
                               required
@@ -742,7 +711,7 @@ export default function AddResidentModal() {
                   <div className="col-span-1">
                     <FormField
                       control={form.control}
-                      name="fatherSuffix"
+                      name="father_suffix"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Suffix</FormLabel>
@@ -775,7 +744,7 @@ export default function AddResidentModal() {
                   <div className="col-span-4">
                     <FormField
                       control={form.control}
-                      name="motherPrefix"
+                      name="mother_prefix"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Prefix</FormLabel>
@@ -804,13 +773,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="motherFirstName"
+                      name="mother_first_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>First Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="motherfirstName"
+                              id="mother_firstName"
                               type="text"
                               placeholder="Enter first name"
                               required
@@ -826,7 +795,7 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="motherMiddleName"
+                      name="mother_middle_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Middle Name</FormLabel>
@@ -848,13 +817,13 @@ export default function AddResidentModal() {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="motherLastName"
+                      name="mother_last_name"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Last Name</FormLabel>
                           <FormControl>
                             <Input
-                              id="motherlastName"
+                              id="mother_last_name"
                               type="text"
                               placeholder="Enter last name"
                               required

@@ -1,23 +1,31 @@
+import { invoke } from "@tauri-apps/api/core";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { XIcon } from "lucide-react";
 import { toast } from "sonner";
 
 type Resident = {
-  full_name: string,
-  civilStatus: string,
-  status: "Moved Out" | "Active" | "Dead" | "Missing",
-  birthday: Date,
-  gender: string,
-  zone: string,
-}
+  id: number;
+  full_name: string;
+  civilStatus: string;
+  status: "Moved Out" | "Active" | "Dead" | "Missing";
+  birthday: Date;
+  gender: string;
+  zone: string;
+};
 export default function DeleteResidentModal(resident: Resident) {
 
-  function onConfirm() {
-    toast.success("Event deleted succesfully", {
-      description: `${resident.full_name} was deleted`
-    })
-
+  async function onConfirm() {
+    try {
+      await invoke("delete_resident_command", { id: resident.id });
+      toast.success("Resident deleted successfully", {
+        description: `${resident.full_name} was deleted`
+      });
+      window.location.reload(); // Optional: Refresh the page
+    } catch (error) {
+      toast.error("Failed to delete resident");
+      console.error("Delete error:", error);
+    }
   }
   return (
     <>

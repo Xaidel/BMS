@@ -72,7 +72,6 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             logo TEXT  -- base64 or file path
             );
             
-        DROP TABLE IF EXISTS residents;
         CREATE TABLE IF NOT EXISTS residents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             prefix TEXT NOT NULL,

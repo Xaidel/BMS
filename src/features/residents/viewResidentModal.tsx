@@ -81,38 +81,15 @@ const selectOption: string[] = [
 const selectStatus: string[] = ["Moved Out", "Active", "Dead", "Missing"];
 
 export default function ViewResidentModal(props: ViewPropsResident) {
-  const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
     defaultValues: {
-      prefix: props.prefix,
-      first_name: props.first_name,
-      middle_name: props.middle_name,
-      last_name: props.last_name,
-      suffix: props.suffix,
-      civil_status: props.civil_status,
-      gender: props.gender,
-      mobile_number: props.mobile_number,
-      date_of_birth: props.date_of_birth,
-      town_of_birth: props.town_of_birth,
-      province_of_birth: props.province_of_birth,
-      nationality: props.nationality,
-      zone: props.zone,
-      barangay: props.barangay,
-      town: props.town,
-      province: props.province,
-      father_first_name: props.father_first_name,
-      father_middle_name: props.father_middle_name,
-      father_last_name: props.father_last_name,
-      father_prefix: props.father_prefix,
-      mother_prefix: props.mother_prefix,
-      mother_first_name: props.mother_first_name,
-      mother_middle_name: props.mother_middle_name,
-      mother_last_name: props.mother_last_name,
-      photo: props.photo,
-      status: props.status,
+      ...props,
+      date_of_birth: props.date_of_birth
+        ? new Date(props.date_of_birth)
+        : undefined,
     },
   });
 
@@ -121,16 +98,22 @@ export default function ViewResidentModal(props: ViewPropsResident) {
       ...values,
       id: props.id,
       date_of_birth: values.date_of_birth
-        ? values.date_of_birth.toISOString()
+        ? typeof values.date_of_birth === "string"
+          ? values.date_of_birth
+          : values.date_of_birth.toISOString()
         : "",
     };
-    await invoke("save_resident_command", { resident: residentWithId });
+    await invoke("update_resident_command", { resident: residentWithId });
     toast.success("Resident updated successfully", {
       description: `${values.first_name} ${values.last_name} was updated`,
     });
     setOpenModal(false);
     props.onSave();
   }
+
+  // Helper for field value
+  const watch = form.watch;
+
   return (
     <>
       <Dialog open={openModal} onOpenChange={setOpenModal}>
@@ -140,7 +123,7 @@ export default function ViewResidentModal(props: ViewPropsResident) {
             View More
           </Button>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className="text-black bg-white">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <DialogHeader>
@@ -152,9 +135,40 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                 </DialogDescription>
               </DialogHeader>
 
+              {/* Steps navigation */}
+              <div className="flex gap-2 mb-2">
+                <Button
+                  type="button"
+                  variant={step === 1 ? "default" : "outline"}
+                  onClick={() => setStep(1)}
+                  size="sm"
+                >
+                  Step 1
+                </Button>
+                <Button
+                  type="button"
+                  variant={step === 2 ? "default" : "outline"}
+                  onClick={() => setStep(2)}
+                  size="sm"
+                >
+                  Step 2
+                </Button>
+                <Button
+                  type="button"
+                  variant={step === 3 ? "default" : "outline"}
+                  onClick={() => setStep(3)}
+                  size="sm"
+                >
+                  Step 3
+                </Button>
+              </div>
+
+              {/* Step 1: Personal Information */}
               {step === 1 && (
                 <>
-                  <h2 className="text-md font-semibold text-gray-900 mt-2">Personal Information</h2>
+                  <p className="text-md font-bold text-black">
+                    Personal Information
+                  </p>
                   <div className="grid grid-cols-4 gap-4">
                     {/* Prefix */}
                     <FormField
@@ -164,7 +178,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Prefix</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("prefix") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -177,7 +195,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>First Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("first_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -190,7 +212,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Middle Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("middle_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -203,7 +229,28 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Last Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("last_name") || ""}
+                              onChange={field.onChange}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    {/* Suffix */}
+                    <FormField
+                      control={form.control}
+                      name="suffix"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Suffix</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              value={watch("suffix") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -216,7 +263,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Gender</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("gender") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -229,7 +280,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Civil Status</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("civil_status") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -242,7 +297,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Mobile Number</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("mobile_number") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -264,7 +323,14 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                               id="date_of_birth"
                               type="date"
                               value={
-                                field.value ? format(field.value, "yyyy-MM-dd") : ""
+                                watch("date_of_birth")
+                                  ? format(
+                                      typeof watch("date_of_birth") === "string"
+                                        ? new Date(watch("date_of_birth"))
+                                        : watch("date_of_birth"),
+                                      "yyyy-MM-dd"
+                                    )
+                                  : ""
                               }
                               onChange={(e) =>
                                 field.onChange(new Date(e.target.value))
@@ -276,47 +342,16 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         </FormItem>
                       )}
                     />
-                    {/* Status */}
-                    <FormField
-                      control={form.control}
-                      name="status"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Status</FormLabel>
-                          <FormControl>
-                            <Input {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Photo Preview (if any) */}
-                    {form.watch("photo") && (
-                      <div className="col-span-4">
-                        {typeof form.watch("photo") === "string" ? (
-                          <img
-                            src={form.watch("photo") as string}
-                            alt="Resident"
-                            className="w-32 h-32 object-cover rounded"
-                          />
-                        ) : form.watch("photo") instanceof File ? (
-                          <img
-                            src={URL.createObjectURL(form.watch("photo") as File)}
-                            alt="Resident"
-                            className="w-32 h-32 object-cover rounded"
-                          />
-                        ) : null}
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex justify-end pt-4">
-                    <Button type="button" onClick={() => setStep(2)}>Next</Button>
                   </div>
                 </>
               )}
 
+              {/* Step 2: Address Information */}
               {step === 2 && (
                 <>
-                  <h2 className="text-md font-semibold text-gray-900 mt-2">Place of Birth</h2>
+                  <p className="text-md font-bold text-black">
+                    Address Information
+                  </p>
                   <div className="grid grid-cols-4 gap-4">
                     {/* Town of Birth */}
                     <FormField
@@ -326,7 +361,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Town of Birth</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("town_of_birth") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -339,7 +378,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Province of Birth</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("province_of_birth") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -352,7 +395,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Nationality</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("nationality") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -365,7 +412,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Zone</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("zone") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -378,7 +429,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Barangay</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("barangay") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -391,7 +446,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Town</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("town") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -404,22 +463,42 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Province</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("province") || ""}
+                              onChange={field.onChange}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    {/* Status */}
+                    <FormField
+                      control={form.control}
+                      name="status"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Status</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...field}
+                              value={watch("status") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
                     />
                   </div>
-                  <div className="flex justify-between pt-4">
-                    <Button type="button" onClick={() => setStep(1)}>Back</Button>
-                    <Button type="button" onClick={() => setStep(3)}>Next</Button>
-                  </div>
                 </>
               )}
 
+              {/* Step 3: Family Information */}
               {step === 3 && (
                 <>
-                  <h2 className="text-md font-semibold text-gray-900 mt-2">Family Information</h2>
+                  <p className="text-md font-bold text-black">
+                    Family Information
+                  </p>
                   <div className="grid grid-cols-4 gap-4">
                     {/* Father's Name */}
                     <FormField
@@ -429,7 +508,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Father Prefix</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("father_prefix") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -441,7 +524,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Father First Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("father_first_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -453,7 +540,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Father Middle Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("father_middle_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -465,7 +556,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Father Last Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("father_last_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -478,7 +573,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Mother Prefix</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("mother_prefix") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -490,7 +589,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Mother First Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("mother_first_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -502,7 +605,11 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Mother Middle Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("mother_middle_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
@@ -514,20 +621,42 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                         <FormItem>
                           <FormLabel>Mother Last Name</FormLabel>
                           <FormControl>
-                            <Input {...field} />
+                            <Input
+                              {...field}
+                              value={watch("mother_last_name") || ""}
+                              onChange={field.onChange}
+                            />
                           </FormControl>
                         </FormItem>
                       )}
                     />
                   </div>
-                  <div className="flex justify-between pt-4">
-                    <Button type="button" onClick={() => setStep(2)}>Back</Button>
-                    {props.status === "Active" && (
-                      <Button type="submit">Save Resident</Button>
-                    )}
-                  </div>
                 </>
               )}
+
+              {/* Step navigation buttons */}
+              <div className="flex justify-between mt-4">
+                <div>
+                  {step > 1 && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => setStep(step - 1)}
+                    >
+                      Previous
+                    </Button>
+                  )}
+                </div>
+                <div>
+                  {step < 3 ? (
+                    <Button type="button" onClick={() => setStep(step + 1)}>
+                      Next
+                    </Button>
+                  ) : (
+                    <Button type="submit">Save Resident</Button>
+                  )}
+                </div>
+              </div>
             </form>
           </Form>
         </DialogContent>

@@ -19,6 +19,7 @@ import { sort } from "@/service/resident/residentSort";
 import searchResident from "@/service/resident/searchResident";
 import SummaryCardResidents from "@/components/ui/summary-card/residents";
 import { invoke } from "@tauri-apps/api/core";
+import { toast } from "sonner";
 
 const filters = ["All Residents", "Alphabetical", "Moved Out", "Active", "Dead", "Missing"];
 
@@ -136,16 +137,22 @@ export default function Residents() {
       .map((row) => row.id);
 
     if (selectedIds.length === 0) {
-      console.error("No resident records selected.");
+      toast.error("No residents selected.");
       return;
     }
 
     try {
-      await invoke("delete_residents_command", { ids: selectedIds });
-      fetchResidents();
-      setRowSelection({});
+      for (const id of selectedIds) {
+        if (id !== undefined) {
+          await invoke("delete_resident_command", { id });
+        }
+      }
+      toast.success("Selected residents deleted.");
+      fetchResidents(); // Refresh the table
+      setRowSelection({}); // Reset selection
     } catch (err) {
-      console.error("Failed to delete selected residents", err);
+      toast.error("Failed to delete selected residents");
+      console.error("Delete error:", err);
     }
   };
 
@@ -195,12 +202,6 @@ export default function Residents() {
                 <DeleteResidentModal
                   id={row.original.id}
                   full_name={row.original.full_name}
-                  civilStatus={row.original.civil_status}
-                  status={row.original.status}
-                  birthday={new Date(row.original.date_of_birth)}
-                  gender={row.original.gender}
-                  zone={row.original.zone}
-                  onDelete={fetchResidents}
                 />
               </div>
             ),

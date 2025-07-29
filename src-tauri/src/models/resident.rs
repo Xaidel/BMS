@@ -1,5 +1,3 @@
-
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -32,4 +30,7 @@ pub struct Resident {
     pub mother_last_name: String,
     pub status: String,
     pub photo: Option<String>,
+    pub is_registered_voter: bool, 
+    pub is_pwd: bool,              
+    pub is_senior: bool,
 }

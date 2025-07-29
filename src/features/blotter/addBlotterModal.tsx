@@ -30,6 +30,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { id } from "date-fns/locale";
+import { blotterSchema } from "@/types/formSchema";
 
 
 const statusOption = [
@@ -39,22 +40,7 @@ const statusOption = [
   "Closed",
 ] as const;
 
-const formSchema = z.object({
-  id: z.number(),
-  type_: z.string(),
-  reported_by: z.string(),
-  involved: z.string(),
-  incident_date: z.date(),
-  location: z.string(),
-  zone: z.string(),
-  status: z.enum(statusOption),
-  narrative: z.string(),
-  action: z.string(),
-  witnesses: z.string(),
-  evidence: z.string(),
-  resolution: z.string(),
-  hearing_date: z.date(),
-});
+
 
 export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -62,8 +48,8 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   const [step, setStep] = useState(1);
   const [capturedImage] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof blotterSchema>>({
+    resolver: zodResolver(blotterSchema),
     defaultValues: {
       id: 0,
       type_: "",
@@ -82,7 +68,7 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof blotterSchema>) {
     try {
       await invoke("insert_blotter_command", {
         blotter: {
@@ -104,10 +90,6 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
       toast.error("Failed to add blotter.");
     }
   }
-
-
-
-
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>

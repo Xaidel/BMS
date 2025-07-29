@@ -1,5 +1,3 @@
-
-
 use rusqlite::params;
 use serde::{Deserialize, Serialize};
 
@@ -35,6 +33,9 @@ pub struct Resident {
     pub mother_last_name: String,
     pub status: String,
     pub photo: Option<String>,
+    pub is_registered_voter: bool,
+    pub is_pwd: bool,
+    pub is_senior: bool,
 }
 
 #[tauri::command]
@@ -43,10 +44,11 @@ pub fn fetch_all_residents_command() -> Result<Vec<Resident>, String> {
 
     let mut stmt = conn.prepare(
         "SELECT id, prefix, first_name, middle_name, last_name, suffix, civil_status, gender, nationality,
-                mobile_number, date_of_birth, town_of_birth, province_of_birth, zone, barangay, town, province,
-                father_prefix, father_first_name, father_middle_name, father_last_name, father_suffix,
-                mother_prefix, mother_first_name, mother_middle_name, mother_last_name, status, photo
-         FROM residents"
+       mobile_number, date_of_birth, town_of_birth, province_of_birth, zone, barangay, town, province,
+       father_prefix, father_first_name, father_middle_name, father_last_name, father_suffix,
+       mother_prefix, mother_first_name, mother_middle_name, mother_last_name, status, photo,
+       is_registered_voter, is_pwd, is_senior
+FROM residents"
     ).map_err(|e| e.to_string())?;
 
     let resident_iter = stmt
@@ -80,6 +82,9 @@ pub fn fetch_all_residents_command() -> Result<Vec<Resident>, String> {
                 mother_last_name: row.get(25)?,
                 status: row.get(26)?,
                 photo: row.get(27)?,
+                is_registered_voter: row.get(28)?,
+                is_pwd: row.get(29)?,
+                is_senior: row.get(30)?,
             })
         })
         .map_err(|e| e.to_string())?;
@@ -97,42 +102,47 @@ pub fn insert_resident_command(resident: Resident) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     conn.execute(
-        "INSERT INTO residents (
-            prefix, first_name, middle_name, last_name, suffix, civil_status, gender, nationality,
-            mobile_number, date_of_birth, town_of_birth, province_of_birth, zone, barangay, town, province,
-            father_prefix, father_first_name, father_middle_name, father_last_name, father_suffix,
-            mother_prefix, mother_first_name, mother_middle_name, mother_last_name, status, photo
-        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18, ?19, ?20, ?21, ?22, ?23, ?24, ?25, ?26, ?27)",
-        params![
-            resident.prefix,
-            resident.first_name,
-            resident.middle_name,
-            resident.last_name,
-            resident.suffix,
-            resident.civil_status,
-            resident.gender,
-            resident.nationality,
-            resident.mobile_number,
-            resident.date_of_birth,
-            resident.town_of_birth,
-            resident.province_of_birth,
-            resident.zone,
-            resident.barangay,
-            resident.town,
-            resident.province,
-            resident.father_prefix,
-            resident.father_first_name,
-            resident.father_middle_name,
-            resident.father_last_name,
-            resident.father_suffix,
-            resident.mother_prefix,
-            resident.mother_first_name,
-            resident.mother_middle_name,
-            resident.mother_last_name,
-            resident.status,
-            resident.photo,
-        ],
-    ).map_err(|e| e.to_string())?;
+    "INSERT INTO residents (
+        prefix, first_name, middle_name, last_name, suffix, civil_status, gender, nationality,
+        mobile_number, date_of_birth, town_of_birth, province_of_birth, zone, barangay, town, province,
+        father_prefix, father_first_name, father_middle_name, father_last_name, father_suffix,
+        mother_prefix, mother_first_name, mother_middle_name, mother_last_name, status, photo,
+        is_registered_voter, is_pwd, is_senior
+    ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16,
+              ?17, ?18, ?19, ?20, ?21, ?22, ?23, ?24, ?25, ?26, ?27, ?28, ?29, ?30)",
+    params![
+        resident.prefix,
+        resident.first_name,
+        resident.middle_name,
+        resident.last_name,
+        resident.suffix,
+        resident.civil_status,
+        resident.gender,
+        resident.nationality,
+        resident.mobile_number,
+        resident.date_of_birth,
+        resident.town_of_birth,
+        resident.province_of_birth,
+        resident.zone,
+        resident.barangay,
+        resident.town,
+        resident.province,
+        resident.father_prefix,
+        resident.father_first_name,
+        resident.father_middle_name,
+        resident.father_last_name,
+        resident.father_suffix,
+        resident.mother_prefix,
+        resident.mother_first_name,
+        resident.mother_middle_name,
+        resident.mother_last_name,
+        resident.status,
+        resident.photo,
+        resident.is_registered_voter,
+        resident.is_pwd,
+        resident.is_senior,
+    ],
+).map_err(|e| e.to_string())?;
 
     Ok(())
 }
@@ -142,45 +152,48 @@ pub fn update_resident_command(resident: Resident) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     conn.execute(
-        "UPDATE residents SET
-            prefix = ?1, first_name = ?2, middle_name = ?3, last_name = ?4, suffix = ?5, civil_status = ?6,
-            gender = ?7, nationality = ?8, mobile_number = ?9, date_of_birth = ?10, town_of_birth = ?11,
-            province_of_birth = ?12, zone = ?13, barangay = ?14, town = ?15, province = ?16,
-            father_prefix = ?17, father_first_name = ?18, father_middle_name = ?19, father_last_name = ?20, father_suffix = ?21,
-            mother_prefix = ?22, mother_first_name = ?23, mother_middle_name = ?24, mother_last_name = ?25,
-            status = ?26, photo = ?27
-         WHERE id = ?28",
-        params![
-            resident.prefix,
-            resident.first_name,
-            resident.middle_name,
-            resident.last_name,
-            resident.suffix,
-            resident.civil_status,
-            resident.gender,
-            resident.nationality,
-            resident.mobile_number,
-            resident.date_of_birth,
-            resident.town_of_birth,
-            resident.province_of_birth,
-            resident.zone,
-            resident.barangay,
-            resident.town,
-            resident.province,
-            resident.father_prefix,
-            resident.father_first_name,
-            resident.father_middle_name,
-            resident.father_last_name,
-            resident.father_suffix,
-            resident.mother_prefix,
-            resident.mother_first_name,
-            resident.mother_middle_name,
-            resident.mother_last_name,
-            resident.status,
-            resident.photo,
-            resident.id
-        ],
-    ).map_err(|e| e.to_string())?;
+    "UPDATE residents SET
+        prefix = ?1, first_name = ?2, middle_name = ?3, last_name = ?4, suffix = ?5, civil_status = ?6,
+        gender = ?7, nationality = ?8, mobile_number = ?9, date_of_birth = ?10, town_of_birth = ?11,
+        province_of_birth = ?12, zone = ?13, barangay = ?14, town = ?15, province = ?16,
+        father_prefix = ?17, father_first_name = ?18, father_middle_name = ?19, father_last_name = ?20, father_suffix = ?21,
+        mother_prefix = ?22, mother_first_name = ?23, mother_middle_name = ?24, mother_last_name = ?25,
+        status = ?26, photo = ?27, is_registered_voter = ?28, is_pwd = ?29, is_senior = ?30
+     WHERE id = ?31",
+    params![
+        resident.prefix,
+        resident.first_name,
+        resident.middle_name,
+        resident.last_name,
+        resident.suffix,
+        resident.civil_status,
+        resident.gender,
+        resident.nationality,
+        resident.mobile_number,
+        resident.date_of_birth,
+        resident.town_of_birth,
+        resident.province_of_birth,
+        resident.zone,
+        resident.barangay,
+        resident.town,
+        resident.province,
+        resident.father_prefix,
+        resident.father_first_name,
+        resident.father_middle_name,
+        resident.father_last_name,
+        resident.father_suffix,
+        resident.mother_prefix,
+        resident.mother_first_name,
+        resident.mother_middle_name,
+        resident.mother_last_name,
+        resident.status,
+        resident.photo,
+        resident.is_registered_voter,
+        resident.is_pwd,
+        resident.is_senior,
+        resident.id
+    ],
+).map_err(|e| e.to_string())?;
 
     Ok(())
 }

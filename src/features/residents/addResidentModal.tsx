@@ -44,7 +44,6 @@ const genderOptions = ["Male", "Female"];
 const suffixOptions = ["Jr.", "Sr.", "II", "III"];
 const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
-
 export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -71,6 +70,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       barangay: "",
       town: "",
       province: "",
+      father_suffix: "",
       father_first_name: "",
       father_middle_name: "",
       father_last_name: "",
@@ -80,28 +80,36 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       mother_middle_name: "",
       mother_last_name: "",
       photo: null,
+      is_registered_voter: false,
+      is_pwd: false,
+      is_senior: false,
     },
   });
 
-  function onSubmit(values: z.infer<typeof residentSchema>) {
-    toast.success("Resident added successfully", {
-      description: `${values.first_name} ${values.last_name}`,
-    });
-    setOpenModal(false);
-    invoke("insert_resident_command", {
-      resident: {
-        ...values,
-        photo: capturedImage || "",
-        dateOfBirth: values.date_of_birth
-          ? values.date_of_birth.toISOString().split("T")[0]
-          : "",
-      },
-    }).then(() => {
-      onSave();
-      window.location.reload();
-    });
-  }
+  async function onSubmit(values: z.infer<typeof residentSchema>) {
+    try {
+      await invoke("insert_resident_command", {
+        resident: {
+          ...values,
+          photo: capturedImage || "",
+          dateOfBirth: values.date_of_birth
+            ? values.date_of_birth.toISOString().split("T")[0]
+            : "",
+        },
+      });
 
+      toast.success("Resident added successfully", {
+        description: `${values.first_name} ${values.last_name}`,
+      });
+
+      setOpenModal(false);
+      form.reset();
+      onSave?.(); // trigger refresh if provided
+    } catch (error) {
+      console.error("Insert resident failed:", error);
+      toast.error("Failed to add resident.");
+    }
+  }
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
@@ -120,6 +128,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
               </DialogDescription>
             </DialogHeader>
 
+            {/* --- Your step-based fields go here (Step 1, 2, 3) --- */}
             {step === 1 && (
               <>
                 <h2 className="text-md font-semibold text-gray-900 mt-2">
@@ -450,6 +459,59 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                     />
                   </div>
                 </div>
+                <div className="col-span-4 grid grid-cols-3 gap-4 mt-4">
+  <FormField
+    control={form.control}
+    name="is_registered_voter"
+    render={({ field }) => (
+      <FormItem className="flex items-center space-x-2">
+        <FormControl>
+          <input
+            type="checkbox"
+            checked={field.value}
+            onChange={field.onChange}
+            className="mr-2"
+          />
+        </FormControl>
+        <FormLabel className="text-black">Registered Voter</FormLabel>
+      </FormItem>
+    )}
+  />
+  <FormField
+    control={form.control}
+    name="is_pwd"
+    render={({ field }) => (
+      <FormItem className="flex items-center space-x-2">
+        <FormControl>
+          <input
+            type="checkbox"
+            checked={field.value}
+            onChange={field.onChange}
+            className="mr-2"
+          />
+        </FormControl>
+        <FormLabel className="text-black">PWD</FormLabel>
+      </FormItem>
+    )}
+  />
+  <FormField
+    control={form.control}
+    name="is_senior"
+    render={({ field }) => (
+      <FormItem className="flex items-center space-x-2">
+        <FormControl>
+          <input
+            type="checkbox"
+            checked={field.value}
+            onChange={field.onChange}
+            className="mr-2"
+          />
+        </FormControl>
+        <FormLabel className="text-black">Senior Citizen</FormLabel>
+      </FormItem>
+    )}
+  />
+</div>
 
                 <div className="flex justify-end pt-4">
                   <Button type="button" onClick={() => setStep(2)}>

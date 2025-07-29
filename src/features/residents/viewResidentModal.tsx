@@ -38,51 +38,24 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
+import { Resident } from "@/types/types";
 
-type ViewPropsResident = {
-  id: number;
-  prefix: string;
-  first_name: string;
-  middle_name?: string; // ← Make optional
-  last_name: string;
-  suffix?: string; // ← Make optional
-  civil_status: string;
-  gender: string;
-  mobile_number: string;
-  date_of_birth: Date;
-  town_of_birth: string;
-  province_of_birth: string;
-  nationality: string;
-  zone: string;
-  barangay: string;
-  town: string;
-  province: string;
-  father_first_name: string;
-  father_middle_name: string;
-  father_last_name: string;
-  father_prefix: string;
-  mother_prefix: string;
-  mother_first_name: string;
-  mother_middle_name: string;
-  mother_last_name: string;
-  photo?: File | null; // ← Make optional
-  status: string;
-  onSave: () => void;
-};
+const civilStatusOptions = ["Single", "Married", "Widowed", "Separated"];
+const statusOption = ["Active", "Dead", "Missing", "Moved Out"];
+const genderOptions = ["Male", "Female"];
+const suffixOptions = ["Jr.", "Sr.", "II", "III"];
+const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
-const selectOption: string[] = [
-  "Single",
-  "Married",
-  "Divorced",
-  "Widowed",
-  "Separated",
-];
+const statusOptions: string[] = ["Moved Out", "Active", "Dead", "Missing"];
 
-const selectStatus: string[] = ["Moved Out", "Active", "Dead", "Missing"];
-
-export default function ViewResidentModal(props: ViewPropsResident) {
+export default function ViewResidentModal(
+  props: Resident & { onSave: () => void }
+) {
+  const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
     defaultValues: {
@@ -93,26 +66,33 @@ export default function ViewResidentModal(props: ViewPropsResident) {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof residentSchema>) {
-    const residentWithId = {
-      ...values,
-      id: props.id,
-      date_of_birth: values.date_of_birth
-        ? typeof values.date_of_birth === "string"
-          ? values.date_of_birth
-          : values.date_of_birth.toISOString()
-        : "",
-    };
-    await invoke("update_resident_command", { resident: residentWithId });
-    toast.success("Resident updated successfully", {
-      description: `${values.first_name} ${values.last_name} was updated`,
-    });
-    setOpenModal(false);
-    props.onSave();
-  }
-
-  // Helper for field value
   const watch = form.watch;
+
+  async function onSubmit(values: z.infer<typeof residentSchema>) {
+    try {
+      const residentWithId = {
+        ...values,
+        id: props.id,
+        date_of_birth:
+          values.date_of_birth instanceof Date
+            ? values.date_of_birth.toISOString().split("T")[0]
+            : values.date_of_birth,
+      };
+
+      await invoke("update_resident_command", { resident: residentWithId });
+
+      toast.success("Resident updated successfully", {
+        description: `${values.first_name} ${values.last_name} was updated.`,
+      });
+
+      setOpenModal(false);
+      props.onSave();
+    } catch (error) {
+      toast.error("Update failed", {
+        description: error instanceof Error ? error.message : "Unknown error",
+      });
+    }
+  }
 
   return (
     <>
@@ -133,528 +113,747 @@ export default function ViewResidentModal(props: ViewPropsResident) {
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
+                <p className="text-md font-bold text-black">
+                  Basic Resident Information
+                </p>
               </DialogHeader>
 
-              {/* Steps navigation */}
-              <div className="flex gap-2 mb-2">
-                <Button
-                  type="button"
-                  variant={step === 1 ? "default" : "outline"}
-                  onClick={() => setStep(1)}
-                  size="sm"
-                >
-                  Step 1
-                </Button>
-                <Button
-                  type="button"
-                  variant={step === 2 ? "default" : "outline"}
-                  onClick={() => setStep(2)}
-                  size="sm"
-                >
-                  Step 2
-                </Button>
-                <Button
-                  type="button"
-                  variant={step === 3 ? "default" : "outline"}
-                  onClick={() => setStep(3)}
-                  size="sm"
-                >
-                  Step 3
-                </Button>
+              {/* Rest of your content here... */}
+              <div className="flex flex-col gap-3">
+                {step === 1 && (
+                  <>
+                    <h2 className="text-md font-semibold text-gray-900 mt-2">
+                      Personal Information
+                    </h2>
+                    <div className="grid grid-cols-4 gap-4">
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="prefix"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Prefix</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Prefix" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {prefixOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="photo"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Upload Profile Picture</FormLabel>
+                              <FormControl>
+                                <>
+                                  <Input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => {
+                                      const file = e.target.files?.[0];
+                                      if (file) {
+                                        field.onChange(file);
+                                        const reader = new FileReader();
+                                        reader.onload = () => {
+                                          setCapturedImage(
+                                            reader.result as string
+                                          );
+                                        };
+                                        reader.readAsDataURL(file);
+                                      }
+                                    }}
+                                    className="mt-2"
+                                  />
+                                </>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="first_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>First Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="first_name"
+                                  type="text"
+                                  placeholder="Enter first name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="middle_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Middle Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="middle_name"
+                                  type="text"
+                                  placeholder="Enter middle name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="last_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Last Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="last_name"
+                                  type="text"
+                                  placeholder="Enter last name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-1">
+                        <FormField
+                          control={form.control}
+                          name="suffix"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Suffix</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Suffix" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {suffixOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="civil_status"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Civil Status</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Civil Status" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {civilStatusOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-1">
+                        <FormField
+                          control={form.control}
+                          name="gender"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Gender</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Gender" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {genderOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="nationality"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Nationality</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="nationality"
+                                  type="text"
+                                  placeholder="Enter nationality"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="mobile_number"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Mobile Number</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="mobileNumber"
+                                  type="text"
+                                  placeholder="Enter mobile number"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="date_of_birth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Date of Birth</FormLabel>
+                              <Popover
+                                open={openCalendar}
+                                onOpenChange={setOpenCalendar}
+                              >
+                                <PopoverTrigger asChild>
+                                  <Button variant="outline">
+                                    {field.value
+                                      ? format(field.value, "PPP")
+                                      : "Pick a date"}
+                                    <CalendarIcon className="ml-auto h-4 w-4" />
+                                  </Button>
+                                </PopoverTrigger>
+                                <PopoverContent
+                                  className="w-auto p-0"
+                                  align="center"
+                                >
+                                  <Calendar
+                                    mode="single"
+                                    selected={field.value}
+                                    onSelect={field.onChange}
+                                    captionLayout="dropdown"
+                                    fromYear={1900}
+                                    toYear={new Date().getFullYear()}
+                                  />
+                                </PopoverContent>
+                              </Popover>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="status"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Status</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Status" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {statusOption.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {step === 2 && (
+                  <>
+                    <h2 className="text-md font-semibold text-gray-900 mt-2">
+                      Place of Birth
+                    </h2>
+                    <div className="grid grid-cols-4 gap-4">
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="town_of_birth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>City/Town</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="townOfBirth"
+                                  type="text"
+                                  placeholder="Enter town/city of birth"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="province_of_birth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Province</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="provinceOfBirth"
+                                  type="text"
+                                  placeholder="Enter province of birth"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <h2 className="text-md font-semibold text-gray-900 mt-2">
+                      Present Address
+                    </h2>
+                    <div className="grid grid-cols-4 gap-4">
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="zone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Zone/Purok</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="zone"
+                                  type="text"
+                                  placeholder="Enter present zone/purok"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="barangay"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Barangay</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="barangay"
+                                  type="text"
+                                  placeholder="Enter present barangay"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="town"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Town</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="town"
+                                  type="text"
+                                  placeholder="Enter present town"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="province"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Province</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="province"
+                                  type="text"
+                                  placeholder="Enter present province"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+                {step === 3 && (
+                  <>
+                    <h2 className="text-md font-semibold text-gray-900 mt-2">
+                      Family Information
+                    </h2>
+                    <h2 className="text-sm font-semibold text-gray-700 mt-2">
+                      Name of Father
+                    </h2>
+                    <div className="grid grid-cols-4 gap-4">
+                      <div className="col-span-4">
+                        <FormField
+                          control={form.control}
+                          name="father_prefix"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Prefix</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Prefix" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {prefixOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="father_first_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>First Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="father_firstName"
+                                  type="text"
+                                  placeholder="Enter first name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="father_middle_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Middle Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="father_middleName"
+                                  type="text"
+                                  placeholder="Enter middle name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="father_last_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Last Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="father_last_name"
+                                  type="text"
+                                  placeholder="Enter last name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-1">
+                        <FormField
+                          control={form.control}
+                          name="father_suffix"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Suffix</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Suffix" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {suffixOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <h2 className="text-sm font-semibold text-gray-700 mt-2">
+                      Name of Mother
+                    </h2>
+                    <div className="grid grid-cols-4 gap-2">
+                      <div className="col-span-4">
+                        <FormField
+                          control={form.control}
+                          name="mother_prefix"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Prefix</FormLabel>
+                              <FormControl>
+                                <Select
+                                  onValueChange={field.onChange}
+                                  defaultValue={field.value}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select Prefix" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {prefixOptions.map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
+                                      </SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="mother_first_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>First Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="mother_firstName"
+                                  type="text"
+                                  placeholder="Enter first name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="mother_middle_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Middle Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="mothermiddleName"
+                                  type="text"
+                                  placeholder="Enter middle name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="mother_last_name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Last Name</FormLabel>
+                              <FormControl>
+                                <Input
+                                  id="mother_last_name"
+                                  type="text"
+                                  placeholder="Enter last name"
+                                  required
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
+              <div className="mt-4 flex justify-between items-center">
+                {/* Back Button on Left */}
+                {step > 1 ? (
+                  <Button
+                    type="button"
+                    onClick={() => setStep((prev) => prev - 1)}
+                  >
+                    Back
+                  </Button>
+                ) : (
+                  <div /> // Keeps spacing even if Back is hidden
+                )}
 
-              {/* Step 1: Personal Information */}
-              {step === 1 && (
-                <>
-                  <p className="text-md font-bold text-black">
-                    Personal Information
-                  </p>
-                  <div className="grid grid-cols-4 gap-4">
-                    {/* Prefix */}
-                    <FormField
-                      control={form.control}
-                      name="prefix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Prefix</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("prefix") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* First Name */}
-                    <FormField
-                      control={form.control}
-                      name="first_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>First Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("first_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Middle Name */}
-                    <FormField
-                      control={form.control}
-                      name="middle_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Middle Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("middle_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Last Name */}
-                    <FormField
-                      control={form.control}
-                      name="last_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Last Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("last_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Suffix */}
-                    <FormField
-                      control={form.control}
-                      name="suffix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Suffix</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("suffix") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Gender */}
-                    <FormField
-                      control={form.control}
-                      name="gender"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Gender</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("gender") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Civil Status */}
-                    <FormField
-                      control={form.control}
-                      name="civil_status"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Civil Status</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("civil_status") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Mobile Number */}
-                    <FormField
-                      control={form.control}
-                      name="mobile_number"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Mobile Number</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("mobile_number") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Date of Birth */}
-                    <FormField
-                      control={form.control}
-                      name="date_of_birth"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel
-                            htmlFor="date_of_birth"
-                            className="text-black font-bold text-xs"
-                          >
-                            Date of Birth
-                          </FormLabel>
-                          <FormControl>
-                            <Input
-                              id="date_of_birth"
-                              type="date"
-                              value={
-                                watch("date_of_birth")
-                                  ? format(
-                                      typeof watch("date_of_birth") === "string"
-                                        ? new Date(watch("date_of_birth"))
-                                        : watch("date_of_birth"),
-                                      "yyyy-MM-dd"
-                                    )
-                                  : ""
-                              }
-                              onChange={(e) =>
-                                field.onChange(new Date(e.target.value))
-                              }
-                              className="text-black"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Step 2: Address Information */}
-              {step === 2 && (
-                <>
-                  <p className="text-md font-bold text-black">
-                    Address Information
-                  </p>
-                  <div className="grid grid-cols-4 gap-4">
-                    {/* Town of Birth */}
-                    <FormField
-                      control={form.control}
-                      name="town_of_birth"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Town of Birth</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("town_of_birth") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Province of Birth */}
-                    <FormField
-                      control={form.control}
-                      name="province_of_birth"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Province of Birth</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("province_of_birth") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Nationality */}
-                    <FormField
-                      control={form.control}
-                      name="nationality"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Nationality</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("nationality") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Zone */}
-                    <FormField
-                      control={form.control}
-                      name="zone"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Zone</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("zone") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Barangay */}
-                    <FormField
-                      control={form.control}
-                      name="barangay"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Barangay</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("barangay") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Town */}
-                    <FormField
-                      control={form.control}
-                      name="town"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Town</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("town") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Province */}
-                    <FormField
-                      control={form.control}
-                      name="province"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Province</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("province") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Status */}
-                    <FormField
-                      control={form.control}
-                      name="status"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Status</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("status") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Step 3: Family Information */}
-              {step === 3 && (
-                <>
-                  <p className="text-md font-bold text-black">
-                    Family Information
-                  </p>
-                  <div className="grid grid-cols-4 gap-4">
-                    {/* Father's Name */}
-                    <FormField
-                      control={form.control}
-                      name="father_prefix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Father Prefix</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("father_prefix") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="father_first_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Father First Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("father_first_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="father_middle_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Father Middle Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("father_middle_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="father_last_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Father Last Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("father_last_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    {/* Mother's Name */}
-                    <FormField
-                      control={form.control}
-                      name="mother_prefix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Mother Prefix</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("mother_prefix") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="mother_first_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Mother First Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("mother_first_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="mother_middle_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Mother Middle Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("mother_middle_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="mother_last_name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Mother Last Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...field}
-                              value={watch("mother_last_name") || ""}
-                              onChange={field.onChange}
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Step navigation buttons */}
-              <div className="flex justify-between mt-4">
-                <div>
-                  {step > 1 && (
+                {/* Next + Save on Right */}
+                <div className="flex gap-2">
+                  {step < 3 && (
                     <Button
                       type="button"
-                      variant="outline"
-                      onClick={() => setStep(step - 1)}
+                      onClick={() => setStep((prev) => prev + 1)}
                     >
-                      Previous
-                    </Button>
-                  )}
-                </div>
-                <div>
-                  {step < 3 ? (
-                    <Button type="button" onClick={() => setStep(step + 1)}>
                       Next
                     </Button>
-                  ) : (
-                    <Button type="submit">Save Resident</Button>
                   )}
+                  {step === 3 && <Button type="submit">Save Blotter</Button>}
                 </div>
               </div>
             </form>

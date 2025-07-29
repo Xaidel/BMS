@@ -8,6 +8,10 @@ export default function searchHousehold(term: string, data: Household[]): Househ
 
   return data.filter(
     (household) =>
-      pattern.test(household.type_) || pattern.test(household.head) || pattern.test(household.household_number.toString())
+      pattern.test(household.type_) ||
+      pattern.test(household.head) ||
+      pattern.test(household.household_number.toString()) ||
+      pattern.test(household.zone) ||
+      pattern.test(household.status)
   );
 }

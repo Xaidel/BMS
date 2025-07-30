@@ -23,7 +23,7 @@ import {
   Wallet,
   Layers,
 } from "lucide-react"; // or custom icons
-import SummaryCardIncome from "@/components/ui/summary-card/income";
+import SummaryCardIncome from "@/components/summary-card/income";
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect } from "react";
 import { pdf } from "@react-pdf/renderer";

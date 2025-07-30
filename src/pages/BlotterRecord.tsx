@@ -23,7 +23,7 @@ import { useSearchParams } from "react-router-dom";
 import { Blotter } from "@/types/types";
 import sort from "@/service/blotter/blotterSort";
 import searchBlotter from "@/service/blotter/searchBlotter";
-import SummaryCardBlotter from "@/components/ui/summary-card/blotter";
+import SummaryCardBlotter from "@/components/summary-card/blotter";
 import { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";

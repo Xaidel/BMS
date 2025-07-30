@@ -17,7 +17,7 @@ import { useSearchParams } from "react-router-dom";
 import { Resident } from "@/types/types";
 import { sort } from "@/service/resident/residentSort";
 import searchResident from "@/service/resident/searchResident";
-import SummaryCardResidents from "@/components/ui/summary-card/residents";
+import SummaryCardResidents from "@/components/summary-card/residents";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
 

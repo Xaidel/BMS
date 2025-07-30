@@ -17,7 +17,7 @@ import {
   ListChecks,
 } from "lucide-react";
 import searchCertificate from "@/service/certificate/searchCertificate";
-import SummaryCard from "@/components/ui/summary-card/certificate";
+import SummaryCard from "@/components/summary-card/certificate";
 
 const filters = [
   "All Certificates",

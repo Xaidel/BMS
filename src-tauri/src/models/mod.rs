@@ -5,3 +5,4 @@ pub mod household;
 pub mod event;
 pub mod settings;
 pub mod resident;
+pub mod official;

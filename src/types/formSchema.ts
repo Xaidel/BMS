@@ -208,3 +208,18 @@ export const settingsSchema = z.object({
   email: z.string().email(),
   logo: z.string(),
 });
+
+
+export const officialSchema = z.object({
+  id: z.number().optional(),
+  name: z.string().min(2, { message: "Name is too short" }).max(100, { message: "Name is too long" }),
+  role: z.string().min(2, { message: "Role is too short" }).max(100, { message: "Role is too long" }),
+  age: z.number().min(18, { message: "Age must be at least 18" }),
+  contact: z.string().min(7, { message: "Contact is too short" }).max(20, { message: "Contact is too long" }),
+  term_start: z.date({ required_error: "Start of term is required" }),
+  term_end: z.date({ required_error: "End of term is required" }),
+  zone: z.string().min(1, { message: "Zone is required" }),
+  image: z.string().optional(),
+  type_: z.string().min(1, { message: "Type is required" }),
+  section: z.string().min(1, { message: "Section is required" }),
+});

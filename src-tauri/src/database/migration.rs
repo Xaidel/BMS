@@ -71,7 +71,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             email TEXT,
             logo TEXT  -- base64 or file path
             );
-        DROP TABLE IF EXISTS residents; -- Drop if exists to avoid conflicts
+            
         CREATE TABLE IF NOT EXISTS residents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             prefix TEXT NOT NULL,
@@ -104,6 +104,20 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             is_registered_voter BOOLEAN NOT NULL DEFAULT 0,
             is_pwd BOOLEAN NOT NULL DEFAULT 0,
             is_senior BOOLEAN NOT NULL DEFAULT 0
+        );
+
+                CREATE TABLE IF NOT EXISTS officials (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            role TEXT NOT NULL,
+            type_ TEXT NOT NULL,
+            section TEXT NOT NULL,
+            age INTEGER NOT NULL,
+            contact TEXT NOT NULL,
+            term_start TEXT NOT NULL,
+            term_end TEXT NOT NULL,
+            zone TEXT NOT NULL,
+            image TEXT
         );
         ",
     )?;

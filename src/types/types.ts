@@ -111,3 +111,17 @@ export type Settings = {
   email: string;
   logo?: string;
 };
+
+
+export type Official = {
+  id?: number;
+  name: string;
+  role: string;
+  age: number;
+  contact: string;
+  term_start: Date;
+  term_end: Date;
+  zone: string;
+  image?: string;
+  type_: string;
+};

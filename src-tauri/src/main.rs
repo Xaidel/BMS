@@ -4,6 +4,7 @@ mod database;
 mod commands;
 mod models;
 
+use commands::officials::{save_official_command, delete_official_command, fetch_all_officials_command, insert_official_command, update_official_command};
 use commands::settings::{save_settings_command, fetch_settings_command, fetch_logo_command};
 use commands::events::{save_event_command, insert_event_command, fetch_all_events_command, delete_event_command, update_event_command};
 use commands::households::{save_household_command, insert_household_command, fetch_all_households_command, delete_household_command, update_household_command};
@@ -83,6 +84,12 @@ fn main() {
             delete_resident_command,
             update_resident_command,
             save_resident_command,
+
+            save_official_command,
+            delete_official_command,
+            fetch_all_officials_command,
+            insert_official_command,
+            update_official_command,
 
             fetch_settings_command,
             save_settings_command,

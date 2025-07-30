@@ -1,13 +1,17 @@
 // components/ui/summarycard.tsx
 type SummaryCardIncomeProps = {
   title: string;
-  value: number | string;
+  value: number;
   icon: JSX.Element;
+  onClick?: () => void;
 };
 
-export default function SummaryCardIncome({ title, value, icon }: SummaryCardIncomeProps) {
+export default function SummaryCardIncome({ title, value, icon, onClick }: SummaryCardIncomeProps) {
   return (
-    <div className="flex justify-between items-center p-4 bg-white shadow-md rounded-lg w-[270px] h-[100px]">
+    <div
+      onClick={onClick}
+      className="cursor-pointer hover:shadow-lg transition-all flex justify-between items-center p-4 bg-white shadow-md rounded-lg w-[270px] h-[100px]"
+    >
       <div>
         <p className="text-sm text-gray-500">{title}</p>
         <p className="text-xl font-bold">{value}</p>

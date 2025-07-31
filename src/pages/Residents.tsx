@@ -168,14 +168,234 @@ export default function Residents() {
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCardResidents title="Total Residents" value={total} icon={<Users size={50} />} />
-        <SummaryCardResidents title="Male" value={male} icon={<Mars size={50} />} />
-        <SummaryCardResidents title="Female" value={female} icon={<Venus size={50} />} />
-        <SummaryCardResidents title="Senior" value={senior} icon={<User size={50} />} />
-        <SummaryCardResidents title="PWD" value={pwd} icon={<Accessibility size={50} />} />
-        <SummaryCardResidents title="Registered Voters" value={registered} icon={<Fingerprint size={50} />} />
-        <SummaryCardResidents title="Active" value={active} icon={<UserCheck size={50} />} />
-        <SummaryCardResidents title="Moved Out" value={movedOut} icon={<UserMinus size={50} />} />
+        <SummaryCardResidents
+          title="Total Residents"
+          value={total}
+          icon={<Users size={50} />}
+          onClick={async () => {
+            const { pdf } = await import("@react-pdf/renderer");
+            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+            const { toast } = await import("sonner");
+            const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+            const casted: Resident[] = data.map((r) => ({
+              ...r,
+              date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+            })) as Resident[];
+
+            const blob = await pdf(<ResidentPDF filter="All Residents" residents={casted} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("ResidentRecords.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Resident Record successfully downloaded", {
+                description: "Resident record is saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Resident record",
+              });
+            }
+          }}
+        />
+        <SummaryCardResidents title="Male" value={male} icon={<Mars size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.gender === "Male");
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="Male Residents" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("MaleResidents.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("Male Resident PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save Male Resident PDF",
+            });
+          }
+        }} />
+        <SummaryCardResidents title="Female" value={female} icon={<Venus size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.gender === "Female");
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="Female Residents" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("FemaleResidents.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("Female Resident PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save Female Resident PDF",
+            });
+          }
+        }} />
+        <SummaryCardResidents title="Senior" value={senior} icon={<User size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.is_senior === true);
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="Senior Residents" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("SeniorResidents.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("Senior Resident PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save Senior Resident PDF",
+            });
+          }
+        }} />
+        <SummaryCardResidents title="PWD" value={pwd} icon={<Accessibility size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.is_pwd === true);
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="PWD Residents" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("PWDResidents.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("PWD Resident PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save PWD Resident PDF",
+            });
+          }
+        }} />
+        <SummaryCardResidents title="Registered Voters" value={registered} icon={<Fingerprint size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.is_registered_voter === true);
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="Registered Voters" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("RegisteredVoters.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("Registered Voters PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save Registered Voters PDF",
+            });
+          }
+        }} />
+        <SummaryCardResidents title="Active" value={active} icon={<UserCheck size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.status === "Active");
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="Active Residents" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("ActiveResidents.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("Active Resident PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save Active Resident PDF",
+            });
+          }
+        }} />
+        <SummaryCardResidents title="Moved Out" value={movedOut} icon={<UserMinus size={50} />} onClick={async () => {
+          const { pdf } = await import("@react-pdf/renderer");
+          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+          const { toast } = await import("sonner");
+          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
+
+          const filtered = data.filter((r) => r.status === "Moved Out");
+          const casted: Resident[] = filtered.map((r) => ({
+            ...r,
+            date_of_birth: typeof r.date_of_birth === "string" ? new Date(r.date_of_birth) : r.date_of_birth,
+          }));
+
+          const blob = await pdf(<ResidentPDF filter="Moved Out Residents" residents={casted} />).toBlob();
+          const buffer = await blob.arrayBuffer();
+          const contents = new Uint8Array(buffer);
+          try {
+            await writeFile("MovedOutResidents.pdf", contents, {
+              baseDir: BaseDirectory.Document,
+            });
+            toast.success("Moved Out Resident PDF downloaded", {
+              description: "Saved in Documents folder",
+            });
+          } catch (e) {
+            toast.error("Error", {
+              description: "Failed to save Moved Out Resident PDF",
+            });
+          }
+        }} />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center">

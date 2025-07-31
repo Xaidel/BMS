@@ -170,7 +170,6 @@ export default function Events() {
   const total = data.length;
   const finished = data.filter((d) => d.status === "Finished").length;
   const upcoming = data.filter((d) => d.status === "Upcoming").length;
-  const ongoing = data.filter((d) => d.status === "Ongoing").length;
   const cancelled = data.filter((d) => d.status === "Cancelled").length;
 
   const handleDeleteSelected = async () => {
@@ -207,24 +206,115 @@ export default function Events() {
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCardEvent
+          title="Total Events"
+          value={total}
+          icon={<CalendarClock size={50} />}
+          onClick={async () => {
+            const { pdf } = await import("@react-pdf/renderer");
+            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+            const { toast } = await import("sonner");
+            const { EventPDF } = await import("@/components/pdf/eventpdf");
+
+            const blob = await pdf(<EventPDF filter="All Events" events={data} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("EventRecords.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Event Record successfully downloaded", {
+                description: "Event record is saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Event record",
+              });
+            }
+          }}
+        />
+        <SummaryCardEvent
           title="Upcoming Events"
           value={upcoming}
           icon={<CalendarPlus size={50} />}
-        />
-        <SummaryCardEvent
-          title="Ongoing Events"
-          value={ongoing}
-          icon={<CalendarClock size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.status === "Upcoming");
+            const { pdf } = await import("@react-pdf/renderer");
+            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+            const { toast } = await import("sonner");
+            const { EventPDF } = await import("@/components/pdf/eventpdf");
+
+            const blob = await pdf(<EventPDF filter="Upcoming Events" events={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("UpcomingEvents.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Upcoming Events PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Upcoming Events PDF",
+              });
+            }
+          }}
         />
         <SummaryCardEvent
           title="Finished Events"
           value={finished}
           icon={<CalendarCheck size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.status === "Finished");
+            const { pdf } = await import("@react-pdf/renderer");
+            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+            const { toast } = await import("sonner");
+            const { EventPDF } = await import("@/components/pdf/eventpdf");
+
+            const blob = await pdf(<EventPDF filter="Finished Events" events={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("FinishedEvents.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Finished Events PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Finished Events PDF",
+              });
+            }
+          }}
         />
         <SummaryCardEvent
           title="Cancelled Events"
           value={cancelled}
           icon={<CalendarX2 size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.status === "Cancelled");
+            const { pdf } = await import("@react-pdf/renderer");
+            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
+            const { toast } = await import("sonner");
+            const { EventPDF } = await import("@/components/pdf/eventpdf");
+
+            const blob = await pdf(<EventPDF filter="Cancelled Events" events={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("CancelledEvents.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Cancelled Events PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Cancelled Events PDF",
+              });
+            }
+          }}
         />
       </div>
 

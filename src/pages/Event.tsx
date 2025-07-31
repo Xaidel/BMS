@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import DataTable from "@/components/ui/datatable";
 import Filter from "@/components/ui/filter";
 import Searchbar from "@/components/ui/searchbar";
-import SummaryCardEvent from "@/components/ui/summary-card/event";
+import SummaryCardEvent from "@/components/summary-card/event";
 import AddEventModal from "@/features/event/addEventModal";
 import DeleteEventModal from "@/features/event/deleteEventModal";
 import ViewEventModal from "@/features/event/viewEventModal";

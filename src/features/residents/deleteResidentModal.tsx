@@ -1,49 +1,67 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { XIcon } from "lucide-react";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Trash } from "lucide-react";
+import { useState } from "react";
 import { toast } from "sonner";
+import { invoke } from "@tauri-apps/api/core";
 
-type Resident = {
-  full_name: string,
-  civilStatus: string,
-  status: "Moved Out" | "Active" | "Dead" | "Missing",
-  birthday: Date,
-  gender: string,
-  zone: string,
+interface Props {
+  id: number;
+  full_name: string;
+  onDelete?: () => void;
 }
-export default function DeleteResidentModal(resident: Resident) {
 
-  function onConfirm() {
-    toast.success("Event deleted succesfully", {
-      description: `${resident.full_name} was deleted`
-    })
+export default function DeleteResidentModal({ id, full_name, onDelete }: Props) {
+  const [open, setOpen] = useState(false);
 
-  }
+  const handleDelete = async () => {
+    try {
+      await invoke("delete_resident_command", { id });
+      toast.success("Resident deleted", {
+        description: `${full_name} was deleted`,
+      });
+      setOpen(false);
+      onDelete?.();
+    } catch (err) {
+      console.error("Delete failed:", err);
+      toast.error("Failed to delete resident");
+    }
+  };
+
   return (
-    <>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="destructive">
-            <XIcon />
-            Delete Resident
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button variant="destructive">
+          <Trash className="w-4 h-4 mr-2" />
+          Delete
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="bg-white text-black">
+        <DialogHeader>
+          <DialogTitle>Delete Resident?</DialogTitle>
+          <DialogDescription>
+            Are you sure you want to delete resident "{full_name}"?
+          </DialogDescription>
+        </DialogHeader>
+        <div className="flex justify-end gap-3 mt-4">
+          <DialogClose asChild>
+            <Button variant="ghost" className="text-black">
+              Cancel
+            </Button>
+          </DialogClose>
+          <Button variant="destructive" onClick={handleDelete}>
+            Confirm
           </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle className="text-black font-normal">Resident Deletion</DialogTitle>
-            <DialogDescription className="text-sm font-bold">This action cannot be undone once confirmed</DialogDescription>
-          </DialogHeader>
-          <div className="text-black text-lg font-bold">Are you sure you want to delete this resident?</div>
-          <div className="flex w-full gap-3 justify-end">
-            <DialogClose asChild>
-              <Button variant="destructive">Delete</Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button onClick={onConfirm}>Confirm</Button>
-            </DialogClose>
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  )
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
 }

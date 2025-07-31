@@ -14,7 +14,7 @@ import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
 import { sort } from "@/service/household/householdSort";
 import searchHousehold from "@/service/household/searchHousehold";
-import SummaryCard from "@/components/ui/summary-card/household";
+import SummaryCard from "@/components/summary-card/household";
 import { invoke } from "@tauri-apps/api/core";
 
 const filters = ["All Households", "Numerical", "Renter", "Owner"];

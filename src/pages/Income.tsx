@@ -23,9 +23,13 @@ import {
   Wallet,
   Layers,
 } from "lucide-react"; // or custom icons
-import SummaryCardIncome from "@/components/ui/summary-card/income";
+import SummaryCardIncome from "@/components/summary-card/income";
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect } from "react";
+import { pdf } from "@react-pdf/renderer";
+import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
+import { toast } from "sonner";
+import { IncomePDF } from "@/components/pdf/incomepdf";
 
 const filters = [
   "All Income",
@@ -163,6 +167,23 @@ export default function IncomePage() {
           title="Total Revenue"
           value={data.reduce((acc, item) => acc + item.amount, 0)}
           icon={<DollarSign size={50} />}
+          onClick={async () => {
+            const blob = await pdf(<IncomePDF filter="All Income" incomes={data} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile('IncomeRecords.pdf', contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Income Record successfully downloaded", {
+                description: "Income record is saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the Income record",
+              });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Local Revenue"
@@ -170,6 +191,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Local Revenue")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Banknote size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Local Revenue");
+            const blob = await pdf(<IncomePDF filter="Local Revenue" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("LocalRevenue.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Local Revenue PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Local Revenue PDF" });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Tax Revenue"
@@ -177,6 +210,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Tax Revenue")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<PiggyBank size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Tax Revenue");
+            const blob = await pdf(<IncomePDF filter="Tax Revenue" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("TaxRevenue.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Tax Revenue PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Tax Revenue PDF" });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Government Grants"
@@ -184,6 +229,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Government Grants")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Gift size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Government Grants");
+            const blob = await pdf(<IncomePDF filter="Government Grants" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("GovernmentGrants.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Government Grants PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Government Grants PDF" });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Service Revenue"
@@ -191,6 +248,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Service Revenue")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Coins size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Service Revenue");
+            const blob = await pdf(<IncomePDF filter="Service Revenue" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("ServiceRevenue.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Service Revenue PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Service Revenue PDF" });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Rental Income"
@@ -198,6 +267,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Rental Income")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Wallet size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Rental Income");
+            const blob = await pdf(<IncomePDF filter="Rental Income" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("RentalIncome.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Rental Income PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Rental Income PDF" });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Government Funds (IRA)"
@@ -205,6 +286,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Government Funds")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Layers size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Government Funds");
+            const blob = await pdf(<IncomePDF filter="Government Funds" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("GovernmentFunds.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Government Funds PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Government Funds PDF" });
+            }
+          }}
         />
         <SummaryCardIncome
           title="Others"
@@ -212,6 +305,18 @@ export default function IncomePage() {
             .filter((d) => d.category === "Others")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Shirt size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.category === "Others");
+            const blob = await pdf(<IncomePDF filter="Others" incomes={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("Others.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Others PDF saved", { description: "Saved in Documents folder" });
+            } catch (e) {
+              toast.error("Error", { description: "Failed to save Others PDF" });
+            }
+          }}
         />
       </div>
 

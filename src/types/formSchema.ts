@@ -46,33 +46,37 @@ export const eventSchema = z.object({
 })
 
 export const residentSchema = z.object({
-  full_name: z.string().min(2, {
-    message: "Resident name is too short"
-  }).max(50, {
-    message: "Resident name is too long, put other details on the 'details' form"
-  }),
-  civilStatus: z.string().min(2, {
-    message: "Resident type is too short"
-  }).max(50, {
-    message: "Resident type is too long."
-  }),
-  birthday: z.date({
-    required_error: "Please specify the event date"
-  }),
-  gender: z.string().min(2, {
-    message: "Resident venue is too short"
-  }).max(50, {
-    message: "Resident venue is too long"
-  }),
-  Zone: z.string().min(2, {
-    message: "Resident too long"
-  }).max(50, {
-    message: "Resident venue is too long"
-  }),
-  status: z.string().max(1000, {
-    message: "Important notes is too long"
-  })
-})
+  prefix: z.string(),
+  first_name: z.string().min(1),
+  middle_name: z.string().optional(),
+  last_name: z.string().min(1),
+  suffix: z.string().optional().nullable(),
+  civil_status: z.string().min(1),
+  gender: z.string().min(1),
+  nationality: z.string().min(1),
+  mobile_number: z.string().min(1),
+  date_of_birth: z.date(),
+  town_of_birth: z.string().min(1),
+  province_of_birth: z.string().min(1),
+  zone: z.string().min(1),
+  barangay: z.string().min(1),
+  town: z.string().min(1),
+  province: z.string().min(1),
+  father_prefix: z.string().min(1),
+  father_first_name: z.string().min(1),
+  father_middle_name: z.string().min(1),
+  father_last_name: z.string().min(1),
+  father_suffix: z.string().optional().nullable(),
+  mother_prefix: z.string().min(1),
+  mother_first_name: z.string().min(1),
+  mother_middle_name: z.string().min(1),
+  mother_last_name: z.string().min(1),
+  status: z.string().min(1),
+  photo: z.any(),
+  is_registered_voter: z.boolean().default(false),
+  is_pwd: z.boolean().default(false),
+  is_senior: z.boolean().default(false),
+});
 
 export const householdSchema = z.object({
   household_number: z.number().min(1),
@@ -179,95 +183,20 @@ export const expenseSchema = z.object({
 });
 
 export const blotterSchema = z.object({
-  type_: z
-    .string()
-    .min(2, {
-      message: "Blotter type is too short",
-    })
-    .max(50, {
-      message: "Blotter type is too long, put other details in the narrative",
-    }),
-  reported_by: z
-    .string()
-    .min(2, {
-      message: "Reporter name is too short",
-    })
-    .max(50, {
-      message: "Reporter name is too long",
-    }),
-  involved: z
-    .string()
-    .min(2, {
-      message: "Involved persons description is too short",
-    })
-    .max(50, {
-      message: "Involved persons description is too long",
-    }),
-  incident_date: z.date({
-    required_error: "Please specify the incident date",
-  }),
-  location: z
-    .string()
-    .min(2, {
-      message: "Location is too short",
-    })
-    .max(50, {
-      message: "Location is too long",
-    }),
-  zone: z
-    .string()
-    .min(2, {
-      message: "Zone is too short",
-    })
-    .max(50, {
-      message: "Zone is too long",
-    }),
-  status: z.string().max(1000, {
-    message: "Status is too long",
-  }),
-  narrative: z
-    .string()
-    .min(2, {
-      message: "Narrative is too short",
-    })
-    .max(1000, {
-      message: "Narrative is too long",
-    }),
-  action: z
-    .string()
-    .min(2, {
-      message: "Action taken is too short",
-    })
-    .max(1000, {
-      message: "Action taken is too long",
-    }),
-  witnesses: z
-    .string()
-    .min(2, {
-      message: "Witness list is too short",
-    })
-    .max(1000, {
-      message: "Witness list is too long",
-    }),
-  evidence: z
-    .string()
-    .min(2, {
-      message: "Evidence description is too short",
-    })
-    .max(1000, {
-      message: "Evidence description is too long",
-    }),
-  resolution: z
-    .string()
-    .min(2, {
-      message: "Resolution is too short",
-    })
-    .max(1000, {
-      message: "Resolution is too long",
-    }),
-  hearing_date: z.date({
-    required_error: "Please specify the hearing date",
-  }),
+  id: z.number().optional(), // Make optional if used for new entries
+  type_: z.string().min(1, "Type is required"),
+  reported_by: z.string().min(1, "Reporter is required"),
+  involved: z.string().min(1, "Involved parties are required"),
+  incident_date: z.date(),
+  location: z.string().min(1, "Location is required"),
+  zone: z.string().min(1, "Zone is required"),
+  status: z.string().min(1, "Status is required"),
+  narrative: z.string().min(1, "Narrative is required"),
+  action: z.string().min(1, "Action is required"),
+  witnesses: z.string().min(1, "Witnesses are required"),
+  evidence: z.string().min(1, "Evidence is required"),
+  resolution: z.string().min(1, "Resolution is required"),
+  hearing_date: z.date(),
 });
 
 export const settingsSchema = z.object({
@@ -278,4 +207,19 @@ export const settingsSchema = z.object({
   phone_number: z.string().min(1),
   email: z.string().email(),
   logo: z.string(),
+});
+
+
+export const officialSchema = z.object({
+  id: z.number().optional(),
+  name: z.string().min(2, { message: "Name is too short" }).max(100, { message: "Name is too long" }),
+  role: z.string().min(2, { message: "Role is too short" }).max(100, { message: "Role is too long" }),
+  age: z.number().min(18, { message: "Age must be at least 18" }),
+  contact: z.string().min(7, { message: "Contact is too short" }).max(20, { message: "Contact is too long" }),
+  term_start: z.date({ required_error: "Start of term is required" }),
+  term_end: z.date({ required_error: "End of term is required" }),
+  zone: z.string().min(1, { message: "Zone is required" }),
+  image: z.string().optional(),
+  type_: z.string().min(1, { message: "Type is required" }),
+  section: z.string().min(1, { message: "Section is required" }),
 });

@@ -1,6 +1,5 @@
 // OfficialsPage.tsx
 import { useState } from "react";
-import AddOfficialModal from "@/features/official/addOfficialModal";
 import ViewOfficialModal from "@/features/official/viewOfficialModal";
 import donald from "../assets/donaldT.jpg";
 
@@ -29,50 +28,49 @@ const sections = [
 
 const officials = {
   barangay: {
-    captain: { name: "John Cena", role: "Captain", image: donald, info: { age: 45, contact: "09123456789", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 1" } },
+    captain: { name: "John Cena", role: "Captain", image: donald, section: "Barangay Officials", info: { age: 45, contact: "09123456789", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 1" } },
     councilors: [
-      { name: "Councilor A", role: "Councilor", image: donald, info: { age: 40, contact: "09123456788", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 2" } },
-      { name: "Councilor B", role: "Councilor", image: donald, info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
+      { name: "Councilor A", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 40, contact: "09123456788", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 2" } },
+      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
+      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
+      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
+      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
+      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
+      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
     ],
     staffs: [
-      { name: "Secretary", role: "Secretary", image: donald, info: { age: 38, contact: "09123456777", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 3" } },
-      { name: "Treasurer", role: "Treasurer", image: donald, info: { age: 42, contact: "09123456776", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 4" } },
-      { name: "Caretaker", role: "Caretaker", image: donald, info: { age: 37, contact: "09123456775", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 5" } },
+      { name: "Secretary", role: "Secretary", image: donald, section: "Barangay Staffs", info: { age: 38, contact: "09123456777", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 3" } },
+      { name: "Treasurer", role: "Treasurer", image: donald, section: "Barangay Staffs", info: { age: 42, contact: "09123456776", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 4" } },
+      { name: "Caretaker", role: "Caretaker", image: donald, section: "Barangay Staffs", info: { age: 37, contact: "09123456775", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 5" } },
     ],
   },
   sk: {
-    captain: { name: "SK Chair", role: "SK Chairman", image: donald, info: { age: 25, contact: "09123456770", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone A" } },
+    captain: { name: "SK Chair", role: "SK Chairman", image: donald, section: "SK Officials", info: { age: 25, contact: "09123456770", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone A" } },
     councilors: [
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
+      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
     ],
   },
   tanod: {
-    chief: { name: "Chief Tanod", role: "Chief", image: donald, info: { age: 50, contact: "09123456772", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone C" } },
+    chief: { name: "Chief Tanod", role: "Chief", image: donald, section: "Tanod Officials", info: { age: 50, contact: "09123456772", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone C" } },
     members: [
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
+      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
     ],
   },
 };
 
 export default function OfficialsPage() {
-  const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedOfficial, setSelectedOfficial] = useState(null);
   const viewMore = (official) => setSelectedOfficial(official);
 
@@ -99,9 +97,6 @@ export default function OfficialsPage() {
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Officials</h1>
-        <button onClick={() => setOpenAddModal(true)} className="bg-blue-600 text-white px-4 py-2 rounded-md">
-          + Add Official
-        </button>
       </div>
 
       {sections.map((section, index) => (
@@ -133,8 +128,6 @@ export default function OfficialsPage() {
           </section>
         </div>
       ))}
-
-      <AddOfficialModal open={openAddModal} onClose={() => setOpenAddModal(false)} />
       {selectedOfficial && (
         <ViewOfficialModal person={selectedOfficial} onClose={() => setSelectedOfficial(null)} />
       )}

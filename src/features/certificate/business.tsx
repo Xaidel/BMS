@@ -1,4 +1,5 @@
 import { Buffer } from "buffer";
+import { toast } from "sonner";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -22,6 +23,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 type Resident = {
+  date_of_birth: any;
+  civil_status: string;
   id?: number;
   first_name: string;
   middle_name?: string;
@@ -61,6 +64,9 @@ export default function BusinessPermit() {
   const [businessLocation, setBusinessLocation] = useState("");
   const [businessOwner, setBusinessOwner] = useState("");
   const [amount, setAmount] = useState("150.00");
+  // Resident selection state
+  const [age, setAge] = useState("");
+  const [civilStatus, setCivilStatus] = useState("");
 
   useEffect(() => {
     invoke("fetch_logo_command")
@@ -117,6 +123,89 @@ export default function BusinessPermit() {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {/* Select Resident Dropdown */}
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={open}
+                  className="w-full flex justify-between"
+                >
+                  {value
+                    ? allResidents.find((res) => res.value === value)?.label
+                    : "Select a Resident"
+                  }
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="p-0 w-full">
+                <Command>
+                  <CommandInput
+                    placeholder="Search Resident..."
+                    className="h-9"
+                    value={search}
+                    onValueChange={setSearch}
+                  />
+                  {allResidents.length === 0 ? (
+                    <CommandEmpty>No Residents Found</CommandEmpty>
+                  ) : (
+                    <div className="h-60 overflow-hidden">
+                      <Virtuoso
+                        style={{ height: "100%" }}
+                        totalCount={filteredResidents.length}
+                        itemContent={(index) => {
+                          const res = filteredResidents[index];
+                          return (
+                            <CommandItem
+                              key={res.value}
+                              value={res.value}
+                              className="text-black"
+                              onSelect={(currentValue) => {
+                                const selected = allResidents.find((r) => r.value === currentValue)?.data;
+                                if (selected) {
+                                  if (selected.date_of_birth) {
+                                    const dob = new Date(selected.date_of_birth);
+                                    const today = new Date();
+                                    let calculatedAge = today.getFullYear() - dob.getFullYear();
+                                    const m = today.getMonth() - dob.getMonth();
+                                    if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                                      calculatedAge--;
+                                    }
+                                    try {
+                                      setAge(calculatedAge.toString());
+                                    } catch {}
+                                  } else {
+                                    try {
+                                      setAge("");
+                                    } catch {}
+                                  }
+                                  try {
+                                    setCivilStatus(selected.civil_status || "");
+                                  } catch {}
+                                  setValue(currentValue === value ? "" : currentValue);
+                                }
+                                setOpen(false);
+                              }}
+                            >
+                              {res.label}
+                              <Check
+                                className={cn(
+                                  "ml-auto",
+                                  value === res.value ? "opacity-100" : "opacity-0"
+                                )}
+                              />
+                            </CommandItem>
+                          );
+                        }}
+                      />
+                    </div>
+                  )}
+                </Command>
+              </PopoverContent>
+            </Popover>
+            <div className="my-4" />
+            {/* End Select Resident Dropdown */}
             <div className="grid gap-4">
               <div>
                 <Label>Business Name</Label>
@@ -140,11 +229,49 @@ export default function BusinessPermit() {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-center items-center">
-            <Button onClick={handleDownload}>
-              <Printer />
-              Print Certificate
-            </Button>
+          <CardFooter className="flex justify-between items-center gap-2">
+            <div className="flex-1 flex justify-start">
+              <Button
+                onClick={async () => {
+                  const selectedResident = allResidents.find((res) => res.value === value)?.data;
+                  if (!selectedResident) {
+                    alert("Please select a resident first.");
+                    return;
+                  }
+
+                  try {
+                    const nowIso = new Date().toISOString();
+                    await invoke("save_certificate_command", {
+                      cert: {
+                        resident_name: `${selectedResident.first_name} ${selectedResident.last_name}`,
+                        id: 0,
+                        type_: "Barangay Business Permit",
+                        issued_date: nowIso,
+                        age: age ? parseInt(age) : undefined,
+                        civil_status: civilStatus || "",
+                        ownership_text: businessOwner || "",
+                        amount: amount || "",
+                      }
+                    });
+
+                    toast.success("Certificate saved successfully!", {
+                      description: `${selectedResident.first_name} ${selectedResident.last_name}'s certificate was saved.`
+                    });
+                  } catch (error) {
+                    console.error("Save certificate failed:", error);
+                    alert("Failed to save certificate.");
+                  }
+                }}
+              >
+                Save
+              </Button>
+            </div>
+            <div className="flex-1 flex justify-end">
+              <Button onClick={handleDownload}>
+                <Printer />
+                Print Certificate
+              </Button>
+            </div>
           </CardFooter>
         </Card>
         <div className="flex-4">

@@ -1,5 +1,7 @@
 import { Buffer } from "buffer";
 
+import { toast } from "sonner";
+
 if (!window.Buffer) {
   window.Buffer = Buffer;
 }
@@ -259,7 +261,40 @@ export default function Clearance() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-center items-center">
+          <CardFooter className="flex justify-between items-center gap-4">
+            <Button
+              onClick={async () => {
+                if (!selectedResident) {
+                  alert("Please select a resident first.");
+                  return;
+                }
+
+                try {
+                  const nowIso = new Date().toISOString();
+                  await invoke("save_certificate_command", {
+                    cert: {
+                      resident_name: `${selectedResident.first_name} ${selectedResident.last_name}`,
+                      id: 0,
+                      type_: "Barangay Clearance",
+                      issued_date: nowIso,
+                      age: age ? parseInt(age) : undefined,
+                      civil_status: civilStatus || "",
+                      ownership_text: "",
+                      amount: amount || "",
+                    }
+                  });
+
+                  toast.success("Certificate saved successfully!", {
+                    description: `${selectedResident.first_name} ${selectedResident.last_name}'s certificate was saved.`
+                  });
+                } catch (error) {
+                  console.error("Save certificate failed:", error);
+                  alert("Failed to save certificate.");
+                }
+              }}
+            >
+              Save
+            </Button>
             <Button onClick={handleDownload}>
               <Printer />
               Print Certificate

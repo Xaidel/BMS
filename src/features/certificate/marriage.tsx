@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown, Printer } from "lucide-react";
+import { toast } from "sonner";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
@@ -377,7 +378,40 @@ export default function Marriage() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex justify-center items-center">
+          <CardFooter className="flex justify-between items-center gap-4">
+            <Button
+              onClick={async () => {
+                if (!selectedResident || !selectedResident2) {
+                  alert("Please select both residents.");
+                  return;
+                }
+
+                try {
+                  const nowIso = new Date().toISOString();
+                  await invoke("save_certificate_command", {
+                    cert: {
+                      id: 0,
+                      resident_name: `${selectedResident.first_name} ${selectedResident.last_name} & ${selectedResident2.first_name} ${selectedResident2.last_name}`,
+                      type_: "Marriage Certificate",
+                      issued_date: nowIso,
+                      age: parseInt(ageMale),
+                      civil_status: `${civilStatusMale}/${civilStatusFemale}`,
+                      ownership_text: "",
+                      amount: amount || "",
+                    }
+                  });
+
+                  toast.success("Certificate saved successfully!", {
+                    description: `Marriage certificate saved for ${selectedResident.first_name} and ${selectedResident2.first_name}`
+                  });
+                } catch (error) {
+                  console.error("Save certificate failed:", error);
+                  alert("Failed to save certificate.");
+                }
+              }}
+            >
+              Save
+            </Button>
             <Button onClick={handleDownload}>
               <Printer />
               Print Certificate

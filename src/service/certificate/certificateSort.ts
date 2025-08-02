@@ -21,7 +21,7 @@ function sortAlphabetical(data: Certificate[]): Certificate[] {
 
 function filterActive(data: Certificate[]): Certificate[] {
   return data.filter((certificate) => {
-    const oneYearLater = new Date(certificate.date);
+    const oneYearLater = new Date(certificate.issued_date);
     oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
     return new Date() <= oneYearLater;
   });
@@ -29,7 +29,7 @@ function filterActive(data: Certificate[]): Certificate[] {
 
 function filterExpired(data: Certificate[]): Certificate[] {
   return data.filter((certificate) => {
-    const oneYearLater = new Date(certificate.date);
+    const oneYearLater = new Date(certificate.issued_date);
     oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
     return new Date() > oneYearLater;
   });

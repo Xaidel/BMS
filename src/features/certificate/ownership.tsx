@@ -5,7 +5,6 @@ if (!window.Buffer) {
 }
 
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -29,7 +28,6 @@ type Resident = {
   suffix?: string;
   date_of_birth?: string;
   civil_status?: string;
-  issued_date?: string;
 };
 
 type mock = {
@@ -61,6 +59,7 @@ export default function Fourps() {
     return allResidents.find((res) => res.value === value)?.data;
   }, [allResidents, value])
   const [amount, setAmount] = useState("10.00");
+  const [ownershipText, setOwnershipText] = useState("");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
 
@@ -222,6 +221,19 @@ export default function Fourps() {
                 </PopoverContent>
               </Popover>
               <div className="mt-4">
+                <label htmlFor="ownership" className="block text-sm font-medium text-gray-700 mb-1">
+                  Ownership Description
+                </label>
+                <input
+                  id="ownership"
+                  type="text"
+                  value={ownershipText}
+                  onChange={(e) => setOwnershipText(e.target.value)}
+                  className="w-full border rounded px-3 py-2 text-sm"
+                  placeholder='e.g., two (2) heads Carabao, female 4 years old and male 1 year old'
+                />
+              </div>
+              <div className="mt-4">
                 <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">
                   Enter Age
                 </label>
@@ -266,40 +278,7 @@ export default function Fourps() {
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-between items-center gap-4">
-            <Button
-              onClick={async () => {
-                if (!selectedResident) {
-                  alert("Please select a resident first.");
-                  return;
-                }
-
-                try {
-                  const nowIso = new Date().toISOString();
-                  await invoke("save_certificate_command", {
-                    cert: {
-                      resident_name: `${selectedResident.first_name} ${selectedResident.last_name}`,
-                      id:0,
-                      type_: "4Ps Certificate",
-                      issued_date: nowIso,
-                      age: age ? parseInt(age) : undefined,
-                      civil_status: civilStatus || "",
-                      ownership_text: "",
-                      amount: amount || "",
-                    }
-                  });
-
-                  toast.success("Certificate saved successfully!", {
-                    description: `${selectedResident.first_name} ${selectedResident.last_name}'s certificate was saved.`
-                  });
-                } catch (error) {
-                  console.error("Save certificate failed:", error);
-                  alert("Failed to save certificate.");
-                }
-              }}
-            >
-              Save
-            </Button>
+          <CardFooter className="flex justify-center items-center">
             <Button onClick={handleDownload}>
               <Printer />
               Print Certificate
@@ -356,21 +335,17 @@ export default function Fourps() {
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                           <Text style={{ fontWeight: "bold" }}>This is to certify that </Text>
                           <Text style={{ fontWeight: "bold" }}>{`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}</Text>
-                          <Text>, {age || "___"} years old, {civilStatus || "___"}, is a resident of Barangay Tambo, Pamplona, Camarines Sur.</Text>
+                          <Text>, {age || "___"} years old, {civilStatus || "___"}, a resident of Barangay Tambo, Pamplona, Camarines Sur is the owner of{ownershipText ? ` ` : ""}{ownershipText && <Text style={{ fontWeight: "bold" }}>{ownershipText}</Text>}.</Text>
                         </Text>
-                        <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
-                          This certifies further that the above-named person is a member of the{" "}
-                          <Text style={{ fontWeight: "bold" }}>4Ps (Programang Pantawid Pamilyang Pilipino)</Text> in this Barangay and has been transpired at Tambo, Pamplona, Camarines Sur.
+                        <Text style={[styles.bodyText, { textAlign: "justify", marginTop: 10 }]}>
+                          This certification is being issued upon request of the interested party for record and reference purposes only.
                         </Text>
-                        <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
-                          This certification is issued upon request of the interested party for record and reference purposes.
-                        </Text>
-                        <Text style={[styles.bodyText, { marginTop: 8 }]}>
-                        </Text>
-                        <Text style={[styles.bodyText, { marginTop: 10, marginBottom: 8 }]}>
-                          Given this {new Date().toLocaleDateString("en-PH", {
-                            day: "numeric", month: "long", year: "numeric"
-                          })}, at Tambo, Pamplona, Camarines Sur.
+                        <Text style={[styles.bodyText, { textAlign: "justify", marginTop: 6 }]}>
+                          Issued this {new Date().toLocaleDateString("en-PH", {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric"
+                          })}, at Tambo, Pamplona, Camarines Sur
                         </Text>
                       </>
                     ) : (

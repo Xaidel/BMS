@@ -2,11 +2,11 @@ import sanitize from "../sanitize";
 
 
 type Certificate = {
+  id: any;
+  resident_name: any;
   name: string;
   type_: string;
-  or: string;
-  date: Date;
-  zone: string;
+  issued_date: Date;
 };
 
 export default function searchCertificate(
@@ -20,6 +20,7 @@ export default function searchCertificate(
     (item) =>
       pattern.test(item.name) ||
       pattern.test(item.type_) ||
-      pattern.test(item.or)
+      pattern.test(item.issued_date.toLocaleDateString())
+
   );
 }

@@ -516,15 +516,18 @@ export default function ViewResidentModal(
                             <FormItem>
                               <FormLabel>Zone/Purok</FormLabel>
                               <FormControl>
-                                <Input
-                                  id="zone"
-                                  type="text"
-                                  placeholder="Enter present zone/purok"
-                                  required
-                                  {...field}
-                                  className="text-black"
-                                />
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                  <SelectTrigger className="w-full text-black border-black/15">
+                                    <SelectValue placeholder={"Please select the zone"} />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {["1", "2", "3", "4", "5", "6", "7"].map((option, i) => (
+                                      <SelectItem value={option} key={i}>{option}</SelectItem>
+                                    ))}
+                                  </SelectContent>
+                                </Select>
                               </FormControl>
+                              <FormMessage />
                             </FormItem>
                           )}
                         />

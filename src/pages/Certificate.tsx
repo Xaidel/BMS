@@ -67,6 +67,7 @@ const columns: ColumnDef<Certificate>[] = [
       />
     ),
   },
+
   {
     header: "Issued To",
     accessorKey: "name",

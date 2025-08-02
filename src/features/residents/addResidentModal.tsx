@@ -579,18 +579,20 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       control={form.control}
                       name="zone"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Zone/Purok</FormLabel>
-                          <FormControl>
-                            <Input
-                              id="zone"
-                              type="text"
-                              placeholder="Enter present zone/purok"
-                              required
-                              {...field}
-                              className="text-black"
-                            />
-                          </FormControl>
+                        <FormItem className="w-full">
+                          <FormLabel htmlFor="zone" className="text-black font-bold text-xs">Zone</FormLabel>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
+                              <SelectTrigger className="w-full text-black border-black/15">
+                                <SelectValue placeholder="Select zone" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {["1", "2", "3", "4", "5", "6", "7"].map((option, i) => (
+                                <SelectItem value={option} key={i}>{option}</SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </FormItem>
                       )}
                     />

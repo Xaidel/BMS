@@ -8,7 +8,7 @@ import DeleteHouseholdModal from "@/features/households/deleteHouseholdModal";
 import ViewHouseholdModal from "@/features/households/viewHouseholdModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash, Home, HomeIcon, UserCheck, UserMinus } from "lucide-react";
+import { Trash, Home, HomeIcon, UserCheck, UserMinus, Users } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
@@ -16,6 +16,10 @@ import { sort } from "@/service/household/householdSort";
 import searchHousehold from "@/service/household/searchHousehold";
 import SummaryCard from "@/components/summary-card/household";
 import { invoke } from "@tauri-apps/api/core";
+import { pdf } from "@react-pdf/renderer";
+import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
+import { HouseholdPDF } from "@/components/pdf/householdpdf";
+import { toast } from "sonner";
 
 const filters = ["All Households", "Numerical", "Renter", "Owner"];
 
@@ -177,29 +181,101 @@ export default function Households() {
   ).length;
   const totalRenter = data.filter((item) => item.type_ === "Renter").length;
   const totalOwner = data.filter((item) => item.type_ === "Owner").length;
+  const total = data.length;
 
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCard
+          title="Total Households"
+          value={total}
+          icon={<Users size={50} />}
+          onClick={async () => {
+            const blob = await pdf(<HouseholdPDF filter="All Households" households={data} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("AllHouseholds.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("All Households PDF downloaded", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the file",
+              });
+            }
+          }}
+        />
+        <SummaryCard
           title="Active Households"
           value={totalActive}
           icon={<UserCheck size={50} />}
-        />
-        <SummaryCard
-          title="Moved Out"
-          value={totalMovedOut}
-          icon={<UserMinus size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.status === "Active");
+            const blob = await pdf(<HouseholdPDF filter="Active Households" households={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("ActiveHouseholds.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Active Households PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Active Households PDF",
+              });
+            }
+          }}
         />
         <SummaryCard
           title="Renter"
           value={totalRenter}
           icon={<HomeIcon size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.type_ === "Renter");
+            const blob = await pdf(<HouseholdPDF filter="Renter Households" households={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("RenterHouseholds.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Renter Households PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Renter Households PDF",
+              });
+            }
+          }}
         />
         <SummaryCard
           title="Owner"
           value={totalOwner}
           icon={<Home size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((d) => d.type_ === "Owner");
+            const blob = await pdf(<HouseholdPDF filter="Owner Households" households={filtered} />).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("OwnerHouseholds.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Owner Households PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Owner Households PDF",
+              });
+            }
+          }}
         />
       </div>
 

@@ -78,11 +78,14 @@ export type Expense = {
 };
 
 export type Certificate = {
+  id?: number;
   name: string;
   type_: string;
-  or: string;
-  date: Date;
-  zone: string;
+  age?: number;
+  civil_status?: string;
+  ownership_text?: string;
+  amount?: string;
+  issued_date?: string;
 };
 
 export type Blotter = {

@@ -1,4 +1,8 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { toast } from "sonner";
+import { BaseDirectory, writeFile } from "@tauri-apps/plugin-fs";
+import { pdf } from "@react-pdf/renderer";
+import { CertificatePDF } from "@/components/pdf/certificatepdf";
 import { useSearchParams } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
@@ -18,11 +22,10 @@ import {
 } from "lucide-react";
 import searchCertificate from "@/service/certificate/searchCertificate";
 import SummaryCard from "@/components/summary-card/certificate";
+import { invoke } from "@tauri-apps/api/core";
 
 const filters = [
   "All Certificates",
-  "OR ASC",
-  "OR DESC",
   "Date ASC",
   "Date DESC",
   "Active",
@@ -30,11 +33,12 @@ const filters = [
 ];
 
 type Certificate = {
+  id: number;
+  amount?: string;
+  resident_name: any;
   name: string;
-  type: string;
-  or: string;
-  date: Date;
-  zone: string;
+  type_: string;
+  issued_date: Date;
 };
 
 const columns: ColumnDef<Certificate>[] = [
@@ -69,60 +73,30 @@ const columns: ColumnDef<Certificate>[] = [
   },
   {
     header: "Type",
-    accessorKey: "type",
-  },
-  {
-    header: "OR#",
-    accessorKey: "or",
+    accessorKey: "type_",
   },
   {
     header: "Issued On",
-    accessorKey: "date",
-    cell: ({ row }) => <div>{format(row.original.date, "MMMM do, yyyy")}</div>,
+    accessorKey: "issued_date",
+    cell: ({ row }) => <div>{format(row.original.issued_date, "MMMM do, yyyy")}</div>,
   },
   {
-    header: "Address",
-    accessorKey: "zone",
+    header: "Expires On",
+    cell: ({ row }) => {
+      const issued = new Date(row.original.issued_date);
+      const expiry = new Date(issued);
+      expiry.setFullYear(issued.getFullYear() + 1);
+      return <div>{format(expiry, "MMMM do, yyyy")}</div>;
+    },
   },
   {
     header: "Status",
     cell: ({ row }) => {
-      const oneYearLater = new Date(row.original.date);
-      oneYearLater.setFullYear(row.original.date.getFullYear() + 1);
+      const oneYearLater = new Date(row.original.issued_date);
+      oneYearLater.setFullYear(row.original.issued_date.getFullYear() + 1);
       const status = new Date() > oneYearLater ? "Expired" : "Active";
       return <p>{status}</p>;
     },
-  },
-];
-
-const date: Certificate[] = [
-  {
-    name: "John Cena",
-    type: "Barangay Certificate",
-    or: "0932",
-    date: new Date("June 2, 2025"),
-    zone: "Zone 3",
-  },
-  {
-    name: "Jane Doe",
-    type: "Barangay Clearance",
-    or: "1045",
-    date: new Date("July 8, 2024"),
-    zone: "Zone 1",
-  },
-  {
-    name: "Carlos Rivera",
-    type: "Residency Certificate",
-    or: "0871",
-    date: new Date("May 10, 2023"),
-    zone: "Zone 2",
-  },
-  {
-    name: "Maria Santos",
-    type: "Barangay Certificate",
-    or: "0555",
-    date: new Date("August 15, 2022"),
-    zone: "Zone 3",
   },
 ];
 
@@ -130,20 +104,44 @@ export default function Certificate() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
+  const [data, setData] = useState<Certificate[]>([]);
 
-  const totalCertificates = date.length;
-  const activeCertificates = date.filter((cert) => {
-    const expiry = new Date(cert.date);
+  const fetchCertificates = () => {
+    invoke<any[]>("fetch_all_certificates_command")
+      .then((fetched) => {
+        const parsed = fetched.map((cert) => {
+          const issuedDate = new Date(cert.issued_date ?? "");
+          return {
+            id: cert.id,
+            amount: cert.amount,
+            resident_name: cert.resident_name,
+            name: cert.resident_name,
+            type_: cert.type_,
+            issued_date: isNaN(issuedDate.getTime()) ? new Date() : issuedDate,
+          };
+        });
+        setData(parsed);
+      })
+      .catch((err) => console.error("Failed to fetch certificates:", err));
+  };
+
+  useEffect(() => {
+    fetchCertificates();
+  }, []);
+
+  const totalCertificates = data.length;
+  const activeCertificates = data.filter((cert) => {
+    const expiry = new Date(cert.issued_date);
     expiry.setFullYear(expiry.getFullYear() + 1);
     return new Date() <= expiry;
   }).length;
-  const expiredCertificates = date.filter((cert) => {
-    const expiry = new Date(cert.date);
+  const expiredCertificates = data.filter((cert) => {
+    const expiry = new Date(cert.issued_date);
     expiry.setFullYear(expiry.getFullYear() + 1);
     return new Date() > expiry;
   }).length;
-  const typeCount = date.reduce((acc, curr) => {
-    acc[curr.type] = (acc[curr.type] || 0) + 1;
+  const typeCount = data.reduce((acc, curr) => {
+    acc[curr.type_] = (acc[curr.type_] || 0) + 1;
     return acc;
   }, {} as Record<string, number>);
   const mostCommonType =
@@ -152,25 +150,21 @@ export default function Certificate() {
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Certificates";
 
-    let sorted = [...date];
+    let sorted = [...data];
 
-    if (sortValue === "OR ASC") {
-      sorted.sort((a, b) => a.or.localeCompare(b.or));
-    } else if (sortValue === "OR DESC") {
-      sorted.sort((a, b) => b.or.localeCompare(a.or));
-    } else if (sortValue === "Date ASC") {
-      sorted.sort((a, b) => a.date.getTime() - b.date.getTime());
+    if (sortValue === "Date ASC") {
+      sorted.sort((a, b) => a.issued_date.getTime() - b.issued_date.getTime());
     } else if (sortValue === "Date DESC") {
-      sorted.sort((a, b) => b.date.getTime() - a.date.getTime());
+      sorted.sort((a, b) => b.issued_date.getTime() - a.issued_date.getTime());
     } else if (sortValue === "Active") {
       sorted = sorted.filter((cert) => {
-        const oneYearLater = new Date(cert.date);
+        const oneYearLater = new Date(cert.issued_date);
         oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
         return new Date() <= oneYearLater;
       });
     } else if (sortValue === "Expired") {
       sorted = sorted.filter((cert) => {
-        const oneYearLater = new Date(cert.date);
+        const oneYearLater = new Date(cert.issued_date);
         oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
         return new Date() > oneYearLater;
       });
@@ -181,7 +175,7 @@ export default function Certificate() {
     }
 
     return sorted;
-  }, [searchParams, searchQuery]);
+  }, [searchParams, searchQuery, data]);
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -195,28 +189,90 @@ export default function Certificate() {
           title="Total Certificates"
           value={totalCertificates}
           icon={<FileText size={50} />}
+          onClick={async () => {
+            const blob = await pdf(
+              <CertificatePDF filter="All Certificates" certificates={data.map(cert => ({ ...cert, issued_date: cert.issued_date.toISOString() }))} />
+            ).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("CertificateRecords.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Certificate Record successfully downloaded", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the certificate record",
+              });
+            }
+          }}
         />
         <SummaryCard
           title="Active Certificates"
           value={activeCertificates}
           icon={<CheckCircle size={50} />}
+          onClick={async () => {
+            const activeCerts = data.filter((cert) => {
+              const expiry = new Date(cert.issued_date);
+              expiry.setFullYear(expiry.getFullYear() + 1);
+              return new Date() <= expiry;
+            });
+            const blob = await pdf(
+              <CertificatePDF filter="Active Certificates" certificates={activeCerts.map(cert => ({ ...cert, issued_date: cert.issued_date.toISOString() }))} />
+            ).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("ActiveCertificateRecords.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Active Certificate Record successfully downloaded", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the certificate record",
+              });
+            }
+          }}
         />
         <SummaryCard
           title="Expired Certificates"
           value={expiredCertificates}
           icon={<XCircle size={50} />}
-        />
-        <SummaryCard
-          title="Most Common Type"
-          value={mostCommonType}
-          icon={<ListChecks size={50} />}
+          onClick={async () => {
+            const expiredCerts = data.filter((cert) => {
+              const expiry = new Date(cert.issued_date);
+              expiry.setFullYear(expiry.getFullYear() + 1);
+              return new Date() > expiry;
+            });
+            const blob = await pdf(
+              <CertificatePDF filter="Expired Certificates" certificates={expiredCerts.map(cert => ({ ...cert, issued_date: cert.issued_date.toISOString() }))} />
+            ).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("ExpiredCertificateRecords.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Expired Certificate Record successfully downloaded", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save the certificate record",
+              });
+            }
+          }}
         />
       </div>
 
       <div className="flex gap-5 w-full items-center justify-center mb-4">
         <Searchbar
           onChange={(value) => setSearchQuery(value)}
-          placeholder="Search by Name, Type, or OR#"
+          placeholder="Search by Name or Type"
           classname="flex flex-5"
         />
         <Filter
@@ -226,7 +282,36 @@ export default function Certificate() {
           classname="flex-1"
         />
 
-        <Button variant="destructive" size="lg">
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={async () => {
+            const selectedIds = Object.keys(rowSelection)
+              .map((key) => filteredData[parseInt(key)])
+              .filter((row) => !!row)
+              .map((row) => row.id); // make sure we use the 'id'
+
+            if (selectedIds.length === 0) {
+              toast.error("No certificates selected.");
+              return;
+            }
+
+            try {
+              for (const id of selectedIds) {
+                if (id !== undefined) {
+                  await invoke("delete_certificate_command", { id });
+                }
+              }
+              toast.success("Selected certificates deleted.");
+              fetchCertificates(); // Refresh the table
+              setRowSelection({}); // Reset selection
+            } catch (err) {
+              toast.error("Failed to delete selected certificates.");
+              console.error("Delete error:", err);
+            }
+          }}
+        >
           <Trash />
           Delete Selected
         </Button>
@@ -235,14 +320,7 @@ export default function Certificate() {
       <DataTable<Certificate>
         classname="py-5"
         height="43.3rem"
-        columns={[
-          ...columns,
-          {
-            id: "view",
-            header: "",
-            cell: () => <Button>View more</Button>,
-          },
-        ]}
+        columns={columns}
         rowSelection={rowSelection}
         onRowSelectionChange={setRowSelection}
         data={filteredData}

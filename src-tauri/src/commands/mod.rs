@@ -6,3 +6,4 @@ pub mod events;
 pub mod settings;
 pub mod residents;
 pub mod officials;
+pub mod certificates;

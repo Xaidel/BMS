@@ -12,37 +12,37 @@ import { Plus } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 
 type Certificate = {
-  price: number
   type: string
   path: string
 }
 
 const data: Certificate[] = [
-  { price: 10, type: "4PS Certification", path: "fourps" },
-  { price: 30, type: "Barangay Certificate", path: "brgy-certificate" },
-  { price: 30, type: "Barangay Clearance", path: "brgy-clearance" },
-  { price: 30, type: "Barangay Indigency", path: "brgy-indigency" },
-  { price: 30, type: "Barangay Permit", path: "brgy-permit" },
-  { price: 30, type: "Certificate of Ownership", path: "cert-ownership" },
-  { price: 30, type: "Certification of BARC", path: "cert-barc" },
-  { price: 30, type: "Certification of Blood", path: "cert-blood" },
-  { price: 30, type: "Certification of Cut Tree", path: "cert-cut" },
-  { price: 30, type: "Certification of Farmers", path: "cert-farmer" },
-  { price: 30, type: "Certification of First Job Seeker", path: "cert-job" },
-  { price: 30, type: "Certification of Good Moral", path: "cert-moral" },
-  { price: 30, type: "Certification of Marriage", path: "cert-marriage" },
-  { price: 30, type: "Certification of Non Existing Business", path: "cert-non" },
-  { price: 30, type: "Certification of Organization", path: "cert-org" },
-  { price: 30, type: "Certification of PWD", path: "cert-pwd" },
-  { price: 30, type: "Certification of Relationship", path: "cert-relationship" },
-  { price: 30, type: "Certification of Residing", path: "cert-residing" },
-  { price: 30, type: "Certification of SSS", path: "cert-sss" },
-  { price: 30, type: "Certification of Same Person", path: "cert-same" },
-  { price: 30, type: "Certification of Shelter Damage", path: "cert-shelter" },
-  { price: 30, type: "Certification of Solo Parent", path: "cert-solo" },
-  { price: 30, type: "Certification of Tenant Cultivation", path: "cert-tenant" },
-  { price: 30, type: "Certification of Unemployment", path: "cert-unemployment" },
-  { price: 30, type: "Registration of Birth", path: "registration-birth" },
+  { type: "4PS Certification", path: "fourps" }, // done
+  { type: "Barangay Residency", path: "brgy-residency" },// done
+  { type: "Barangay Clearance", path: "brgy-clearance" }, // done
+  { type: "Barangay Indigency", path: "brgy-indigency" }, // done
+  { type: "Certification of Unemployment", path: "cert-unemployment" },//done
+  { type: "Barangay Business Permit", path: "brgy-business-permit" }, // done
+  { type: "Registration of Birth", path: "registration-birth" }, // done
+    { type: "Certification of Marriage", path: "cert-marriage" }, // done
+  { type: "Certificate of Ownership", path: "cert-ownership" }, 
+  { type: "Certification of BARC", path: "cert-barc" },
+  { type: "Certification of Blood", path: "cert-blood" },
+  { type: "Certification of Cut Tree", path: "cert-cut" },
+  { type: "Certification of Farmers", path: "cert-farmer" },
+  { type: "Certification of First Job Seeker", path: "cert-job" },
+  { type: "Certification of Good Moral", path: "cert-moral" },
+  { type: "Certification of Non Existing Business", path: "cert-non" },
+  { type: "Certification of Organization", path: "cert-org" },
+  { type: "Certification of PWD", path: "cert-pwd" },
+  { type: "Certification of Relationship", path: "cert-relationship" },
+  { type: "Certification of Residing", path: "cert-residing" },
+  { type: "Certification of SSS", path: "cert-sss" },
+  { type: "Certification of Same Person", path: "cert-same" },
+  { type: "Certification of Shelter Damage", path: "cert-shelter" },
+  { type: "Certification of Solo Parent", path: "cert-solo" },
+  { type: "Certification of Tenant Cultivation", path: "cert-tenant" },
+
 ]
 
 export default function IssueCertificateModal() {
@@ -73,14 +73,12 @@ export default function IssueCertificateModal() {
                 <TableCaption>Certificate services being offered.</TableCaption>
                 <TableHeader className="sticky top-0 z-10 bg-background">
                   <TableRow>
-                    <TableHead className="w-[100px] text-black bg-background">Price</TableHead>
                     <TableHead className="text-black bg-background">Type</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {data.map((cert, i) => (
                     <TableRow key={i} className="text-black">
-                      <TableCell className="font-medium">₱{cert.price}</TableCell>
                       <TableCell>
                         <div className="flex justify-between items-center">
                           {cert.type}

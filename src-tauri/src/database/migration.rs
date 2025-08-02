@@ -106,7 +106,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             is_senior BOOLEAN NOT NULL DEFAULT 0
         );
 
-                CREATE TABLE IF NOT EXISTS officials (
+        CREATE TABLE IF NOT EXISTS officials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             role TEXT NOT NULL,
@@ -118,6 +118,16 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             term_end TEXT NOT NULL,
             zone TEXT NOT NULL,
             image TEXT
+        );
+        CREATE TABLE certificates (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            resident_name TEXT NOT NULL,
+            type_ TEXT NOT NULL,
+            age INTEGER,
+            civil_status TEXT,
+            ownership_text TEXT,
+            amount TEXT,
+            issued_date TEXT
         );
         ",
     )?;

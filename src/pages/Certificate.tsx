@@ -18,7 +18,6 @@ import {
   FileText,
   CheckCircle,
   XCircle,
-  ListChecks,
 } from "lucide-react";
 import searchCertificate from "@/service/certificate/searchCertificate";
 import SummaryCard from "@/components/summary-card/certificate";
@@ -50,8 +49,8 @@ const columns: ColumnDef<Certificate>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
+              ? "indeterminate"
+              : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -141,12 +140,6 @@ export default function Certificate() {
     expiry.setFullYear(expiry.getFullYear() + 1);
     return new Date() > expiry;
   }).length;
-  const typeCount = data.reduce((acc, curr) => {
-    acc[curr.type_] = (acc[curr.type_] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
-  const mostCommonType =
-    Object.entries(typeCount).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "N/A";
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Certificates";

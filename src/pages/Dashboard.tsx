@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
-import { pdf } from "@react-pdf/renderer";
-import { toast } from "sonner";
-import { Users } from "lucide-react";
-import { HouseholdPDF } from "@/components/pdf/householdpdf";
 import { invoke } from "@tauri-apps/api/core";
 
-import CustomEstablishment from "@/components/icons/CustomEstablishments";
 import CustomFemale from "@/components/icons/CustomFemale";
 import CustomHouse from "@/components/icons/CustomHouse";
 import CustomMale from "@/components/icons/CustomMale";
@@ -23,77 +18,7 @@ import type { Income, Expense } from "@/types/types";
 
 const categories = [];
 
-const PopulationData = [
-  {
-    population: 100,
-    zone: 1,
-  },
-  {
-    population: 100,
-    zone: 2,
-  },
-  {
-    population: 100,
-    zone: 3,
-  },
-  {
-    population: 100,
-    zone: 4,
-  },
-  {
-    population: 100,
-    zone: 5,
-  },
-  {
-    population: 200,
-    zone: 6,
-  },
-];
 
-const ExpenseData = [
-  {
-    source: "Infrastructure Expenses",
-    description: "Spending on buildings, and roads",
-    fill: "#7F50CC",
-    value: 37, // (750 / 2050) * 100 ≈ 36.59
-  },
-  {
-    source: "Honoraria",
-    description: "Payments given to public servants or officials",
-    fill: "#440987",
-    value: 15, // (300 / 2050) * 100 ≈ 14.63
-  },
-  {
-    source: "Utilities",
-    description: "Electricity, water, communication, etc.",
-    fill: "#3830CE",
-    value: 24, // (500 / 2050) * 100 ≈ 24.39
-  },
-  {
-    source: "Local Funds Used",
-    description: "Expenses covered by the local fund",
-    fill: "#8D9BFF",
-    value: 10, // (200 / 2050) * 100 ≈ 9.76
-  },
-  {
-    source: "Foods",
-    description: "Food expenses for programs, meetings, etc.",
-    fill: "#5165F6",
-    value: 5, // (100 / 2050) * 100 ≈ 4.88
-  },
-  {
-    source: "IRA Used",
-    description: "Portion of Internal Revenue Allotment spent",
-    fill: "#4E3D8F",
-    value: 5, // (100 / 2050) * 100 ≈ 4.88
-  },
-  {
-    source: "Others",
-    description: "Miscellaneous or unclassified expenses",
-    fill: "#9A8CFF",
-    value: 5, // (100 / 2050) * 100 ≈ 4.88
-  },
-];
 
 
 export default function Dashboard() {
@@ -110,7 +35,7 @@ export default function Dashboard() {
   const [populationData, setPopulationData] = useState<{ zone: number; population: number }[]>([]);
   const [incomeChartData, setIncomeChartData] = useState<{ source: string; value: number; fill: string; description: string }[]>([]);
   const [expenseChartData, setExpenseChartData] = useState<{ source: string; value: number; fill: string; description: string }[]>([]);
-
+  console.log(householdData, eventTotal)
   useEffect(() => {
     invoke<Household[]>("fetch_all_households_command")
       .then((fetched) => {
@@ -365,19 +290,19 @@ export default function Dashboard() {
             </div>
           ))}
         </div>
-        
+
         <div className="flex flex-col gap-5 ml-3 mr-0 w-full">
           <div className="w-[100%] min-w-[300px]">
             <PopulationChart data={populationData} />
           </div>
-            <div className="flex flex-row gap-5 w-full">
+          <div className="flex flex-row gap-5 w-full">
             <div className="w-[50%] min-w-[300px]">
               <IncomeChart data={incomeChartData} />
             </div>
             <div className="w-[50%] min-w-[300px]">
               <ExpenseChart data={expenseChartData} />
             </div>
-            </div>
+          </div>
         </div>
       </div>
     </div>

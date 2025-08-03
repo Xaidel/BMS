@@ -102,9 +102,6 @@ export default function Residents() {
     setSearchParams(searchParams);
   };
 
-  const handleSearch = (term: string) => {
-    setSearchQuery(term);
-  };
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Residents";

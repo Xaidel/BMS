@@ -30,10 +30,6 @@ type Resident = {
   civil_status?: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Residency() {
   const navigate = useNavigate()

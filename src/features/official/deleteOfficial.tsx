@@ -12,12 +12,6 @@ import { XIcon } from "lucide-react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  section: string;
-};
 
 interface Props {
   id: number;

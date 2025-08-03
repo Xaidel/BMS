@@ -18,7 +18,6 @@ import {
   Banknote,
   PiggyBank,
   Gift,
-  Landmark,
   Coins,
   Wallet,
   Layers,
@@ -48,8 +47,8 @@ const columns: ColumnDef<Income>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
+              ? "indeterminate"
+              : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"

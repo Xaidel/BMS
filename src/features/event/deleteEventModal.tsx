@@ -12,16 +12,6 @@ import { XIcon } from "lucide-react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 
-type Event = {
-  id: number;
-  name: string;
-  type_: string;
-  status: "Upcoming" | "Finished" | "Ongoing" | "Cancelled";
-  date: Date;
-  venue: string;
-  attendee: string;
-  notes: string;
-};
 
 interface Props {
   id: number;

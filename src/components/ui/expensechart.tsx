@@ -53,7 +53,7 @@ export default function ExpenseChart({ data }: ChartProps) {
               nameKey="source"
               cy="50%"
               cx="50%"
-              label={({ value }) => `${value}%`}
+              label={({ value }) => `₱${new Intl.NumberFormat("en-PH").format(value)}`}
               labelLine={false}
             >
             </Pie>

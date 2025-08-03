@@ -26,7 +26,8 @@ type Resident = {
   middle_name?: string;
   last_name: string;
   suffix?: string;
-  // Add more fields if needed
+  age?: number;
+  civil_status?: string;
 };
 
 type mock = {
@@ -119,6 +120,14 @@ export default function Birth() {
       })
       .catch(console.error);
   }, []);
+
+  // Populate related fields when a resident is selected
+  useEffect(() => {
+    if (selectedResident) {
+      if ('age' in selectedResident) setAge(String(selectedResident.age ?? ""));
+      if ('civil_status' in selectedResident) setCivilStatus(selectedResident.civil_status ?? "");
+    }
+  }, [selectedResident]);
   const styles = StyleSheet.create({
     page: { padding: 30 },
     section: { marginBottom: 10 },
@@ -210,103 +219,253 @@ export default function Birth() {
               <div className="mt-4 grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Registry No.</label>
-                  <input type="text" value={registryNo} onChange={(e) => setRegistryNo(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={registryNo}
+                    onChange={(e) => setRegistryNo(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 2023-0001"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                  <input type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="date"
+                    value={birthDate}
+                    onChange={(e) => setBirthDate(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 2023-01-01"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name of child (First)</label>
-                  <input type="text" value={childFirstName} onChange={(e) => setChildFirstName(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={childFirstName}
+                    onChange={(e) => setChildFirstName(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Juan"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name of child (Middle)</label>
-                  <input type="text" value={childMiddleName} onChange={(e) => setChildMiddleName(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={childMiddleName}
+                    onChange={(e) => setChildMiddleName(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Dela"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name of child (Last)</label>
-                  <input type="text" value={childLastName} onChange={(e) => setChildLastName(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={childLastName}
+                    onChange={(e) => setChildLastName(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Cruz"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
-                  <input type="text" value={childGender} onChange={(e) => setChildGender(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={childGender}
+                    onChange={(e) => setChildGender(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Male"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
-                  <input type="date" value={childDateOfBirth} onChange={(e) => setChildDateOfBirth(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="date"
+                    value={childDateOfBirth}
+                    onChange={(e) => setChildDateOfBirth(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 2023-01-01"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Weight at Birth</label>
-                  <input type="text" value={childWeight} onChange={(e) => setChildWeight(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={childWeight}
+                    onChange={(e) => setChildWeight(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 3.2 kg"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Type of Birth</label>
-                  <input type="text" value={typeOfBirth} onChange={(e) => setTypeOfBirth(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={typeOfBirth}
+                    onChange={(e) => setTypeOfBirth(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Single"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Total Number of Child</label>
-                  <input type="number" value={totalNumberOfChild} onChange={(e) => setTotalNumberOfChild(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="number"
+                    value={totalNumberOfChild}
+                    onChange={(e) => setTotalNumberOfChild(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 1"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Time at Birth</label>
-                  <input type="text" value={timeAtBirth} onChange={(e) => setTimeAtBirth(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={timeAtBirth}
+                    onChange={(e) => setTimeAtBirth(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 2:15 AM"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Place of Birth</label>
-                  <input type="text" value={placeOfBirth} onChange={(e) => setPlaceOfBirth(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={placeOfBirth}
+                    onChange={(e) => setPlaceOfBirth(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Barangay Health Center"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Maiden Name</label>
-                  <input type="text" value={motherMaidenName} onChange={(e) => setMotherMaidenName(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={motherMaidenName}
+                    onChange={(e) => setMotherMaidenName(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Maria Santos"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Occupation</label>
-                  <input type="text" value={motherOccupation} onChange={(e) => setMotherOccupation(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={motherOccupation}
+                    onChange={(e) => setMotherOccupation(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Teacher"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Age</label>
-                  <input type="number" value={motherAge} onChange={(e) => setMotherAge(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="number"
+                    value={motherAge}
+                    onChange={(e) => setMotherAge(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 28"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Residence</label>
-                  <input type="text" value={motherResidence} onChange={(e) => setMotherResidence(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={motherResidence}
+                    onChange={(e) => setMotherResidence(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Purok 2, Barangay Mabini"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Religion</label>
-                  <input type="text" value={motherReligion} onChange={(e) => setMotherReligion(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={motherReligion}
+                    onChange={(e) => setMotherReligion(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Roman Catholic"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Name</label>
-                  <input type="text" value={fatherName} onChange={(e) => setFatherName(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={fatherName}
+                    onChange={(e) => setFatherName(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Jose Cruz"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Occupation</label>
-                  <input type="text" value={fatherOccupation} onChange={(e) => setFatherOccupation(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={fatherOccupation}
+                    onChange={(e) => setFatherOccupation(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Farmer"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Age</label>
-                  <input type="number" value={fatherAge} onChange={(e) => setFatherAge(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="number"
+                    value={fatherAge}
+                    onChange={(e) => setFatherAge(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 30"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Residence</label>
-                  <input type="text" value={fatherResidence} onChange={(e) => setFatherResidence(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={fatherResidence}
+                    onChange={(e) => setFatherResidence(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Purok 2, Barangay Mabini"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Religion</label>
-                  <input type="text" value={fatherReligion} onChange={(e) => setFatherReligion(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={fatherReligion}
+                    onChange={(e) => setFatherReligion(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Roman Catholic"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date of Marriage</label>
-                  <input type="date" value={dateOfMarriage} onChange={(e) => setDateOfMarriage(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="date"
+                    value={dateOfMarriage}
+                    onChange={(e) => setDateOfMarriage(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. 2010-06-15"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Place of Marriage</label>
-                  <input type="text" value={placeOfMarriage} onChange={(e) => setPlaceOfMarriage(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={placeOfMarriage}
+                    onChange={(e) => setPlaceOfMarriage(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. San Roque Church"
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Attendant at Birth</label>
-                  <input type="text" value={attendantAtBirth} onChange={(e) => setAttendantAtBirth(e.target.value)} className="w-full border rounded px-3 py-2 text-sm" />
+                  <input
+                    type="text"
+                    value={attendantAtBirth}
+                    onChange={(e) => setAttendantAtBirth(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm"
+                    placeholder="e.g. Dr. Ana Reyes"
+                  />
                 </div>
               </div>
               <div className="mt-4">
@@ -319,7 +478,7 @@ export default function Birth() {
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   className="w-full border rounded px-3 py-2 text-sm"
-                  placeholder="e.g., 10.00"
+                  placeholder="e.g. 10.00"
                 />
               </div>
               <div className="mt-4">
@@ -332,12 +491,12 @@ export default function Birth() {
                   value={preparedBy}
                   onChange={(e) => setPreparedBy(e.target.value)}
                   className="w-full border rounded px-3 py-2 text-sm"
-                  placeholder="Enter name of preparer"
+                  placeholder="e.g. MARILOU T. LOPEZ"
                 />
               </div>
             </div>
           </CardContent>
-          <CardFooter className="flex justify-center items-center">
+          <CardFooter className="flex justify-between items-center">
             <Button
               onClick={async () => {
                 if (!selectedResident) {
@@ -353,7 +512,7 @@ export default function Birth() {
                       id: 0,
                       type_: "Birth Certificate",
                       issued_date: nowIso,
-                      age: age ? parseInt(age) : undefined,
+                      age: selectedResident?.age ?? undefined,
                       civil_status: civilStatus || "",
                       ownership_text: "",
                       amount: amount || "",

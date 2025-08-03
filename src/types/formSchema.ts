@@ -1,10 +1,10 @@
 import { z } from "zod"
 
 export const loginSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name is too short"
+  username: z.string().min(2, {
+    message: "Username is too short"
   }).max(50, {
-    message: "Password is too long"
+    message: "Username is too long"
   }),
   password: z.string().min(2, {
     message: "Password is too short"
@@ -215,11 +215,10 @@ export const officialSchema = z.object({
   name: z.string().min(2, { message: "Name is too short" }).max(100, { message: "Name is too long" }),
   role: z.string().min(2, { message: "Role is too short" }).max(100, { message: "Role is too long" }),
   age: z.number().min(18, { message: "Age must be at least 18" }),
-  contact: z.string().min(7, { message: "Contact is too short" }).max(20, { message: "Contact is too long" }),
+  contact: z.string().min(1, { message: "Contact is too short" }).max(20, { message: "Contact is too long" }),
   term_start: z.date({ required_error: "Start of term is required" }),
   term_end: z.date({ required_error: "End of term is required" }),
   zone: z.string().min(1, { message: "Zone is required" }),
   image: z.string().optional(),
-  type_: z.string().min(1, { message: "Type is required" }),
   section: z.string().min(1, { message: "Section is required" }),
 });

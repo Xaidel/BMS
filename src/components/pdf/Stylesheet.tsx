@@ -32,12 +32,6 @@ export const styles = StyleSheet.create({
     padding: "5px",
     width: "12.5%",
     fontSize: 10,
-  },
-  certHeader: {
-    fontSize: 8,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
   }
 
 })

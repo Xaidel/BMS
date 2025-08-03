@@ -117,14 +117,20 @@ export type Settings = {
 
 
 export type Official = {
-  id?: number;
+  id: number;
   name: string;
   role: string;
+  image: string;
+  section: string;
   age: number;
   contact: string;
-  term_start: Date;
-  term_end: Date;
+  term_start: string;
+  term_end: string;
   zone: string;
-  image?: string;
-  type_: string;
+};
+
+export type User = {
+  id?: number;
+  username: string;
+  password: string;
 };

@@ -18,23 +18,37 @@ export default function LoginPage() {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: "",
+      username: "",
       password: "",
     }
   })
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
-  try {
-    const response = await invoke<string>("greet", { name: values.name }); 
-    toast.success("Login Successful!", {
-      description: <p>{response}</p>,
-    });
-    navigate("/dashboard");
-  } catch (error) {
-    console.error("Failed to invoke greet:", error);
-    toast.error("Login failed. Please try again.");
+    // Bypass with master credentials
+    if (values.username === "juan" && values.password === "juan123") {
+      toast.success("Logged in with master credentials");
+      localStorage.setItem("username", values.username);
+      navigate("/dashboard");
+      return;
+    }
+    try {
+      const isValid = await invoke<boolean>("verify_user_credentials_command", {
+        username: values.username,
+        password: values.password,
+      });
+
+      if (isValid) {
+        toast.success("Login Successful!");
+        localStorage.setItem("username", values.username);
+        navigate("/dashboard");
+      } else {
+        toast.error("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error("Failed to verify login:", error);
+      toast.error("Login failed. Please try again.");
+    }
   }
-}
 
 useEffect(() => {
   invoke("test_db_connection")
@@ -67,15 +81,15 @@ useEffect(() => {
                 <div className="space-y-2">
                   <FormField
                     control={form.control}
-                    name="name"
+                    name="username"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="name" className="font-bold text-lg">Name</FormLabel>
+                        <FormLabel htmlFor="username" className="font-bold text-lg">Username</FormLabel>
                         <FormControl>
                           <Input
-                            id="name"
+                            id="username"
                             type="text"
-                            placeholder="Enter your name"
+                            placeholder="Enter your username"
                             required
                             className="h-[3rem]"
                             {...field}

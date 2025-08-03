@@ -105,12 +105,10 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             is_pwd BOOLEAN NOT NULL DEFAULT 0,
             is_senior BOOLEAN NOT NULL DEFAULT 0
         );
-
         CREATE TABLE IF NOT EXISTS officials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             role TEXT NOT NULL,
-            type_ TEXT NOT NULL,
             section TEXT NOT NULL,
             age INTEGER NOT NULL,
             contact TEXT NOT NULL,
@@ -128,6 +126,12 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             ownership_text TEXT,
             amount TEXT,
             issued_date TEXT
+        );
+
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL UNIQUE,
+            password TEXT NOT NULL
         );
         ",
     )?;

@@ -128,3 +128,9 @@ export type Official = {
   image?: string;
   type_: string;
 };
+
+export type User = {
+  id?: number;
+  username: string;
+  password: string;
+};

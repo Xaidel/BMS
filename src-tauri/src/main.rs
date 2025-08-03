@@ -4,6 +4,7 @@ mod database;
 mod commands;
 mod models;
 
+use commands::user::verify_user_credentials_command;
 use commands::officials::{save_official_command, delete_official_command, fetch_all_officials_command, insert_official_command, update_official_command};
 use commands::settings::{save_settings_command, fetch_settings_command, fetch_logo_command};
 use commands::events::{save_event_command, insert_event_command, fetch_all_events_command, delete_event_command, update_event_command};
@@ -101,7 +102,11 @@ fn main() {
             update_certificate_command,
             delete_certificate_command,
             save_certificate_command,
+
+            verify_user_credentials_command,
+            
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+

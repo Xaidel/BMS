@@ -1,10 +1,10 @@
 import { z } from "zod"
 
 export const loginSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name is too short"
+  username: z.string().min(2, {
+    message: "Username is too short"
   }).max(50, {
-    message: "Password is too long"
+    message: "Username is too long"
   }),
   password: z.string().min(2, {
     message: "Password is too short"

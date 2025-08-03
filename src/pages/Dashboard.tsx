@@ -210,13 +210,13 @@ export default function Dashboard() {
         }
 
         const colorMap: Record<string, string> = {
-          "Local Revenue": "#4CAF50",        // green
-          "Tax Revenue": "#FF9800",          // orange
-          "Government Grants": "#03A9F4",    // light blue
-          "Service Revenue": "#9C27B0",      // purple
-          "Rental Income": "#FFC107",        // amber
-          "Government Funds (IRA)": "#00BCD4", // cyan
-          "Others": "#607D8B",               // blue gray
+          "Local Revenue": "#3F51B5",             // indigo
+          "Tax Revenue": "#E91E63",               // pink
+          "Government Grants": "#2196F3",         // blue
+          "Service Revenue": "#8BC34A",           // light green
+          "Rental Income": "#FF5722",             // deep orange
+          "Government Funds (IRA)": "#00BCD4",    // cyan
+          "Others": "#9E9E9E",                    // gray
         };
 
         const chartData = Object.entries(totals).map(([source, value]) => ({
@@ -294,7 +294,9 @@ export default function Dashboard() {
     <div className="w-screen h-screen overflow-y-auto overflow-x-hidden">
       {/* Wrapper that controls overall scale and margin */}
       <div className="scale-[81%] origin-top-left mx-auto w-[100%] box-border">
-        <Greet />
+        <div className="ml-4">
+          <Greet />
+        </div>
 
         <div className="flex gap-6 my-6 flex-wrap justify-around flex-1">
           <div className="w-[22%] min-w-[150px]">

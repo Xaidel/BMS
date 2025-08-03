@@ -30,10 +30,6 @@ type Resident = {
   civil_status?: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Marriage() {
   const navigate = useNavigate()
@@ -300,26 +296,26 @@ export default function Marriage() {
                                 key={res.value}
                                 value={res.value}
                                 className="text-black"
-                                  onSelect={(currentValue) => {
-                                    const selected = allResidents.find((r) => r.value === currentValue)?.data;
-                                    if (selected) {
-                                      if (selected.date_of_birth) {
-                                        const dob = new Date(selected.date_of_birth);
-                                        const today = new Date();
-                                        let calculatedAge = today.getFullYear() - dob.getFullYear();
-                                        const m = today.getMonth() - dob.getMonth();
-                                        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                                          calculatedAge--;
-                                        }
-                                        setAgeFemale(calculatedAge.toString());
-                                      } else {
-                                        setAgeFemale("");
+                                onSelect={(currentValue) => {
+                                  const selected = allResidents.find((r) => r.value === currentValue)?.data;
+                                  if (selected) {
+                                    if (selected.date_of_birth) {
+                                      const dob = new Date(selected.date_of_birth);
+                                      const today = new Date();
+                                      let calculatedAge = today.getFullYear() - dob.getFullYear();
+                                      const m = today.getMonth() - dob.getMonth();
+                                      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                                        calculatedAge--;
                                       }
-                                      setCivilStatusFemale(selected.civil_status || "");
+                                      setAgeFemale(calculatedAge.toString());
+                                    } else {
+                                      setAgeFemale("");
                                     }
-                                    setValue2(currentValue === value2 ? "" : currentValue);
-                                    setOpenFemale(false);
-                                  }}
+                                    setCivilStatusFemale(selected.civil_status || "");
+                                  }
+                                  setValue2(currentValue === value2 ? "" : currentValue);
+                                  setOpenFemale(false);
+                                }}
                               >
                                 {res.label}
                                 <Check

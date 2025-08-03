@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Dialog,
@@ -33,18 +33,6 @@ import { format } from "date-fns";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
 
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  age?: number;
-  contact?: string;
-  term_start?: string;
-  term_end?: string;
-  zone?: string;
-  section?: string;
-  image?: string;
-};
 
 export default function ViewOfficialModal({ person, onClose }) {
   const [imagePreview, setImagePreview] = useState(person?.image || "");
@@ -131,17 +119,6 @@ export default function ViewOfficialModal({ person, onClose }) {
   };
 
   // Role, section dropdown options (match AddOfficialModal)
-  const roleOptions = [
-    { value: "Captain", label: "Barangay Captain" },
-    { value: "Councilor", label: "Barangay Councilor" },
-    { value: "Secretary", label: "Barangay Secretary" },
-    { value: "Treasurer", label: "Barangay Treasurer" },
-    { value: "Caretaker", label: "Barangay Caretaker" },
-    { value: "SK Chairman", label: "SK Chairman" },
-    { value: "SK Kagawad", label: "SK Kagawad" },
-    { value: "Chief", label: "Tanod Chief" },
-    { value: "Tanod", label: "Tanod Member" },
-  ];
   const sectionOptions = [
     { value: "Barangay Officials", label: "Barangay Officials" },
     { value: "SK Officials", label: "SK Officials" },
@@ -379,7 +356,7 @@ export default function ViewOfficialModal({ person, onClose }) {
               </div>
             </div>
             <div className="flex justify-end pt-4 space-x-2">
-               <Button
+              <Button
                 type="button"
                 variant="outline"
                 onClick={handleReset}

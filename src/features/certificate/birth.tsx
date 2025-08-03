@@ -30,10 +30,6 @@ type Resident = {
   civil_status?: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Birth() {
   const navigate = useNavigate()
@@ -69,7 +65,7 @@ export default function Birth() {
   const [preparedBy, setPreparedBy] = useState("MARILOU T. LOPEZ");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
-
+  console.log(age)
   // Resident selector state for Select Resident dropdown
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");

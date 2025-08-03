@@ -55,8 +55,8 @@ const columns: ColumnDef<Event>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
+              ? "indeterminate"
+              : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -125,11 +125,9 @@ const columns: ColumnDef<Event>[] = [
 
 export default function Events() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
-  const [printData, setPrintDataState] = useState<Event[] | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [data, setData] = useState<Event[]>([]);
-
   const fetchEvents = () => {
     invoke<Event[]>("fetch_all_events_command")
       .then((fetched) => {
@@ -198,9 +196,6 @@ export default function Events() {
     }
   };
 
-  function setPrintData(data: Event[]) {
-    setPrintDataState(data);
-  }
 
   return (
     <>
@@ -356,7 +351,7 @@ export default function Events() {
               return (
                 <div className="flex gap-3">
                   <ViewEventModal {...row.original} onSave={fetchEvents} />
-                  {status !== "Upcoming" && status !== "Ongoing" && status !== "Finished" &&  (
+                  {status !== "Upcoming" && status !== "Ongoing" && status !== "Finished" && (
                     <DeleteEventModal
                       {...row.original}
                       onDelete={fetchEvents}

@@ -1,17 +1,26 @@
 // OfficialsPage.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { invoke } from "@tauri-apps/api/core";
 import ViewOfficialModal from "@/features/official/viewOfficialModal";
-import donald from "../assets/donaldT.jpg";
+import AddOfficialModal from "@/features/official/addOfficialModal";
+
+type Official = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  section: string;
+  age?: number;
+  contact?: string;
+  term_start?: string;
+  term_end?: string;
+  zone?: string;
+};
 
 const sections = [
   {
     title: "Barangay Officials",
-    members: ["captain", "councilors"],
-    type: "barangay",
-  },
-  {
-    title: "Barangay Staffs",
-    members: ["staffs"],
+    members: ["captain", "councilors", "staffs"],
     type: "barangay",
   },
   {
@@ -26,77 +35,88 @@ const sections = [
   },
 ];
 
-const officials = {
-  barangay: {
-    captain: { name: "John Cena", role: "Captain", image: donald, section: "Barangay Officials", info: { age: 45, contact: "09123456789", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 1" } },
-    councilors: [
-      { name: "Councilor A", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 40, contact: "09123456788", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 2" } },
-      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-      { name: "Councilor B", role: "Councilor", image: donald, section: "Barangay Officials", info: { age: 39, contact: "09123456785", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 6" } },
-    ],
-    staffs: [
-      { name: "Secretary", role: "Secretary", image: donald, section: "Barangay Staffs", info: { age: 38, contact: "09123456777", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 3" } },
-      { name: "Treasurer", role: "Treasurer", image: donald, section: "Barangay Staffs", info: { age: 42, contact: "09123456776", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 4" } },
-      { name: "Caretaker", role: "Caretaker", image: donald, section: "Barangay Staffs", info: { age: 37, contact: "09123456775", termStart: "2022-01-01", termEnd: "2025-01-01", zone: "Zone 5" } },
-    ],
-  },
-  sk: {
-    captain: { name: "SK Chair", role: "SK Chairman", image: donald, section: "SK Officials", info: { age: 25, contact: "09123456770", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone A" } },
-    councilors: [
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-      { name: "SK Kagawad 1", role: "SK Kagawad", image: donald, section: "SK Officials", info: { age: 22, contact: "09123456771", termStart: "2023-01-01", termEnd: "2026-01-01", zone: "Zone B" } },
-    ],
-  },
-  tanod: {
-    chief: { name: "Chief Tanod", role: "Chief", image: donald, section: "Tanod Officials", info: { age: 50, contact: "09123456772", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone C" } },
-    members: [
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-      { name: "Tanod A", role: "Tanod", image: donald, section: "Tanod Officials", info: { age: 48, contact: "09123456773", termStart: "2021-01-01", termEnd: "2024-01-01", zone: "Zone D" } },
-    ],
-  },
-};
-
 export default function OfficialsPage() {
+  const [officialsData, setOfficialsData] = useState(null);
   const [selectedOfficial, setSelectedOfficial] = useState(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
+  const handleAddOfficial = (type: string, sectionTitle: string) => {
+    console.log("Open add modal for", sectionTitle, "of type", type);
+    // Future: set modal open with prefilled type/section
+    setIsAddModalOpen(true);
+  };
+
+  useEffect(() => {
+    invoke<Official[]>("fetch_all_officials_command")
+      .then((data) => {
+        const structured = {
+          barangay: { captain: null, councilors: [], staffs: [] },
+          sk: { captain: null, councilors: [] },
+          tanod: { chief: null, members: [] },
+        };
+
+        data.forEach((person) => {
+          const role = person.role.toLowerCase();
+          const section = person.section.toLowerCase();
+
+          if (section === "barangay officials") {
+            if (role === "barangay captain") {
+              structured.barangay.captain = person;
+            } else if (role === "barangay councilor") {
+              structured.barangay.councilors.push(person);
+            } else if (["secretary", "treasurer", "driver", "care taker"].includes(role)) {
+              structured.barangay.staffs.push(person);
+            }
+          } else if (section === "sk officials") {
+            if (role === "sk chairman") {
+              structured.sk.captain = person;
+            } else if (role === "sk councilor") {
+              structured.sk.councilors.push(person);
+            }
+          } else if (section === "tanod officials") {
+            if (role === "chief tanod") {
+              structured.tanod.chief = person;
+            } else if (role === "tanod member") {
+              structured.tanod.members.push(person);
+            }
+          }
+        });
+
+        setOfficialsData(structured);
+      })
+      .catch((err) => console.error("Failed to fetch officials:", err));
+  }, []);
+
   const viewMore = (official) => setSelectedOfficial(official);
 
   const ProfileCard = ({ person }) => (
     <div
       onClick={() => viewMore(person)}
-      className="cursor-pointer p-3 rounded-lg bg-white shadow-md hover:bg-gray-100 w-50 h-auto text-center scale-[0.95] hover:scale-100 transition-transform"
+      className="cursor-pointer p-1 rounded-lg bg-white shadow-md hover:bg-gray-100 w-50 h-auto text-center scale-[1] hover:scale-100 transition-transform"
     >
       <img src={person.image} alt={person.name} className="rounded-full w-34 h-34 mx-auto object-cover mb-2" />
       <p className="text-base font-bold">{person.name}</p>
       <p className="text-sm font-bold text-gray-700">{person.role}</p>
       <div className="text-sm text-gray-700 mt-2 space-y-1">
-        {person.info?.age && <p>Age: {person.info.age}</p>}
-        {person.info?.contact && <p>Contact: {person.info.contact}</p>}
-        {person.info?.termStart && <p>Term Start: {person.info.termStart}</p>}
-        {person.info?.termEnd && <p>Term End: {person.info.termEnd}</p>}
-        {person.info?.zone && <p>Zone: {person.info.zone}</p>}
+        {person.age !== undefined && person.age !== null && <p>Age: {person.age}</p>}
+        {person.contact && <p>Contact: {person.contact}</p>}
+        {person.term_start && <p>Term Start: {person.term_start}</p>}
+        {person.term_end && <p>Term End: {person.term_end}</p>}
+        {person.zone && <p>Zone: {person.zone}</p>}
       </div>
     </div>
   );
 
+  if (!officialsData) return <div className="p-4">Loading officials...</div>;
+
   return (
-    <div className="ml-0 pl-0 pr-2 py-6 w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 scale-90 xl:scale-79 origin-top-left transition-transform">
+    <div className="ml-0 pl-0 pr-2 py-6 min-w-[1500px] overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 scale-90 xl:scale-79 origin-top-left transition-transform">
 
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Officials</h1>
+        <AddOfficialModal onSave={() => {
+          window.location.reload();
+        }} />
       </div>
 
       {sections.map((section, index) => (
@@ -104,22 +124,21 @@ export default function OfficialsPage() {
           <div className="h-0.5 w-full bg-gray-500/20 my-8" />
           <section className="mb-10">
             <h2 className="text-xl font-semibold text-center">{section.title}</h2>
-            <div className="flex flex-col items-center space-y-4 mt-4">
+            <div className="flex flex-col items-center space-y-2 mt-2">
               {section.members.map((key) => {
-                const value = officials[section.type][key];
+                const value = officialsData[section.type]?.[key];
                 if (Array.isArray(value)) {
-                  const isCouncilorRow = key === "councilors" && section.members.includes("captain");
                   return (
                     <div
                       key={key}
-                      className={`flex ${isCouncilorRow ? "flex-row flex-nowrap overflow-x-auto gap-6 justify-start w-full" : "gap-6 flex-wrap justify-center"}`}
+                      className="flex gap-3 flex-wrap justify-center"
                     >
                       {value.map((person, i) => (
                         <ProfileCard key={`${key}-${i}`} person={person} />
                       ))}
                     </div>
                   );
-                } else if (value) {
+                } else if (value && typeof value === "object") {
                   return <ProfileCard key={key} person={value} />;
                 }
                 return null;
@@ -130,6 +149,52 @@ export default function OfficialsPage() {
       ))}
       {selectedOfficial && (
         <ViewOfficialModal person={selectedOfficial} onClose={() => setSelectedOfficial(null)} />
+      )}
+      {isAddModalOpen && (
+        <AddOfficialModal
+          onSave={() => {
+            setIsAddModalOpen(false);
+            // re-fetch updated officials list
+            invoke<Official[]>("fetch_all_officials_command")
+              .then((data) => {
+                const structured = {
+                  barangay: { captain: null, councilors: [], staffs: [] },
+                  sk: { captain: null, councilors: [] },
+                  tanod: { chief: null, members: [] },
+                };
+
+                data.forEach((person) => {
+                  const role = person.role.toLowerCase();
+                  const section = person.section.toLowerCase();
+
+                  if (section === "barangay officials") {
+                    if (role === "barangay captain") {
+                      structured.barangay.captain = person;
+                    } else if (role === "barangay councilor") {
+                      structured.barangay.councilors.push(person);
+                    } else if (["secretary", "treasurer", "driver", "care taker"].includes(role)) {
+                      structured.barangay.staffs.push(person);
+                    }
+                  } else if (section === "sk officials") {
+                    if (role === "sk chairman") {
+                      structured.sk.captain = person;
+                    } else if (role === "sk councilor") {
+                      structured.sk.councilors.push(person);
+                    }
+                  } else if (section === "tanod officials") {
+                    if (role === "chief tanod") {
+                      structured.tanod.chief = person;
+                    } else if (role === "tanod member") {
+                      structured.tanod.members.push(person);
+                    }
+                  }
+                });
+
+                setOfficialsData(structured);
+              })
+              .catch((err) => console.error("Failed to fetch officials:", err));
+          }}
+        />
       )}
     </div>
   );

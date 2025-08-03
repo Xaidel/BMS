@@ -11,6 +11,5 @@ pub struct Official {
     pub term_end: String,
     pub zone: String,
     pub image: Option<String>,
-    pub type_: String, // base64 string or filepath
     pub section: String,
 }

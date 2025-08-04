@@ -53,7 +53,6 @@ const columns: ColumnDef<Resident>[] = [
     header: "Full Name",
     cell: ({ row }) => {
       const r = row.original;
-      return `${r.last_name}, ${r.first_name ?? ""} ${r.middle_name}`;
     },
   },
   {
@@ -102,9 +101,6 @@ export default function Residents() {
     setSearchParams(searchParams);
   };
 
-  const handleSearch = (term: string) => {
-    setSearchQuery(term);
-  };
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Residents";

@@ -39,10 +39,6 @@ type Resident = {
   issued_date?: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Fourps() {
   const navigate = useNavigate()
@@ -300,7 +296,7 @@ export default function Fourps() {
                   await invoke("save_certificate_command", {
                     cert: {
                       resident_name: `${selectedResident.first_name} ${selectedResident.last_name}`,
-                      id:0,
+                      id: 0,
                       type_: "4Ps Certificate",
                       issued_date: nowIso,
                       age: age ? parseInt(age) : undefined,

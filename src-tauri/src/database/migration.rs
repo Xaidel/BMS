@@ -117,7 +117,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             zone TEXT NOT NULL,
             image TEXT
         );
-        CREATE TABLE certificates (
+        CREATE TABLE IF NOT EXISTS certificates (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             resident_name TEXT NOT NULL,
             type_ TEXT NOT NULL,

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { eventSchema, residentSchema } from "@/types/formSchema";
+import { residentSchema } from "@/types/formSchema";
 import { CalendarIcon, Eye } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -46,7 +46,6 @@ const genderOptions = ["Male", "Female"];
 const suffixOptions = ["Jr.", "Sr.", "II", "III"];
 const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
-const statusOptions: string[] = ["Moved Out", "Active", "Dead", "Missing"];
 
 export default function ViewResidentModal(
   props: Resident & { onSave: () => void }
@@ -55,7 +54,7 @@ export default function ViewResidentModal(
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
-
+  console.log(capturedImage)
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
     defaultValues: {
@@ -66,7 +65,6 @@ export default function ViewResidentModal(
     },
   });
 
-  const watch = form.watch;
 
   async function onSubmit(values: z.infer<typeof residentSchema>) {
     try {

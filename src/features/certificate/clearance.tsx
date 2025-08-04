@@ -21,6 +21,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Official } from "@/types/types";
 
 type Resident = {
   id?: number;
@@ -31,17 +32,6 @@ type Resident = {
   date_of_birth?: string;
   civil_status?: string;
 };
-
-type Official = {
-  name: string;
-  role: string;
-  section: string;
-};
-
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Clearance() {
   const navigate = useNavigate()
@@ -154,7 +144,7 @@ export default function Clearance() {
           <CardHeader>
             <CardTitle className="flex gap-2 items-center justify-start">
               <ArrowLeftCircleIcon className="h-8 w-8" onClick={() => navigate(-1)} />
-                Barangay Clearance
+              Barangay Clearance
             </CardTitle>
             <CardDescription className="text-start">
               Please fill out the necessary information needed for Barangay Clearance Certification

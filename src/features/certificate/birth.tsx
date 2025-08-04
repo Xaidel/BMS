@@ -30,14 +30,6 @@ type Resident = {
   civil_status?: string;
 };
 
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  section: string;
-};
-
 export default function Birth() {
   const [captainName, setCaptainName] = useState<string | null>(null);
   const [preparedBy, setPreparedBy] = useState<string | null>(null);
@@ -73,7 +65,7 @@ export default function Birth() {
   const [amount, setAmount] = useState("10.00");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
-
+  console.log(age)
   // Resident selector state for Select Resident dropdown
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");

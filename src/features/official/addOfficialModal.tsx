@@ -59,7 +59,7 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
       zone: "",
     },
   });
-
+  console.log(imagePreview)
   async function onSubmit(values: z.infer<typeof officialSchema>) {
     try {
       await invoke("insert_official_command", {

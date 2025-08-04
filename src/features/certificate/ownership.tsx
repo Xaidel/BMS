@@ -20,6 +20,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Official } from "@/types/types";
 
 type Resident = {
   id?: number;
@@ -30,19 +31,6 @@ type Resident = {
   date_of_birth?: string;
   civil_status?: string;
 };
-
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  section: string;
-};
-
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Fourps() {
   const navigate = useNavigate()

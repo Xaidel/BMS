@@ -1,5 +1,4 @@
 // components/ui/summarycardResidents.tsx
-import React from "react";
 
 interface SummaryCardProps {
   title: string;

@@ -40,11 +40,6 @@ export default function OfficialsPage() {
   const [selectedOfficial, setSelectedOfficial] = useState(null);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const handleAddOfficial = (type: string, sectionTitle: string) => {
-    console.log("Open add modal for", sectionTitle, "of type", type);
-    // Future: set modal open with prefilled type/section
-    setIsAddModalOpen(true);
-  };
 
   useEffect(() => {
     invoke<Official[]>("fetch_all_officials_command")

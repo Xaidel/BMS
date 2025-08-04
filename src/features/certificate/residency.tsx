@@ -19,6 +19,7 @@ import { ArrowLeftCircleIcon, Check, ChevronsUpDown, Printer } from "lucide-reac
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
+import { Official } from "@/types/types";
 
 type Resident = {
   id?: number;
@@ -29,19 +30,6 @@ type Resident = {
   date_of_birth?: string;
   civil_status?: string;
 };
-
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  section: string;
-};
-
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Residency() {
   const navigate = useNavigate()

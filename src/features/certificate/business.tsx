@@ -33,10 +33,6 @@ type Resident = {
   // Add more fields if needed
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function BusinessPermit() {
   const navigate = useNavigate()
@@ -189,15 +185,15 @@ export default function BusinessPermit() {
                                     }
                                     try {
                                       setAge(calculatedAge.toString());
-                                    } catch {}
+                                    } catch { }
                                   } else {
                                     try {
                                       setAge("");
-                                    } catch {}
+                                    } catch { }
                                   }
                                   try {
                                     setCivilStatus(selected.civil_status || "");
-                                  } catch {}
+                                  } catch { }
                                   setValue(currentValue === value ? "" : currentValue);
                                 }
                                 setOpen(false);
@@ -367,10 +363,10 @@ export default function BusinessPermit() {
                         This Barangay permit on business indorsed to this Municipality for registration purposes only.
                       </Text>
                       <Text style={[styles.bodyText, { marginTop: 10, marginBottom: 8 }]}>
-                          Given this {new Date().toLocaleDateString("en-PH", {
-                            day: "numeric", month: "long", year: "numeric"
-                          })}, at Tambo, Pamplona, Camarines Sur.
-                        </Text>
+                        Given this {new Date().toLocaleDateString("en-PH", {
+                          day: "numeric", month: "long", year: "numeric"
+                        })}, at Tambo, Pamplona, Camarines Sur.
+                      </Text>
                       <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                         This Barangay Permit is not valid without official receipt.
                       </Text>

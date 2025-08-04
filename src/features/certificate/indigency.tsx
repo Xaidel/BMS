@@ -39,10 +39,6 @@ type Official = {
   role: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Indigency() {
   const navigate = useNavigate()

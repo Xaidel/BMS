@@ -137,7 +137,7 @@ export default function Blotters() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [printData, setPrintDataState] = useState<Blotter[] | null>(null);
-
+  console.log(printData)
   const fetchBlotters = () => {
     invoke<Blotter[]>("fetch_all_blotters_command")
       .then((fetched) => {

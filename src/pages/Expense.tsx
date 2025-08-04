@@ -8,7 +8,7 @@ import DeleteExpenseModal from "@/features/expense/deleteExpenseModal";
 import ViewExpenseModal from "@/features/expense/viewExpenseModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash, Banknote, Coins, Gift, Landmark, Layers, PiggyBank, DollarSign, Wallet, Home, Salad, Shirt } from "lucide-react";
+import { Trash, Banknote, Landmark, Layers, PiggyBank, DollarSign, Wallet, Salad, Shirt } from "lucide-react";
 import type { Expense } from "@/types/types";
 import { useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
@@ -112,7 +112,7 @@ export default function Expense() {
     fetchExpenses();
   }, []);
 
-    <AddExpenseModal onSave={fetchExpenses} />;
+  <AddExpenseModal onSave={fetchExpenses} />;
 
   const handleSortChange = (sortValue: string) => {
     searchParams.set("sort", sortValue);
@@ -338,7 +338,7 @@ export default function Expense() {
           <Trash />
           Delete Selected
         </Button>
-        <AddExpenseModal onSave={fetchExpenses}/>
+        <AddExpenseModal onSave={fetchExpenses} />
       </div>
 
       <DataTable<Expense>
@@ -353,11 +353,11 @@ export default function Expense() {
             cell: ({ row }) => (
               <div className="flex gap-3">
                 <ViewExpenseModal {...row.original} onSave={fetchExpenses} />
-                <DeleteExpenseModal 
+                <DeleteExpenseModal
                   id={row.original.id!}
                   type_={row.original.type_}
                   category={row.original.category}
-                  onDelete={fetchExpenses}                
+                  onDelete={fetchExpenses}
                 />
               </div>
             ),

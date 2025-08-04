@@ -31,10 +31,6 @@ type Resident = {
   civil_status?: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Fourps() {
   const navigate = useNavigate()

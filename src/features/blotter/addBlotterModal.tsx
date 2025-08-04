@@ -23,22 +23,15 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { datetimeRegex, z } from "zod";
+import { z } from "zod";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
-import { id } from "date-fns/locale";
 import { blotterSchema } from "@/types/formSchema";
 
 
-const statusOption = [
-  "Active",
-  "On going",
-  "Transferred to Police",
-  "Closed",
-] as const;
 
 
 
@@ -46,7 +39,6 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
-  const [capturedImage] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof blotterSchema>>({
     resolver: zodResolver(blotterSchema),

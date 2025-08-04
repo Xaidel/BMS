@@ -12,7 +12,6 @@ import { Trash } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
-import { Income } from "@/types/types";
 
 interface Props {
   id: number;
@@ -21,7 +20,7 @@ interface Props {
   onDelete?: () => void;
 }
 
-export default function DeleteIncomeModal({ id, type_, category, onDelete }: Props) {
+export default function DeleteIncomeModal({ id, type_, onDelete }: Props) {
   const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {

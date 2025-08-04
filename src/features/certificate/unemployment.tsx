@@ -32,10 +32,6 @@ type Resident = {
   // Add more fields if needed
 };
 
-type mock = {
-  value: string,
-  label: string
-}
 
 export default function Unemployment() {
   const navigate = useNavigate()

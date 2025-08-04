@@ -8,12 +8,11 @@ import DeleteHouseholdModal from "@/features/households/deleteHouseholdModal";
 import ViewHouseholdModal from "@/features/households/viewHouseholdModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash, Home, HomeIcon, UserCheck, UserMinus, Users } from "lucide-react";
+import { Trash, Home, HomeIcon, UserCheck, Users } from "lucide-react";
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Household } from "@/types/types";
 import { sort } from "@/service/household/householdSort";
-import searchHousehold from "@/service/household/searchHousehold";
 import SummaryCard from "@/components/summary-card/household";
 import { invoke } from "@tauri-apps/api/core";
 import { pdf } from "@react-pdf/renderer";
@@ -32,8 +31,8 @@ const columns: ColumnDef<Household>[] = [
           table.getIsAllPageRowsSelected()
             ? true
             : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
+              ? "indeterminate"
+              : false
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
@@ -111,9 +110,6 @@ export default function Households() {
     setSearchParams(searchParams);
   };
 
-  const handleSearch = (term: string) => {
-    setSearchQuery(term);
-  };
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Households";
@@ -174,11 +170,8 @@ export default function Households() {
 
   <AddHouseholdModal onSave={fetchHouseholds} />;
 
-    
+
   const totalActive = data.filter((item) => item.status === "Active").length;
-  const totalMovedOut = data.filter(
-    (item) => item.status === "Moved Out"
-  ).length;
   const totalRenter = data.filter((item) => item.type_ === "Renter").length;
   const totalOwner = data.filter((item) => item.type_ === "Owner").length;
   const total = data.length;

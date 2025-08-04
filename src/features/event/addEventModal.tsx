@@ -14,7 +14,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from '@tauri-apps/api/core'
-import type { Event } from "@/types/types";
 
 const selectOption: string[] = [
   "Seminar",

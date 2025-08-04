@@ -105,7 +105,7 @@ export default function OfficialsPage() {
     return (
       <div
         onClick={() => viewMore(person)}
-        className="cursor-pointer p-1 rounded-lg bg-white shadow-md hover:bg-gray-100 w-50 h-auto text-center scale-[1] hover:scale-100 transition-transform"
+        className="cursor-pointer my-5 p-1 rounded-lg bg-white shadow-md hover:bg-gray-100 w-50 h-auto text-center scale-[1] hover:scale-100 transition-transform"
       >
         <img
           src={person.image && person.image.trim() !== "" ? person.image : logo}

@@ -196,8 +196,7 @@ export default function ViewOfficialModal({ person, onClose }) {
                 control={form.control}
                 name="role"
                 render={({ field }) => {
-                  const selectedSection = form.watch("section");
-
+                  // Updated sectionRoleMap as requested
                   const sectionRoleMap = {
                     "Barangay Officials": [
                       "Barangay Captain",
@@ -211,6 +210,7 @@ export default function ViewOfficialModal({ person, onClose }) {
                     "Tanod Officials": ["Chief Tanod", "Tanod Member"],
                   };
 
+                  const selectedSection = form.watch("section");
                   const roleOptions = sectionRoleMap[selectedSection] || [];
 
                   return (

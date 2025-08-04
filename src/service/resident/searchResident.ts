@@ -12,7 +12,6 @@ export default function searchResident(term: string, data: Resident[]) {
       resident.last_name,
       resident.gender,
       resident.status,
-      resident.barangay,
       resident.zone,
       resident.civil_status,
     ];

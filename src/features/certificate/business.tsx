@@ -67,6 +67,8 @@ export default function BusinessPermit() {
   // Resident selection state
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
+  // Captain name state
+  const [captainName, setCaptainName] = useState<string | null>(null);
 
   useEffect(() => {
     invoke("fetch_logo_command")
@@ -91,6 +93,19 @@ export default function BusinessPermit() {
     invoke("fetch_all_residents_command")
       .then((res) => {
         if (Array.isArray(res)) setResidents(res as Resident[]);
+      })
+      .catch(console.error);
+
+    invoke("fetch_all_officials_command")
+      .then((data) => {
+        const captain = (data as any[]).find(
+          (person) =>
+            person.section?.toLowerCase() === "barangay officials" &&
+            person.role?.toLowerCase() === "barangay captain"
+        );
+        if (captain) {
+          setCaptainName(captain.name);
+        }
       })
       .catch(console.error);
   }, []);
@@ -361,7 +376,9 @@ export default function BusinessPermit() {
                       </Text>
                     </>
                     <Text style={[styles.bodyText, { marginTop: 40, marginBottom: 6 }]}>Certifying Officer,</Text>
-                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>HON. JERRY T. AQUINO</Text>
+                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
+                      HON. {captainName || "________________"}
+                    </Text>
                     <Text style={[styles.bodyText, { marginBottom: 10 }]}>Punong Barangay</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>O.R. No.: ____________________</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>Date: _________________________</Text>

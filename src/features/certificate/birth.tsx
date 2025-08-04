@@ -30,12 +30,17 @@ type Resident = {
   civil_status?: string;
 };
 
-type mock = {
-  value: string,
-  label: string
-}
+type Official = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  section: string;
+};
 
 export default function Birth() {
+  const [captainName, setCaptainName] = useState<string | null>(null);
+  const [preparedBy, setPreparedBy] = useState<string | null>(null);
   const navigate = useNavigate()
   // Birth certificate form fields
   const [registryNo, setRegistryNo] = useState("");
@@ -66,7 +71,6 @@ export default function Birth() {
   const [placeOfMarriage, setPlaceOfMarriage] = useState("");
   const [attendantAtBirth, setAttendantAtBirth] = useState("");
   const [amount, setAmount] = useState("10.00");
-  const [preparedBy, setPreparedBy] = useState("MARILOU T. LOPEZ");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
 
@@ -111,11 +115,35 @@ export default function Birth() {
       })
       .catch(console.error);
 
+
     // Fetch residents for selector
     invoke("fetch_all_residents_command")
       .then((res) => {
         if (Array.isArray(res)) {
           setResidents(res as Resident[]);
+        };
+      })
+      .catch(console.error);
+
+    // Fetch barangay officials and set captain's name and secretary's name
+    invoke("fetch_all_officials_command")
+      .then((res) => {
+        if (Array.isArray(res)) {
+          const officials = res as any[];
+
+          const captain = officials.find(
+            (o) => o.role?.toLowerCase() === "barangay captain"
+          );
+          if (captain) {
+            setCaptainName(captain.name || `${captain.first_name} ${captain.last_name}`);
+          }
+
+          const secretary = officials.find(
+            (o) => o.role?.toLowerCase() === "secretary"
+          );
+          if (secretary) {
+            setPreparedBy(secretary.name || `${secretary.first_name} ${secretary.last_name}`);
+          }
         }
       })
       .catch(console.error);
@@ -221,7 +249,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Registry No.</label>
                   <input
                     type="text"
-                    value={registryNo}
+                    value={registryNo || ""}
                     onChange={(e) => setRegistryNo(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 2023-0001"
@@ -231,7 +259,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
                   <input
                     type="date"
-                    value={birthDate}
+                    value={birthDate || ""}
                     onChange={(e) => setBirthDate(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 2023-01-01"
@@ -241,7 +269,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name of child (First)</label>
                   <input
                     type="text"
-                    value={childFirstName}
+                    value={childFirstName || ""}
                     onChange={(e) => setChildFirstName(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Juan"
@@ -251,7 +279,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name of child (Middle)</label>
                   <input
                     type="text"
-                    value={childMiddleName}
+                    value={childMiddleName || ""}
                     onChange={(e) => setChildMiddleName(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Dela"
@@ -261,7 +289,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Name of child (Last)</label>
                   <input
                     type="text"
-                    value={childLastName}
+                    value={childLastName || ""}
                     onChange={(e) => setChildLastName(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Cruz"
@@ -271,7 +299,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
                   <input
                     type="text"
-                    value={childGender}
+                    value={childGender || ""}
                     onChange={(e) => setChildGender(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Male"
@@ -281,7 +309,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
                   <input
                     type="date"
-                    value={childDateOfBirth}
+                    value={childDateOfBirth || ""}
                     onChange={(e) => setChildDateOfBirth(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 2023-01-01"
@@ -291,7 +319,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Weight at Birth</label>
                   <input
                     type="text"
-                    value={childWeight}
+                    value={childWeight || ""}
                     onChange={(e) => setChildWeight(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 3.2 kg"
@@ -301,7 +329,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Type of Birth</label>
                   <input
                     type="text"
-                    value={typeOfBirth}
+                    value={typeOfBirth || ""}
                     onChange={(e) => setTypeOfBirth(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Single"
@@ -311,7 +339,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Total Number of Child</label>
                   <input
                     type="number"
-                    value={totalNumberOfChild}
+                    value={totalNumberOfChild || ""}
                     onChange={(e) => setTotalNumberOfChild(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 1"
@@ -321,7 +349,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Time at Birth</label>
                   <input
                     type="text"
-                    value={timeAtBirth}
+                    value={timeAtBirth || ""}
                     onChange={(e) => setTimeAtBirth(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 2:15 AM"
@@ -331,7 +359,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Place of Birth</label>
                   <input
                     type="text"
-                    value={placeOfBirth}
+                    value={placeOfBirth || ""}
                     onChange={(e) => setPlaceOfBirth(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Barangay Health Center"
@@ -341,7 +369,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Maiden Name</label>
                   <input
                     type="text"
-                    value={motherMaidenName}
+                    value={motherMaidenName || ""}
                     onChange={(e) => setMotherMaidenName(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Maria Santos"
@@ -351,7 +379,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Occupation</label>
                   <input
                     type="text"
-                    value={motherOccupation}
+                    value={motherOccupation || ""}
                     onChange={(e) => setMotherOccupation(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Teacher"
@@ -361,7 +389,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Age</label>
                   <input
                     type="number"
-                    value={motherAge}
+                    value={motherAge || ""}
                     onChange={(e) => setMotherAge(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 28"
@@ -371,7 +399,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Residence</label>
                   <input
                     type="text"
-                    value={motherResidence}
+                    value={motherResidence || ""}
                     onChange={(e) => setMotherResidence(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Purok 2, Barangay Mabini"
@@ -381,7 +409,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mother Religion</label>
                   <input
                     type="text"
-                    value={motherReligion}
+                    value={motherReligion || ""}
                     onChange={(e) => setMotherReligion(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Roman Catholic"
@@ -391,7 +419,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Name</label>
                   <input
                     type="text"
-                    value={fatherName}
+                    value={fatherName || ""}
                     onChange={(e) => setFatherName(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Jose Cruz"
@@ -401,7 +429,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Occupation</label>
                   <input
                     type="text"
-                    value={fatherOccupation}
+                    value={fatherOccupation || ""}
                     onChange={(e) => setFatherOccupation(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Farmer"
@@ -411,7 +439,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Age</label>
                   <input
                     type="number"
-                    value={fatherAge}
+                    value={fatherAge || ""}
                     onChange={(e) => setFatherAge(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 30"
@@ -421,7 +449,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Residence</label>
                   <input
                     type="text"
-                    value={fatherResidence}
+                    value={fatherResidence || ""}
                     onChange={(e) => setFatherResidence(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Purok 2, Barangay Mabini"
@@ -431,7 +459,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Father Religion</label>
                   <input
                     type="text"
-                    value={fatherReligion}
+                    value={fatherReligion || ""}
                     onChange={(e) => setFatherReligion(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Roman Catholic"
@@ -441,7 +469,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date of Marriage</label>
                   <input
                     type="date"
-                    value={dateOfMarriage}
+                    value={dateOfMarriage || ""}
                     onChange={(e) => setDateOfMarriage(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. 2010-06-15"
@@ -451,7 +479,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Place of Marriage</label>
                   <input
                     type="text"
-                    value={placeOfMarriage}
+                    value={placeOfMarriage || ""}
                     onChange={(e) => setPlaceOfMarriage(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. San Roque Church"
@@ -461,7 +489,7 @@ export default function Birth() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Attendant at Birth</label>
                   <input
                     type="text"
-                    value={attendantAtBirth}
+                    value={attendantAtBirth || ""}
                     onChange={(e) => setAttendantAtBirth(e.target.value)}
                     className="w-full border rounded px-3 py-2 text-sm"
                     placeholder="e.g. Dr. Ana Reyes"
@@ -475,7 +503,7 @@ export default function Birth() {
                 <input
                   id="amount"
                   type="text"
-                  value={amount}
+                  value={amount || ""}
                   onChange={(e) => setAmount(e.target.value)}
                   className="w-full border rounded px-3 py-2 text-sm"
                   placeholder="e.g. 10.00"
@@ -488,7 +516,7 @@ export default function Birth() {
                 <input
                   id="preparedBy"
                   type="text"
-                  value={preparedBy}
+                  value={preparedBy || ""}
                   onChange={(e) => setPreparedBy(e.target.value)}
                   className="w-full border rounded px-3 py-2 text-sm"
                   placeholder="e.g. MARILOU T. LOPEZ"
@@ -529,10 +557,6 @@ export default function Birth() {
               }}
             >
               Save
-            </Button>
-            <Button onClick={handleDownload}>
-              <Printer />
-              Print Certificate
             </Button>
           </CardFooter>
         </Card>
@@ -634,13 +658,17 @@ export default function Birth() {
                     <View style={{ marginTop: 30, flexDirection: "row", justifyContent: "space-between" }}>
                       <View>
                         <Text style={[styles.bodyText, { fontWeight: "bold" }]}>Prepared by:</Text>
-                        <Text style={[styles.bodyText, { marginTop: 20 }]}>{preparedBy}</Text>
+                        <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
+                      {preparedBy || "________________"}
+                        </Text>
                         <Text style={styles.bodyText}>Barangay Secretary</Text>
                       </View>
                       <View>
                         <Text style={[styles.bodyText, { fontWeight: "bold" }]}>Noted:</Text>
-                        <Text style={[styles.bodyText, { marginTop: 20 }]}>LALAINE E. NEGRITO</Text>
-                        <Text style={styles.bodyText}>Punong Barangay</Text>
+                        <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
+                      HON. {captainName || "________________"}
+                        </Text>
+                        <Text style={styles.bodyText}>Barangay Captain</Text>
                       </View>
                     </View>
 

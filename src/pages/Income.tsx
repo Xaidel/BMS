@@ -165,10 +165,10 @@ export default function IncomePage() {
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCardIncome
           title="Total Revenue"
-          value={data.reduce((acc, item) => acc + item.amount, 0)}
+          value={filteredData.reduce((acc, item) => acc + item.amount, 0)}
           icon={<DollarSign size={50} />}
           onClick={async () => {
-            const blob = await pdf(<IncomePDF filter="All Income" incomes={data} />).toBlob();
+            const blob = await pdf(<IncomePDF filter="All Income" incomes={filteredData} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
             try {
@@ -187,12 +187,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Local Revenue"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Local Revenue")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Banknote size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Local Revenue");
+            const filtered = filteredData.filter((d) => d.category === "Local Revenue");
             const blob = await pdf(<IncomePDF filter="Local Revenue" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -206,12 +206,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Tax Revenue"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Tax Revenue")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<PiggyBank size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Tax Revenue");
+            const filtered = filteredData.filter((d) => d.category === "Tax Revenue");
             const blob = await pdf(<IncomePDF filter="Tax Revenue" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -225,12 +225,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Government Grants"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Government Grants")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Gift size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Government Grants");
+            const filtered = filteredData.filter((d) => d.category === "Government Grants");
             const blob = await pdf(<IncomePDF filter="Government Grants" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -244,12 +244,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Service Revenue"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Service Revenue")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Coins size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Service Revenue");
+            const filtered = filteredData.filter((d) => d.category === "Service Revenue");
             const blob = await pdf(<IncomePDF filter="Service Revenue" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -263,12 +263,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Rental Income"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Rental Income")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Wallet size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Rental Income");
+            const filtered = filteredData.filter((d) => d.category === "Rental Income");
             const blob = await pdf(<IncomePDF filter="Rental Income" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -282,12 +282,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Government Funds (IRA)"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Government Funds")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Layers size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Government Funds");
+            const filtered = filteredData.filter((d) => d.category === "Government Funds");
             const blob = await pdf(<IncomePDF filter="Government Funds" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -301,12 +301,12 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Others"
-          value={data
+          value={filteredData
             .filter((d) => d.category === "Others")
             .reduce((acc, item) => acc + item.amount, 0)}
           icon={<Shirt size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Others");
+            const filtered = filteredData.filter((d) => d.category === "Others");
             const blob = await pdf(<IncomePDF filter="Others" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);

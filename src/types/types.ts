@@ -53,6 +53,7 @@ export type Household = {
   zone: string;
   date: Date;
   status: "Moved Out" | "Active";
+  selectedResidents?: string[]; // optional list of selected members
 };
 
 export type Income = {

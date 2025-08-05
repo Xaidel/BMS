@@ -4,16 +4,19 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon, Plus } from "lucide-react";
+import { CalendarIcon, Plus, ChevronsUpDown, Check } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod"
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { invoke } from '@tauri-apps/api/core'
 import { householdSchema } from "@/types/formSchema";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import { Command, CommandInput, CommandEmpty, CommandItem } from "@/components/ui/command";
+import { Virtuoso } from "react-virtuoso";
+import { cn } from "@/lib/utils";
 
 const selectOption: string[] = ["Renter", "Owner"];
 
@@ -35,6 +38,14 @@ const status: string[] = [
 export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
+  const [selectedResidents, setSelectedResidents] = useState<string[]>([]);
+  const [residentSearch, setResidentSearch] = useState("");
+  const [residentOptions, setResidentOptions] = useState<string[]>([]);
+  // For head of household popover
+  const [headOpen, setHeadOpen] = useState(false);
+  const [headSearch, setHeadSearch] = useState("");
+  const [allResidents, setAllResidents] = useState<{ label: string; value: string }[]>([]);
+
   const form = useForm<z.infer<typeof householdSchema>>({
     resolver: zodResolver(householdSchema),
     defaultValues: {
@@ -48,6 +59,50 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
     }
   })
 
+  // Fetch all residents for dropdowns (head, members)
+  useEffect(() => {
+    invoke("fetch_all_residents_command")
+      .then((res) => {
+        if (Array.isArray(res)) {
+          const all = res as {
+            id?: number;
+            first_name: string;
+            middle_name?: string;
+            last_name: string;
+            suffix?: string;
+          }[];
+          const mapped = all.map((r) => ({
+            label: `${r.last_name}, ${r.first_name}${r.middle_name ? " " + r.middle_name : ""}${r.suffix ? " " + r.suffix : ""}`,
+            value: `${r.last_name}, ${r.first_name}${r.middle_name ? " " + r.middle_name : ""}${r.suffix ? " " + r.suffix : ""}`,
+          }));
+          setAllResidents(mapped);
+        }
+      })
+      .catch(() => setAllResidents([]));
+  }, []);
+
+  // Search logic for residentOptions (Add Members input)
+  useEffect(() => {
+    if (!residentSearch) {
+      setResidentOptions([]);
+      return;
+    }
+    const matches = allResidents
+      .filter((r) =>
+        r.label.toLowerCase().includes(residentSearch.toLowerCase())
+      )
+      .map((r) => r.label);
+    setResidentOptions(matches);
+  }, [residentSearch, allResidents]);
+
+  // Filtered residents for head dropdown
+  const filteredResidents = useMemo(() => {
+    if (!headSearch) return allResidents;
+    return allResidents.filter((r) =>
+      r.label.toLowerCase().includes(headSearch.toLowerCase())
+    );
+  }, [allResidents, headSearch]);
+
   async function onSubmit(values: z.infer<typeof householdSchema>) {
     toast.success("Household added sucessfully", {
       description: `${values.household_number} was added`
@@ -55,12 +110,19 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
     setOpenModal(false);
     await invoke("insert_household_command", {
       household: {
-        ...values,
-        date: values.date.toISOString(),
+        household_number: values.household_number,
+        type_: values.type_,
+        members: values.members,
+        head: values.head,
+        zone: values.zone,
+        date: values.date.toISOString().split("T")[0],
+        status: values.status,
+        selected_residents: selectedResidents,
       },
     });
     onSave();
     form.reset();
+    setSelectedResidents([]);
   }
 
   return (
@@ -124,7 +186,7 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
                           </FormControl>
                           <SelectContent>
                             {selectOption.map((option, i) => (
-                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                              <SelectItem value={option} key={i} className="text-black">{option}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -133,6 +195,70 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
                     )}
                   />
                 </div>
+                <FormField
+                    control={form.control}
+                    name="head"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-black font-bold text-xs">Head of Household</FormLabel>
+                        <Popover open={headOpen} onOpenChange={setHeadOpen}>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              aria-expanded={headOpen}
+                              className="w-full justify-between text-black"
+                            >
+                              {field.value
+                                ? allResidents.find((res) => res.value === field.value)?.label
+                                : "Select Head of Household"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="p-0">
+                            <Command>
+                              <CommandInput
+                                placeholder="Search Head of Household..."
+                                className="h-9"
+                                value={headSearch}
+                                onValueChange={setHeadSearch}
+                              />
+                              <CommandEmpty>No Residents Found</CommandEmpty>
+                              <div className="h-60 overflow-hidden">
+                                <Virtuoso
+                                  style={{ height: "100%" }}
+                                  totalCount={filteredResidents.length}
+                                  itemContent={(index) => {
+                                    const res = filteredResidents[index];
+                                    return (
+                                      <CommandItem
+                                        key={res.value}
+                                        value={res.value}
+                                        className="text-black"
+                                        onSelect={(currentValue) => {
+                                          field.onChange(currentValue);
+                                          setHeadOpen(false);
+                                        }}
+                                      >
+                                        {res.label}
+                                        <Check
+                                          className={cn(
+                                            "ml-auto",
+                                            field.value === res.value ? "opacity-100" : "opacity-0"
+                                          )}
+                                        />
+                                      </CommandItem>
+                                    );
+                                  }}
+                                />
+                              </div>
+                            </Command>
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 <div>
                   <FormField
                     control={form.control}
@@ -157,26 +283,39 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
                   />
                 </div>
                 <div>
-                  <FormField
-                    control={form.control}
-                    name="head"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel htmlFor="members" className="text-black font-bold text-xs">Head of Household</FormLabel>
-                        <FormControl>
-                          <Input
-                            id="members"
-                            type="string"
-                            placeholder="Enter head of household"
-                            required
-                            {...field}
-                            className="text-black"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormLabel className="text-black font-bold text-xs">Add Members</FormLabel>
+                <Input
+                  type="text"
+                  placeholder={
+                    selectedResidents.length > 0
+                      ? selectedResidents.join(", ")
+                      : "Search resident name"
+                  }
+                  value={residentSearch}
+                  onChange={(e) => setResidentSearch(e.target.value)}
+                  className="text-black"
+                />
+                {residentOptions.length > 0 && (
+                  <ul className="bg-white border rounded shadow mt-1 max-h-32 overflow-y-auto">
+                    {residentOptions.map((name, i) => (
+                      <li
+                        key={i}
+                        className="px-2 py-1 hover:bg-gray-100 cursor-pointer text-black"
+                        onClick={() => {
+                          if (!selectedResidents.includes(name)) {
+                            setSelectedResidents([...selectedResidents, name]);
+                          }
+                          setResidentSearch("");
+                          setResidentOptions([]);
+                        }}
+                      >
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+                <div>
                 </div>
                 <div>
                   <FormField
@@ -193,7 +332,7 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
                           </FormControl>
                           <SelectContent>
                             {zone.map((option, i) => (
-                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                              <SelectItem value={option} key={i} className="text-black">{option}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -217,6 +356,7 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
                             <PopoverTrigger asChild className="w-full text-black hover:bg-primary hover:text-white">
                               <Button
                                 variant="outline"
+                                className="text-black"
                               >
                                 {field.value ? (
                                   format(field.value, "PPP")
@@ -257,7 +397,7 @@ export default function AddHouseholdModal({ onSave }: { onSave: () => void }) {
                           </FormControl>
                           <SelectContent>
                             {status.map((option, i) => (
-                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                              <SelectItem value={option} key={i} className="text-black">{option}</SelectItem>
                             ))}
                           </SelectContent>
                         </Select>

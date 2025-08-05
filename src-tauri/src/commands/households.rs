@@ -1,3 +1,20 @@
+#[tauri::command]
+pub fn fetch_members_by_household_command(household_id: i32) -> Result<Vec<String>, String> {
+    let conn = establish_connection().map_err(|e| e.to_string())?;
+
+    let mut stmt = conn
+        .prepare("SELECT selected_residents FROM households WHERE id = ?1")
+        .map_err(|e| e.to_string())?;
+
+    let selected_residents_json: String = stmt
+        .query_row(params![household_id], |row| row.get(0))
+        .map_err(|e| e.to_string())?;
+
+    let selected_residents: Vec<String> =
+        serde_json::from_str(&selected_residents_json).map_err(|e| e.to_string())?;
+
+    Ok(selected_residents)
+}
 use rusqlite::params;
 use crate::database::connection::establish_connection;
 use crate::models::household::Household;
@@ -7,11 +24,14 @@ pub fn fetch_all_households_command() -> Result<Vec<Household>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     let mut stmt = conn.prepare(
-        "SELECT id, household_number, type_, members, head, zone, date, status FROM households"
+        "SELECT id, household_number, type_, members, head, zone, date, status, selected_residents FROM households"
     ).map_err(|e| e.to_string())?;
 
     let household_iter = stmt
         .query_map([], |row| {
+            let residents_json: String = row.get(8)?;
+            let selected_residents: Vec<String> = serde_json::from_str(&residents_json).unwrap_or_default();
+
             Ok(Household {
                 id: row.get(0)?,
                 household_number: row.get(1)?,
@@ -21,6 +41,7 @@ pub fn fetch_all_households_command() -> Result<Vec<Household>, String> {
                 zone: row.get(5)?,
                 date: row.get(6)?,
                 status: row.get(7)?,
+                selected_residents,
             })
         })
         .map_err(|e| e.to_string())?;
@@ -36,11 +57,12 @@ pub fn fetch_all_households_command() -> Result<Vec<Household>, String> {
 #[tauri::command]
 pub fn insert_household_command(household: Household) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
+    let residents_json = serde_json::to_string(&household.selected_residents).map_err(|e| e.to_string())?;
 
     conn.execute(
         "INSERT INTO households (
-            household_number, type_, members, head, zone, date, status
-        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)",
+            household_number, type_, members, head, zone, date, status, selected_residents
+        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
         params![
             household.household_number,
             household.type_,
@@ -49,6 +71,7 @@ pub fn insert_household_command(household: Household) -> Result<(), String> {
             household.zone,
             household.date,
             household.status,
+            residents_json,
         ],
     ).map_err(|e| e.to_string())?;
 
@@ -58,6 +81,7 @@ pub fn insert_household_command(household: Household) -> Result<(), String> {
 #[tauri::command]
 pub fn update_household_command(household: Household) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
+    let residents_json = serde_json::to_string(&household.selected_residents).map_err(|e| e.to_string())?;
 
     conn.execute(
         "UPDATE households SET
@@ -67,8 +91,9 @@ pub fn update_household_command(household: Household) -> Result<(), String> {
             head = ?4,
             zone = ?5,
             date = ?6,
-            status = ?7
-         WHERE id = ?8",
+            status = ?7,
+            selected_residents = ?8
+         WHERE id = ?9",
         params![
             household.household_number,
             household.type_,
@@ -77,6 +102,7 @@ pub fn update_household_command(household: Household) -> Result<(), String> {
             household.zone,
             household.date,
             household.status,
+            residents_json,
             household.id
         ],
     ).map_err(|e| e.to_string())?;

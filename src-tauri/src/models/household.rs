@@ -10,4 +10,5 @@ pub struct Household {
     pub zone: String,
     pub date: String,
     pub status: String,
+    pub selected_residents: Vec<String>,
 }

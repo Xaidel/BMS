@@ -101,7 +101,8 @@ export const householdSchema = z.object({
   }),
   status: z.string().max(1000, {
     message: "Status is too long"
-  })
+  }),
+  selectedResidents: z.array(z.string()).optional()
 })
 
 export const incomeSchema = z.object({

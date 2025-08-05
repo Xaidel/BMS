@@ -68,6 +68,7 @@ const columns: ColumnDef<Expense>[] = [
   {
     header: "Amount",
     accessorKey: "amount",
+    cell: ({ row }) => <div>{Intl.NumberFormat("en-US").format(row.original.amount)}</div>
   },
   {
     header: "Paid From",

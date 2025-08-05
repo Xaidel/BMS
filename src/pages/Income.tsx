@@ -164,7 +164,7 @@ export default function IncomePage() {
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCardIncome
           title="Total Revenue"
-          value={filteredData.reduce((acc, item) => acc + item.amount, 0)}
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData.reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<DollarSign size={50} />}
           onClick={async () => {
             const blob = await pdf(<IncomePDF filter="All Income" incomes={filteredData} />).toBlob();
@@ -186,9 +186,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Local Revenue"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Local Revenue")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<Banknote size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Local Revenue");
@@ -205,9 +205,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Tax Revenue"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Tax Revenue")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<PiggyBank size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Tax Revenue");
@@ -224,9 +224,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Government Grants"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Government Grants")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<Gift size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Government Grants");
@@ -243,9 +243,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Service Revenue"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Service Revenue")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<Coins size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Service Revenue");
@@ -262,9 +262,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Rental Income"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Rental Income")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<Wallet size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Rental Income");
@@ -281,9 +281,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Government Funds (IRA)"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Government Funds")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<Layers size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Government Funds");
@@ -300,9 +300,9 @@ export default function IncomePage() {
         />
         <SummaryCardIncome
           title="Others"
-          value={filteredData
+          value={Number(new Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Others")
-            .reduce((acc, item) => acc + item.amount, 0)}
+            .reduce((acc, item) => acc + item.amount, 0)).replace(/,/g, ""))}
           icon={<Shirt size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Others");

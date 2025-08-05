@@ -31,9 +31,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { settingsSchema } from "@/types/formSchema";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { residentSchema } from "@/types/formSchema";
@@ -48,6 +49,23 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    async function loadDefaultLocation() {
+      try {
+        const settings = await invoke("fetch_settings_command") as z.infer<typeof settingsSchema>;
+        if (settings) {
+          form.setValue("barangay", settings.barangay || "");
+          form.setValue("town", settings.municipality || "");
+          form.setValue("province", settings.province || "");
+        }
+      } catch (error) {
+        console.error("Failed to load default location from settings:", error);
+      }
+    }
+
+    loadDefaultLocation();
+  }, []);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof residentSchema>>({
@@ -624,7 +642,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       name="town"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Town</FormLabel>
+                          <FormLabel>City/Town</FormLabel>
                           <FormControl>
                             <Input
                               id="town"

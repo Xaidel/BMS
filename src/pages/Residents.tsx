@@ -53,6 +53,8 @@ const columns: ColumnDef<Resident>[] = [
     header: "Full Name",
     cell: ({ row }) => {
       const r = row.original;
+      const fullName = [r.last_name ? r.last_name + "," : "", r.first_name, r.middle_name, r.suffix].filter(Boolean).join(" ");
+      return <div>{fullName}</div>;
     },
   },
   {

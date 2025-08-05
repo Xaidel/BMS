@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { invoke } from "@tauri-apps/api/core";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { householdSchema } from "@/types/formSchema";
@@ -6,15 +9,12 @@ import { useForm } from "react-hook-form";
 import { z } from "zod"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { format } from "date-fns"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
 import { toast } from "sonner";
 import { Household } from "@/types/types";
-import { invoke } from "@tauri-apps/api/core";
 
 
 
@@ -53,11 +53,63 @@ export default function ViewHouseholdModal(props: Household & { onSave: () => vo
     }
   })
 
+  const [selectedResidents, setSelectedResidents] = useState<string[]>([]);
+  const [residentSearch, setResidentSearch] = useState("");
+  const [residentOptions, setResidentOptions] = useState<string[]>([]);
+  const [allResidents, setAllResidents] = useState<{ label: string; value: string }[]>([]);
+
+useEffect(() => {
+  invoke("fetch_all_residents_command")
+    .then((res) => {
+      if (Array.isArray(res)) {
+        const all = res as {
+          first_name: string;
+          middle_name?: string;
+          last_name: string;
+          suffix?: string;
+        }[];
+        const mapped = all.map((r) => ({
+          label: `${r.last_name}, ${r.first_name}${r.middle_name ? " " + r.middle_name : ""}${r.suffix ? " " + r.suffix : ""}`,
+          value: `${r.last_name}, ${r.first_name}${r.middle_name ? " " + r.middle_name : ""}${r.suffix ? " " + r.suffix : ""}`,
+        }));
+        setAllResidents(mapped);
+      }
+    })
+    .catch(() => setAllResidents([]));
+
+  // Fetch members for the current household and update selectedResidents
+  if (props.id) {
+    invoke("fetch_members_by_household_command", { householdId: props.id })
+      .then((res) => {
+        console.log("Fetched members:", res);
+        if (Array.isArray(res)) {
+          setSelectedResidents(res.map((r) => String(r)));
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch members", err);
+        setSelectedResidents([]);
+      });
+  }
+}, [props.id]);
+
+  useEffect(() => {
+    if (!residentSearch) {
+      setResidentOptions([]);
+      return;
+    }
+    const matches = allResidents
+      .filter((r) => r.label.toLowerCase().includes(residentSearch.toLowerCase()))
+      .map((r) => r.label);
+    setResidentOptions(matches);
+  }, [residentSearch, allResidents]);
+
   async function onSubmit(values: z.infer<typeof householdSchema>) {
     const householdWithId = {
       ...values,
       id: props.id,
       date: values.date.toISOString(),
+      selected_residents: selectedResidents,
     };
     await invoke("save_household_command", { household: householdWithId });
     toast.success("Household updated successfully", {
@@ -269,6 +321,39 @@ export default function ViewHouseholdModal(props: Household & { onSave: () => vo
                     )}
                   />
                 </div>
+              </div>
+              <div>
+                <FormLabel className="text-black font-bold text-xs">Add Members</FormLabel>
+                <Input
+                  type="text"
+                  placeholder={
+                    selectedResidents.length > 0
+                      ? selectedResidents.join(", ")
+                      : "Search resident name"
+                  }
+                  value={residentSearch}
+                  onChange={(e) => setResidentSearch(e.target.value)}
+                  className="text-black"
+                />
+                {residentOptions.length > 0 && (
+                  <ul className="bg-white border rounded shadow mt-1 max-h-32 overflow-y-auto">
+                    {residentOptions.map((name, i) => (
+                      <li
+                        key={i}
+                        className="px-2 py-1 hover:bg-gray-100 cursor-pointer text-black"
+                        onClick={() => {
+                          if (!selectedResidents.includes(name)) {
+                            setSelectedResidents([...selectedResidents, name]);
+                          }
+                          setResidentSearch("");
+                          setResidentOptions([]);
+                        }}
+                      >
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
               <div className="mt-4 flex justify-end">
                 <Button type="submit">Save Household</Button>

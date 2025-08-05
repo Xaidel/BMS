@@ -1,7 +1,7 @@
 // components/ui/summarycard.tsx
 type SummaryCardIncomeProps = {
   title: string;
-  value: number;
+  value: number | string;
   icon: JSX.Element;
   onClick?: () => void;
 };

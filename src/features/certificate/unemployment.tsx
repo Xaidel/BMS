@@ -1,3 +1,10 @@
+type Official = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  section: string;
+};
 import { Buffer } from "buffer";
 
 if (!window.Buffer) {
@@ -38,6 +45,7 @@ export default function Unemployment() {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState("")
   const [residents, setResidents] = useState<Resident[]>([]);
+  const [captainName, setCaptainName] = useState<string | null>(null);
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
       value: `${res.first_name} ${res.last_name}`.toLowerCase(),
@@ -76,6 +84,19 @@ export default function Unemployment() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+        }
+      })
+      .catch(console.error);
+
+    invoke<Official[]>("fetch_all_officials_command")
+      .then((data) => {
+        const captain = data.find(
+          (person) =>
+            person.section.toLowerCase() === "barangay officials" &&
+            person.role.toLowerCase() === "barangay captain"
+        );
+        if (captain) {
+          setCaptainName(captain.name);
         }
       })
       .catch(console.error);
@@ -274,10 +295,6 @@ export default function Unemployment() {
             >
               Save
             </Button>
-            <Button onClick={handleDownload}>
-              <Printer />
-              Print Certificate
-            </Button>
           </CardFooter>
         </Card>
         <div className="flex-4">
@@ -350,7 +367,9 @@ export default function Unemployment() {
                       <Text style={styles.bodyText}>Please select a resident to view certificate.</Text>
                     )}
                     <Text style={[styles.bodyText, { marginTop: 40, marginBottom: 6 }]}>Certifying Officer,</Text>
-                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>HON. JERRY T. AQUINO</Text>
+                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
+                      HON. {captainName || "________________"}
+                    </Text>
                     <Text style={[styles.bodyText, { marginBottom: 10 }]}>Punong Barangay</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>O.R. No.: ____________________</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>Date: _________________________</Text>

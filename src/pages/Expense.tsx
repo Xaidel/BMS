@@ -161,10 +161,10 @@ export default function Expense() {
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
         <SummaryCardExpense
           title="Total Expenditure"
-          value={data.reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(filteredData.reduce((acc, item) => acc + item.amount, 0))}
           icon={<DollarSign size={50} />}
           onClick={async () => {
-            const blob = await pdf(<ExpensePDF filter="All Expenses" expenses={data} />).toBlob();
+            const blob = await pdf(<ExpensePDF filter="All Expenses" expenses={filteredData} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
             try {
@@ -183,12 +183,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="Infrastructure Expenses"
-          value={data
-            .filter((d) => d.category === "Infrastructure")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "Infrastructure")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<Landmark size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Infrastructure");
+            const filtered = filteredData.filter((d) => d.category === "Infrastructure");
             const blob = await pdf(<ExpensePDF filter="Infrastructure Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -202,12 +204,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="Honoraria"
-          value={data
-            .filter((d) => d.category === "Honoraria")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "Honoraria")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<PiggyBank size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Honoraria");
+            const filtered = filteredData.filter((d) => d.category === "Honoraria");
             const blob = await pdf(<ExpensePDF filter="Honoraria Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -221,12 +225,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="Utilities"
-          value={data
-            .filter((d) => d.category === "Utilities")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "Utilities")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<Wallet size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Utilities");
+            const filtered = filteredData.filter((d) => d.category === "Utilities");
             const blob = await pdf(<ExpensePDF filter="Utilities Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -240,12 +246,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="Local Funds Used"
-          value={data
-            .filter((d) => d.category === "Local Funds")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "Local Funds")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<Banknote size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Local Funds");
+            const filtered = filteredData.filter((d) => d.category === "Local Funds");
             const blob = await pdf(<ExpensePDF filter="Local Funds Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -259,12 +267,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="Foods"
-          value={data
-            .filter((d) => d.category === "Foods")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "Foods")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<Salad size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Foods");
+            const filtered = filteredData.filter((d) => d.category === "Foods");
             const blob = await pdf(<ExpensePDF filter="Foods Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -278,12 +288,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="IRA Used"
-          value={data
-            .filter((d) => d.category === "IRA")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "IRA")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<Layers size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "IRA");
+            const filtered = filteredData.filter((d) => d.category === "IRA");
             const blob = await pdf(<ExpensePDF filter="IRA Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -297,12 +309,14 @@ export default function Expense() {
         />
         <SummaryCardExpense
           title="Others"
-          value={data
-            .filter((d) => d.category === "Others")
-            .reduce((acc, item) => acc + item.amount, 0)}
+          value={new Intl.NumberFormat("en-US").format(
+            filteredData
+              .filter((d) => d.category === "Others")
+              .reduce((acc, item) => acc + item.amount, 0)
+          )}
           icon={<Shirt size={50} />}
           onClick={async () => {
-            const filtered = data.filter((d) => d.category === "Others");
+            const filtered = filteredData.filter((d) => d.category === "Others");
             const blob = await pdf(<ExpensePDF filter="Other Expenses" expenses={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);

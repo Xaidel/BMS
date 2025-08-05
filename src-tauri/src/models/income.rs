@@ -1,5 +1,3 @@
-use serde::{Deserialize, Serialize};
-
 #[derive(serde::Serialize, serde::Deserialize, Debug, Clone)]
 pub struct Income {
     pub id: Option<i32>,

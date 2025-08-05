@@ -20,6 +20,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Official } from "@/types/types";
 
 type Resident = {
   id?: number;
@@ -31,7 +32,6 @@ type Resident = {
   civil_status?: string;
 };
 
-
 export default function Fourps() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
@@ -39,6 +39,7 @@ export default function Fourps() {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
+  const [captainName, setCaptainName] = useState<string | null>(null);
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
       value: `${res.first_name} ${res.last_name}`.toLowerCase(),
@@ -106,6 +107,20 @@ export default function Fourps() {
             }
             setCivilStatus(selected.civil_status || "");
           }
+        }
+      })
+      .catch(console.error);
+
+    // Fetch captain's name
+    invoke<Official[]>("fetch_all_officials_command")
+      .then((data) => {
+        const captain = data.find(
+          (person) =>
+            person.section.toLowerCase() === "barangay officials" &&
+            person.role.toLowerCase() === "barangay captain"
+        );
+        if (captain) {
+          setCaptainName(captain.name);
         }
       })
       .catch(console.error);
@@ -309,10 +324,6 @@ export default function Fourps() {
             >
               Save
             </Button>
-            <Button onClick={handleDownload}>
-              <Printer />
-              Print Certificate
-            </Button>
           </CardFooter>
         </Card>
         <div className="flex-4">
@@ -382,7 +393,9 @@ export default function Fourps() {
                       <Text style={styles.bodyText}>Please select a resident to view certificate.</Text>
                     )}
                     <Text style={[styles.bodyText, { marginTop: 40, marginBottom: 6 }]}>Certifying Officer,</Text>
-                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>HON. JERRY T. AQUINO</Text>
+                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
+                      HON. {captainName || "________________"}
+                    </Text>
                     <Text style={[styles.bodyText, { marginBottom: 10 }]}>Punong Barangay</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>O.R. No.: ____________________</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>Date: _________________________</Text>

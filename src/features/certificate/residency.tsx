@@ -19,6 +19,7 @@ import { ArrowLeftCircleIcon, Check, ChevronsUpDown, Printer } from "lucide-reac
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
+import { Official } from "@/types/types";
 
 type Resident = {
   id?: number;
@@ -29,7 +30,6 @@ type Resident = {
   date_of_birth?: string;
   civil_status?: string;
 };
-
 
 export default function Residency() {
   const navigate = useNavigate()
@@ -57,6 +57,7 @@ export default function Residency() {
   }, [allResidents, value])
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
+  const [captainName, setCaptainName] = useState<string | null>(null);
 
   useEffect(() => {
     invoke("fetch_logo_command")
@@ -101,6 +102,20 @@ export default function Residency() {
             }
             setCivilStatus(selected.civil_status || "");
           }
+        }
+      })
+      .catch(console.error);
+
+    // Fetch captain's name
+    invoke<Official[]>("fetch_all_officials_command")
+      .then((data) => {
+        const captain = data.find(
+          (person) =>
+            person.section.toLowerCase() === "barangay officials" &&
+            person.role.toLowerCase() === "barangay captain"
+        );
+        if (captain) {
+          setCaptainName(captain.name);
         }
       })
       .catch(console.error);
@@ -278,10 +293,6 @@ export default function Residency() {
             >
               Save
             </Button>
-            <Button onClick={handleDownload}>
-              <Printer />
-              Print Certificate
-            </Button>
           </CardFooter>
         </Card>
         <div className="flex-4">
@@ -349,7 +360,9 @@ export default function Residency() {
                       <Text style={styles.bodyText}>Please select a resident to view certificate.</Text>
                     )}
                     <Text style={[styles.bodyText, { marginTop: 40, marginBottom: 6 }]}>Certifying Officer,</Text>
-                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>HON. JERRY T. AQUINO</Text>
+                    <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
+                      HON. {captainName || "________________"}
+                    </Text>
                     <Text style={[styles.bodyText, { marginBottom: 10 }]}>Punong Barangay</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>O.R. No.: ____________________</Text>
                     <Text style={[styles.bodyText, { marginBottom: 4 }]}>Date: _________________________</Text>

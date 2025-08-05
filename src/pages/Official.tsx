@@ -84,23 +84,41 @@ export default function OfficialsPage() {
 
   const viewMore = (official) => setSelectedOfficial(official);
 
-  const ProfileCard = ({ person }) => (
-    <div
-      onClick={() => viewMore(person)}
-      className="cursor-pointer p-1 rounded-lg bg-white shadow-md hover:bg-gray-100 w-50 h-auto text-center scale-[1] hover:scale-100 transition-transform"
-    >
-      <img src={person.image} alt={person.name} className="rounded-full w-34 h-34 mx-auto object-cover mb-2" />
-      <p className="text-base font-bold">{person.name}</p>
-      <p className="text-sm font-bold text-gray-700">{person.role}</p>
-      <div className="text-sm text-gray-700 mt-2 space-y-1">
-        {person.age !== undefined && person.age !== null && <p>Age: {person.age}</p>}
-        {person.contact && <p>Contact: {person.contact}</p>}
-        {person.term_start && <p>Term Start: {person.term_start}</p>}
-        {person.term_end && <p>Term End: {person.term_end}</p>}
-        {person.zone && <p>Zone: {person.zone}</p>}
+  const ProfileCard = ({ person }) => {
+    const [logo, setLogo] = useState("/logo.png");
+
+    useEffect(() => {
+      if (!person.image || person.image.trim() === "") {
+        invoke("fetch_logo_command")
+          .then((result) => {
+            if (result) setLogo(result as string);
+          })
+          .catch(() => {});
+      }
+    }, [person.image]);
+
+    return (
+      <div
+        onClick={() => viewMore(person)}
+        className="cursor-pointer my-5 p-1 rounded-lg bg-white shadow-md hover:bg-gray-100 w-50 h-auto text-center scale-[1] hover:scale-100 transition-transform"
+      >
+        <img
+          src={person.image && person.image.trim() !== "" ? person.image : logo}
+          alt={person.name}
+          className="rounded-full w-34 h-34 mx-auto object-cover mb-2"
+        />
+        <p className="text-base font-bold">{person.name}</p>
+        <p className="text-sm font-bold text-gray-700">{person.role}</p>
+        <div className="text-sm text-gray-700 mt-2 space-y-1">
+          {person.age !== undefined && person.age !== null && <p>Age: {person.age}</p>}
+          {person.contact && <p>Contact: {person.contact}</p>}
+          {person.term_start && <p>Term Start: {person.term_start}</p>}
+          {person.term_end && <p>Term End: {person.term_end}</p>}
+          {person.zone && <p>Zone: {person.zone}</p>}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   if (!officialsData) return <div className="p-4">Loading officials...</div>;
 

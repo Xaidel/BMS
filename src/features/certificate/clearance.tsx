@@ -16,7 +16,7 @@ import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
 import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
-import { ArrowLeftCircleIcon, Check, ChevronsUpDown, Printer } from "lucide-react";
+import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
@@ -129,14 +129,14 @@ export default function Clearance() {
     bodyText: { fontSize: 14 },
   });
   // Download/Print handler function
-  function handleDownload() {
-    if (!selectedResident) {
-      alert("Please select a resident first.");
-      return;
-    }
-    console.log("Download started...");
-    // Download/print logic goes here...
-  }
+  /* function handleDownload() {
+     if (!selectedResident) {
+       alert("Please select a resident first.");
+       return;
+     }
+     console.log("Download started...");
+     // Download/print logic goes here...
+   }*/
   return (
     <>
       <div className="flex gap-1 ">

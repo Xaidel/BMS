@@ -324,19 +324,35 @@ useEffect(() => {
               </div>
               <div>
                 <FormLabel className="text-black font-bold text-xs">Add Members</FormLabel>
-                <Input
-                  type="text"
-                  placeholder={
-                    selectedResidents.length > 0
-                      ? selectedResidents.join(", ")
-                      : "Search resident name"
-                  }
-                  value={residentSearch}
-                  onChange={(e) => setResidentSearch(e.target.value)}
-                  className="text-black"
-                />
+                <div
+                  className="flex flex-wrap gap-1 items-center border rounded p-2 min-h-[42px] bg-white"
+                >
+                  {selectedResidents.map((name, idx) => (
+                    <span
+                      key={idx}
+                      className="relative inline-flex items-center bg-gray-200 text-black rounded-full px-3 py-1 text-xs font-medium mr-1 mb-1"
+                    >
+                      <span className="pr-3">{name}</span>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedResidents(prev => prev.filter((_, i) => i !== idx))}
+                        aria-label={`Remove ${name}`}
+                        className="absolute -top-2 -right-2 w-5 h-5 rounded-full flex items-center justify-center text-xs bg-red-500 text-white hover:bg-red-600"
+                      >
+                        ×
+                      </button>
+                    </span>
+                  ))}
+                  <input
+                    type="text"
+                    placeholder={selectedResidents.length === 0 ? "Search resident name" : ""}
+                    value={residentSearch}
+                    onChange={(e) => setResidentSearch(e.target.value)}
+                    className="flex-1 min-w-[120px] border-none outline-none bg-transparent text-black py-1"
+                  />
+                </div>
                 {residentOptions.length > 0 && (
-                  <ul className="bg-white border rounded shadow mt-1 max-h-32 overflow-y-auto">
+                  <ul className="bg-white border rounded shadow mt-1 max-h-32 overflow-y-auto z-10 relative">
                     {residentOptions.map((name, i) => (
                       <li
                         key={i}

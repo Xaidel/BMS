@@ -91,10 +91,6 @@ const columns: ColumnDef<Blotter>[] = [
     },
   },
   {
-    header: "Location",
-    accessorKey: "location",
-  },
-  {
     header: "Zone",
     accessorKey: "zone",
   },

@@ -6,22 +6,43 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { householdSchema } from "@/types/formSchema";
 import { CalendarIcon, Eye } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { format } from "date-fns"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { z } from "zod";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { format } from "date-fns";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { toast } from "sonner";
 import { Household } from "@/types/types";
+import ViewResidentModal from "@/features/residents/viewResidentModal";
+import { Resident } from "@/types/types";
 
-
-
-const selectOption: string[] = [
-  "Renter",
-  "Owner",
-]
+const selectOption: string[] = ["Renter", "Owner"];
 
 const zone: string[] = [
   "Zone 1",
@@ -30,16 +51,15 @@ const zone: string[] = [
   "Zone 4",
   "Zone 5",
   "Zone 6",
-]
+];
 
-const status: string[] = [
-  "Active",
-  "Moved Out"
-]
+const status: string[] = ["Active", "Moved Out"];
 
-export default function ViewHouseholdModal(props: Household & { onSave: () => void }) {
-  const [openCalendar, setOpenCalendar] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
+export default function ViewHouseholdModal(
+  props: Household & { onSave: () => void }
+) {
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const form = useForm<z.infer<typeof householdSchema>>({
     resolver: zodResolver(householdSchema),
     defaultValues: {
@@ -50,48 +70,57 @@ export default function ViewHouseholdModal(props: Household & { onSave: () => vo
       zone: props.zone,
       date: props.date,
       status: props.status,
-    }
-  })
+    },
+  });
 
   const [selectedResidents, setSelectedResidents] = useState<string[]>([]);
   const [residentSearch, setResidentSearch] = useState("");
   const [residentOptions, setResidentOptions] = useState<string[]>([]);
-  const [allResidents, setAllResidents] = useState<{ label: string; value: string }[]>([]);
-
-useEffect(() => {
-  invoke("fetch_all_residents_command")
-    .then((res) => {
-      if (Array.isArray(res)) {
-        const all = res as {
-          first_name: string;
-          middle_name?: string;
-          last_name: string;
-          suffix?: string;
-        }[];
-        const mapped = all.map((r) => ({
-          label: `${r.last_name}, ${r.first_name}${r.middle_name ? " " + r.middle_name : ""}${r.suffix ? " " + r.suffix : ""}`,
-          value: `${r.last_name}, ${r.first_name}${r.middle_name ? " " + r.middle_name : ""}${r.suffix ? " " + r.suffix : ""}`,
-        }));
-        setAllResidents(mapped);
-      }
-    })
-    .catch(() => setAllResidents([]));
-
-  // Fetch members for the current household and update selectedResidents
-  if (props.id) {
-    invoke("fetch_members_by_household_command", { householdId: props.id })
+  const [allResidents, setAllResidents] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [selectedResident, setSelectedResident] = useState<Resident | null>(
+    null
+  );
+  const [viewResidentOpen, setViewResidentOpen] = useState(false);
+  useEffect(() => {
+    invoke("fetch_all_residents_command")
       .then((res) => {
-        console.log("Fetched members:", res);
         if (Array.isArray(res)) {
-          setSelectedResidents(res.map((r) => String(r)));
+          const all = res as {
+            first_name: string;
+            middle_name?: string;
+            last_name: string;
+            suffix?: string;
+          }[];
+          const mapped = all.map((r) => ({
+            label: `${r.last_name}, ${r.first_name}${
+              r.middle_name ? " " + r.middle_name : ""
+            }${r.suffix ? " " + r.suffix : ""}`,
+            value: `${r.last_name}, ${r.first_name}${
+              r.middle_name ? " " + r.middle_name : ""
+            }${r.suffix ? " " + r.suffix : ""}`,
+          }));
+          setAllResidents(mapped);
         }
       })
-      .catch((err) => {
-        console.error("Failed to fetch members", err);
-        setSelectedResidents([]);
-      });
-  }
-}, [props.id]);
+      .catch(() => setAllResidents([]));
+
+    // Fetch members for the current household and update selectedResidents
+    if (props.id) {
+      invoke("fetch_members_by_household_command", { householdId: props.id })
+        .then((res) => {
+          console.log("Fetched members:", res);
+          if (Array.isArray(res)) {
+            setSelectedResidents(res.map((r) => String(r)));
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to fetch members", err);
+          setSelectedResidents([]);
+        });
+    }
+  }, [props.id]);
 
   useEffect(() => {
     if (!residentSearch) {
@@ -99,7 +128,9 @@ useEffect(() => {
       return;
     }
     const matches = allResidents
-      .filter((r) => r.label.toLowerCase().includes(residentSearch.toLowerCase()))
+      .filter((r) =>
+        r.label.toLowerCase().includes(residentSearch.toLowerCase())
+      )
       .map((r) => r.label);
     setResidentOptions(matches);
   }, [residentSearch, allResidents]);
@@ -113,17 +144,14 @@ useEffect(() => {
     };
     await invoke("save_household_command", { household: householdWithId });
     toast.success("Household updated successfully", {
-      description: `${values.household_number} was updated`
+      description: `${values.household_number} was updated`,
     });
     setOpenModal(false);
     props.onSave();
   }
   return (
     <>
-      <Dialog
-        open={openModal}
-        onOpenChange={setOpenModal}
-      >
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>
           <Button>
             <Eye />
@@ -134,11 +162,15 @@ useEffect(() => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <DialogHeader>
-                <DialogTitle className="text-black">View/Edit Household</DialogTitle>
+                <DialogTitle className="text-black">
+                  View/Edit Household
+                </DialogTitle>
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
-                <p className="text-md font-bold text-black">Basic Household Information</p>
+                <p className="text-md font-bold text-black">
+                  Basic Household Information
+                </p>
               </DialogHeader>
               <div className="flex flex-col gap-3">
                 <div>
@@ -147,7 +179,12 @@ useEffect(() => {
                     name="household_number"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="name" className="text-black font-bold text-xs">Household Number</FormLabel>
+                        <FormLabel
+                          htmlFor="name"
+                          className="text-black font-bold text-xs"
+                        >
+                          Household Number
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="name"
@@ -170,16 +207,28 @@ useEffect(() => {
                     name="type_"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Type</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormLabel
+                          htmlFor="type"
+                          className="text-black font-bold text-xs"
+                        >
+                          Type
+                        </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
                           <FormControl>
                             <SelectTrigger className="w-full text-black border-black/15">
-                              <SelectValue placeholder={"Please select the household type"} />
+                              <SelectValue
+                                placeholder={"Please select the household type"}
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
                             {selectOption.map((option, i) => (
-                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                              <SelectItem value={option} key={i}>
+                                {option}
+                              </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -194,7 +243,12 @@ useEffect(() => {
                     name="members"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="members" className="text-black font-bold text-xs">Family Members</FormLabel>
+                        <FormLabel
+                          htmlFor="members"
+                          className="text-black font-bold text-xs"
+                        >
+                          Family Members
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="members"
@@ -217,7 +271,12 @@ useEffect(() => {
                     name="head"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="members" className="text-black font-bold text-xs">Head of Household</FormLabel>
+                        <FormLabel
+                          htmlFor="members"
+                          className="text-black font-bold text-xs"
+                        >
+                          Head of Household
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="members"
@@ -239,16 +298,28 @@ useEffect(() => {
                     name="zone"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Zone</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormLabel
+                          htmlFor="type"
+                          className="text-black font-bold text-xs"
+                        >
+                          Zone
+                        </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
                           <FormControl>
                             <SelectTrigger className="w-full text-black border-black/15">
-                              <SelectValue placeholder={"Please select the household type"} />
+                              <SelectValue
+                                placeholder={"Please select the household type"}
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
                             {zone.map((option, i) => (
-                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                              <SelectItem value={option} key={i}>
+                                {option}
+                              </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -263,16 +334,22 @@ useEffect(() => {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="date" className="text-black font-bold text-xs">Date of Residency</FormLabel>
+                        <FormLabel
+                          htmlFor="date"
+                          className="text-black font-bold text-xs"
+                        >
+                          Date of Residency
+                        </FormLabel>
                         <Popover
                           open={openCalendar}
                           onOpenChange={setOpenCalendar}
                         >
                           <FormControl>
-                            <PopoverTrigger asChild className="w-full text-black hover:bg-primary hover:text-white">
-                              <Button
-                                variant="outline"
-                              >
+                            <PopoverTrigger
+                              asChild
+                              className="w-full text-black hover:bg-primary hover:text-white"
+                            >
+                              <Button variant="outline">
                                 {field.value ? (
                                   format(field.value, "PPP")
                                 ) : (
@@ -303,16 +380,28 @@ useEffect(() => {
                     name="status"
                     render={({ field }) => (
                       <FormItem className="w-full">
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Status</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormLabel
+                          htmlFor="type"
+                          className="text-black font-bold text-xs"
+                        >
+                          Status
+                        </FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
                           <FormControl>
                             <SelectTrigger className="w-full text-black border-black/15">
-                              <SelectValue placeholder={"Please select the household type"} />
+                              <SelectValue
+                                placeholder={"Please select the household type"}
+                              />
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
                             {status.map((option, i) => (
-                              <SelectItem value={option} key={i}>{option}</SelectItem>
+                              <SelectItem value={option} key={i}>
+                                {option}
+                              </SelectItem>
                             ))}
                           </SelectContent>
                         </Select>
@@ -323,29 +412,37 @@ useEffect(() => {
                 </div>
               </div>
               <div>
-                <FormLabel className="text-black font-bold text-xs">Add Members</FormLabel>
-                <div
-                  className="flex flex-wrap gap-1 items-center border rounded p-2 min-h-[42px] bg-white"
-                >
+                <FormLabel className="text-black font-bold text-xs">
+                  Add Members
+                </FormLabel>
+                <div className="flex flex-wrap gap-1 items-center border rounded p-2 min-h-[42px] bg-white">
                   {selectedResidents.map((name, idx) => (
                     <span
                       key={idx}
-                      className="relative inline-flex items-center bg-gray-200 text-black rounded-full px-3 py-1 text-xs font-medium mr-1 mb-1"
+                      onClick={() => {
+                        invoke<Resident>("fetch_resident_by_fullname_command", {
+                          fullName: name,
+                        })
+                          .then((residentData) => {
+                            setSelectedResident(residentData);
+                            setViewResidentOpen(true);
+                          })
+                          .catch(() => {
+                            toast.error("Failed to load resident details");
+                          });
+                      }}
+                      className="bg-gray-200 text-black rounded-full px-3 py-1 text-xs font-medium mr-1 mb-1 cursor-pointer hover:bg-gray-300"
                     >
-                      <span className="pr-3">{name}</span>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedResidents(prev => prev.filter((_, i) => i !== idx))}
-                        aria-label={`Remove ${name}`}
-                        className="absolute -top-2 -right-2 w-5 h-5 rounded-full flex items-center justify-center text-xs bg-red-500 text-white hover:bg-red-600"
-                      >
-                        ×
-                      </button>
+                      {name}
                     </span>
                   ))}
                   <input
                     type="text"
-                    placeholder={selectedResidents.length === 0 ? "Search resident name" : ""}
+                    placeholder={
+                      selectedResidents.length === 0
+                        ? "Search resident name"
+                        : ""
+                    }
                     value={residentSearch}
                     onChange={(e) => setResidentSearch(e.target.value)}
                     className="flex-1 min-w-[120px] border-none outline-none bg-transparent text-black py-1"
@@ -377,7 +474,15 @@ useEffect(() => {
             </form>
           </Form>
         </DialogContent>
-      </Dialog >
+        {selectedResident && (
+          <ViewResidentModal
+            {...selectedResident}
+            onSave={() => {
+              // Optionally refresh data here
+            }}
+          />
+        )}
+      </Dialog>
     </>
-  )
+  );
 }

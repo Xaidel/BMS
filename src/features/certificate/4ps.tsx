@@ -68,7 +68,7 @@ export default function Fourps() {
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
 
-  const civilStatusOptions = ["Single", "Married", "Widowed", "Separated", "Divorced"];
+const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Widowed", "Separated"];
 
   useEffect(() => {
     invoke("fetch_logo_command")

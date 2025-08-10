@@ -48,7 +48,7 @@ export default function Indigency() {
   const [amount, setAmount] = useState("10.00");
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
-  const civilStatusOptions = ["Single", "Married", "Widowed", "Separated", "Divorced"];
+const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Widowed", "Separated"];
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
       value: `${res.first_name} ${res.last_name}`.toLowerCase(),

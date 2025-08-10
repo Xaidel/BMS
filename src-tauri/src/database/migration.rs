@@ -71,7 +71,6 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             email TEXT,
             logo TEXT  -- base64 or file path
             );
-            
         CREATE TABLE IF NOT EXISTS residents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             prefix TEXT NOT NULL,
@@ -83,6 +82,10 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             gender TEXT NOT NULL,
             nationality TEXT NOT NULL,
             mobile_number TEXT NOT NULL,
+            religion TEXT,
+            occupation TEXT,
+            source_of_income TEXT,
+            average_monthly_income REAL,
             date_of_birth TEXT NOT NULL,
             town_of_birth TEXT NOT NULL,
             province_of_birth TEXT NOT NULL,
@@ -90,6 +93,8 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             barangay TEXT NOT NULL,
             town TEXT NOT NULL,
             province TEXT NOT NULL,
+            household_number INTEGER NOT NULL,
+            role_in_household TEXT NOT NULL,
             father_prefix TEXT NOT NULL,
             father_first_name TEXT NOT NULL,
             father_middle_name TEXT NOT NULL,
@@ -105,6 +110,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             is_pwd BOOLEAN NOT NULL DEFAULT 0,
             is_senior BOOLEAN NOT NULL DEFAULT 0
         );
+        
         CREATE TABLE IF NOT EXISTS officials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,

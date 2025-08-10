@@ -13,6 +13,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -39,7 +40,14 @@ import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { residentSchema } from "@/types/formSchema";
 
-const civilStatusOptions = ["Single", "Married", "Widowed", "Separated"];
+const civilStatusOptions = [
+  "Single",
+  "Lived-in",
+  "Cohabitation",
+  "Married",
+  "Widowed",
+  "Separated",
+];
 const statusOption = ["Active", "Dead", "Missing", "Moved Out"];
 const genderOptions = ["Male", "Female"];
 const suffixOptions = ["Jr.", "Sr.", "II", "III"];
@@ -53,7 +61,9 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   useEffect(() => {
     async function loadDefaultLocation() {
       try {
-        const settings = await invoke("fetch_settings_command") as z.infer<typeof settingsSchema>;
+        const settings = (await invoke("fetch_settings_command")) as z.infer<
+          typeof settingsSchema
+        >;
         if (settings) {
           form.setValue("barangay", settings.barangay || "");
           form.setValue("town", settings.municipality || "");
@@ -80,6 +90,10 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       status: "",
       gender: "",
       mobile_number: "",
+      religion: "",
+      occupation: "",
+      source_of_income: "",
+      average_monthly_income: 0,
       date_of_birth: undefined,
       town_of_birth: "",
       province_of_birth: "",
@@ -312,64 +326,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="civil_status"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Civil Status</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select Civil Status" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {civilStatusOptions.map((option) => (
-                                  <SelectItem key={option} value={option}>
-                                    {option}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-1">
-                    <FormField
-                      control={form.control}
-                      name="gender"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Gender</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select Gender" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {genderOptions.map((option) => (
-                                  <SelectItem key={option} value={option}>
-                                    {option}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
                       name="nationality"
                       render={({ field }) => (
                         <FormItem>
@@ -406,6 +362,134 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               className="text-black"
                             />
                           </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="religion"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Religion</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter religion" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="gender"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Gender</FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Gender" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {genderOptions.map((option) => (
+                                  <SelectItem key={option} value={option}>
+                                    {option}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="civil_status"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Civil Status</FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Civil Status" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {civilStatusOptions.map((option) => (
+                                  <SelectItem key={option} value={option}>
+                                    {option}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="occupation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Occupation</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter occupation" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="source_of_income"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Source of Income</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter source of income"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="average_monthly_income"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Average Monthly Income</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Enter amount"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(Number(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -478,58 +562,62 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   </div>
                 </div>
                 <div className="col-span-4 grid grid-cols-3 gap-4 mt-4">
-  <FormField
-    control={form.control}
-    name="is_registered_voter"
-    render={({ field }) => (
-      <FormItem className="flex items-center space-x-2">
-        <FormControl>
-          <input
-            type="checkbox"
-            checked={field.value}
-            onChange={field.onChange}
-            className="mr-2"
-          />
-        </FormControl>
-        <FormLabel className="text-black">Registered Voter</FormLabel>
-      </FormItem>
-    )}
-  />
-  <FormField
-    control={form.control}
-    name="is_pwd"
-    render={({ field }) => (
-      <FormItem className="flex items-center space-x-2">
-        <FormControl>
-          <input
-            type="checkbox"
-            checked={field.value}
-            onChange={field.onChange}
-            className="mr-2"
-          />
-        </FormControl>
-        <FormLabel className="text-black">PWD</FormLabel>
-      </FormItem>
-    )}
-  />
-  <FormField
-    control={form.control}
-    name="is_senior"
-    render={({ field }) => (
-      <FormItem className="flex items-center space-x-2">
-        <FormControl>
-          <input
-            type="checkbox"
-            checked={field.value}
-            onChange={field.onChange}
-            className="mr-2"
-          />
-        </FormControl>
-        <FormLabel className="text-black">Senior Citizen</FormLabel>
-      </FormItem>
-    )}
-  />
-</div>
+                  <FormField
+                    control={form.control}
+                    name="is_registered_voter"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center space-x-2">
+                        <FormControl>
+                          <input
+                            type="checkbox"
+                            checked={field.value}
+                            onChange={field.onChange}
+                            className="mr-2"
+                          />
+                        </FormControl>
+                        <FormLabel className="text-black">
+                          Registered Voter
+                        </FormLabel>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="is_pwd"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center space-x-2">
+                        <FormControl>
+                          <input
+                            type="checkbox"
+                            checked={field.value}
+                            onChange={field.onChange}
+                            className="mr-2"
+                          />
+                        </FormControl>
+                        <FormLabel className="text-black">PWD</FormLabel>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="is_senior"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center space-x-2">
+                        <FormControl>
+                          <input
+                            type="checkbox"
+                            checked={field.value}
+                            onChange={field.onChange}
+                            className="mr-2"
+                          />
+                        </FormControl>
+                        <FormLabel className="text-black">
+                          Senior Citizen
+                        </FormLabel>
+                      </FormItem>
+                    )}
+                  />
+                </div>
 
                 <div className="flex justify-end pt-4">
                   <Button type="button" onClick={() => setStep(2)}>
@@ -598,17 +686,29 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       name="zone"
                       render={({ field }) => (
                         <FormItem className="w-full">
-                          <FormLabel htmlFor="zone" className="text-black font-bold text-xs">Zone</FormLabel>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormLabel
+                            htmlFor="zone"
+                            className="text-black font-bold text-xs"
+                          >
+                            Zone
+                          </FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <FormControl>
                               <SelectTrigger className="w-full text-black border-black/15">
                                 <SelectValue placeholder="Select zone" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              {["1", "2", "3", "4", "5", "6", "7"].map((option, i) => (
-                                <SelectItem value={option} key={i}>{option}</SelectItem>
-                              ))}
+                              {["1", "2", "3", "4", "5", "6", "7", "8"].map(
+                                (option, i) => (
+                                  <SelectItem value={option} key={i}>
+                                    {option}
+                                  </SelectItem>
+                                )
+                              )}
                             </SelectContent>
                           </Select>
                         </FormItem>
@@ -673,6 +773,64 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               {...field}
                               className="text-black"
                             />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  {/* --- Household Number field --- */}
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="household_number"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Household Number</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="text"
+                              placeholder="Enter household number"
+                              {...field}
+                              className="text-black"
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  {/* --- Role in Household field --- */}
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="role_in_household"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Role in Household</FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select role" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {[
+                                  "Head", "Adopted Daughter", "Adopted Son", "Auntie", "Brother", "Brother in law",
+                                  "Cousin", "Daughter", "Daughter in law", "Father", "Father in law", "Friend",
+                                  "Granddaughter", "Granddaughter in law", "Grandfather", "Grandmother", "Grandson",
+                                  "Grandson in law", "House maid/helper", "Mother", "Mother in law", "Nephew", "Niece",
+                                  "Partner", "Sister", "Son", "Son in law", "Spouse", "Stepbrother", "Stepdaughter",
+                                  "Stepdaughter in law", "Stepfather", "Stepmother", "Stepgranddaughter",
+                                  "Stepgranddaughter in law", "Stepgrandson", "Stepgrandson in law", "Stepsister",
+                                  "Stepson", "Stepson in law", "Tenant", "Uncle", "Others"
+                                ].map((option) => (
+                                  <SelectItem key={option} value={option}>
+                                    {option}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                           </FormControl>
                         </FormItem>
                       )}

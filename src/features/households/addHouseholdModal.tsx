@@ -28,6 +28,7 @@ const zone: string[] = [
   "Zone 5",
   "Zone 6",
   "Zone 7",
+  "Zone 8",
 ]
 
 const status: string[] = [

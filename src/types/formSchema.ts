@@ -62,6 +62,8 @@ export const residentSchema = z.object({
   barangay: z.string().min(1),
   town: z.string().min(1),
   province: z.string().min(1),
+  household_number: z.string().min(1),
+  role_in_household: z.string().min(1),
   father_prefix: z.string().min(1),
   father_first_name: z.string().min(1),
   father_middle_name: z.string().min(1),
@@ -76,6 +78,10 @@ export const residentSchema = z.object({
   is_registered_voter: z.boolean().default(false),
   is_pwd: z.boolean().default(false),
   is_senior: z.boolean().default(false),
+  religion: z.string().optional(),
+  occupation: z.string().optional(),
+  source_of_income: z.string().optional(),
+  average_monthly_income: z.number().optional(),
 });
 
 export const householdSchema = z.object({

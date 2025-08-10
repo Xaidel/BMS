@@ -50,7 +50,11 @@ const items = [
   },
 ]
 
-export default function AppSidebar() {
+type Props = {
+  onHover: () => void;
+}
+
+export default function AppSidebar({onHover}: Props) {
   const location = useLocation()
   const currentPath = location.pathname
   const isActive = (currentPath: string, targetPath: string): boolean => {
@@ -59,7 +63,7 @@ export default function AppSidebar() {
     return false
   }
   return (
-    <Sidebar collapsible="icon" className="z-100">
+    <Sidebar collapsible="icon" className="z-100" onMouseEnter={onHover}>
       <SidebarHeader className="mt-2">
         <SidebarTrigger className=" hover:bg-primary hover:text-foreground "
           size="lg"

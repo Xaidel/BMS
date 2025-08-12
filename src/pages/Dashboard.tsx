@@ -13,7 +13,6 @@ import ExpenseChart from "@/components/ui/expensechart";
 import Greet from "@/components/ui/greetings";
 import IncomeChart from "@/components/ui/incomechart";
 import PopulationChart from "@/components/ui/populationchart";
-import { Household } from "@/types/types";
 import type { Income, Expense } from "@/types/types";
 
 const categories = [];
@@ -36,21 +35,21 @@ export default function Dashboard() {
   const [incomeChartData, setIncomeChartData] = useState<{ source: string; value: number; fill: string; description: string }[]>([]);
   const [expenseChartData, setExpenseChartData] = useState<{ source: string; value: number; fill: string; description: string }[]>([]);
   console.log(householdData, eventTotal)
-  useEffect(() => {
-    invoke<Household[]>("fetch_all_households_command")
-      .then((fetched) => {
-        const parsed = fetched.map((household) => ({
-          ...household,
-          date: new Date(household.date),
-        }));
-        setHouseholdData(parsed);
-        setHouseholdTotal(parsed.length);
-      })
-      .catch((err) => {
-        console.error("Failed to fetch households:", err);
-        setHouseholdTotal(0);
-      });
-  }, []);
+//   useEffect(() => {
+//   invoke<Household[]>("fetch_all_households_command")
+//     .then((fetched) => {
+//       const parsed = fetched.map((household) => ({
+//         ...household,
+//         date: new Date(household.date), // convert string to Date object
+//       }));
+//       setHouseholdData(parsed);
+//       setHouseholdTotal(parsed.length);
+//     })
+//     .catch((err) => {
+//       console.error("Failed to fetch households:", err);
+//       setHouseholdTotal(0);
+//     });
+// }, []);
 
   useEffect(() => {
     invoke<any[]>("fetch_all_residents_command")

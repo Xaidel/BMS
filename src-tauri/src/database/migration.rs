@@ -40,18 +40,6 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             category TEXT NOT NULL,
             or_number INTEGER NOT NULL
         );
-        DROP TABLE IF EXISTS barangays; -- Drop old table if it exists
-        CREATE TABLE IF NOT EXISTS households (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            household_number INTEGER NOT NULL,
-            type_ TEXT NOT NULL,
-            members INTEGER NOT NULL,
-            head TEXT NOT NULL,
-            zone TEXT NOT NULL,
-            date TEXT NOT NULL,
-            status TEXT NOT NULL,
-            selected_residents TEXT
-        );
         CREATE TABLE IF NOT EXISTS events (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,

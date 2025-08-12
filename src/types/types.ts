@@ -50,18 +50,6 @@ export type Resident = {
   photo?: any;
 };
 
-export type Household = {
-  id?: number;
-  household_number: number;
-  type_: string;
-  members: number;
-  head: string;
-  zone: string;
-  date: Date;
-  status: "Moved Out" | "Active";
-  selectedResidents?: string[]; // optional list of selected members
-};
-
 export type Income = {
   id?: number;
   category: string,

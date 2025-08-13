@@ -141,12 +141,13 @@ pub fn fetch_all_residents_with_income() -> Result<Vec<(i32, f64)>, String> {
 }
 
 #[tauri::command]
-pub fn fetch_residents_with_pwd_and_senior() -> Result<Vec<i32>, String> {
+pub fn fetch_residents_with_pwd() -> Result<Vec<i32>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
-
-    // Using is_pwd or is_senior boolean flags
     let mut stmt = conn.prepare(
-        "SELECT DISTINCT household_number FROM residents WHERE (is_pwd = 1 OR is_senior = 1) AND household_number IS NOT NULL"
+        "SELECT DISTINCT household_number 
+         FROM residents 
+         WHERE is_pwd = 1 
+         AND household_number IS NOT NULL"
     ).map_err(|e| e.to_string())?;
 
     let rows = stmt.query_map([], |row| {
@@ -157,6 +158,26 @@ pub fn fetch_residents_with_pwd_and_senior() -> Result<Vec<i32>, String> {
     for row in rows {
         household_numbers.push(row.map_err(|e| e.to_string())?);
     }
+    Ok(household_numbers)
+}
 
+#[tauri::command]
+pub fn fetch_residents_with_senior() -> Result<Vec<i32>, String> {
+    let conn = establish_connection().map_err(|e| e.to_string())?;
+    let mut stmt = conn.prepare(
+        "SELECT DISTINCT household_number 
+         FROM residents 
+         WHERE is_senior = 1 
+         AND household_number IS NOT NULL"
+    ).map_err(|e| e.to_string())?;
+
+    let rows = stmt.query_map([], |row| {
+        Ok(row.get::<_, Option<i32>>(0)?.unwrap_or_default())
+    }).map_err(|e| e.to_string())?;
+
+    let mut household_numbers = Vec::new();
+    for row in rows {
+        household_numbers.push(row.map_err(|e| e.to_string())?);
+    }
     Ok(household_numbers)
 }

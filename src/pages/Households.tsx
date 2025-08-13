@@ -21,7 +21,7 @@ import { HouseholdPDF } from "@/components/pdf/householdpdf";
 import { pdf } from "@react-pdf/renderer";
 import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import Filter from "@/components/ui/filter";
-import { sortResidents } from "@/service/household/householdSort"; 
+import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
 
 export default function Households() {
@@ -65,7 +65,14 @@ export default function Households() {
         header: "Head of Household",
         cell: ({ row }) => {
           const r = row.original as Resident;
-          const fullName = [r.last_name ? r.last_name + "," : "", r.first_name, r.middle_name, r.suffix].filter(Boolean).join(" ");
+          const fullName = [
+            r.last_name ? r.last_name + "," : "",
+            r.first_name,
+            r.middle_name,
+            r.suffix,
+          ]
+            .filter(Boolean)
+            .join(" ");
           return <div>{fullName}</div>;
         },
       },
@@ -74,7 +81,7 @@ export default function Households() {
         accessorKey: "zone",
       },
       {
-        header: "Total Income",
+        header: "Total Household Income",
         cell: ({ row }) => {
           const income =
             householdIncomeMap.get(row.original.household_number) ?? 0;
@@ -102,7 +109,9 @@ export default function Households() {
   const [householdSeniorMap, setHouseholdSeniorMap] = useState<Set<number>>(
     new Set()
   );
-  const [householdMembersMap, setHouseholdMembersMap] = useState<Map<number, number>>(new Map());
+  const [householdMembersMap, setHouseholdMembersMap] = useState<
+    Map<number, number>
+  >(new Map());
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
@@ -117,53 +126,71 @@ export default function Households() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSortChange = (sortValue: string) => {
-  searchParams.set("sort", sortValue);
-  setSearchParams(searchParams);
-  setFilterValue(sortValue);
-};
+    searchParams.set("sort", sortValue);
+    setSearchParams(searchParams);
+    setFilterValue(sortValue);
+  };
+  
 
-  const filteredData = useMemo(() => {
-    let sorted = [...data];
+const filteredData = useMemo(() => {
+  let sorted = [...data];
 
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      sorted = sorted.filter(
-        (item) =>
-          item.full_name.toLowerCase().includes(query) ||
-          item.household_number.toString().includes(query)
+  if (searchQuery.trim()) {
+    const query = searchQuery.toLowerCase();
+
+    sorted = sorted.filter((item) => {
+      const firstName = item.first_name ?? "";
+      const middleName = item.middle_name ?? "";
+      const lastName = item.last_name ?? "";
+      const fullName = [lastName, firstName, middleName].filter(Boolean).join(" ").toLowerCase();
+      const householdNumber = item.household_number?.toString() ?? "";
+      const zone = item.zone?.toLowerCase() ?? "";
+
+      return (
+        fullName.includes(query) ||
+        firstName.toLowerCase().includes(query) ||
+        middleName.toLowerCase().includes(query) ||
+        lastName.toLowerCase().includes(query) ||
+        householdNumber.includes(query) ||
+        zone.includes(query)
       );
-    }
+    });
+  }
 
-    return sortResidents(sorted, filterValue);
+  return sortResidents(sorted, filterValue);
 }, [data, searchQuery, filterValue]);
 
   useEffect(() => {
-  if (!data || data.length === 0) return;
-  const fetchMembersAndCalcIncome = async () => {
-    const updatedIncomeMap = new Map(householdIncomeMap);
-    const updatedMembersMap = new Map<number, number>();
+    if (!data || data.length === 0) return;
+    const fetchMembersAndCalcIncome = async () => {
+      const updatedIncomeMap = new Map(householdIncomeMap);
+      const updatedMembersMap = new Map<number, number>();
 
-    for (const household of data) {
-      try {
-        const members: { average_monthly_income: number | null }[] = await invoke("fetch_residents_by_household_number", {
-          householdNumber: household.household_number,
-        });
-        const totalIncome = members.reduce(
-          (acc, m) => acc + (Number(m.average_monthly_income) || 0),
-          0
-        );
-        updatedIncomeMap.set(household.household_number, totalIncome);
-        updatedMembersMap.set(household.household_number, members.length);
-      } catch (error) {
-        console.error(`Failed to fetch members for household ${household.household_number}:`, error);
-        updatedMembersMap.set(household.household_number, 0);
+      for (const household of data) {
+        try {
+          const members: { average_monthly_income: number | null }[] =
+            await invoke("fetch_residents_by_household_number", {
+              householdNumber: household.household_number,
+            });
+          const totalIncome = members.reduce(
+            (acc, m) => acc + (Number(m.average_monthly_income) || 0),
+            0
+          );
+          updatedIncomeMap.set(household.household_number, totalIncome);
+          updatedMembersMap.set(household.household_number, members.length);
+        } catch (error) {
+          console.error(
+            `Failed to fetch members for household ${household.household_number}:`,
+            error
+          );
+          updatedMembersMap.set(household.household_number, 0);
+        }
       }
-    }
-    setHouseholdIncomeMap(updatedIncomeMap);
-    setHouseholdMembersMap(updatedMembersMap);
-  };
-  fetchMembersAndCalcIncome();
-}, [data]);
+      setHouseholdIncomeMap(updatedIncomeMap);
+      setHouseholdMembersMap(updatedMembersMap);
+    };
+    fetchMembersAndCalcIncome();
+  }, [data]);
 
   // Compute counts separately
   const pwdCount = useMemo(() => {
@@ -284,29 +311,25 @@ export default function Households() {
     return count;
   }, [data, householdIncomeMap, selectedHousehold]);
 
-  const [householdPwdSeniorMap, setHouseholdPwdSeniorMap] = useState<
-    Set<number>
-  >(new Set());
-
   useEffect(() => {
-    invoke("fetch_residents_with_pwd_and_senior")
-      .then((residents: { household_number: number }[]) => {
-        const setHouseholds = new Set<number>();
-        residents.forEach(({ household_number }) => {
-          setHouseholds.add(household_number);
-        });
-        setHouseholdPwdSeniorMap(setHouseholds);
+    invoke<number[]>("fetch_residents_with_pwd")
+      .then((households) => {
+        setHouseholdPwdMap(new Set(households));
       })
       .catch((err) => {
-        console.error("Failed to fetch residents with PWDs and Seniors:", err);
+        console.error("Failed to fetch households with PWDs:", err);
       });
   }, []);
 
-  const householdPwdSenior = useMemo(() => {
-    return data.filter((household) =>
-      householdPwdSeniorMap.has(household.household_number)
-    ).length;
-  }, [data, householdPwdSeniorMap]);
+  useEffect(() => {
+    invoke<number[]>("fetch_residents_with_senior")
+      .then((households) => {
+        setHouseholdSeniorMap(new Set(households));
+      })
+      .catch((err) => {
+        console.error("Failed to fetch households with seniors:", err);
+      });
+  }, []);
 
   const total = data.length;
 
@@ -317,15 +340,12 @@ export default function Households() {
 
   const adjustedHouseholdIncome = householdIncome;
 
-const filters = [
-  "All",
-  "Numerical",
-  "AgeDesc",
-  "NameAsc",
-  "IncomeAsc",
-  "IncomeDesc",
-  "ZoneAsc",
-];
+  const filters = [
+    "All",
+    "Numerical",
+    "AgeDesc",
+    "NameAsc",
+  ];
 
   return (
     <>
@@ -338,9 +358,14 @@ const filters = [
             const blob = await pdf(
               <HouseholdPDF
                 filter="All Households"
-                households={data.map(hh => ({
+                households={data.map((hh) => ({
                   ...hh,
                   members: householdMembersMap.get(hh.household_number) ?? 0,
+                  low_income:
+                    (householdIncomeMap.get(hh.household_number) ?? 0) <
+                    LOW_INCOME_THRESHOLD,
+                  has_senior: householdSeniorMap.has(hh.household_number),
+                  has_pwd: householdPwdMap.has(hh.household_number),
                 }))}
               />
             ).toBlob();
@@ -374,9 +399,12 @@ const filters = [
             const blob = await pdf(
               <HouseholdPDF
                 filter="Low Income Households"
-                households={filtered.map(hh => ({
+                households={filtered.map((hh) => ({
                   ...hh,
                   members: householdMembersMap.get(hh.household_number) ?? 0,
+                  low_income: true,
+                  has_senior: householdSeniorMap.has(hh.household_number),
+                  has_pwd: householdPwdMap.has(hh.household_number),
                 }))}
               />
             ).toBlob();
@@ -409,9 +437,14 @@ const filters = [
             const blob = await pdf(
               <HouseholdPDF
                 filter="PWD Households"
-                households={filtered.map(hh => ({
+                households={filtered.map((hh) => ({
                   ...hh,
                   members: householdMembersMap.get(hh.household_number) ?? 0,
+                  low_income:
+                    (householdIncomeMap.get(hh.household_number) ?? 0) <
+                    LOW_INCOME_THRESHOLD,
+                  has_senior: householdSeniorMap.has(hh.household_number),
+                  has_pwd: householdPwdMap.has(hh.household_number),
                 }))}
               />
             ).toBlob();
@@ -444,9 +477,14 @@ const filters = [
             const blob = await pdf(
               <HouseholdPDF
                 filter="Senior Households"
-                households={filtered.map(hh => ({
+                households={filtered.map((hh) => ({
                   ...hh,
                   members: householdMembersMap.get(hh.household_number) ?? 0,
+                  low_income:
+                    (householdIncomeMap.get(hh.household_number) ?? 0) <
+                    LOW_INCOME_THRESHOLD,
+                  has_senior: true,
+                  has_pwd: true,
                 }))}
               />
             ).toBlob();

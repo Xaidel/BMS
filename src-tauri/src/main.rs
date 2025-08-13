@@ -4,7 +4,7 @@ mod database;
 mod commands;
 mod models;
 
-use commands::households::{fetch_household_heads_command, fetch_residents_by_household_number, fetch_all_residents_with_income, fetch_residents_with_pwd_and_senior};
+use commands::households::{fetch_household_heads_command, fetch_residents_by_household_number, fetch_all_residents_with_income, fetch_residents_with_pwd, fetch_residents_with_senior};
 use commands::user::{verify_user_credentials_command, insert_user_command};
 use commands::officials::{fetch_all_officials_command,insert_official_command, save_official_command, delete_official_command};
 use commands::settings::{save_settings_command, fetch_settings_command, fetch_logo_command};
@@ -83,9 +83,9 @@ fn main() {
             fetch_household_heads_command,
             fetch_residents_by_household_number,
             fetch_all_residents_with_income,         
-            fetch_residents_with_pwd_and_senior, 
+            fetch_residents_with_pwd,
+            fetch_residents_with_senior,
             
-
             fetch_all_officials_command,
             insert_official_command,
             save_official_command,

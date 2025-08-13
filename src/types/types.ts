@@ -9,17 +9,6 @@ export type Event = {
   notes: string
 }
 
-// export type Household = {
-//   id: number;
-//   household_number: number;
-//   first_name: string;
-//   middle_name: string;
-//   last_name: string;
-//   zone: string;
-//   date_of_birth: string;
-//   full_name: string;
-// };
-
 export type Resident = {
   id: number;
   is_registered_voter: boolean;

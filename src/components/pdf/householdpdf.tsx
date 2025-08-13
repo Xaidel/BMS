@@ -27,6 +27,9 @@ export const HouseholdPDF = ({ filter, households }: Props) => {
               <View style={styles.headerCell}><Text>Head</Text></View>
               <View style={styles.headerCell}><Text>Zone</Text></View>
               <View style={styles.headerCell}><Text>Members</Text></View>
+              <View style={styles.headerCell}><Text>Households with PWD</Text></View>
+              <View style={styles.headerCell}><Text>Households with Senior</Text></View>
+              <View style={styles.headerCell}><Text>Low Income</Text></View>
             </View>
             <View style={styles.table}>
               {households.map((household, index) => {
@@ -40,9 +43,16 @@ export const HouseholdPDF = ({ filter, households }: Props) => {
                   >
                     <View style={styles.tableCell}><Text>{household.id}</Text></View>
                     <View style={styles.tableCell}><Text>{household.household_number}</Text></View>
-                    <View style={styles.tableCell}><Text>{household.full_name}</Text></View>
+                    <View style={styles.tableCell}>
+                      <Text>
+                        {household.full_name || [household.last_name, household.first_name, household.middle_name, household.suffix].filter(Boolean).join(" ")}
+                      </Text>
+                    </View>
                     <View style={styles.tableCell}><Text>{household.zone}</Text></View>
                     <View style={styles.tableCell}><Text>{household.members}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.has_pwd ? "Yes" : "No"}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.has_senior ? "Yes" : "No"}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.low_income ? "Yes" : "No"}</Text></View>
                   </View>
                 );
               })}

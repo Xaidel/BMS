@@ -11,7 +11,6 @@ export default function searchResident(term: string, data: Resident[]): Resident
       pattern.test(resident.middle_name ?? "") ||
       pattern.test(resident.last_name) ||
       pattern.test(resident.full_name ?? "") ||
-      pattern.test(resident.household_number.toString()) ||
-      pattern.test(resident.zone)
+      pattern.test(resident.household_number.toString())
   );
 }

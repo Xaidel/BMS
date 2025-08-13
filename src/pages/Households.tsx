@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTable from "@/components/ui/datatable";
-import Filter from "@/components/ui/filter";
 import Searchbar from "@/components/ui/searchbar";
 import {
   Dialog,
@@ -11,84 +10,106 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
 import { useMemo, useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import ViewHouseholdModal from "@/features/households/viewhouseholdmodal";
 import SummaryCardHousehold from "@/components/summary-card/household";
-import { Home, HomeIcon, UserCheck, Users } from "lucide-react";
+import { HomeIcon, UserCheck, Users } from "lucide-react";
 import { HouseholdPDF } from "@/components/pdf/householdpdf";
 import { pdf } from "@react-pdf/renderer";
 import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
-type ResidentHead = {
-  id: number;
-  household_number: number;
-  full_name: string;
-  zone: string;
-  date_of_birth: string;
-};
-
-const columns: ColumnDef<ResidentHead>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected()
-            ? true
-            : table.getIsSomePageRowsSelected()
-            ? "indeterminate"
-            : false
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        className="flex items-center justify-center"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="flex items-center justify-center"
-      />
-    ),
-  },
-  {
-    header: "Household Number",
-    accessorKey: "household_number",
-  },
-  {
-    header: "Head of Household",
-    accessorKey: "full_name",
-  },
-  {
-    header: "Zone",
-    accessorKey: "zone",
-  },
-  {
-    header: "Date of Birth",
-    accessorKey: "date_of_birth",
-    cell: ({ row }) => {
-      return (
-        <div>
-          {format(new Date(row.original.date_of_birth), "MMMM d, yyyy")}
-        </div>
-      );
-    },
-  },
-];
+import Filter from "@/components/ui/filter";
+import { sortResidents } from "@/service/household/householdSort"; 
+import { Resident } from "@/types/types";
 
 export default function Households() {
+  const [householdIncomeMap, setHouseholdIncomeMap] = useState<
+    Map<number, number>
+  >(new Map());
+  const columns = useMemo<ColumnDef<Resident>[]>(
+    () => [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <Checkbox
+            checked={
+              table.getIsAllPageRowsSelected()
+                ? true
+                : table.getIsSomePageRowsSelected()
+                ? "indeterminate"
+                : false
+            }
+            onCheckedChange={(value) =>
+              table.toggleAllPageRowsSelected(!!value)
+            }
+            aria-label="Select all"
+            className="flex items-center justify-center"
+          />
+        ),
+        cell: ({ row }) => (
+          <Checkbox
+            checked={row.getIsSelected()}
+            onCheckedChange={(value) => row.toggleSelected(!!value)}
+            aria-label="Select row"
+            className="flex items-center justify-center"
+          />
+        ),
+      },
+      {
+        header: "Household Number",
+        accessorKey: "household_number",
+      },
+      {
+        header: "Head of Household",
+        cell: ({ row }) => {
+          const r = row.original as Resident;
+          const fullName = [r.last_name ? r.last_name + "," : "", r.first_name, r.middle_name, r.suffix].filter(Boolean).join(" ");
+          return <div>{fullName}</div>;
+        },
+      },
+      {
+        header: "Zone",
+        accessorKey: "zone",
+      },
+      {
+        header: "Total Income",
+        cell: ({ row }) => {
+          const income =
+            householdIncomeMap.get(row.original.household_number) ?? 0;
+          return `₱${income.toLocaleString()}`;
+        },
+      },
+      {
+        header: "Total Members",
+        accessorKey: "members", // can be dummy key
+        cell: ({ row }) => {
+          return (
+            <div>
+              {householdMembersMap.get(row.original.household_number) ?? 0}
+            </div>
+          );
+        },
+      },
+    ],
+    [householdIncomeMap]
+  );
+
+  const [householdPwdMap, setHouseholdPwdMap] = useState<Set<number>>(
+    new Set()
+  );
+  const [householdSeniorMap, setHouseholdSeniorMap] = useState<Set<number>>(
+    new Set()
+  );
+  const [householdMembersMap, setHouseholdMembersMap] = useState<Map<number, number>>(new Map());
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [filterValue, setFilterValue] = useState(
     searchParams.get("sort") ?? "All"
   );
-  const [data, setData] = useState<ResidentHead[]>([]);
+  const [data, setData] = useState<Resident[]>([]);
   const [selectedHousehold, setSelectedHousehold] = useState<{
     household_number: number;
     full_name: string;
@@ -96,10 +117,10 @@ export default function Households() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSortChange = (sortValue: string) => {
-    searchParams.set("sort", sortValue);
-    setSearchParams(searchParams);
-    setFilterValue(sortValue);
-  };
+  searchParams.set("sort", sortValue);
+  setSearchParams(searchParams);
+  setFilterValue(sortValue);
+};
 
   const filteredData = useMemo(() => {
     let sorted = [...data];
@@ -113,11 +134,54 @@ export default function Households() {
       );
     }
 
-    return sorted;
-  }, [filterValue, searchQuery, data]);
+    return sortResidents(sorted, filterValue);
+}, [data, searchQuery, filterValue]);
+
+  useEffect(() => {
+  if (!data || data.length === 0) return;
+  const fetchMembersAndCalcIncome = async () => {
+    const updatedIncomeMap = new Map(householdIncomeMap);
+    const updatedMembersMap = new Map<number, number>();
+
+    for (const household of data) {
+      try {
+        const members: { average_monthly_income: number | null }[] = await invoke("fetch_residents_by_household_number", {
+          householdNumber: household.household_number,
+        });
+        const totalIncome = members.reduce(
+          (acc, m) => acc + (Number(m.average_monthly_income) || 0),
+          0
+        );
+        updatedIncomeMap.set(household.household_number, totalIncome);
+        updatedMembersMap.set(household.household_number, members.length);
+      } catch (error) {
+        console.error(`Failed to fetch members for household ${household.household_number}:`, error);
+        updatedMembersMap.set(household.household_number, 0);
+      }
+    }
+    setHouseholdIncomeMap(updatedIncomeMap);
+    setHouseholdMembersMap(updatedMembersMap);
+  };
+  fetchMembersAndCalcIncome();
+}, [data]);
+
+  // Compute counts separately
+  const pwdCount = useMemo(() => {
+    if (!data.length || !householdPwdMap.size) return 0;
+    return data.filter((household) =>
+      householdPwdMap.has(household.household_number)
+    ).length;
+  }, [data, householdPwdMap]);
+
+  const seniorCount = useMemo(() => {
+    if (!data.length || !householdSeniorMap.size) return 0;
+    return data.filter((household) =>
+      householdSeniorMap.has(household.household_number)
+    ).length;
+  }, [data, householdSeniorMap]);
 
   const fetchHouseholdHeads = () => {
-    invoke<ResidentHead[]>("fetch_household_heads_command")
+    invoke<Resident[]>("fetch_household_heads_command")
       .then((fetched) => {
         setData(fetched);
       })
@@ -132,9 +196,6 @@ export default function Households() {
   }, []);
 
   const LOW_INCOME_THRESHOLD = 20000;
-  const [householdIncomeMap, setHouseholdIncomeMap] = useState<
-    Map<number, number>
-  >(new Map());
 
   useEffect(() => {
     invoke("fetch_all_residents_with_income")
@@ -162,20 +223,50 @@ export default function Households() {
       });
   }, []);
 
+  // New useEffect: fetch members for each household in data and calculate income
+  useEffect(() => {
+    if (!data || data.length === 0) return;
+    // For each household, fetch members, sum their income, and update householdIncomeMap if low income
+    const fetchMembersAndCalcIncome = async () => {
+      const updatedMap = new Map(householdIncomeMap); // Start from previous values
+      for (const household of data) {
+        try {
+          const members: { average_monthly_income: number | null }[] =
+            await invoke("fetch_residents_by_household_number", {
+              householdNumber: household.household_number,
+            });
+          const totalIncome = members.reduce(
+            (acc, m) => acc + (Number(m.average_monthly_income) || 0),
+            0
+          );
+          // If total income is less than threshold, update the map
+          if (totalIncome < LOW_INCOME_THRESHOLD) {
+            updatedMap.set(household.household_number, totalIncome);
+          } else {
+            updatedMap.set(household.household_number, totalIncome);
+          }
+        } catch (error) {
+          console.error(
+            `Failed to fetch members for household ${household.household_number}:`,
+            error
+          );
+        }
+      }
+      setHouseholdIncomeMap(updatedMap);
+    };
+    fetchMembersAndCalcIncome();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   const householdIncome = useMemo(() => {
     // Find all households with low income (active)
     const lowIncomeHouseholds = data.filter((household) => {
       const totalIncome =
         householdIncomeMap.get(household.household_number) ?? 0;
-      // console.log(
-      //   `Household ${household.household_number} income: ${totalIncome}, status: ${household.status}`
-      // );
       return totalIncome < LOW_INCOME_THRESHOLD;
     });
     let count = lowIncomeHouseholds.length;
 
-    // Also count selectedHousehold from ViewHouseholdModal if its total income is less than threshold,
-    // and it is not already counted in the above filter.
     if (selectedHousehold) {
       const selectedHhNum = selectedHousehold.household_number;
       // Only check if not already included in the filtered list
@@ -219,48 +310,22 @@ export default function Households() {
 
   const total = data.length;
 
-  // New state to track additional count from modal
-  const [modalLowIncomeCount, setModalLowIncomeCount] = useState(0);
-
   // Handler to receive totalIncome from ViewHouseholdModal
-  const onTotalIncomeCalculated = (totalIncome: number) => {
-    if (selectedHousehold) {
-      const selectedHhNum = selectedHousehold.household_number;
-      const alreadyCounted = data.some(
-        (hh) =>
-          hh.household_number === selectedHhNum &&
-          householdIncomeMap.get(selectedHhNum)! < LOW_INCOME_THRESHOLD
-      );
-      if (!alreadyCounted && totalIncome < LOW_INCOME_THRESHOLD) {
-        setModalLowIncomeCount(1);
-      } else {
-        setModalLowIncomeCount(0);
-      }
-    } else {
-      setModalLowIncomeCount(0);
-    }
+  const onTotalIncomeCalculated = (income: number) => {
+    console.log("Household income calculated in modal:", income);
   };
 
-  const adjustedHouseholdIncome = useMemo(() => {
-    if (!selectedHousehold) return householdIncome;
+  const adjustedHouseholdIncome = householdIncome;
 
-    const selectedHhNum = selectedHousehold.household_number;
-    const alreadyCounted = data.some(
-      (hh) =>
-        hh.household_number === selectedHhNum &&
-        (householdIncomeMap.get(selectedHhNum) ?? 0) < LOW_INCOME_THRESHOLD
-    );
-
-    return alreadyCounted
-      ? householdIncome
-      : householdIncome + (modalLowIncomeCount > 0 ? 1 : 0);
-  }, [
-    householdIncome,
-    modalLowIncomeCount,
-    selectedHousehold,
-    data,
-    householdIncomeMap,
-  ]);
+const filters = [
+  "All",
+  "Numerical",
+  "AgeDesc",
+  "NameAsc",
+  "IncomeAsc",
+  "IncomeDesc",
+  "ZoneAsc",
+];
 
   return (
     <>
@@ -271,7 +336,13 @@ export default function Households() {
           icon={<Users size={50} />}
           onClick={async () => {
             const blob = await pdf(
-              <HouseholdPDF filter="All Households" households={data} />
+              <HouseholdPDF
+                filter="All Households"
+                households={data.map(hh => ({
+                  ...hh,
+                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                }))}
+              />
             ).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -303,7 +374,10 @@ export default function Households() {
             const blob = await pdf(
               <HouseholdPDF
                 filter="Low Income Households"
-                households={filtered}
+                households={filtered.map(hh => ({
+                  ...hh,
+                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                }))}
               />
             ).toBlob();
             const buffer = await blob.arrayBuffer();
@@ -324,29 +398,74 @@ export default function Households() {
           }}
         />
         <SummaryCardHousehold
-          title="Households with PWDs and Senior Citizens"
-          value={householdPwdSenior}
+          title="Households with PWDs"
+          value={pwdCount}
           icon={<HomeIcon size={50} />}
-          // onClick={async () => {
-          //   const filtered = data.filter((d) => d.type_ === "householdPwdSenior");
-          //   const blob = await pdf(
-          //     <HouseholdPDF filter="Renter Households" households={filtered} />
-          //   ).toBlob();
-          //   const buffer = await blob.arrayBuffer();
-          //   const contents = new Uint8Array(buffer);
-          //   try {
-          //     await writeFile("RenterHouseholds.pdf", contents, {
-          //       baseDir: BaseDirectory.Document,
-          //     });
-          //     toast.success("Renter Households PDF saved", {
-          //       description: "Saved in Documents folder",
-          //     });
-          //   } catch (e) {
-          //     toast.error("Error", {
-          //       description: "Failed to save Renter Households PDF",
-          //     });
-          //   }
-          // }}
+          onClick={async () => {
+            const filtered = data.filter((household) =>
+              householdPwdMap.has(household.household_number)
+            );
+
+            const blob = await pdf(
+              <HouseholdPDF
+                filter="PWD Households"
+                households={filtered.map(hh => ({
+                  ...hh,
+                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                }))}
+              />
+            ).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+
+            try {
+              await writeFile("PWDHouseholds.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("PWD Households PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save PWD Households PDF",
+              });
+            }
+          }}
+        />
+        <SummaryCardHousehold
+          title="Households with Senior Citizens"
+          value={seniorCount}
+          icon={<HomeIcon size={50} />}
+          onClick={async () => {
+            const filtered = data.filter((household) =>
+              householdSeniorMap.has(household.household_number)
+            );
+
+            const blob = await pdf(
+              <HouseholdPDF
+                filter="Senior Households"
+                households={filtered.map(hh => ({
+                  ...hh,
+                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                }))}
+              />
+            ).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+
+            try {
+              await writeFile("SeniorHouseholds.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Senior Households PDF saved", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save Senior Households PDF",
+              });
+            }
+          }}
         />
       </div>
       <div className="flex gap-5 w-full items-center justify-center mb-5">
@@ -355,14 +474,14 @@ export default function Households() {
           placeholder="Search Household Head"
           classname="flex flex-5"
         />
-        {/* <Filter
+        <Filter
           onChange={handleSortChange}
           filters={filters}
           initial="All"
           classname="flex-1"
-        /> */}
+        />
       </div>
-      <DataTable<ResidentHead>
+      <DataTable<Resident>
         classname="py-5"
         height="43.3rem"
         data={filteredData}

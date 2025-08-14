@@ -1,6 +1,5 @@
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 import { styles } from "./Stylesheet";
-import { format } from "date-fns";
 
 type Props = {
   filter: string;

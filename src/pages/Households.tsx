@@ -14,7 +14,6 @@ import { useMemo, useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
-import ViewHouseholdModal from "@/features/households/viewhouseholdmodal";
 import SummaryCardHousehold from "@/components/summary-card/household";
 import { HomeIcon, UserCheck, Users } from "lucide-react";
 import { HouseholdPDF } from "@/components/pdf/householdpdf";
@@ -23,6 +22,9 @@ import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import Filter from "@/components/ui/filter";
 import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
+import ViewHouseholdModal from "@/features/households/viewhouseholdmodal";
+
+
 
 export default function Households() {
   const [householdIncomeMap, setHouseholdIncomeMap] = useState<

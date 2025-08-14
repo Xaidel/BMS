@@ -4,7 +4,9 @@ import { SidebarProvider } from "./sidebar";
 export default function SidebarLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar onHover={function (): void {
+        throw new Error("Function not implemented.");
+      } } />
       <main>
         {children}
       </main>

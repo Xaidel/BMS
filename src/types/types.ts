@@ -19,7 +19,7 @@ export type Resident = {
   middle_name?: string;
   last_name: string;
   suffix?: string;
-  full_name?: string; // can be generated later
+  full_name?: string; 
   civil_status: string;
   gender: string;
   nationality: string;
@@ -35,7 +35,7 @@ export type Resident = {
   barangay: string;
   town: string;
   province: string;
-  household_number: string;
+  household_number: number;
   role_in_household: string;
   father_prefix: string;
   father_first_name: string;
@@ -48,18 +48,6 @@ export type Resident = {
   mother_last_name: string;
   status: "Moved Out" | "Active" | "Dead" | "Missing";
   photo?: any;
-};
-
-export type Household = {
-  id?: number;
-  household_number: number;
-  type_: string;
-  members: number;
-  head: string;
-  zone: string;
-  date: Date;
-  status: "Moved Out" | "Active";
-  selectedResidents?: string[]; // optional list of selected members
 };
 
 export type Income = {

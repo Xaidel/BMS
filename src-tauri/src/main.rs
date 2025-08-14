@@ -4,11 +4,11 @@ mod database;
 mod commands;
 mod models;
 
+use commands::households::{fetch_household_heads_command, fetch_residents_by_household_number, fetch_all_residents_with_income, fetch_residents_with_pwd, fetch_residents_with_senior};
 use commands::user::{verify_user_credentials_command, insert_user_command};
 use commands::officials::{fetch_all_officials_command,insert_official_command, save_official_command, delete_official_command};
 use commands::settings::{save_settings_command, fetch_settings_command, fetch_logo_command};
 use commands::events::{save_event_command, insert_event_command, fetch_all_events_command, delete_event_command, update_event_command};
-use commands::households::{save_household_command, insert_household_command, fetch_all_households_command, delete_household_command, update_household_command, fetch_members_by_household_command};
 use commands::expense::{save_expense_command, insert_expense_command, fetch_all_expenses_command, delete_expense_command, update_expense_command};
 use commands::income::{save_income_command, insert_income_command, fetch_all_incomes_command, delete_income_command, update_income_command};
 use commands::blotters::{save_blotter_command, insert_blotter_command, fetch_all_blotters_command, delete_blotter_command, update_blotter_command};
@@ -17,7 +17,6 @@ use commands::certificates::{insert_certificate_command, fetch_all_certificates_
 use database::connection::establish_connection;
 use database::migration::migrate;
 use tauri::command;
-
 
 #[command]
 fn greet(name: &str) -> String {
@@ -56,12 +55,6 @@ fn main() {
             update_event_command,
             save_event_command,
 
-            insert_household_command,
-            fetch_all_households_command,
-            delete_household_command,
-            update_household_command,
-            save_household_command,
-            fetch_members_by_household_command,
             
             insert_expense_command,
             fetch_all_expenses_command,
@@ -81,13 +74,18 @@ fn main() {
             update_blotter_command,
             save_blotter_command,
 
-            // Residents
             insert_resident_command,
             fetch_all_residents_command,
             delete_resident_command,
             update_resident_command,
             save_resident_command,
-
+            
+            fetch_household_heads_command,
+            fetch_residents_by_household_number,
+            fetch_all_residents_with_income,         
+            fetch_residents_with_pwd,
+            fetch_residents_with_senior,
+            
             fetch_all_officials_command,
             insert_official_command,
             save_official_command,
@@ -110,4 +108,3 @@ fn main() {
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
-

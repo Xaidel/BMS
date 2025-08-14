@@ -1,5 +1,3 @@
-// components/ui/summarycardHousehold.tsx
-
 type SummaryCardHouseholdProps = {
   title: string;
   value: number | string;

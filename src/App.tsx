@@ -10,7 +10,6 @@ import AppLayout from './components/ui/applayout';
 import Dashboard from './pages/Dashboard';
 import Event from './pages/Event';
 import Residents from './pages/Residents';
-import Households from './pages/Households';
 import Certificate from './pages/Certificate';
 import Income from './pages/Income';
 import Expense from './pages/Expense';
@@ -19,6 +18,7 @@ import Official from './pages/Official';
 import Settings from './pages/Settings';
 import { Toaster } from './components/ui/sonner';
 import IssueCertificate from './pages/IssueCertificate';
+import Households from './pages/Households';
 function App() {
   const queryClient: QueryClient = new QueryClient({
     defaultOptions: {

@@ -62,7 +62,7 @@ export const residentSchema = z.object({
   barangay: z.string().min(1),
   town: z.string().min(1),
   province: z.string().min(1),
-  household_number: z.string().min(1),
+  household_number: z.number().min(1),
   role_in_household: z.string().min(1),
   father_prefix: z.string().min(1),
   father_first_name: z.string().min(1),
@@ -83,33 +83,6 @@ export const residentSchema = z.object({
   source_of_income: z.string().optional(),
   average_monthly_income: z.number().optional(),
 });
-
-export const householdSchema = z.object({
-  household_number: z.number().min(1),
-  type_: z.string().min(2, {
-    message: "Household type is too short"
-  }).max(50, {
-    message: "Household type is too long."
-  }),
-  members: z.number().min(1),
-  head: z.string().min(2, {
-    message: "Household head name is too short"
-  }).max(50, {
-    message: "Household head name is too long"
-  }),
-  zone: z.string().min(2, {
-    message: "Zone is too short"
-  }).max(50, {
-    message: "Zone is too long"
-  }),
-  date: z.date({
-    required_error: "Please specify the registration date"
-  }),
-  status: z.string().max(1000, {
-    message: "Status is too long"
-  }),
-  selectedResidents: z.array(z.string()).optional()
-})
 
 export const incomeSchema = z.object({
   type_: z

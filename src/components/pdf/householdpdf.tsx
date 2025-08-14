@@ -1,13 +1,9 @@
-
-
 import { Document, Page, Text, View } from "@react-pdf/renderer";
 import { styles } from "./Stylesheet";
-import { format } from "date-fns";
-import { Household } from "@/types/types";
 
 type Props = {
   filter: string;
-  households: Household[];
+  households: any[];
 };
 
 export const HouseholdPDF = ({ filter, households }: Props) => {
@@ -27,32 +23,38 @@ export const HouseholdPDF = ({ filter, households }: Props) => {
             <View style={styles.tableRow}>
               <View style={styles.headerCell}><Text>ID</Text></View>
               <View style={styles.headerCell}><Text>House #</Text></View>
-              <View style={styles.headerCell}><Text>Type</Text></View>
-              <View style={styles.headerCell}><Text>Members</Text></View>
               <View style={styles.headerCell}><Text>Head</Text></View>
               <View style={styles.headerCell}><Text>Zone</Text></View>
-              <View style={styles.headerCell}><Text>Date</Text></View>
-              <View style={styles.headerCell}><Text>Status</Text></View>
+              <View style={styles.headerCell}><Text>Members</Text></View>
+              <View style={styles.headerCell}><Text>Households with PWD</Text></View>
+              <View style={styles.headerCell}><Text>Households with Senior</Text></View>
+              <View style={styles.headerCell}><Text>Low Income</Text></View>
             </View>
             <View style={styles.table}>
-              {households.map((household, index) => (
-                <View
-                  style={[
-                    styles.tableRow,
-                    { backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }
-                  ]}
-                  key={household.id}
-                >
-                  <View style={styles.tableCell}><Text>{household.id}</Text></View>
-                  <View style={styles.tableCell}><Text>{household.household_number}</Text></View>
-                  <View style={styles.tableCell}><Text>{household.type_}</Text></View>
-                  <View style={styles.tableCell}><Text>{household.members}</Text></View>
-                  <View style={styles.tableCell}><Text>{household.head}</Text></View>
-                  <View style={styles.tableCell}><Text>{household.zone}</Text></View>
-                  <View style={styles.tableCell}><Text>{format(household.date, "MMMM do, yyyy")}</Text></View>
-                  <View style={styles.tableCell}><Text>{household.status}</Text></View>
-                </View>
-              ))}
+              {households.map((household, index) => {
+                return (
+                  <View
+                    style={[
+                      styles.tableRow,
+                      { backgroundColor: index % 2 === 0 ? "#f9f9f9" : "white" }
+                    ]}
+                    key={household.id || index}
+                  >
+                    <View style={styles.tableCell}><Text>{household.id}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.household_number}</Text></View>
+                    <View style={styles.tableCell}>
+                      <Text>
+                        {household.full_name || [household.last_name, household.first_name, household.middle_name, household.suffix].filter(Boolean).join(" ")}
+                      </Text>
+                    </View>
+                    <View style={styles.tableCell}><Text>{household.zone}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.members}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.has_pwd ? "Yes" : "No"}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.has_senior ? "Yes" : "No"}</Text></View>
+                    <View style={styles.tableCell}><Text>{household.low_income ? "Yes" : "No"}</Text></View>
+                  </View>
+                );
+              })}
             </View>
           </View>
         </View>

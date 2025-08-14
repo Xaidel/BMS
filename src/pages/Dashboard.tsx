@@ -13,17 +13,12 @@ import ExpenseChart from "@/components/ui/expensechart";
 import Greet from "@/components/ui/greetings";
 import IncomeChart from "@/components/ui/incomechart";
 import PopulationChart from "@/components/ui/populationchart";
-import { Household } from "@/types/types";
 import type { Income, Expense } from "@/types/types";
 
 const categories = [];
 
-
-
-
 export default function Dashboard() {
-  const [householdTotal, setHouseholdTotal] = useState(0);
-  const [householdData, setHouseholdData] = useState<any[]>([]);
+  const [householdData] = useState<any[]>([]);
   const [residentTotal, setResidentTotal] = useState(0);
   const [registeredVotersTotal, setRegisteredVotersTotal] = useState(0);
   const [eventTotal, setEventTotal] = useState(0);
@@ -32,23 +27,25 @@ export default function Dashboard() {
   const [femaleTotal, setFemaleTotal] = useState(0);
   const [pwdTotal, setPwdTotal] = useState(0);
   const [seniorTotal, setSeniorTotal] = useState(0);
-  const [populationData, setPopulationData] = useState<{ zone: number; population: number }[]>([]);
-  const [incomeChartData, setIncomeChartData] = useState<{ source: string; value: number; fill: string; description: string }[]>([]);
-  const [expenseChartData, setExpenseChartData] = useState<{ source: string; value: number; fill: string; description: string }[]>([]);
-  console.log(householdData, eventTotal)
+  const [populationData, setPopulationData] = useState<
+    { zone: number; population: number }[]
+  >([]);
+  const [incomeChartData, setIncomeChartData] = useState<
+    { source: string; value: number; fill: string; description: string }[]
+  >([]);
+  const [expenseChartData, setExpenseChartData] = useState<
+    { source: string; value: number; fill: string; description: string }[]
+  >([]);
+  console.log(householdData, eventTotal);
+  const [totalHouseholds, setTotalHouseholds] = useState<number>(0);
+  
   useEffect(() => {
-    invoke<Household[]>("fetch_all_households_command")
-      .then((fetched) => {
-        const parsed = fetched.map((household) => ({
-          ...household,
-          date: new Date(household.date),
-        }));
-        setHouseholdData(parsed);
-        setHouseholdTotal(parsed.length);
+    invoke<{ household_number: number }[]>("fetch_household_heads_command")
+      .then((households) => {
+        setTotalHouseholds(households.length);
       })
       .catch((err) => {
         console.error("Failed to fetch households:", err);
-        setHouseholdTotal(0);
       });
   }, []);
 
@@ -68,10 +65,12 @@ export default function Dashboard() {
           }
         }
 
-        const zoneData = Object.entries(zoneCountMap).map(([zone, population]) => ({
-          zone: isNaN(Number(zone)) ? 0 : Number(zone),
-          population,
-        }));
+        const zoneData = Object.entries(zoneCountMap).map(
+          ([zone, population]) => ({
+            zone: isNaN(Number(zone)) ? 0 : Number(zone),
+            population,
+          })
+        );
 
         // Optional: sort by zone number
         zoneData.sort((a, b) => a.zone - b.zone);
@@ -79,7 +78,9 @@ export default function Dashboard() {
         setPopulationData(zoneData);
 
         // Other counts
-        const registeredCount = residents.filter((r) => r.is_registered_voter === true).length;
+        const registeredCount = residents.filter(
+          (r) => r.is_registered_voter === true
+        ).length;
         setRegisteredVotersTotal(registeredCount);
         setMaleTotal(residents.filter((r) => r.gender === "Male").length);
         setFemaleTotal(residents.filter((r) => r.gender === "Female").length);
@@ -135,28 +136,29 @@ export default function Dashboard() {
         }
 
         const colorMap: Record<string, string> = {
-          "Local Revenue": "#3F51B5",             // indigo
-          "Tax Revenue": "#E91E63",               // pink
-          "Government Grants": "#2196F3",         // blue
-          "Service Revenue": "#8BC34A",           // light green
-          "Rental Income": "#FF5722",             // deep orange
-          "Government Funds (IRA)": "#00BCD4",    // cyan
-          "Others": "#9E9E9E",                    // gray
+          "Local Revenue": "#3F51B5", // indigo
+          "Tax Revenue": "#E91E63", // pink
+          "Government Grants": "#2196F3", // blue
+          "Service Revenue": "#8BC34A", // light green
+          "Rental Income": "#FF5722", // deep orange
+          "Government Funds (IRA)": "#00BCD4", // cyan
+          Others: "#9E9E9E", // gray
         };
 
         const chartData = Object.entries(totals).map(([source, value]) => ({
           source,
           value,
           fill: colorMap[source] || "#ccc",
-          description: {
-            "Local Revenue": "Revenue collected within the barangay",
-            "Tax Revenue": "Revenue from various local taxes",
-            "Government Grants": "Funds provided by the government",
-            "Service Revenue": "Income from services offered",
-            "Rental Income": "Revenue from property rentals",
-            "Government Funds (IRA)": "Internal Revenue Allotment",
-            "Others": "Other income sources"
-          }[source] || "No description available",
+          description:
+            {
+              "Local Revenue": "Revenue collected within the barangay",
+              "Tax Revenue": "Revenue from various local taxes",
+              "Government Grants": "Funds provided by the government",
+              "Service Revenue": "Income from services offered",
+              "Rental Income": "Revenue from property rentals",
+              "Government Funds (IRA)": "Internal Revenue Allotment",
+              Others: "Other income sources",
+            }[source] || "No description available",
         }));
 
         setIncomeChartData(chartData);
@@ -184,28 +186,29 @@ export default function Dashboard() {
         }
 
         const colorMap: Record<string, string> = {
-          "Infrastructure": "#3F51B5",       // indigo
-          "Honoraria": "#E91E63",            // pink
-          "Utilities": "#2196F3",            // blue
-          "Local Funds": "#8BC34A",          // light green
-          "Foods": "#FF5722",                // deep orange
-          "IRA": "#00BCD4",                  // cyan
-          "Others": "#9E9E9E",               // gray
+          Infrastructure: "#3F51B5", // indigo
+          Honoraria: "#E91E63", // pink
+          Utilities: "#2196F3", // blue
+          "Local Funds": "#8BC34A", // light green
+          Foods: "#FF5722", // deep orange
+          IRA: "#00BCD4", // cyan
+          Others: "#9E9E9E", // gray
         };
 
         const chartData = Object.entries(totals).map(([source, value]) => ({
           source,
           value,
           fill: colorMap[source] || "#ccc",
-          description: {
-            "Infrastructure": "Spending on buildings, and roads",
-            "Honoraria": "Payments given to public servants or officials",
-            "Utilities": "Electricity, water, communication, etc.",
-            "Local Funds": "Expenses covered by the local fund",
-            "Foods": "Food expenses for programs, meetings, etc.",
-            "IRA": "Portion of Internal Revenue Allotment spent",
-            "Others": "Miscellaneous or unclassified expenses",
-          }[source] || "No description available",
+          description:
+            {
+              Infrastructure: "Spending on buildings, and roads",
+              Honoraria: "Payments given to public servants or officials",
+              Utilities: "Electricity, water, communication, etc.",
+              "Local Funds": "Expenses covered by the local fund",
+              Foods: "Food expenses for programs, meetings, etc.",
+              IRA: "Portion of Internal Revenue Allotment spent",
+              Others: "Miscellaneous or unclassified expenses",
+            }[source] || "No description available",
         }));
 
         setExpenseChartData(chartData);
@@ -227,7 +230,7 @@ export default function Dashboard() {
           <div className="w-[22%] min-w-[150px]">
             <CategoryCard
               title="Households"
-              count={householdTotal}
+              count={totalHouseholds}
               icon={CustomHouse}
             />
           </div>
@@ -253,11 +256,7 @@ export default function Dashboard() {
             />
           </div>
           <div className="w-[22%] min-w-[150px]">
-            <CategoryCard
-              title="Male"
-              count={maleTotal}
-              icon={CustomMale}
-            />
+            <CategoryCard title="Male" count={maleTotal} icon={CustomMale} />
           </div>
           <div className="w-[22%] min-w-[150px]">
             <CategoryCard
@@ -267,11 +266,7 @@ export default function Dashboard() {
             />
           </div>
           <div className="w-[22%] min-w-[150px]">
-            <CategoryCard
-              title="PWD"
-              count={pwdTotal}
-              icon={CustomPWD}
-            />
+            <CategoryCard title="PWD" count={pwdTotal} icon={CustomPWD} />
           </div>
           <div className="w-[22%] min-w-[150px]">
             <CategoryCard

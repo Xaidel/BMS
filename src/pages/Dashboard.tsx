@@ -18,8 +18,7 @@ import type { Income, Expense } from "@/types/types";
 const categories = [];
 
 export default function Dashboard() {
-  const [householdTotal, setHouseholdTotal] = useState(0);
-  const [householdData, setHouseholdData] = useState<any[]>([]);
+  const [householdData] = useState<any[]>([]);
   const [residentTotal, setResidentTotal] = useState(0);
   const [registeredVotersTotal, setRegisteredVotersTotal] = useState(0);
   const [eventTotal, setEventTotal] = useState(0);

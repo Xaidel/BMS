@@ -1,6 +1,6 @@
 import { Resident } from "@/types/types"; // Import Resident type
 
-export function sortResidents(data: Resident[], term: string, householdIncomeMap?: Map<number, number>): Resident[] {
+export function sortResidents(data: Resident[], term: string): Resident[] {
   switch (term) {
   case "Numerical":
     return sortByHouseholdNumber(data);

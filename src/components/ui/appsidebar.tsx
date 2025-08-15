@@ -1,4 +1,4 @@
-import { LayoutDashboard, Calendar, Users, House, FileBadge2, TrendingUp, BanknoteArrowUpIcon, Files, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, Calendar, Users, House, FileBadge2, TrendingUp, BanknoteArrowUpIcon, Files, Settings, LogOut, MapIcon } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger } from "./sidebar";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -23,7 +23,11 @@ const items = [
     url: "/households",
     icon: House
   },
-
+  {
+    title: "Barangay Map",
+    url: "/barangay-map",
+    icon: MapIcon
+  },
   {
     title: "Certificate",
     url: "/certificates",
@@ -51,11 +55,12 @@ const items = [
   },
 ]
 
-type Props = {
+type SidebarProps = {
   onHover: () => void;
+  onOut: () => void
 }
 
-export default function AppSidebar({onHover}: Props) {
+export default function AppSidebar({ onHover, onOut }: SidebarProps) {
   const location = useLocation()
   const currentPath = location.pathname
   const isActive = (currentPath: string, targetPath: string): boolean => {
@@ -64,7 +69,7 @@ export default function AppSidebar({onHover}: Props) {
     return false
   }
   return (
-    <Sidebar collapsible="icon" className="z-100" onMouseEnter={onHover}>
+    <Sidebar collapsible="icon" className="z-100" onMouseEnter={onHover} onMouseLeave={onOut}>
       <SidebarHeader className="mt-2">
         <SidebarTrigger className=" hover:bg-primary hover:text-foreground "
           size="lg"

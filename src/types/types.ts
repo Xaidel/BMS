@@ -129,3 +129,13 @@ export type User = {
   username: string;
   password: string;
 };
+
+export type BarangayMap = {
+  id: number;
+  name: string;
+  x: number;
+  y: number;
+  house_number: string;
+  zone: string;
+  section: string;
+};

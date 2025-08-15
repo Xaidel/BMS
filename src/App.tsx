@@ -19,6 +19,7 @@ import Settings from './pages/Settings';
 import { Toaster } from './components/ui/sonner';
 import IssueCertificate from './pages/IssueCertificate';
 import Households from './pages/Households';
+import BarangayMapPage from './pages/BarangayMap';
 function App() {
   const queryClient: QueryClient = new QueryClient({
     defaultOptions: {
@@ -39,6 +40,7 @@ function App() {
             <Route path='event' element={<Event />} />
             <Route path='residents' element={<Residents />} />
             <Route path='households' element={<Households />} />
+            <Route path='barangay-map' element={<BarangayMapPage />} />
             <Route path='certificates' element={<Certificate />} />
             <Route path='/certificates/template/:template' element={<IssueCertificate />} />
             <Route path='income' element={<Income />} />

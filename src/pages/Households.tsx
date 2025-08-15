@@ -22,9 +22,6 @@ import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import Filter from "@/components/ui/filter";
 import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
-import ViewHouseholdModal from "@/features/households/viewhouseholdModal";
-
-
 
 export default function Households() {
   // Map household_number (as string) -> total income (as string)
@@ -41,8 +38,8 @@ export default function Households() {
               table.getIsAllPageRowsSelected()
                 ? true
                 : table.getIsSomePageRowsSelected()
-                ? "indeterminate"
-                : false
+                  ? "indeterminate"
+                  : false
             }
             onCheckedChange={(value) =>
               table.toggleAllPageRowsSelected(!!value)
@@ -129,35 +126,35 @@ export default function Households() {
     setSearchParams(searchParams);
     setFilterValue(sortValue);
   };
-  
 
-const filteredData = useMemo(() => {
-  let sorted = [...data];
 
-  if (searchQuery.trim()) {
-    const query = searchQuery.toLowerCase();
+  const filteredData = useMemo(() => {
+    let sorted = [...data];
 
-    sorted = sorted.filter((item) => {
-      const firstName = item.first_name ?? "";
-      const middleName = item.middle_name ?? "";
-      const lastName = item.last_name ?? "";
-      const fullName = [lastName, firstName, middleName].filter(Boolean).join(" ").toLowerCase();
-      const householdNumber = item.household_number?.toString() ?? "";
-      const zone = item.zone?.toLowerCase() ?? "";
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
 
-      return (
-        fullName.includes(query) ||
-        firstName.toLowerCase().includes(query) ||
-        middleName.toLowerCase().includes(query) ||
-        lastName.toLowerCase().includes(query) ||
-        householdNumber.includes(query) ||
-        zone.includes(query)
-      );
-    });
-  }
+      sorted = sorted.filter((item) => {
+        const firstName = item.first_name ?? "";
+        const middleName = item.middle_name ?? "";
+        const lastName = item.last_name ?? "";
+        const fullName = [lastName, firstName, middleName].filter(Boolean).join(" ").toLowerCase();
+        const householdNumber = item.household_number?.toString() ?? "";
+        const zone = item.zone?.toLowerCase() ?? "";
 
-  return sortResidents(sorted, filterValue);
-}, [data, searchQuery, filterValue]);
+        return (
+          fullName.includes(query) ||
+          firstName.toLowerCase().includes(query) ||
+          middleName.toLowerCase().includes(query) ||
+          lastName.toLowerCase().includes(query) ||
+          householdNumber.includes(query) ||
+          zone.includes(query)
+        );
+      });
+    }
+
+    return sortResidents(sorted, filterValue);
+  }, [data, searchQuery, filterValue]);
 
   useEffect(() => {
     if (!data || data.length === 0) return;

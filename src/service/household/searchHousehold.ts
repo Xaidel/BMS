@@ -17,7 +17,7 @@ export default function searchResident(term: string, data: Resident[]) {
       resident.gender,
       resident.status,
       resident.civil_status,
-      resident.household_number?.toString(),
+      resident.household_number,
     ];
 
     // Construct full name for extra matching

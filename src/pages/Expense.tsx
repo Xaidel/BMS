@@ -8,7 +8,7 @@ import DeleteExpenseModal from "@/features/expense/deleteExpenseModal";
 import ViewExpenseModal from "@/features/expense/viewExpenseModal";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Trash, Banknote, Landmark, Layers, PiggyBank, DollarSign, Wallet, Salad, Shirt } from "lucide-react";
+import { Trash, Banknote, Landmark, PiggyBank, Salad, PhilippinePeso, CircleEllipsis, Zap, BanknoteArrowDown } from "lucide-react";
 import type { Expense } from "@/types/types";
 import { useSearchParams } from "react-router-dom";
 import { useMemo, useState, useEffect } from "react";
@@ -89,7 +89,6 @@ const columns: ColumnDef<Expense>[] = [
   },
 ];
 
-
 export default function Expense() {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
@@ -163,7 +162,7 @@ export default function Expense() {
         <SummaryCardExpense
           title="Total Expenditure"
           value={new Intl.NumberFormat("en-US").format(filteredData.reduce((acc, item) => acc + item.amount, 0))}
-          icon={<DollarSign size={50} />}
+          icon={<PhilippinePeso size={50} />}
           onClick={async () => {
             const blob = await pdf(<ExpensePDF filter="All Expenses" expenses={filteredData} />).toBlob();
             const buffer = await blob.arrayBuffer();
@@ -231,7 +230,7 @@ export default function Expense() {
               .filter((d) => d.category === "Utilities")
               .reduce((acc, item) => acc + item.amount, 0)
           )}
-          icon={<Wallet size={50} />}
+          icon={<Zap size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Utilities");
             const blob = await pdf(<ExpensePDF filter="Utilities Expenses" expenses={filtered} />).toBlob();
@@ -294,7 +293,7 @@ export default function Expense() {
               .filter((d) => d.category === "IRA")
               .reduce((acc, item) => acc + item.amount, 0)
           )}
-          icon={<Layers size={50} />}
+          icon={<BanknoteArrowDown size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "IRA");
             const blob = await pdf(<ExpensePDF filter="IRA Expenses" expenses={filtered} />).toBlob();
@@ -315,7 +314,7 @@ export default function Expense() {
               .filter((d) => d.category === "Others")
               .reduce((acc, item) => acc + item.amount, 0)
           )}
-          icon={<Shirt size={50} />}
+          icon={<CircleEllipsis size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Others");
             const blob = await pdf(<ExpensePDF filter="Other Expenses" expenses={filtered} />).toBlob();

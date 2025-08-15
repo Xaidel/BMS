@@ -15,20 +15,21 @@ import { invoke } from "@tauri-apps/api/core";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import SummaryCardHousehold from "@/components/summary-card/household";
-import { HomeIcon, UserCheck, Users } from "lucide-react";
+import { Accessibility, BanknoteArrowDown, House, Users } from "lucide-react";
 import { HouseholdPDF } from "@/components/pdf/householdpdf";
 import { pdf } from "@react-pdf/renderer";
 import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import Filter from "@/components/ui/filter";
 import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
-import ViewHouseholdModal from "@/features/households/viewhouseholdmodal";
+import ViewHouseholdModal from "@/features/households/viewhouseholdModal";
 
 
 
 export default function Households() {
+  // Map household_number (as string) -> total income (as string)
   const [householdIncomeMap, setHouseholdIncomeMap] = useState<
-    Map<number, number>
+    Map<string, string>
   >(new Map());
   const columns = useMemo<ColumnDef<Resident>[]>(
     () => [
@@ -86,7 +87,7 @@ export default function Households() {
         header: "Total Household Income",
         cell: ({ row }) => {
           const income =
-            householdIncomeMap.get(row.original.household_number) ?? 0;
+            householdIncomeMap.get(row.original.household_number) ?? "";
           return `₱${income.toLocaleString()}`;
         },
       },
@@ -96,7 +97,7 @@ export default function Households() {
         cell: ({ row }) => {
           return (
             <div>
-              {householdMembersMap.get(row.original.household_number) ?? 0}
+              {householdMembersMap.get(row.original.household_number) ?? ""}
             </div>
           );
         },
@@ -105,15 +106,11 @@ export default function Households() {
     [householdIncomeMap]
   );
 
-  const [householdPwdMap, setHouseholdPwdMap] = useState<Set<number>>(
-    new Set()
-  );
-  const [householdSeniorMap, setHouseholdSeniorMap] = useState<Set<number>>(
-    new Set()
-  );
-  const [householdMembersMap, setHouseholdMembersMap] = useState<
-    Map<number, number>
-  >(new Map());
+  // Store household_number as string in these sets
+  const [householdPwdMap, setHouseholdPwdMap] = useState<Set<string>>(new Set());
+  const [householdSeniorMap, setHouseholdSeniorMap] = useState<Set<string>>(new Set());
+  // Map household_number (as string) -> members count (as string)
+  const [householdMembersMap, setHouseholdMembersMap] = useState<Map<string, string>>(new Map());
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
@@ -122,7 +119,7 @@ export default function Households() {
   );
   const [data, setData] = useState<Resident[]>([]);
   const [selectedHousehold, setSelectedHousehold] = useState<{
-    household_number: number;
+    household_number: string;
     full_name: string;
   } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -166,26 +163,26 @@ const filteredData = useMemo(() => {
     if (!data || data.length === 0) return;
     const fetchMembersAndCalcIncome = async () => {
       const updatedIncomeMap = new Map(householdIncomeMap);
-      const updatedMembersMap = new Map<number, number>();
+      const updatedMembersMap = new Map<string, string>();
 
       for (const household of data) {
         try {
           const members: { average_monthly_income: number | null }[] =
             await invoke("fetch_residents_by_household_number", {
-              householdNumber: household.household_number,
+              householdNumber: household.household_number.toString(),
             });
           const totalIncome = members.reduce(
             (acc, m) => acc + (Number(m.average_monthly_income) || 0),
             0
           );
-          updatedIncomeMap.set(household.household_number, totalIncome);
-          updatedMembersMap.set(household.household_number, members.length);
+          updatedIncomeMap.set(household.household_number.toString(), totalIncome.toString());
+          updatedMembersMap.set(household.household_number.toString(), members.length.toString());
         } catch (error) {
           console.error(
             `Failed to fetch members for household ${household.household_number}:`,
             error
           );
-          updatedMembersMap.set(household.household_number, 0);
+          updatedMembersMap.set(household.household_number.toString(), "0");
         }
       }
       setHouseholdIncomeMap(updatedIncomeMap);
@@ -198,14 +195,14 @@ const filteredData = useMemo(() => {
   const pwdCount = useMemo(() => {
     if (!data.length || !householdPwdMap.size) return 0;
     return data.filter((household) =>
-      householdPwdMap.has(household.household_number)
+      householdPwdMap.has(household.household_number.toString())
     ).length;
   }, [data, householdPwdMap]);
 
   const seniorCount = useMemo(() => {
     if (!data.length || !householdSeniorMap.size) return 0;
     return data.filter((household) =>
-      householdSeniorMap.has(household.household_number)
+      householdSeniorMap.has(household.household_number.toString())
     ).length;
   }, [data, householdSeniorMap]);
 
@@ -235,15 +232,14 @@ const filteredData = useMemo(() => {
             average_monthly_income: number | null;
           }[]
         ) => {
-          const incomeMap = new Map<number, number>();
-
+          const incomeMap = new Map<string, string>();
           residents.forEach(({ household_number, average_monthly_income }) => {
             // Ensure valid numeric income
             const validIncome = Number(average_monthly_income) || 0;
-            const current = incomeMap.get(household_number) ?? 0;
-            incomeMap.set(household_number, current + validIncome);
+            const key = household_number.toString();
+            const current = Number(incomeMap.get(key)) || 0;
+            incomeMap.set(key, (current + validIncome).toString());
           });
-
           setHouseholdIncomeMap(incomeMap);
         }
       )
@@ -262,18 +258,14 @@ const filteredData = useMemo(() => {
         try {
           const members: { average_monthly_income: number | null }[] =
             await invoke("fetch_residents_by_household_number", {
-              householdNumber: household.household_number,
+              householdNumber: household.household_number.toString(),
             });
           const totalIncome = members.reduce(
             (acc, m) => acc + (Number(m.average_monthly_income) || 0),
             0
           );
           // If total income is less than threshold, update the map
-          if (totalIncome < LOW_INCOME_THRESHOLD) {
-            updatedMap.set(household.household_number, totalIncome);
-          } else {
-            updatedMap.set(household.household_number, totalIncome);
-          }
+          updatedMap.set(household.household_number.toString(), totalIncome.toString());
         } catch (error) {
           console.error(
             `Failed to fetch members for household ${household.household_number}:`,
@@ -290,21 +282,22 @@ const filteredData = useMemo(() => {
   const householdIncome = useMemo(() => {
     // Find all households with low income (active)
     const lowIncomeHouseholds = data.filter((household) => {
-      const totalIncome =
-        householdIncomeMap.get(household.household_number) ?? 0;
+      const totalIncomeStr = householdIncomeMap.get(household.household_number.toString()) ?? "0";
+      const totalIncome = parseFloat(totalIncomeStr);
       return totalIncome < LOW_INCOME_THRESHOLD;
     });
     let count = lowIncomeHouseholds.length;
 
     if (selectedHousehold) {
-      const selectedHhNum = selectedHousehold.household_number;
+      const selectedHhNum = selectedHousehold.household_number.toString();
       // Only check if not already included in the filtered list
       const alreadyCounted = lowIncomeHouseholds.some(
-        (hh) => hh.household_number === selectedHhNum
+        (hh) => hh.household_number.toString() === selectedHhNum
       );
       if (!alreadyCounted) {
         // Compute total income for selected household
-        const selectedTotalIncome = householdIncomeMap.get(selectedHhNum) ?? 0;
+        const selectedTotalIncomeStr = householdIncomeMap.get(selectedHhNum) ?? "0";
+        const selectedTotalIncome = parseFloat(selectedTotalIncomeStr);
         if (selectedTotalIncome < LOW_INCOME_THRESHOLD) {
           count += 1;
         }
@@ -316,7 +309,8 @@ const filteredData = useMemo(() => {
   useEffect(() => {
     invoke<number[]>("fetch_residents_with_pwd")
       .then((households) => {
-        setHouseholdPwdMap(new Set(households));
+        // Convert all household_numbers to string
+        setHouseholdPwdMap(new Set(households.map((num) => num.toString())));
       })
       .catch((err) => {
         console.error("Failed to fetch households with PWDs:", err);
@@ -326,7 +320,7 @@ const filteredData = useMemo(() => {
   useEffect(() => {
     invoke<number[]>("fetch_residents_with_senior")
       .then((households) => {
-        setHouseholdSeniorMap(new Set(households));
+        setHouseholdSeniorMap(new Set(households.map((num) => num.toString())));
       })
       .catch((err) => {
         console.error("Failed to fetch households with seniors:", err);
@@ -355,19 +349,19 @@ const filteredData = useMemo(() => {
         <SummaryCardHousehold
           title="Total Households"
           value={total}
-          icon={<Users size={50} />}
+          icon={<House size={50} />}
           onClick={async () => {
             const blob = await pdf(
               <HouseholdPDF
                 filter="All Households"
                 households={data.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
                   low_income:
-                    (householdIncomeMap.get(hh.household_number) ?? 0) <
+                    (parseFloat(householdIncomeMap.get(hh.household_number.toString()) ?? "0")) <
                     LOW_INCOME_THRESHOLD,
-                  has_senior: householdSeniorMap.has(hh.household_number),
-                  has_pwd: householdPwdMap.has(hh.household_number),
+                  has_senior: householdSeniorMap.has(hh.household_number.toString()),
+                  has_pwd: householdPwdMap.has(hh.household_number.toString()),
                 }))}
               />
             ).toBlob();
@@ -390,11 +384,11 @@ const filteredData = useMemo(() => {
         <SummaryCardHousehold
           title="Households with Less than 20,000 Income"
           value={adjustedHouseholdIncome}
-          icon={<UserCheck size={50} />}
+          icon={<BanknoteArrowDown size={50} />}
           onClick={async () => {
             const filtered = data.filter((household) => {
               const totalIncome =
-                householdIncomeMap.get(household.household_number) ?? 0;
+                parseFloat(householdIncomeMap.get(household.household_number.toString()) ?? "0");
               return totalIncome < LOW_INCOME_THRESHOLD;
             });
 
@@ -403,10 +397,10 @@ const filteredData = useMemo(() => {
                 filter="Low Income Households"
                 households={filtered.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
                   low_income: true,
-                  has_senior: householdSeniorMap.has(hh.household_number),
-                  has_pwd: householdPwdMap.has(hh.household_number),
+                  has_senior: householdSeniorMap.has(hh.household_number.toString()),
+                  has_pwd: householdPwdMap.has(hh.household_number.toString()),
                 }))}
               />
             ).toBlob();
@@ -430,10 +424,10 @@ const filteredData = useMemo(() => {
         <SummaryCardHousehold
           title="Households with PWDs"
           value={pwdCount}
-          icon={<HomeIcon size={50} />}
+          icon={<Accessibility size={50} />}
           onClick={async () => {
             const filtered = data.filter((household) =>
-              householdPwdMap.has(household.household_number)
+              householdPwdMap.has(household.household_number.toString())
             );
 
             const blob = await pdf(
@@ -441,12 +435,12 @@ const filteredData = useMemo(() => {
                 filter="PWD Households"
                 households={filtered.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
                   low_income:
-                    (householdIncomeMap.get(hh.household_number) ?? 0) <
+                    (parseFloat(householdIncomeMap.get(hh.household_number.toString()) ?? "0")) <
                     LOW_INCOME_THRESHOLD,
-                  has_senior: householdSeniorMap.has(hh.household_number),
-                  has_pwd: householdPwdMap.has(hh.household_number),
+                  has_senior: householdSeniorMap.has(hh.household_number.toString()),
+                  has_pwd: householdPwdMap.has(hh.household_number.toString()),
                 }))}
               />
             ).toBlob();
@@ -470,10 +464,10 @@ const filteredData = useMemo(() => {
         <SummaryCardHousehold
           title="Households with Senior Citizens"
           value={seniorCount}
-          icon={<HomeIcon size={50} />}
+          icon={<Users size={50} />}
           onClick={async () => {
             const filtered = data.filter((household) =>
-              householdSeniorMap.has(household.household_number)
+              householdSeniorMap.has(household.household_number.toString())
             );
 
             const blob = await pdf(
@@ -481,9 +475,9 @@ const filteredData = useMemo(() => {
                 filter="Senior Households"
                 households={filtered.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number) ?? 0,
+                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
                   low_income:
-                    (householdIncomeMap.get(hh.household_number) ?? 0) <
+                    (parseFloat(householdIncomeMap.get(hh.household_number.toString()) ?? "0")) <
                     LOW_INCOME_THRESHOLD,
                   has_senior: true,
                   has_pwd: true,

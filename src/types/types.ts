@@ -27,7 +27,7 @@ export type Resident = {
   religion: string;
   occupation: string;
   source_of_income: string;
-  average_monthly_income: string;
+  average_monthly_income: number;
   date_of_birth: Date;
   town_of_birth: string;
   province_of_birth: string;
@@ -35,7 +35,7 @@ export type Resident = {
   barangay: string;
   town: string;
   province: string;
-  household_number: number;
+  household_number: string;
   role_in_household: string;
   father_prefix: string;
   father_first_name: string;

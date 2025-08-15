@@ -57,7 +57,8 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
-
+   const [capturedImage, setCapturedImage] = useState<string | null>(null);
+   
   useEffect(() => {
     async function loadDefaultLocation() {
       try {
@@ -76,7 +77,8 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
 
     loadDefaultLocation();
   }, []);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
+
+ 
 
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
@@ -102,6 +104,8 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       barangay: "",
       town: "",
       province: "",
+      household_number: "",
+      role_in_household: "",
       father_suffix: "",
       father_first_name: "",
       father_middle_name: "",
@@ -438,7 +442,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       )}
                     />
                   </div>
-                  
+
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
@@ -816,14 +820,49 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               </SelectTrigger>
                               <SelectContent>
                                 {[
-                                  "Head", "Adopted Daughter", "Adopted Son", "Auntie", "Brother", "Brother in law",
-                                  "Cousin", "Daughter", "Daughter in law", "Father", "Father in law", "Friend",
-                                  "Granddaughter", "Granddaughter in law", "Grandfather", "Grandmother", "Grandson",
-                                  "Grandson in law", "House maid/helper", "Mother", "Mother in law", "Nephew", "Niece",
-                                  "Partner", "Sister", "Son", "Son in law", "Spouse", "Stepbrother", "Stepdaughter",
-                                  "Stepdaughter in law", "Stepfather", "Stepmother", "Stepgranddaughter",
-                                  "Stepgranddaughter in law", "Stepgrandson", "Stepgrandson in law", "Stepsister",
-                                  "Stepson", "Stepson in law", "Tenant", "Uncle", "Others"
+                                  "Head",
+                                  "Adopted Daughter",
+                                  "Adopted Son",
+                                  "Auntie",
+                                  "Brother",
+                                  "Brother in law",
+                                  "Cousin",
+                                  "Daughter",
+                                  "Daughter in law",
+                                  "Father",
+                                  "Father in law",
+                                  "Friend",
+                                  "Granddaughter",
+                                  "Granddaughter in law",
+                                  "Grandfather",
+                                  "Grandmother",
+                                  "Grandson",
+                                  "Grandson in law",
+                                  "House maid/helper",
+                                  "Mother",
+                                  "Mother in law",
+                                  "Nephew",
+                                  "Niece",
+                                  "Partner",
+                                  "Sister",
+                                  "Son",
+                                  "Son in law",
+                                  "Spouse",
+                                  "Stepbrother",
+                                  "Stepdaughter",
+                                  "Stepdaughter in law",
+                                  "Stepfather",
+                                  "Stepmother",
+                                  "Stepgranddaughter",
+                                  "Stepgranddaughter in law",
+                                  "Stepgrandson",
+                                  "Stepgrandson in law",
+                                  "Stepsister",
+                                  "Stepson",
+                                  "Stepson in law",
+                                  "Tenant",
+                                  "Uncle",
+                                  "Others",
                                 ].map((option) => (
                                   <SelectItem key={option} value={option}>
                                     {option}

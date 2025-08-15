@@ -6,7 +6,7 @@ use crate::{commands::residents::Resident, database::connection::establish_conne
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ResidentHead {
     pub id: Option<i32>,
-    pub household_number: Option<i32>,
+    pub household_number: String,
     pub prefix: String,
     pub first_name: String,
     pub middle_name: Option<String>,
@@ -50,7 +50,7 @@ pub fn fetch_household_heads_command() -> Result<Vec<ResidentHead>, String> {
 }
 
 #[tauri::command]
-pub fn fetch_residents_by_household_number(household_number: i32) -> Result<Vec<Resident>, String> {
+pub fn fetch_residents_by_household_number(household_number: String) -> Result<Vec<Resident>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     let mut stmt = conn.prepare(
@@ -118,7 +118,7 @@ pub fn fetch_residents_by_household_number(household_number: i32) -> Result<Vec<
 }
 
 #[tauri::command]
-pub fn fetch_all_residents_with_income() -> Result<Vec<(i32, f64)>, String> {
+pub fn fetch_all_residents_with_income() -> Result<Vec<(String, i64)>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     let mut stmt = conn.prepare(
@@ -127,8 +127,8 @@ pub fn fetch_all_residents_with_income() -> Result<Vec<(i32, f64)>, String> {
 
     let rows = stmt.query_map([], |row| {
         Ok((
-            row.get::<_, Option<i32>>(0)?.unwrap_or_default(),
-            row.get::<_, f64>(1)?,
+            row.get::<_, Option<String>>(0)?.unwrap_or_default(),
+            row.get::<_, i64>(1)?,
         ))
     }).map_err(|e| e.to_string())?;
 
@@ -162,7 +162,7 @@ pub fn fetch_residents_with_pwd() -> Result<Vec<i32>, String> {
 }
 
 #[tauri::command]
-pub fn fetch_residents_with_senior() -> Result<Vec<i32>, String> {
+pub fn fetch_residents_with_senior() -> Result<Vec<String>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
     let mut stmt = conn.prepare(
         "SELECT DISTINCT household_number 
@@ -172,10 +172,10 @@ pub fn fetch_residents_with_senior() -> Result<Vec<i32>, String> {
     ).map_err(|e| e.to_string())?;
 
     let rows = stmt.query_map([], |row| {
-        Ok(row.get::<_, Option<i32>>(0)?.unwrap_or_default())
+        Ok(row.get::<_, Option<String>>(0)?.unwrap_or_default())
     }).map_err(|e| e.to_string())?;
 
-    let mut household_numbers = Vec::new();
+    let mut household_numbers: Vec<String> = Vec::new();
     for row in rows {
         household_numbers.push(row.map_err(|e| e.to_string())?);
     }

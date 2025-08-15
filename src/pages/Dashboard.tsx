@@ -14,6 +14,7 @@ import Greet from "@/components/ui/greetings";
 import IncomeChart from "@/components/ui/incomechart";
 import PopulationChart from "@/components/ui/populationchart";
 import type { Income, Expense } from "@/types/types";
+import CustomCalendar from "@/components/icons/CustomCalendar";
 
 const categories = [];
 
@@ -252,7 +253,7 @@ export default function Dashboard() {
             <CategoryCard
               title="Upcoming Events"
               count={upcomingEventsTotal}
-              icon={CustomPopulation}
+              icon={CustomCalendar}
             />
           </div>
           <div className="w-[22%] min-w-[150px]">

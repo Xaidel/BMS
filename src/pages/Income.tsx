@@ -10,17 +10,15 @@ import { sort } from "@/service/income/incomeSort";
 import type { Income } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { Shirt, Trash } from "lucide-react";
+import { CircleEllipsis, HandCoins, PhilippinePeso, Trash } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
-  DollarSign,
   Banknote,
-  PiggyBank,
   Gift,
   Coins,
-  Wallet,
   Layers,
+  HousePlus,
 } from "lucide-react"; // or custom icons
 import SummaryCardIncome from "@/components/summary-card/income";
 import { invoke } from "@tauri-apps/api/core";
@@ -161,7 +159,7 @@ export default function IncomePage() {
         <SummaryCardIncome
           title="Total Revenue"
           value={new Intl.NumberFormat("en-US").format(filteredData.reduce((acc, item) => acc + item.amount, 0))}
-          icon={<DollarSign size={50} />}
+          icon={<PhilippinePeso size={50} />}
           onClick={async () => {
             const blob = await pdf(<IncomePDF filter="All Income" incomes={filteredData} />).toBlob();
             const buffer = await blob.arrayBuffer();
@@ -204,7 +202,7 @@ export default function IncomePage() {
           value={Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Tax Revenue")
             .reduce((acc, item) => acc + item.amount, 0))}
-          icon={<PiggyBank size={50} />}
+          icon={<HandCoins size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Tax Revenue");
             const blob = await pdf(<IncomePDF filter="Tax Revenue" incomes={filtered} />).toBlob();
@@ -261,7 +259,7 @@ export default function IncomePage() {
           value={Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Rental Income")
             .reduce((acc, item) => acc + item.amount, 0))}
-          icon={<Wallet size={50} />}
+          icon={<HousePlus size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Rental Income");
             const blob = await pdf(<IncomePDF filter="Rental Income" incomes={filtered} />).toBlob();
@@ -299,7 +297,7 @@ export default function IncomePage() {
           value={Intl.NumberFormat("en-US").format(filteredData
             .filter((d) => d.category === "Others")
             .reduce((acc, item) => acc + item.amount, 0))}
-          icon={<Shirt size={50} />}
+          icon={<CircleEllipsis size={50} />}
           onClick={async () => {
             const filtered = filteredData.filter((d) => d.category === "Others");
             const blob = await pdf(<IncomePDF filter="Others" incomes={filtered} />).toBlob();

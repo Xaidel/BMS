@@ -1,6 +1,3 @@
-// Residents page implemented by mirroring Household logic
-// (Code inserted here reflects working data table, filter, summary, and modal handling for Resident records)
-
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTable from "@/components/ui/datatable";
@@ -150,7 +147,6 @@ export default function Residents() {
       setRowSelection({}); // Reset selection
     } catch (err) {
       toast.error("Failed to delete selected residents");
-      console.error("Delete error:", err);
     }
   };
 
@@ -399,8 +395,14 @@ export default function Residents() {
       <div className="flex gap-5 w-full items-center justify-center">
         <Searchbar onChange={(value) => setSearchQuery(value)} placeholder="Search Resident" classname="flex flex-5" />
         <Filter onChange={handleSortChange} filters={filters} initial="All Residents" classname="flex-1" />
-        <Button variant="destructive" size="lg" disabled={Object.keys(rowSelection).length === 0} onClick={handleDeleteSelected}>
-          <Trash /> Delete Selected
+        <Button
+          variant="destructive"
+          size="lg"
+          disabled={Object.keys(rowSelection).length === 0}
+          onClick={handleDeleteSelected}
+        >
+          <Trash />
+          Delete Selected
         </Button>
         <AddResidentModal onSave={fetchResidents} />
       </div>
@@ -420,6 +422,7 @@ export default function Residents() {
                 <DeleteResidentModal
                   id={row.original.id}
                   full_name={row.original.full_name}
+                  onDelete={fetchResidents}
                 />
               </div>
             ),

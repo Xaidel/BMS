@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 
 type Props = {
-  household_number: number;
+  household_number: String;
   head_name: string;
   onClose: () => void;
   onTotalIncomeCalculated: (totalIncome: number) => void;

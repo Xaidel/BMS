@@ -62,7 +62,7 @@ export const residentSchema = z.object({
   barangay: z.string().min(1),
   town: z.string().min(1),
   province: z.string().min(1),
-  household_number: z.number().min(1),
+  household_number: z.string().min(1),
   role_in_household: z.string().min(1),
   father_prefix: z.string().min(1),
   father_first_name: z.string().min(1),

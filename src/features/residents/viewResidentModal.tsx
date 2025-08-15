@@ -60,7 +60,7 @@ export default function ViewResidentModal(
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
-  console.log(capturedImage);
+
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
     defaultValues: {
@@ -75,28 +75,31 @@ export default function ViewResidentModal(
   });
 
   async function onSubmit(values: z.infer<typeof residentSchema>) {
-    try {
-      const residentWithId = {
-        ...values,
-        id: props.id,
-        date_of_birth:
-          values.date_of_birth instanceof Date
-            ? values.date_of_birth.toISOString().split("T")[0]
-            : values.date_of_birth,
-      };
+    const residentPayload = {
+      ...values,
+      id: props.id, // triggers update
+      date_of_birth: values.date_of_birth
+        ? values.date_of_birth.toISOString().split("T")[0]
+        : "",
+      photo: capturedImage || null,
+    };
 
-      await invoke("update_resident_command", { resident: residentWithId });
+    try {
+      await invoke("save_resident_command", { resident: residentPayload });
 
       toast.success("Resident updated successfully", {
-        description: `${values.first_name} ${values.last_name} was updated.`,
+        description: `${values.first_name} ${values.last_name}`,
       });
 
+      // Close modal and reset form
       setOpenModal(false);
-      props.onSave();
+      form.reset();
+
+      // Trigger parent refresh
+      props.onSave?.();
     } catch (error) {
-      toast.error("Update failed", {
-        description: error instanceof Error ? error.message : "Unknown error",
-      });
+      console.error("Failed to update resident:", error);
+      toast.error("Failed to update resident");
     }
   }
 
@@ -750,28 +753,24 @@ export default function ViewResidentModal(
                         />
                       </div>
                       <div className="col-span-2">
-                        <FormField
-                          control={form.control}
-                          name="household_number"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Household Number</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  placeholder="Enter household number"
-                                  {...field}
-                                  value={field.value ?? ""}
-                                  onChange={(e) =>
-                                    field.onChange(Number(e.target.value))
-                                  }
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
+                    <FormField
+                      control={form.control}
+                      name="household_number"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Household Number</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="text"
+                              placeholder="Enter household number"
+                              {...field}
+                              className="text-black"
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                       <div className="col-span-2">
                         <FormField
                           control={form.control}
@@ -825,7 +824,6 @@ export default function ViewResidentModal(
                                       "Stepgranddaughter",
                                       "Stepgranddaughter in law",
                                       "Step grandson",
-                                      "Stepgranddaughter in law",
                                       "Stepsister",
                                       "Stepson",
                                       "Stepson in law",
@@ -1106,7 +1104,7 @@ export default function ViewResidentModal(
                       Next
                     </Button>
                   )}
-                  {step === 3 && <Button type="submit">Save Blotter</Button>}
+                  {step === 3 && <Button type="submit">Save Resident</Button>}
                 </div>
               </div>
             </form>
@@ -1116,3 +1114,4 @@ export default function ViewResidentModal(
     </>
   );
 }
+

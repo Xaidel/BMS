@@ -1,16 +1,3 @@
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  section: string;
-};
-import { Buffer } from "buffer";
-
-if (!window.Buffer) {
-  window.Buffer = Buffer;
-}
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandInput, CommandItem } from "@/components/ui/command";
@@ -27,6 +14,19 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 
+type Official = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  section: string;
+};
+
+import { Buffer } from "buffer";
+
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
 type Resident = {
   id?: number;
   first_name: string;
@@ -139,15 +139,6 @@ export default function Unemployment() {
     heading: { fontSize: 18, marginBottom: 10 },
     bodyText: { fontSize: 14 },
   });
-  // Download/Print handler function
-  /* function handleDownload() {
-     if (!selectedResident) {
-       alert("Please select a resident first.");
-       return;
-     }
-     console.log("Download started...");
-     // Download/print logic goes here...
-   }*/
   return (
     <>
       <div className="flex gap-1 ">

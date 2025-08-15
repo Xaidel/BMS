@@ -14,7 +14,7 @@ export function sortResidents(data: Resident[], term: string): Resident[] {
 }
 
 function sortByHouseholdNumber(data: Resident[]): Resident[] {
-  return [...data].sort((a, b) => a.household_number - b.household_number);
+  return [...data].sort((a, b) => Number(a.household_number) - Number(b.household_number));
 }
 
 function sortByAgeDesc(data: Resident[]): Resident[] {

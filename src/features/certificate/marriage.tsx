@@ -143,15 +143,6 @@ export default function Marriage() {
     heading: { fontSize: 18, marginBottom: 10 },
     bodyText: { fontSize: 14 },
   });
-  // Download/Print handler function
-  /* function handleDownload() {
-     if (!selectedResident) {
-       alert("Please select a resident first.");
-       return;
-     }
-     console.log("Download started...");
-     // Download/print logic goes here...
-   }*/
   return (
     <>
       <div className="flex gap-1 ">

@@ -13,21 +13,19 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 
-interface Props {
+type DeleteResidentModalProps = {
   id: number;
   full_name: string;
   onDelete?: () => void;
-}
+};
 
-export default function DeleteResidentModal({ id, full_name, onDelete }: Props) {
+export default function DeleteResidentModal({ id, full_name, onDelete }: DeleteResidentModalProps) {
   const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {
     try {
       await invoke("delete_resident_command", { id });
-      toast.success("Resident deleted", {
-        description: `${full_name} was deleted`,
-      });
+      toast.success("Resident deleted");
       setOpen(false);
       onDelete?.();
     } catch (err) {
@@ -35,7 +33,7 @@ export default function DeleteResidentModal({ id, full_name, onDelete }: Props) 
       toast.error("Failed to delete resident");
     }
   };
-
+ 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

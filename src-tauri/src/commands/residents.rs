@@ -18,7 +18,7 @@ pub struct Resident {
     pub religion: String,
     pub occupation: String,
     pub source_of_income: String,
-    pub average_monthly_income: f64,
+    pub average_monthly_income: i64,
     pub date_of_birth: String,
     pub town_of_birth: String,
     pub province_of_birth: String,
@@ -26,7 +26,7 @@ pub struct Resident {
     pub barangay: String,
     pub town: String,
     pub province: String,
-    pub household_number: Option<i32>,      
+    pub household_number: String,      
     pub role_in_household: String,            
     pub father_prefix: String,
     pub father_first_name: String,
@@ -172,9 +172,11 @@ pub fn insert_resident_command(resident: Resident) -> Result<(), String> {
 
 #[tauri::command]
 pub fn update_resident_command(resident: Resident) -> Result<(), String> {
+    println!("Attempting to update resident: {:?}", resident.id);
+
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
-    conn.execute(
+    let rows_updated = conn.execute(
         "UPDATE residents SET
             prefix = ?1, first_name = ?2, middle_name = ?3, last_name = ?4, suffix = ?5, civil_status = ?6,
             gender = ?7, nationality = ?8, mobile_number = ?9, religion = ?10, occupation = ?11, source_of_income = ?12, average_monthly_income = ?13,
@@ -205,10 +207,8 @@ pub fn update_resident_command(resident: Resident) -> Result<(), String> {
             resident.barangay,
             resident.town,
             resident.province,
-            // pass new fields here
             resident.household_number,
             resident.role_in_household,
-            //
             resident.father_prefix,
             resident.father_first_name,
             resident.father_middle_name,
@@ -226,6 +226,8 @@ pub fn update_resident_command(resident: Resident) -> Result<(), String> {
             resident.id
         ],
     ).map_err(|e| e.to_string())?;
+
+    println!("Rows updated: {}", rows_updated);
 
     Ok(())
 }

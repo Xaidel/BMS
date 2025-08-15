@@ -8,12 +8,12 @@ import DeleteBlotterModal from "@/features/blotter/deleteBlotterModal";
 import ViewBlotterModal from "@/features/blotter/viewBlotterModal";
 import { pdf } from "@react-pdf/renderer"
 import {
-  DollarSign,
   Eye,
-  Users,
-  AlarmClock,
   Gavel,
   BookOpenCheck,
+  Loader,
+  Siren,
+  BookOpenText,
 } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
@@ -218,7 +218,7 @@ export default function Blotters() {
         <SummaryCardBlotter
           title="Total Blotters"
           value={total}
-          icon={<Users size={50}
+          icon={<BookOpenText size={50}
           />}
           onClick={async () => {
             setPrintData(data)
@@ -290,7 +290,7 @@ export default function Blotters() {
         <SummaryCardBlotter
           title="On Going"
           value={ongoing}
-          icon={<AlarmClock size={50} />}
+          icon={<Loader size={50} />}
           onClick={async () => {
             setPrintData(data)
             const blob = await pdf(<BlotterPDF filter="On Going Blotters" blotters={data.filter((d) => d.status === "On Going")} />).toBlob()
@@ -336,7 +336,7 @@ export default function Blotters() {
         <SummaryCardBlotter
           title="Transferred to Police"
           value={transferred}
-          icon={<DollarSign size={50} />}
+          icon={<Siren size={50} />}
           onClick={async () => {
             setPrintData(data)
             const blob = await pdf(<BlotterPDF filter="Blotters that are transferred to police" blotters={data.filter((d) => d.status === "Transferred to Police")} />).toBlob()

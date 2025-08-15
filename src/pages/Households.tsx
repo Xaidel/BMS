@@ -24,6 +24,7 @@ import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
 import ViewHouseholdModal from "@/features/households/viewhouseholdModal";
 
+
 export default function Households() {
   // Map household_number (as string) -> total income (as string)
   const [householdIncomeMap, setHouseholdIncomeMap] = useState<
@@ -39,8 +40,8 @@ export default function Households() {
               table.getIsAllPageRowsSelected()
                 ? true
                 : table.getIsSomePageRowsSelected()
-                ? "indeterminate"
-                : false
+                  ? "indeterminate"
+                  : false
             }
             onCheckedChange={(value) =>
               table.toggleAllPageRowsSelected(!!value)

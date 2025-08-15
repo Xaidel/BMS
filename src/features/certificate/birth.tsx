@@ -14,7 +14,6 @@ import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
 import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
-import { ArrowLeftCircleIcon, Check, ChevronsUpDown} from "lucide-react";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
@@ -646,14 +645,14 @@ export default function Birth() {
                       <View>
                         <Text style={[styles.bodyText, { fontWeight: "bold" }]}>Prepared by:</Text>
                         <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
-                      {preparedBy || "________________"}
+                          {preparedBy || "________________"}
                         </Text>
                         <Text style={styles.bodyText}>Barangay Secretary</Text>
                       </View>
                       <View>
                         <Text style={[styles.bodyText, { fontWeight: "bold" }]}>Noted:</Text>
                         <Text style={[styles.bodyText, { marginTop: 20, marginBottom: 4, fontWeight: "bold" }]}>
-                      HON. {captainName || "________________"}
+                          HON. {captainName || "________________"}
                         </Text>
                         <Text style={styles.bodyText}>Barangay Captain</Text>
                       </View>

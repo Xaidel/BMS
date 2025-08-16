@@ -1,16 +1,3 @@
-type Official = {
-  id: number;
-  name: string;
-  role: string;
-  image: string;
-  section: string;
-};
-import { Buffer } from "buffer";
-
-if (!window.Buffer) {
-  window.Buffer = Buffer;
-}
-
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,6 +13,19 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
+import { Buffer } from "buffer";
+
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
+type Official = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  section: string;
+};
 
 type Resident = {
   id?: number;

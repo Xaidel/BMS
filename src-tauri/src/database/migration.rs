@@ -98,7 +98,6 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             is_pwd BOOLEAN NOT NULL DEFAULT 0,
             is_senior BOOLEAN NOT NULL DEFAULT 0
         );
-
         CREATE TABLE IF NOT EXISTS barangay_map (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
@@ -108,7 +107,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             zone TEXT,
             section TEXT
         );
-        
+                
         CREATE TABLE IF NOT EXISTS officials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,

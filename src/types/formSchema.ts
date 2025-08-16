@@ -14,7 +14,7 @@ export const loginSchema = z.object({
 })
 
 export const eventSchema = z.object({
-  name: z.string().min(2, {
+  name: z.string().min(1, {
     message: "Event name is too short"
   }).max(50, {
     message: "Event name is too long, put other details in the notes"

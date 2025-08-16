@@ -202,3 +202,12 @@ export const officialSchema = z.object({
   image: z.string().optional(),
   section: z.string().min(1, { message: "Section is required" }),
 });
+
+export const barangayMapSchema = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  house_number: z.string().min(1, { message: "House number is required" }),
+  x: z.number().min(0, { message: "X coordinate must be zero or greater" }),
+  y: z.number().min(0, { message: "Y coordinate must be zero or greater" }),
+  zone: z.string().min(1, { message: "Zone is required" }),
+  section: z.string().min(1, { message: "Section is required" }),
+});

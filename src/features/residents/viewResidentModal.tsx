@@ -674,7 +674,7 @@ export default function ViewResidentModal(
                                     />
                                   </SelectTrigger>
                                   <SelectContent>
-                                    {["1", "2", "3", "4", "5", "6", "7"].map(
+                                    {["1", "2", "3", "4", "5", "6", "7", "8"].map(
                                       (option, i) => (
                                         <SelectItem value={option} key={i}>
                                           {option}

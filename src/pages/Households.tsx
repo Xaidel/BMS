@@ -22,6 +22,8 @@ import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import Filter from "@/components/ui/filter";
 import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
+import ViewHouseholdModal from "@/features/households/viewhouseholdModal";
+
 
 export default function Households() {
   // Map household_number (as string) -> total income (as string)
@@ -83,8 +85,9 @@ export default function Households() {
       {
         header: "Total Household Income",
         cell: ({ row }) => {
-          const income =
-            householdIncomeMap.get(row.original.household_number) ?? "";
+          const incomeStr =
+            householdIncomeMap.get(row.original.household_number) ?? "0";
+          const income = Number(incomeStr);
           return `₱${income.toLocaleString()}`;
         },
       },
@@ -104,10 +107,16 @@ export default function Households() {
   );
 
   // Store household_number as string in these sets
-  const [householdPwdMap, setHouseholdPwdMap] = useState<Set<string>>(new Set());
-  const [householdSeniorMap, setHouseholdSeniorMap] = useState<Set<string>>(new Set());
+  const [householdPwdMap, setHouseholdPwdMap] = useState<Set<string>>(
+    new Set()
+  );
+  const [householdSeniorMap, setHouseholdSeniorMap] = useState<Set<string>>(
+    new Set()
+  );
   // Map household_number (as string) -> members count (as string)
-  const [householdMembersMap, setHouseholdMembersMap] = useState<Map<string, string>>(new Map());
+  const [householdMembersMap, setHouseholdMembersMap] = useState<
+    Map<string, string>
+  >(new Map());
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({});
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
@@ -127,7 +136,6 @@ export default function Households() {
     setFilterValue(sortValue);
   };
 
-
   const filteredData = useMemo(() => {
     let sorted = [...data];
 
@@ -138,7 +146,10 @@ export default function Households() {
         const firstName = item.first_name ?? "";
         const middleName = item.middle_name ?? "";
         const lastName = item.last_name ?? "";
-        const fullName = [lastName, firstName, middleName].filter(Boolean).join(" ").toLowerCase();
+        const fullName = [lastName, firstName, middleName]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
         const householdNumber = item.household_number?.toString() ?? "";
         const zone = item.zone?.toLowerCase() ?? "";
 
@@ -172,8 +183,14 @@ export default function Households() {
             (acc, m) => acc + (Number(m.average_monthly_income) || 0),
             0
           );
-          updatedIncomeMap.set(household.household_number.toString(), totalIncome.toString());
-          updatedMembersMap.set(household.household_number.toString(), members.length.toString());
+          updatedIncomeMap.set(
+            household.household_number.toString(),
+            totalIncome.toString()
+          );
+          updatedMembersMap.set(
+            household.household_number.toString(),
+            members.length.toString()
+          );
         } catch (error) {
           console.error(
             `Failed to fetch members for household ${household.household_number}:`,
@@ -262,7 +279,10 @@ export default function Households() {
             0
           );
           // If total income is less than threshold, update the map
-          updatedMap.set(household.household_number.toString(), totalIncome.toString());
+          updatedMap.set(
+            household.household_number.toString(),
+            totalIncome.toString()
+          );
         } catch (error) {
           console.error(
             `Failed to fetch members for household ${household.household_number}:`,
@@ -279,7 +299,8 @@ export default function Households() {
   const householdIncome = useMemo(() => {
     // Find all households with low income (active)
     const lowIncomeHouseholds = data.filter((household) => {
-      const totalIncomeStr = householdIncomeMap.get(household.household_number.toString()) ?? "0";
+      const totalIncomeStr =
+        householdIncomeMap.get(household.household_number.toString()) ?? "0";
       const totalIncome = parseFloat(totalIncomeStr);
       return totalIncome < LOW_INCOME_THRESHOLD;
     });
@@ -293,7 +314,8 @@ export default function Households() {
       );
       if (!alreadyCounted) {
         // Compute total income for selected household
-        const selectedTotalIncomeStr = householdIncomeMap.get(selectedHhNum) ?? "0";
+        const selectedTotalIncomeStr =
+          householdIncomeMap.get(selectedHhNum) ?? "0";
         const selectedTotalIncome = parseFloat(selectedTotalIncomeStr);
         if (selectedTotalIncome < LOW_INCOME_THRESHOLD) {
           count += 1;
@@ -333,12 +355,7 @@ export default function Households() {
 
   const adjustedHouseholdIncome = householdIncome;
 
-  const filters = [
-    "All",
-    "Numerical",
-    "AgeDesc",
-    "NameAsc",
-  ];
+  const filters = ["All", "Numerical", "AgeDesc", "NameAsc"];
 
   return (
     <>
@@ -353,11 +370,17 @@ export default function Households() {
                 filter="All Households"
                 households={data.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
+                  members:
+                    householdMembersMap.get(hh.household_number.toString()) ??
+                    "0",
                   low_income:
-                    (parseFloat(householdIncomeMap.get(hh.household_number.toString()) ?? "0")) <
-                    LOW_INCOME_THRESHOLD,
-                  has_senior: householdSeniorMap.has(hh.household_number.toString()),
+                    parseFloat(
+                      householdIncomeMap.get(hh.household_number.toString()) ??
+                        "0"
+                    ) < LOW_INCOME_THRESHOLD,
+                  has_senior: householdSeniorMap.has(
+                    hh.household_number.toString()
+                  ),
                   has_pwd: householdPwdMap.has(hh.household_number.toString()),
                 }))}
               />
@@ -384,8 +407,10 @@ export default function Households() {
           icon={<BanknoteArrowDown size={50} />}
           onClick={async () => {
             const filtered = data.filter((household) => {
-              const totalIncome =
-                parseFloat(householdIncomeMap.get(household.household_number.toString()) ?? "0");
+              const totalIncome = parseFloat(
+                householdIncomeMap.get(household.household_number.toString()) ??
+                  "0"
+              );
               return totalIncome < LOW_INCOME_THRESHOLD;
             });
 
@@ -394,9 +419,13 @@ export default function Households() {
                 filter="Low Income Households"
                 households={filtered.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
+                  members:
+                    householdMembersMap.get(hh.household_number.toString()) ??
+                    "0",
                   low_income: true,
-                  has_senior: householdSeniorMap.has(hh.household_number.toString()),
+                  has_senior: householdSeniorMap.has(
+                    hh.household_number.toString()
+                  ),
                   has_pwd: householdPwdMap.has(hh.household_number.toString()),
                 }))}
               />
@@ -432,11 +461,17 @@ export default function Households() {
                 filter="PWD Households"
                 households={filtered.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
+                  members:
+                    householdMembersMap.get(hh.household_number.toString()) ??
+                    "0",
                   low_income:
-                    (parseFloat(householdIncomeMap.get(hh.household_number.toString()) ?? "0")) <
-                    LOW_INCOME_THRESHOLD,
-                  has_senior: householdSeniorMap.has(hh.household_number.toString()),
+                    parseFloat(
+                      householdIncomeMap.get(hh.household_number.toString()) ??
+                        "0"
+                    ) < LOW_INCOME_THRESHOLD,
+                  has_senior: householdSeniorMap.has(
+                    hh.household_number.toString()
+                  ),
                   has_pwd: householdPwdMap.has(hh.household_number.toString()),
                 }))}
               />
@@ -472,10 +507,14 @@ export default function Households() {
                 filter="Senior Households"
                 households={filtered.map((hh) => ({
                   ...hh,
-                  members: householdMembersMap.get(hh.household_number.toString()) ?? "0",
+                  members:
+                    householdMembersMap.get(hh.household_number.toString()) ??
+                    "0",
                   low_income:
-                    (parseFloat(householdIncomeMap.get(hh.household_number.toString()) ?? "0")) <
-                    LOW_INCOME_THRESHOLD,
+                    parseFloat(
+                      householdIncomeMap.get(hh.household_number.toString()) ??
+                        "0"
+                    ) < LOW_INCOME_THRESHOLD,
                   has_senior: true,
                   has_pwd: true,
                 }))}

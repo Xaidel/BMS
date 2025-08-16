@@ -14,6 +14,7 @@ use commands::income::{save_income_command, insert_income_command, fetch_all_inc
 use commands::blotters::{save_blotter_command, insert_blotter_command, fetch_all_blotters_command, delete_blotter_command, update_blotter_command};
 use commands::residents::{insert_resident_command, fetch_all_residents_command, delete_resident_command, update_resident_command,save_resident_command};
 use commands::certificates::{insert_certificate_command, fetch_all_certificates_command, update_certificate_command, delete_certificate_command, save_certificate_command};
+use commands::barangay_map::{fetch_households, insert_household, update_household, delete_household};
 use database::connection::establish_connection;
 use database::migration::migrate;
 use tauri::command;
@@ -103,6 +104,11 @@ fn main() {
 
             verify_user_credentials_command,
             insert_user_command,
+
+            fetch_households,
+            insert_household,
+            update_household,
+            delete_household,
             
         ])
         .run(tauri::generate_context!())

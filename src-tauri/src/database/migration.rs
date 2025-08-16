@@ -98,12 +98,13 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             is_pwd BOOLEAN NOT NULL DEFAULT 0,
             is_senior BOOLEAN NOT NULL DEFAULT 0
         );
+        DROP TABLE IF EXISTS barangay_map;
         CREATE TABLE IF NOT EXISTS barangay_map (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,
             x REAL NOT NULL,
             y REAL NOT NULL,
-            house_number TEXT,
+            houseNumber TEXT,
             zone TEXT,
             section TEXT
         );

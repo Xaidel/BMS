@@ -24,7 +24,7 @@ type AddMapModalProps = {
     name: string;
     x: number;
     y: number;
-    house_number: string;
+    houseNumber: string;
     zone: string;
     section: string;
   }) => void;
@@ -120,7 +120,7 @@ export default function AddMapModal({
         name,
         x,
         y,
-        house_number: houseNumber,
+        houseNumber: houseNumber,
         zone,
         section,
         residentId: Number(selectedResidentId),
@@ -132,7 +132,7 @@ export default function AddMapModal({
         name,
         x,
         y,
-        house_number: houseNumber,
+        houseNumber: houseNumber,
         zone,
         section,
       });

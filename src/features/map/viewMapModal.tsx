@@ -23,7 +23,7 @@ type ViewMapModalProps = {
     name: string;
     x: number;
     y: number;
-    house_number: string;
+    houseNumber: string;
     zone: string;
     section: string;
   }) => void;
@@ -32,7 +32,7 @@ type ViewMapModalProps = {
     name: string;
     x: number;
     y: number;
-    house_number: string;
+    houseNumber: string;
     zone: string;
     section: string;
     residentId?: number;
@@ -62,7 +62,7 @@ export default function ViewMapModal({
       setName(household.name);
       setX(household.x);
       setY(household.y);
-      setHouseNumber(household.house_number);
+      setHouseNumber(household.houseNumber);
       setZone(household.zone);
       setSection(household.section);
       setSelectedResidentId(household.residentId?.toString() || "");
@@ -135,14 +135,14 @@ export default function ViewMapModal({
         name,
         x,
         y,
-        house_number: houseNumber,
+        houseNumber: houseNumber,
         zone,
         section,
         residentId: selectedResidentId ? Number(selectedResidentId) : undefined,
       });
 
       alert(`Household for ${name} saved successfully!`);
-      onSave({ name, x, y, house_number: houseNumber, zone, section });
+      onSave({ name, x, y, houseNumber: houseNumber, zone, section });
       onClose();
     } catch (err) {
       alert("Failed to save household. Check console for details.");

@@ -50,7 +50,7 @@ export default function BarangayMapPage() {
       name: string;
       x: number;
       y: number;
-      house_number: string;
+      houseNumber: string;
       zone: string;
       section: string;
     }[]
@@ -74,7 +74,7 @@ export default function BarangayMapPage() {
       name: string;
       x: number;
       y: number;
-      house_number: string;
+      houseNumber: string;
       zone: string;
       section: string;
     };
@@ -85,7 +85,7 @@ export default function BarangayMapPage() {
     return households.filter(
       (h) =>
         `${h.name}`.toLowerCase().includes(search.toLowerCase()) ||
-        `${h.house_number}`.toLowerCase().includes(search.toLowerCase())
+        `${h.houseNumber}`.toLowerCase().includes(search.toLowerCase())
     );
   }, [households, search]);
 
@@ -99,7 +99,7 @@ export default function BarangayMapPage() {
     return households.filter(
       (h) =>
         (h.name && h.name.toLowerCase().includes(query)) ||
-        (h.house_number && h.house_number.toLowerCase().includes(query))
+        (h.houseNumber && h.houseNumber.toLowerCase().includes(query))
     );
   }, [searchQuery, households]);
 
@@ -211,7 +211,7 @@ export default function BarangayMapPage() {
     name: string;
     x: number;
     y: number;
-    house_number: string;
+    houseNumber: string;
     zone: string;
     section: string;
   }) {
@@ -243,7 +243,7 @@ export default function BarangayMapPage() {
         resident_id: data.resident_id,
         x: data.x,
         y: data.y,
-        house_number: data.house_number,
+        houseNumber: data.houseNumber,
         zone: data.zone || "default_zone",
         section: data.section || "default_section",
       });
@@ -274,7 +274,7 @@ export default function BarangayMapPage() {
           name: data.name,
           x: data.x,
           y: data.y,
-          house_number: data.house_number,
+          houseNumber: data.houseNumber,
           zone: data.zone,
           section: data.section,
         },
@@ -290,11 +290,11 @@ export default function BarangayMapPage() {
       .trim()
       .toLowerCase();
     if (!searchTerm) return;
-    // Find by name or household_number (house_number)
+    // Find by name or household_number (houseNumber)
     const household = households.find(
       (h) =>
         (h.name && h.name.toLowerCase().includes(searchTerm)) ||
-        (h.house_number && h.house_number.toLowerCase().includes(searchTerm))
+        (h.houseNumber && h.houseNumber.toLowerCase().includes(searchTerm))
     );
     if (household && mapRef.current) {
       mapRef.current.setView(
@@ -424,7 +424,7 @@ export default function BarangayMapPage() {
                           setOpen(false);
                         }}
                       >
-                        {h.name} ({h.house_number})
+                        {h.name} ({h.houseNumber})
                       </CommandItem>
                     );
                   }}

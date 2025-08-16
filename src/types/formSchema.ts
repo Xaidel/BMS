@@ -14,7 +14,7 @@ export const loginSchema = z.object({
 })
 
 export const eventSchema = z.object({
-  name: z.string().min(2, {
+  name: z.string().min(1, {
     message: "Event name is too short"
   }).max(50, {
     message: "Event name is too long, put other details in the notes"
@@ -205,7 +205,7 @@ export const officialSchema = z.object({
 
 export const barangayMapSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
-  house_number: z.string().min(1, { message: "House number is required" }),
+  houseNumber: z.string().min(1, { message: "House number is required" }),
   x: z.number().min(0, { message: "X coordinate must be zero or greater" }),
   y: z.number().min(0, { message: "Y coordinate must be zero or greater" }),
   zone: z.string().min(1, { message: "Zone is required" }),

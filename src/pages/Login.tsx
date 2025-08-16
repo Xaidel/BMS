@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     // Bypass with master credentials
-    if (values.username === "juan" && values.password === "juan123") {
+    if (values.username === "john" && values.password === "john") {
       toast.success("Logged in with master credentials");
       localStorage.setItem("username", values.username);
       navigate("/dashboard");

@@ -42,7 +42,6 @@ export type Resident = {
   father_middle_name: string;
   father_last_name: string;
   father_suffix: string;
-  mother_prefix: string;
   mother_first_name: string;
   mother_middle_name: string;
   mother_last_name: string;

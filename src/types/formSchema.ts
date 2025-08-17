@@ -69,7 +69,6 @@ export const residentSchema = z.object({
   father_middle_name: z.string().min(1),
   father_last_name: z.string().min(1),
   father_suffix: z.string().optional().nullable(),
-  mother_prefix: z.string().min(1),
   mother_first_name: z.string().min(1),
   mother_middle_name: z.string().min(1),
   mother_last_name: z.string().min(1),

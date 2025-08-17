@@ -30,7 +30,6 @@ pub struct Resident {
     pub father_middle_name: String,
     pub father_last_name: String,
     pub father_suffix: String,
-    pub mother_prefix: String,
     pub mother_first_name: String,
     pub mother_middle_name: String,
     pub mother_last_name: String,

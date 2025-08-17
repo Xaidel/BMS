@@ -983,35 +983,6 @@ export default function ViewResidentModal(
                       Name of Mother
                     </h2>
                     <div className="grid grid-cols-4 gap-2">
-                      <div className="col-span-4">
-                        <FormField
-                          control={form.control}
-                          name="mother_prefix"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Prefix</FormLabel>
-                              <FormControl>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                >
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Prefix" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {prefixOptions.map((option) => (
-                                      <SelectItem key={option} value={option}>
-                                        {option}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                              </FormControl>
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
                       <div className="col-span-2">
                         <FormField
                           control={form.control}

@@ -91,7 +91,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       father_middle_name: "",
       father_last_name: "",
       father_prefix: "",
-      mother_prefix: "",
       mother_first_name: "",
       mother_middle_name: "",
       mother_last_name: "",

@@ -51,7 +51,7 @@ export default function IncomeChart({ data }: ChartProps) {
               data={data}
               dataKey="value"
               nameKey="source"
-              cy="50%"
+              cy="52%"
               cx="50%"
               label={({ value }) => `₱${new Intl.NumberFormat("en-PH").format(value)}`}
               labelLine={false}

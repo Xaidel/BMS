@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandInput, CommandItem } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -9,16 +8,12 @@ import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
 import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
+import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
+import { toast } from "sonner";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
-import { Buffer } from "buffer";
 
-if (!window.Buffer) {
-  window.Buffer = Buffer;
-}
 type Official = {
   id: number;
   name: string;
@@ -27,25 +22,29 @@ type Official = {
   section: string;
 };
 
+import { Buffer } from "buffer";
+
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
 type Resident = {
   id?: number;
   first_name: string;
   middle_name?: string;
   last_name: string;
   suffix?: string;
-  date_of_birth?: string;
+  age?: number;
   civil_status?: string;
-  issued_date?: string;
+  date_of_birth?: string;
+  // Add more fields if needed
 };
 
 
-export default function Fourps() {
+export default function Unemployment() {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState("")
   const [residents, setResidents] = useState<Resident[]>([]);
-  const [age, setAge] = useState("");
-  const [civilStatus, setCivilStatus] = useState("");
   const [captainName, setCaptainName] = useState<string | null>(null);
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
@@ -66,8 +65,8 @@ export default function Fourps() {
   const [amount, setAmount] = useState("10.00");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
-
-const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Widowed", "Separated"];
+  const [age, setAge] = useState("");
+  const [civilStatus, setCivilStatus] = useState("");
 
   useEffect(() => {
     invoke("fetch_logo_command")
@@ -104,32 +103,36 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
 
     invoke("fetch_all_residents_command")
       .then((res) => {
+        // Ensure age and civil_status are present in each resident object, fallback to undefined if missing
         if (Array.isArray(res)) {
-          setResidents(res as Resident[]);
-          // After setting residents, update selected resident's age and civil status if already selected
-          const allRes = (res as Resident[]).map((res) => ({
-            value: `${res.first_name} ${res.last_name}`.toLowerCase(),
-            label: `${res.first_name} ${res.last_name}`,
-            data: res,
-          }));
-          const selected = allRes.find((r) => r.value === value)?.data;
-          if (selected) {
-            if (selected.date_of_birth) {
-              const dob = new Date(selected.date_of_birth);
-              const today = new Date();
-              let calculatedAge = today.getFullYear() - dob.getFullYear();
-              const m = today.getMonth() - dob.getMonth();
-              if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                calculatedAge--;
-              }
-              setAge(calculatedAge.toString());
-            }
-            setCivilStatus(selected.civil_status || "");
-          }
+          setResidents(
+            (res as any[]).map((resident) => ({
+              ...resident,
+              age: resident.age,
+              civil_status: resident.civil_status,
+            }))
+          );
         }
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    if (selectedResident?.date_of_birth) {
+      const dob = new Date(selectedResident.date_of_birth);
+      const today = new Date();
+      let calculatedAge = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        calculatedAge--;
+      }
+      setAge(calculatedAge.toString());
+    } else {
+      setAge("");
+    }
+    setCivilStatus(selectedResident?.civil_status || "");
+  }, [selectedResident]);
+
   const styles = StyleSheet.create({
     page: { padding: 30 },
     section: { marginBottom: 10 },
@@ -143,10 +146,10 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
           <CardHeader>
             <CardTitle className="flex gap-2 items-center justify-start">
               <ArrowLeftCircleIcon className="h-8 w-8" onClick={() => navigate(-1)} />
-              4ps Certificate
+              Unemployment Certificate
             </CardTitle>
             <CardDescription className="text-start">
-              Please fill out the necessary information needed for 4ps Certification
+              Please fill out the necessary information needed for Unemployment Certification
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -191,24 +194,10 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
                                   value={res.value}
                                   className="text-black"
                                   onSelect={(currentValue) => {
-                                    const selected = allResidents.find((r) => r.value === currentValue)?.data;
-                                    if (selected) {
-                                      if (selected.date_of_birth) {
-                                        const dob = new Date(selected.date_of_birth);
-                                        const today = new Date();
-                                        let calculatedAge = today.getFullYear() - dob.getFullYear();
-                                        const m = today.getMonth() - dob.getMonth();
-                                        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-                                          calculatedAge--;
-                                        }
-                                        setAge(calculatedAge.toString());
-                                      } else {
-                                        setAge("");
-                                      }
-                                      setCivilStatus(selected.civil_status || "");
-                                      setValue(currentValue === value ? "" : currentValue);
-                                    }
-                                    setOpen(false);
+                                    setValue(
+                                      currentValue === value ? "" : currentValue
+                                    )
+                                    setOpen(false)
                                   }}
                                 >
                                   {res.label}
@@ -229,34 +218,24 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
                 </PopoverContent>
               </Popover>
               <div className="mt-4">
-                <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">
-                  Enter Age
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Age</label>
                 <input
-                  id="age"
                   type="text"
+                  className="w-full border rounded px-3 py-2 text-black"
+                  placeholder="Auto-filled age"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="w-full border rounded px-3 py-2 text-sm"
-                  placeholder="e.g., 24"
                 />
               </div>
               <div className="mt-4">
-                <label htmlFor="civil_status" className="block text-sm font-medium text-gray-700 mb-1">
-                  Select Civil Status
-                </label>
-                <Select value={civilStatus} onValueChange={setCivilStatus}>
-                  <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
-                    <SelectValue placeholder="-- Select Civil Status --" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {civilStatusOptions.map((option) => (
-                      <SelectItem key={option} value={option}>
-                        {option}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Civil Status</label>
+                <input
+                  type="text"
+                  className="w-full border rounded px-3 py-2 text-black"
+                  placeholder="Auto-filled civil status"
+                  value={civilStatus}
+                  onChange={(e) => setCivilStatus(e.target.value)}
+                />
               </div>
               <div className="mt-4">
                 <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
@@ -287,17 +266,17 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
                     cert: {
                       resident_name: `${selectedResident.first_name} ${selectedResident.last_name}`,
                       id: 0,
-                      type_: "4Ps Certificate",
+                      type_: "Unemployment Certificate",
                       issued_date: nowIso,
                       age: age ? parseInt(age) : undefined,
                       civil_status: civilStatus || "",
                       ownership_text: "",
                       amount: amount || "",
-                    }
+                    },
                   });
 
                   toast.success("Certificate saved successfully!", {
-                    description: `${selectedResident.first_name} ${selectedResident.last_name}'s certificate was saved.`
+                    description: `${selectedResident.first_name} ${selectedResident.last_name}'s certificate was saved.`,
                   });
                 } catch (error) {
                   console.error("Save certificate failed:", error);
@@ -359,11 +338,12 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                           <Text style={{ fontWeight: "bold" }}>This is to certify that </Text>
                           <Text style={{ fontWeight: "bold" }}>{`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}</Text>
-                          <Text>, {age || "___"} years old, {civilStatus || "___"}, is a resident of Barangay Tambo, Pamplona, Camarines Sur.</Text>
+                          <Text>, {age}, {civilStatus.toLowerCase() || "civil status"}, is a resident of Barangay {settings ? settings.barangay : "________________"}
+                        ,{settings ? settings.municipality : "________________"}
+                        ,{settings ? settings.province : "________________"}.</Text>
                         </Text>
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
-                          This certifies further that the above-named person is a member of the{" "}
-                          <Text style={{ fontWeight: "bold" }}>4Ps (Programang Pantawid Pamilyang Pilipino)</Text> in this Barangay and has been transpired at Tambo, Pamplona, Camarines Sur.
+                          This certifies further that the above-named person is currently <Text style={{ fontWeight: "bold" }}>unemployed</Text> and is actively seeking employment.
                         </Text>
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                           This certification is issued upon request of the interested party for record and reference purposes.
@@ -373,7 +353,10 @@ const civilStatusOptions = ["Single", "Lived-in", "Cohabitation", "Married", "Wi
                         <Text style={[styles.bodyText, { marginTop: 10, marginBottom: 8 }]}>
                           Given this {new Date().toLocaleDateString("en-PH", {
                             day: "numeric", month: "long", year: "numeric"
-                          })}, at Tambo, Pamplona, Camarines Sur.
+                          })}
+                        , at {settings ? settings.barangay : "________________"}
+                        ,{settings ? settings.municipality : "________________"}
+                        ,{settings ? settings.province : "________________"}
                         </Text>
                       </>
                     ) : (

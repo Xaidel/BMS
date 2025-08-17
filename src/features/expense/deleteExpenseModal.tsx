@@ -40,7 +40,7 @@ export default function DeleteExpenseModal({ id, type_, onDelete }: DeleteExpens
       <DialogTrigger asChild>
         <Button variant="destructive">
           <XIcon className="w-4 h-4 mr-2" />
-          Delete Expense
+          Delete
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-white text-black">
@@ -52,7 +52,7 @@ export default function DeleteExpenseModal({ id, type_, onDelete }: DeleteExpens
         </DialogHeader>
         <div className="flex justify-end gap-3 mt-4">
           <DialogClose asChild>
-            <Button variant="ghost" className="text-black">
+            <Button variant="outline" className="text-black border-gray-200">
               Cancel
             </Button>
           </DialogClose>

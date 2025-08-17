@@ -19,6 +19,7 @@ import {
 import { ChevronsUpDown } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
 import { toast } from "sonner";
+import DeleteMapModal from "@/features/map/deleteMapModal";
 
 type Resident = {
   zone: string;
@@ -451,47 +452,27 @@ export default function BarangayMapPage() {
         residents={allResidents}
         onSave={handleModalSubmit}
       />
-      {/* Delete confirmation modal */}
-      {deleteHousehold && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(0,0,0,0.5)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 1200,
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: "white",
-              padding: 20,
-              borderRadius: 8,
-              maxWidth: 400,
-              width: "90%",
-              boxShadow: "0 2px 10px rgba(0,0,0,0.3)",
-              textAlign: "center",
-            }}
-          >
-            <p style={{ marginBottom: 20, fontWeight: "bold" }}>
-              Are you sure you want to delete household "{deleteHousehold.household.name}"?
-            </p>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <Button variant="outline" onClick={cancelDelete}>
-                Cancel
-              </Button>
-              <Button variant="destructive" onClick={confirmDelete}>
-                Confirm
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      <DeleteMapModal
+        open={!!deleteHousehold}
+        household={deleteHousehold?.household || null}
+        onClose={cancelDelete}
+        onDeleted={() => {
+          if (deleteHousehold) {
+            // Remove marker and household from state
+            mapRef.current?.removeLayer(deleteHousehold.marker);
+            setHouseholds((prev) =>
+              prev.filter((h) => h.id !== deleteHousehold.household.id)
+            );
+            setMarkerResidentMap((prev) => {
+              const newMap = new Map(prev);
+              newMap.delete(deleteHousehold.marker);
+              return newMap;
+            });
+            setDeleteHousehold(null);
+            window.location.reload();
+          }
+        }}
+      />
     </>
   );
 }

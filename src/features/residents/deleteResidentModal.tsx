@@ -51,7 +51,7 @@ export default function DeleteResidentModal({ id, full_name, onDelete }: DeleteR
         </DialogHeader>
         <div className="flex justify-end gap-3 mt-4">
           <DialogClose asChild>
-            <Button variant="ghost" className="text-black">
+            <Button variant="outline" className="text-black border-gray-200">
               Cancel
             </Button>
           </DialogClose>

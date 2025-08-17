@@ -76,7 +76,8 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
 
       setOpenModal(false);
       form.reset();
-      setImagePreview("");
+      setImagePreview("")
+      ;
       onSave(); // refresh the data in parent
     } catch (err) {
       console.error("Insert official failed:", err);
@@ -132,7 +133,7 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
-                        className="text-black"
+                        className="text-gray-600 bg-gray-400 border rounded px-3 py-1"
                       />
                     </FormControl>
                     <FormMessage />
@@ -387,7 +388,17 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
             </div>
 
             <div className="flex justify-end pt-4 space-x-2">
-              <Button type="submit" variant="default" className="px-4 py-2">Save Official</Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="px-4 py-2"
+                onClick={() => setOpenModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" variant="default" className="px-4 py-2">
+                Save Official
+              </Button>
             </div>
           </form>
         </Form>

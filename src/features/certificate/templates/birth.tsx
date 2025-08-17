@@ -18,6 +18,7 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { toast } from "sonner";
+import { ArrowLeftCircleIcon, ChevronsUpDown, Check } from "lucide-react";
 
 type Resident = {
   id?: number;

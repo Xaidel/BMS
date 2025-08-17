@@ -1,55 +1,62 @@
+// src/features/map/DeleteMapModal.tsx
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
-type DeletePinModalProps = {
-  pinId: number;
-  onDelete: () => void;
+type DeleteMapModalProps = {
   open: boolean;
+  household: {
+    id: number;
+    name: string;
+  } | null;
   onClose: () => void;
+  onDeleted: () => void;
 };
 
-export default function DeletePinModal({ pinId, onDelete, open, onClose }: DeletePinModalProps) {
-  async function onConfirm() {
+export default function DeleteMapModal({
+  open,
+  household,
+  onClose,
+  onDeleted,
+}: DeleteMapModalProps) {
+  if (!open || !household) return null;
+
+  async function confirmDelete() {
     try {
-      await invoke("delete_pin_command", { id: pinId });
-      toast.success("Pin deleted");
-      onDelete();
+      await invoke("delete_household", { id: household.id });
+      toast.success(`Household "${household.name}" deleted successfully!`);
+      onDeleted();
       onClose();
-      setTimeout(() => window.location.reload(), 200); // Delay to allow modal to close
-    } catch (error) {
-      toast.error("Failed to delete pin");
+    } catch (error: any) {
+      toast.error(`Failed to delete household: ${error?.toString() || error}`);
     }
   }
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) onClose(); }}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-black font-normal">Delete Pin</DialogTitle>
-          <DialogDescription className="text-sm font-bold">
-            This action cannot be undone once confirmed.
+          <DialogTitle className="text-black">Delete Household</DialogTitle>
+          <DialogDescription className="text-black">
+            Are you sure you want to delete household "{household.name}"?
           </DialogDescription>
         </DialogHeader>
-        <div className="text-black text-lg font-bold">
-          Are you sure you want to delete this pin?
-        </div>
-        <div className="flex w-full gap-3 justify-end">
-          <DialogClose asChild>
-            <Button variant="ghost" className="text-black">Cancel</Button>
-          </DialogClose>
-          <Button variant="destructive" onClick={onConfirm}>
-            Confirm Delete
+        <DialogFooter>
+          <Button variant="outline" onClick={onClose} className="text-black border-gray-200">
+            Cancel
           </Button>
-        </div>
+          <Button variant="destructive" onClick={confirmDelete}>
+            Confirm
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

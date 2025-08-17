@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-
 import CustomFemale from "@/components/icons/CustomFemale";
 import CustomHouse from "@/components/icons/CustomHouse";
 import CustomMale from "@/components/icons/CustomMale";
@@ -15,9 +14,7 @@ import IncomeChart from "@/components/ui/incomechart";
 import PopulationChart from "@/components/ui/populationchart";
 import type { Income, Expense } from "@/types/types";
 import CustomCalendar from "@/components/icons/CustomCalendar";
-
 const categories = [];
-
 export default function Dashboard() {
   const [householdData] = useState<any[]>([]);
   const [residentTotal, setResidentTotal] = useState(0);
@@ -39,7 +36,7 @@ export default function Dashboard() {
   >([]);
   console.log(householdData, eventTotal);
   const [totalHouseholds, setTotalHouseholds] = useState<number>(0);
-  
+
   useEffect(() => {
     invoke<{ household_number: number }[]>("fetch_household_heads_command")
       .then((households) => {

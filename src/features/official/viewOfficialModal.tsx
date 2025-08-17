@@ -150,7 +150,7 @@ export default function ViewOfficialModal({ person, onClose }) {
                   type="file"
                   accept="image/*"
                   onChange={handleImageChange}
-                  className="w-40 h-10"
+                  className="text-gray-600 bg-gray-400 border rounded px-3 py-1"
                 />
               </label>
             </div>

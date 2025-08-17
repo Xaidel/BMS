@@ -1,10 +1,5 @@
 import { Buffer } from "buffer";
 import { toast } from "sonner";
-
-if (!window.Buffer) {
-  window.Buffer = Buffer;
-}
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -38,6 +33,10 @@ import { Virtuoso } from "react-virtuoso";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
+
 type Resident = {
   date_of_birth: any;
   civil_status: string;
@@ -46,10 +45,9 @@ type Resident = {
   middle_name?: string;
   last_name: string;
   suffix?: string;
-  // Add more fields if needed
 };
 
-export default function BusinessPermit() {
+export default function BusinessClearance() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -140,11 +138,11 @@ export default function BusinessPermit() {
                 className="h-8 w-8"
                 onClick={() => navigate(-1)}
               />
-              Barangay Business Permit
+              Barangay Business Clearance
             </CardTitle>
             <CardDescription className="text-start">
               Please fill out the necessary information needed for Barangay
-              Business Permit
+              Business Clearance
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -304,7 +302,7 @@ export default function BusinessPermit() {
                       cert: {
                         resident_name: `${selectedResident.first_name} ${selectedResident.last_name}`,
                         id: 0,
-                        type_: "Barangay Business Permit",
+                        type_: "Barangay Business Clearance",
                         issued_date: nowIso,
                         age: age ? parseInt(age) : undefined,
                         civil_status: civilStatus || "",
@@ -325,8 +323,7 @@ export default function BusinessPermit() {
                 Save
               </Button>
             </div>
-            <div className="flex-1 flex justify-end">
-            </div>
+            <div className="flex-1 flex justify-end"></div>
           </CardFooter>
         </Card>
         <div className="flex-4">
@@ -409,7 +406,7 @@ export default function BusinessPermit() {
                         marginBottom: 10,
                       }}
                     >
-                      BARANGAY BUSINESS PERMIT
+                      BARANGAY BUSINESS CLEARANCE
                     </Text>
                     <View
                       style={{
@@ -474,13 +471,11 @@ export default function BusinessPermit() {
                           { textAlign: "justify", marginBottom: 8 },
                         ]}
                       >
-                        And which said person had accomplish{" "}
-                        <Text style={{ fontWeight: "bold" }}>
-                          Barangay Ordinance No.14
-                        </Text>
-                        . This ordinance is imposing Barangay Permit fee and it
-                        is required for every business Trade or any transaction
-                        within the jurisdiction of this Barangay.
+                        This is to certify that the above-named individual is a
+                        bona fide resident of Barangay{" "}
+                        {settings?.barangay || "________________"} and is duly
+                        authorized to operate his/her business within the
+                        jurisdiction of this Barangay.
                       </Text>
                       <Text
                         style={[
@@ -488,8 +483,10 @@ export default function BusinessPermit() {
                           { textAlign: "justify", marginBottom: 8 },
                         ]}
                       >
-                        This Barangay permit on business indorsed to this
-                        Municipality for registration purposes only.
+                        This clearance is issued upon request for compliance
+                        with local business regulations and may be presented to
+                        relevant authorities as proof of residency and business
+                        authorization.
                       </Text>
                       <Text
                         style={[
@@ -503,7 +500,9 @@ export default function BusinessPermit() {
                           month: "long",
                           year: "numeric",
                         })}
-                        , at Tambo, Pamplona, Camarines Sur.
+                        , at {settings ? settings.barangay : "________________"}
+                        ,{settings ? settings.municipality : "________________"}
+                        ,{settings ? settings.province : "________________"}
                       </Text>
                       <Text
                         style={[
@@ -511,14 +510,14 @@ export default function BusinessPermit() {
                           { textAlign: "justify", marginBottom: 8 },
                         ]}
                       >
-                        This Barangay Permit is not valid without official
-                        receipt.
+                        This Barangay Business Clearance is not valid without
+                        the signature of the Punong Barangay.
                       </Text>
                     </>
                     <Text
                       style={[
                         styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
+                        { marginTop: 20, marginBottom: 6 },
                       ]}
                     >
                       Certifying Officer,

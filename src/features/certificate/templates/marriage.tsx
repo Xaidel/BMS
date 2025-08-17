@@ -29,6 +29,7 @@ type Resident = {
   suffix?: string;
   date_of_birth?: string;
   civil_status?: string;
+  zone?: string;
 };
 
 export default function Marriage() {
@@ -464,7 +465,9 @@ export default function Marriage() {
                       <>
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                           <Text style={{ fontWeight: "bold" }}>This is to certify that </Text>
-                          <Text style={{ fontWeight: "bold" }}>{`MR. ${selectedResident.first_name} ${selectedResident.middle_name ?? ""} ${selectedResident.last_name}`.toUpperCase()}</Text>, {ageMale || "___"} years old, {civilStatusMale || "___"}, a resident of Zone 5, Tambo, Pamplona Camarines Sur, wishes to contract marriage with
+                          <Text style={{ fontWeight: "bold" }}>{`MR. ${selectedResident.first_name} ${selectedResident.middle_name ?? ""} ${selectedResident.last_name}`.toUpperCase()}</Text>, {ageMale || "___"} years old, {civilStatusMale || "___"}, a resident of {selectedResident.zone}  , at {settings ? settings.barangay : "________________"}
+                        ,{settings ? settings.municipality : "________________"}
+                        ,{settings ? settings.province : "________________"} wishes to contract marriage with
                           <Text style={{ fontWeight: "bold" }}> MS. {`${selectedResident2.first_name} ${selectedResident2.middle_name ?? ""} ${selectedResident2.last_name}`.toUpperCase()}</Text>, {ageFemale || "___"} years old, {civilStatusFemale || "___"}, no legal impediment to contract marriage.
                         </Text>
                       </>

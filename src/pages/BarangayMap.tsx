@@ -1,4 +1,3 @@
-// src/pages/BarangayMap.tsx
 import { useEffect, useRef, useState, useMemo } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -18,8 +17,8 @@ import {
 } from "@/components/ui/popover";
 import { ChevronsUpDown } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
-import { toast } from "sonner";
 import DeleteMapModal from "@/features/map/deleteMapModal";
+import { searchHouseholds } from "@/service/map/mapSearch";
 
 type Resident = {
   zone: string;
@@ -83,26 +82,8 @@ export default function BarangayMapPage() {
   } | null>(null);
 
   const filteredHouseholds = useMemo(() => {
-    return households.filter(
-      (h) =>
-        `${h.name}`.toLowerCase().includes(search.toLowerCase()) ||
-        `${h.houseNumber}`.toLowerCase().includes(search.toLowerCase())
-    );
+    return searchHouseholds(households, search);
   }, [households, search]);
-
-  // Search bar state
-  const [searchQuery, setSearchQuery] = useState("");
-
-  // Derived list of suggestions filtered from households using searchQuery
-  const suggestions = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    if (!query) return [];
-    return households.filter(
-      (h) =>
-        (h.name && h.name.toLowerCase().includes(query)) ||
-        (h.houseNumber && h.houseNumber.toLowerCase().includes(query))
-    );
-  }, [searchQuery, households]);
 
   useEffect(() => {
     invoke("fetch_household_heads_command")
@@ -174,13 +155,9 @@ export default function BarangayMapPage() {
 
     // Render markers for all households
     households.forEach((h) => {
-      // Optionally check existing markers by iterating layers
-      mapRef.current!.eachLayer((layer) => {
-        // you can check if this layer is a marker, if needed
-      });
 
       const marker = L.marker([h.y, h.x]).addTo(mapRef.current!);
-      marker.bindTooltip(h.name, {
+      marker.bindTooltip(`${h.name} (${h.houseNumber})`, {
         permanent: false,
         direction: "top",
         offset: L.point(0, -20),
@@ -240,15 +217,6 @@ export default function BarangayMapPage() {
     }
 
     try {
-      const result = await invoke("insert_household", {
-        resident_id: data.resident_id,
-        x: data.x,
-        y: data.y,
-        houseNumber: data.houseNumber,
-        zone: data.zone || "default_zone",
-        section: data.section || "default_section",
-      });
-
       alert(`✅ Household for ${data.name} saved successfully!`);
 
       marker.unbindPopup();
@@ -282,62 +250,6 @@ export default function BarangayMapPage() {
       ]);
     } catch (error: any) {
       alert(`❌ Failed to save household: ${error?.toString() || error}`);
-    }
-  }
-
-  // Search handler
-  function handleSearch(query?: string) {
-    const searchTerm = (query !== undefined ? query : searchQuery)
-      .trim()
-      .toLowerCase();
-    if (!searchTerm) return;
-    // Find by name or household_number (houseNumber)
-    const household = households.find(
-      (h) =>
-        (h.name && h.name.toLowerCase().includes(searchTerm)) ||
-        (h.houseNumber && h.houseNumber.toLowerCase().includes(searchTerm))
-    );
-    if (household && mapRef.current) {
-      mapRef.current.setView(
-        [household.y, household.x],
-        mapRef.current.getZoom() + 2
-      );
-      setSearchQuery(household.name);
-    } else {
-      alert("Household not found.");
-    }
-  }
-
-  // Handler for confirming deletion
-  async function confirmDelete() {
-    if (!deleteHousehold) return;
-    const { household, marker } = deleteHousehold;
-
-    try {
-      await invoke("delete_household", { id: household.id });
-      // Remove marker from map
-      mapRef.current?.removeLayer(marker);
-
-      // Remove household from state
-      setHouseholds((prev) => prev.filter((h) => h.id !== household.id));
-
-      // Remove marker-resident association
-      setMarkerResidentMap((prev) => {
-        const newMap = new Map(prev);
-        newMap.delete(marker);
-        return newMap;
-      });
-
-      toast.success(`Household "${household.name}" deleted successfully!`);
-
-      // Reload page to update map
-      setTimeout(() => window.location.reload());
-    } catch (error: any) {
-      setNotification(
-        `Failed to delete household: ${error?.toString() || error}`
-      );
-    } finally {
-      setDeleteHousehold(null);
     }
   }
 

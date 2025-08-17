@@ -1025,7 +1025,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   Mother's Maiden Name
                 </h2>
                 <div className="grid grid-cols-4 gap-2">
-
                   <div className="col-span-2">
                     <FormField
                       control={form.control}

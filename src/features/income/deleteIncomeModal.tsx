@@ -52,7 +52,7 @@ export default function DeleteIncomeModal({ id, type_, onDelete }: Props) {
         </DialogHeader>
         <div className="flex justify-end gap-3 mt-4">
           <DialogClose asChild>
-            <Button variant="ghost" className="text-black">
+            <Button variant="outline" className="text-black border-gray-200">
               Cancel
             </Button>
           </DialogClose>

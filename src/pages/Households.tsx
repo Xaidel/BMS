@@ -24,7 +24,6 @@ import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
 import ViewHouseholdModal from "@/features/households/viewhouseholdModal";
 
-
 export default function Households() {
   // Map household_number (as string) -> total income (as string)
   const [householdIncomeMap, setHouseholdIncomeMap] = useState<
@@ -40,8 +39,8 @@ export default function Households() {
               table.getIsAllPageRowsSelected()
                 ? true
                 : table.getIsSomePageRowsSelected()
-                  ? "indeterminate"
-                  : false
+                ? "indeterminate"
+                : false
             }
             onCheckedChange={(value) =>
               table.toggleAllPageRowsSelected(!!value)
@@ -238,29 +237,29 @@ export default function Households() {
   const LOW_INCOME_THRESHOLD = 20000;
 
   useEffect(() => {
-    invoke("fetch_all_residents_with_income")
-      .then(
-        (
-          residents: {
-            household_number: number;
-            average_monthly_income: number | null;
-          }[]
-        ) => {
-          const incomeMap = new Map<string, string>();
-          residents.forEach(({ household_number, average_monthly_income }) => {
-            // Ensure valid numeric income
-            const validIncome = Number(average_monthly_income) || 0;
-            const key = household_number.toString();
-            const current = Number(incomeMap.get(key)) || 0;
-            incomeMap.set(key, (current + validIncome).toString());
-          });
-          setHouseholdIncomeMap(incomeMap);
-        }
-      )
-      .catch((err) => {
-        console.error("Failed to fetch residents income data:", err);
-      });
-  }, []);
+  invoke("fetch_all_residents_with_income")
+    .then(
+      (
+        residents: {
+          household_number: number | null;
+          average_monthly_income: number | null;
+        }[]
+      ) => {
+        const incomeMap = new Map<string, string>();
+        residents.forEach(({ household_number, average_monthly_income }) => {
+          // Ensure valid numeric income
+          const validIncome = Number(average_monthly_income) || 0;
+          const key = household_number?.toString() ?? "0"; // <-- safe
+          const current = Number(incomeMap.get(key)) || 0;
+          incomeMap.set(key, (current + validIncome).toString());
+        });
+        setHouseholdIncomeMap(incomeMap);
+      }
+    )
+    .catch((err) => {
+      console.error("Failed to fetch residents income data:", err);
+    });
+}, []);
 
   // New useEffect: fetch members for each household in data and calculate income
   useEffect(() => {
@@ -326,10 +325,12 @@ export default function Households() {
   }, [data, householdIncomeMap, selectedHousehold]);
 
   useEffect(() => {
-    invoke<number[]>("fetch_residents_with_pwd")
+    invoke<(number | string)[]>("fetch_residents_with_pwd")
       .then((households) => {
-        // Convert all household_numbers to string
-        setHouseholdPwdMap(new Set(households.map((num) => num.toString())));
+        // Convert all household_numbers to string safely
+        setHouseholdPwdMap(
+          new Set(households.map((num) => (num !== null && num !== undefined ? num.toString() : "")))
+        );
       })
       .catch((err) => {
         console.error("Failed to fetch households with PWDs:", err);
@@ -337,9 +338,12 @@ export default function Households() {
   }, []);
 
   useEffect(() => {
-    invoke<number[]>("fetch_residents_with_senior")
+    invoke<(number | string)[]>("fetch_residents_with_senior")
       .then((households) => {
-        setHouseholdSeniorMap(new Set(households.map((num) => num.toString())));
+        // Convert all household_numbers to string safely
+        setHouseholdSeniorMap(
+          new Set(households.map((num) => (num !== null && num !== undefined ? num.toString() : "")))
+        );
       })
       .catch((err) => {
         console.error("Failed to fetch households with seniors:", err);

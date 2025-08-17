@@ -47,6 +47,7 @@ const civilStatusOptions = [
   "Married",
   "Widowed",
   "Separated",
+  "Divorced",
 ];
 const statusOption = ["Active", "Dead", "Missing", "Moved Out"];
 const genderOptions = ["Male", "Female"];
@@ -57,28 +58,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [step, setStep] = useState(1);
-   const [capturedImage, setCapturedImage] = useState<string | null>(null);
-   
-  useEffect(() => {
-    async function loadDefaultLocation() {
-      try {
-        const settings = (await invoke("fetch_settings_command")) as z.infer<
-          typeof settingsSchema
-        >;
-        if (settings) {
-          form.setValue("barangay", settings.barangay || "");
-          form.setValue("town", settings.municipality || "");
-          form.setValue("province", settings.province || "");
-        }
-      } catch (error) {
-        console.error("Failed to load default location from settings:", error);
-      }
-    }
-
-    loadDefaultLocation();
-  }, []);
-
- 
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
@@ -121,6 +101,25 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       is_senior: false,
     },
   });
+
+  useEffect(() => {
+    async function loadDefaultLocation() {
+      try {
+        const settings = (await invoke("fetch_settings_command")) as z.infer<
+          typeof settingsSchema
+        >;
+        if (settings) {
+          form.setValue("barangay", settings.barangay || "");
+          form.setValue("town", settings.municipality || "");
+          form.setValue("province", settings.province || "");
+        }
+      } catch (error) {
+        console.error("Failed to load default location from settings:", error);
+      }
+    }
+
+    loadDefaultLocation();
+  }, []);
 
   async function onSubmit(values: z.infer<typeof residentSchema>) {
     try {
@@ -170,7 +169,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                 <h2 className="text-md font-semibold text-gray-900 mt-2">
                   Personal Information
                 </h2>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-5">
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
@@ -446,62 +445,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="occupation"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Occupation</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Enter occupation" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="source_of_income"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Source of Income</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Enter source of income"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="average_monthly_income"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Average Monthly Income</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="number"
-                              placeholder="Enter amount"
-                              {...field}
-                              onChange={(e) =>
-                                field.onChange(Number(e.target.value))
-                              }
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
                       name="date_of_birth"
                       render={({ field }) => (
                         <FormItem>
@@ -536,12 +479,13 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       )}
                     />
                   </div>
+
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
                       name="status"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="min-w-[150px]">
                           <FormLabel>Status</FormLabel>
                           <FormControl>
                             <Select
@@ -564,63 +508,82 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       )}
                     />
                   </div>
-                </div>
-                <div className="col-span-4 grid grid-cols-3 gap-4 mt-4">
-                  <FormField
-                    control={form.control}
-                    name="is_registered_voter"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center space-x-2">
-                        <FormControl>
-                          <input
-                            type="checkbox"
-                            checked={field.value}
-                            onChange={field.onChange}
-                            className="mr-2"
-                          />
-                        </FormControl>
-                        <FormLabel className="text-black">
-                          Registered Voter
-                        </FormLabel>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="is_pwd"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center space-x-2">
-                        <FormControl>
-                          <input
-                            type="checkbox"
-                            checked={field.value}
-                            onChange={field.onChange}
-                            className="mr-2"
-                          />
-                        </FormControl>
-                        <FormLabel className="text-black">PWD</FormLabel>
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="is_senior"
-                    render={({ field }) => (
-                      <FormItem className="flex items-center space-x-2">
-                        <FormControl>
-                          <input
-                            type="checkbox"
-                            checked={field.value}
-                            onChange={field.onChange}
-                            className="mr-2"
-                          />
-                        </FormControl>
-                        <FormLabel className="text-black">
-                          Senior Citizen
-                        </FormLabel>
-                      </FormItem>
-                    )}
-                  />
+
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="occupation"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Occupation</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter occupation" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <div className="col-span-4 flex flex-wrap items-center gap-11">
+                    <FormField
+                      control={form.control}
+                      name="is_registered_voter"
+                      render={({ field }) => (
+                        <FormItem className="flex items-center space-x-2">
+                          <FormControl>
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="mr-2"
+                            />
+                          </FormControl>
+                          <FormLabel className="text-black">
+                            Registered Voter
+                          </FormLabel>
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="is_pwd"
+                      render={({ field }) => (
+                        <FormItem className="flex items-center space-x-2">
+                          <FormControl>
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="mr-2"
+                            />
+                          </FormControl>
+                          <FormLabel className="text-black">PWD</FormLabel>
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="is_senior"
+                      render={({ field }) => (
+                        <FormItem className="flex items-center space-x-2">
+                          <FormControl>
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="mr-2"
+                            />
+                          </FormControl>
+                          <FormLabel className="text-black">
+                            Senior Citizen
+                          </FormLabel>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-end pt-4">
@@ -875,6 +838,46 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       )}
                     />
                   </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="source_of_income"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Source of Income</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Enter source of income"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="average_monthly_income"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Average Monthly Income</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="Enter amount"
+                              {...field}
+                              onChange={(e) =>
+                                field.onChange(Number(e.target.value))
+                              }
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
                 </div>
                 <div className="flex justify-between pt-4">
                   <Button type="button" onClick={() => setStep(1)}>
@@ -1020,37 +1023,9 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   </div>
                 </div>
                 <h2 className="text-sm font-semibold text-gray-700 mt-2">
-                  Name of Mother
+                  Mother's Maiden Name
                 </h2>
                 <div className="grid grid-cols-4 gap-2">
-                  <div className="col-span-4">
-                    <FormField
-                      control={form.control}
-                      name="mother_prefix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Prefix</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select Prefix" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {prefixOptions.map((option) => (
-                                  <SelectItem key={option} value={option}>
-                                    {option}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
 
                   <div className="col-span-2">
                     <FormField

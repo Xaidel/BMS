@@ -141,7 +141,7 @@ pub fn fetch_all_residents_with_income() -> Result<Vec<(String, i64)>, String> {
 }
 
 #[tauri::command]
-pub fn fetch_residents_with_pwd() -> Result<Vec<i32>, String> {
+pub fn fetch_residents_with_pwd() -> Result<Vec<String>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
     let mut stmt = conn.prepare(
         "SELECT DISTINCT household_number 
@@ -151,7 +151,7 @@ pub fn fetch_residents_with_pwd() -> Result<Vec<i32>, String> {
     ).map_err(|e| e.to_string())?;
 
     let rows = stmt.query_map([], |row| {
-        Ok(row.get::<_, Option<i32>>(0)?.unwrap_or_default())
+        Ok(row.get::<_, Option<String>>(0)?.unwrap_or_default())
     }).map_err(|e| e.to_string())?;
 
     let mut household_numbers = Vec::new();

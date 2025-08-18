@@ -60,17 +60,15 @@ useEffect(() => {
     });
 }, []);
 
-
-
   return (
     <div className="min-w-screen min-h-screen bg-background flex flex-col items-center justify-center ">
       <Card className="w-full max-w-[41rem] h-[42rem] max-h-[47rem] py-[3rem]">
         <CardHeader className="space-y-4">
-          <div className="w-[7rem] h-[7rem] rounded-full bg-[#CDCDCD] mx-auto flex items-center justify-center">
-            <img src={logo} alt="logo" width={80} />
+          <div className="w-[7rem] h-[7rem] mx-auto flex items-center justify-center">
+            <img src={logo} alt="logo" width={120} />
           </div>
           <div className="mx-auto font-redhat text-center">
-            <CardTitle className="text-2xl font-extrabold">Welcome Back</CardTitle>
+            <CardTitle className="text-2xl font-extrabold">Welcome Back!</CardTitle>
             <CardDescription className="text-md font-normal text-[#848484]">Enter the credentials to access BMS</CardDescription>
           </div>
         </CardHeader>

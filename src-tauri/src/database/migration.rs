@@ -59,7 +59,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             email TEXT,
             logo TEXT  -- base64 or file path
             );
-            
+        
         CREATE TABLE IF NOT EXISTS residents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             prefix TEXT NOT NULL,

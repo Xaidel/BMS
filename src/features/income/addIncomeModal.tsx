@@ -31,6 +31,13 @@ import {
 } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 export default function AddIncomeModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -98,25 +105,23 @@ export default function AddIncomeModal({ onSave }: { onSave: () => void }) {
                 name="category"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black font-bold text-xs">
-                      Category
-                    </FormLabel>
-                    <FormControl>
-                      <select
-                        className="text-black border rounded p-2 w-full"
-                        value={field.value}
-                        onChange={field.onChange}
-                      >
-                        <option value="">Select category</option>
-                        <option value="Local Revenue">Local Revenue</option>
-                        <option value="Tax Revenue">Tax Revenue</option>
-                        <option value="Government Grants">Government Grants</option>
-                        <option value="Service Revenue">Service Revenue</option>
-                        <option value="Rental Income">Rental Income</option>
-                        <option value="Government Funds">Government Funds</option>
-                        <option value="Others">Others</option>
-                      </select>
-                    </FormControl>
+                    <FormLabel className="text-black font-bold text-xs">Category</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="w-full text-black border-black/15">
+                          <SelectValue placeholder="Please select a category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="Local Revenue">Local Revenue</SelectItem>
+                        <SelectItem value="Tax Revenue">Tax Revenue</SelectItem>
+                        <SelectItem value="Government Grants">Government Grants</SelectItem>
+                        <SelectItem value="Service Revenue">Service Revenue</SelectItem>
+                        <SelectItem value="Rental Income">Rental Income</SelectItem>
+                        <SelectItem value="Government Funds">Government Funds</SelectItem>
+                        <SelectItem value="Others">Others</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -241,10 +246,7 @@ export default function AddIncomeModal({ onSave }: { onSave: () => void }) {
                     <FormLabel className="text-black font-bold text-xs">
                       Date Received
                     </FormLabel>
-                    <Popover
-                      open={openCalendar}
-                      onOpenChange={setOpenCalendar}
-                    >
+                    <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
                       <FormControl>
                         <PopoverTrigger asChild>
                           <Button

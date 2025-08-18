@@ -31,6 +31,13 @@ import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type ViewPropsIncome = {
   id?: number;
@@ -113,20 +120,20 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
                         Category
                       </FormLabel>
                       <FormControl>
-                        <select
-                          className="text-black border rounded p-2 w-full"
-                          value={field.value}
-                          onChange={field.onChange}
-                        >
-                          <option value="">Select category</option>
-                          <option value="Infrastructure">Infrastructure</option>
-                          <option value="Honoraria">Honoraria</option>
-                          <option value="Utilities">Utilities</option>
-                          <option value="Local Funds">Local Funds</option>
-                          <option value="Foods">Foods</option>
-                          <option value="IRA">IRA</option>
-                          <option value="Others">Others</option>
-                        </select>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger className="text-black w-full">
+                            <SelectValue placeholder="Please select the category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Local Revenue">Local Revenue</SelectItem>
+                            <SelectItem value="Tax Revenue">Tax Revenue</SelectItem>
+                            <SelectItem value="Government Grants">Government Grants</SelectItem>
+                            <SelectItem value="Service Revenue">Service Revenue</SelectItem>
+                            <SelectItem value="Rental Income">Rental Income</SelectItem>
+                            <SelectItem value="Government Funds">Government Funds</SelectItem>
+                            <SelectItem value="Others">Others</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

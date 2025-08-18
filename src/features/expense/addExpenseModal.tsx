@@ -1,22 +1,47 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { z } from "zod"
+import { z } from "zod";
 import { useState } from "react";
 import { toast } from "sonner";
-import { invoke } from '@tauri-apps/api/core'
+import { invoke } from "@tauri-apps/api/core";
 import { expenseSchema } from "@/types/formSchema";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
-  const [openCalendar, setOpenCalendar] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
+  const [openCalendar, setOpenCalendar] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const form = useForm<z.infer<typeof expenseSchema>>({
     resolver: zodResolver(expenseSchema),
     defaultValues: {
@@ -27,8 +52,8 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
       paid_by: "",
       category: "",
       date: undefined,
-    }
-  })
+    },
+  });
 
   async function onSubmit(values: z.infer<typeof expenseSchema>) {
     try {
@@ -54,12 +79,9 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
 
   return (
     <>
-      <Dialog
-        open={openModal}
-        onOpenChange={setOpenModal}
-      >
+      <Dialog open={openModal} onOpenChange={setOpenModal}>
         <DialogTrigger asChild>
-          <Button size="lg" >
+          <Button size="lg">
             <Plus />
             Add Expense
           </Button>
@@ -72,46 +94,53 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
                 <DialogDescription className="text-sm">
                   All the fields are required unless it is mentioned otherwise
                 </DialogDescription>
-                <p className="text-md font-bold text-black">Basic Expense Information</p>
+                <p className="text-md font-bold text-black">
+                  Basic Expense Information
+                </p>
               </DialogHeader>
               <div className="flex flex-col gap-3">
                 {/* Category */}
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-black font-bold text-xs">
-                      Category
-                    </FormLabel>
-                    <FormControl>
-                      <select
-                        className="text-black border rounded p-2 w-full"
-                        value={field.value}
-                        onChange={field.onChange}
-                      >
-                        <option value="">Select category</option>
-                        <option value="Infrastructure">Infrastructure</option>
-                        <option value="Honoraria">Honoraria</option>
-                        <option value="Utilities">Utilities</option>
-                        <option value="Local Funds">Local Funds</option>
-                        <option value="Foods">Foods</option>
-                        <option value="IRA">IRA</option>
-                        <option value="Others">Others</option>
-                      </select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* Type */}
+                <FormField
+                  control={form.control}
+                  name="category"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="text-black font-bold text-xs">
+                        Category
+                      </FormLabel>
+                      <FormControl>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger className="w-full text-black border-black/15">
+                            <SelectValue placeholder="Please Select a category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Infrastructure">Infrastructure</SelectItem>
+                            <SelectItem value="Honoraria">Honoraria</SelectItem>
+                            <SelectItem value="Utilities">Utilities</SelectItem>
+                            <SelectItem value="Local Funds">Local Funds</SelectItem>
+                            <SelectItem value="Foods">Foods</SelectItem>
+                            <SelectItem value="IRA">IRA</SelectItem>
+                            <SelectItem value="Others">Others</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Type */}
                 <div>
                   <FormField
                     control={form.control}
                     name="type_"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="type" className="text-black font-bold text-xs">Expense Name</FormLabel>
+                        <FormLabel
+                          htmlFor="type"
+                          className="text-black font-bold text-xs"
+                        >
+                          Expense Name
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="type_"
@@ -128,61 +157,70 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
                   />
                 </div>
                 {/* Amount */}
-              <FormField
-                control={form.control}
-                name="amount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-black font-bold text-xs">
-                      Amount
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        onChange={(e) =>
-                          field.onChange(
-                            e.target.value === "" ? undefined : +e.target.value
-                          )
-                        }
-                        value={field.value ?? ""}
-                        className="text-black"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
                 <FormField
-                control={form.control}
-                name="or_number"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-black font-bold text-xs">
-                      OR#
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        onChange={(e) =>
-                          field.onChange(
-                            e.target.value === "" ? undefined : +e.target.value
-                          )
-                        }
-                        value={field.value ?? ""}
-                        className="text-black"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  control={form.control}
+                  name="amount"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-bold text-xs">
+                        Amount
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value === ""
+                                ? undefined
+                                : +e.target.value
+                            )
+                          }
+                          value={field.value ?? ""}
+                          className="text-black"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="or_number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-bold text-xs">
+                        OR#
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value === ""
+                                ? undefined
+                                : +e.target.value
+                            )
+                          }
+                          value={field.value ?? ""}
+                          className="text-black"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 <div>
                   <FormField
                     control={form.control}
                     name="paid_to"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="paid_to" className="text-black font-bold text-xs">Paid To</FormLabel>
+                        <FormLabel
+                          htmlFor="paid_to"
+                          className="text-black font-bold text-xs"
+                        >
+                          Paid To
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="paid_to"
@@ -204,7 +242,12 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
                     name="paid_by"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="paid_by" className="text-black font-bold text-xs">Paid By</FormLabel>
+                        <FormLabel
+                          htmlFor="paid_by"
+                          className="text-black font-bold text-xs"
+                        >
+                          Paid By
+                        </FormLabel>
                         <FormControl>
                           <Input
                             id="paid_by"
@@ -226,16 +269,22 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel htmlFor="date" className="text-black font-bold text-xs">Date of Expense</FormLabel>
+                        <FormLabel
+                          htmlFor="date"
+                          className="text-black font-bold text-xs"
+                        >
+                          Date of Expense
+                        </FormLabel>
                         <Popover
                           open={openCalendar}
                           onOpenChange={setOpenCalendar}
                         >
                           <FormControl>
-                            <PopoverTrigger asChild className="w-full text-black hover:bg-primary hover:text-white">
-                              <Button
-                                variant="outline"
-                              >
+                            <PopoverTrigger
+                              asChild
+                              className="w-full text-black hover:bg-primary hover:text-white"
+                            >
+                              <Button variant="outline">
                                 {field.value ? (
                                   format(field.value, "PPP")
                                 ) : (
@@ -260,7 +309,6 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
                     )}
                   />
                 </div>
-            
               </div>
               <div className="mt-4 flex justify-end">
                 <Button type="submit">Save Expense</Button>
@@ -268,7 +316,7 @@ export default function AddExpenseModal({ onSave }: { onSave: () => void }) {
             </form>
           </Form>
         </DialogContent>
-      </Dialog >
+      </Dialog>
     </>
-  )
+  );
 }

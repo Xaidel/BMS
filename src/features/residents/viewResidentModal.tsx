@@ -129,13 +129,12 @@ export default function ViewResidentModal(
 
               {/* Rest of your content here... */}
               <div className="flex flex-col gap-3">
-                implement this by copy mirroring the functions and logic
                 {step === 1 && (
                   <>
                     <h2 className="text-md font-semibold text-gray-900 mt-2">
                       Personal Information
                     </h2>
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-4 gap-5">
                       <div className="col-span-2">
                         <FormField
                           control={form.control}
@@ -416,65 +415,6 @@ export default function ViewResidentModal(
                       <div className="col-span-2">
                         <FormField
                           control={form.control}
-                          name="occupation"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Occupation</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Enter occupation"
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      <div className="col-span-2">
-                        <FormField
-                          control={form.control}
-                          name="source_of_income"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Source of Income</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Enter source of income"
-                                  {...field}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      <div className="col-span-2">
-                        <FormField
-                          control={form.control}
-                          name="average_monthly_income"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Average Monthly Income</FormLabel>
-                              <FormControl>
-                                <Input
-                                  type="number"
-                                  placeholder="Enter amount"
-                                  {...field}
-                                  onChange={(e) =>
-                                    field.onChange(Number(e.target.value))
-                                  }
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <div className="col-span-2">
-                        <FormField
-                          control={form.control}
                           name="date_of_birth"
                           render={({ field }) => (
                             <FormItem>
@@ -509,12 +449,13 @@ export default function ViewResidentModal(
                           )}
                         />
                       </div>
+
                       <div className="col-span-2">
                         <FormField
                           control={form.control}
                           name="status"
                           render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="min-w-[150px]">
                               <FormLabel>Status</FormLabel>
                               <FormControl>
                                 <Select
@@ -537,72 +478,89 @@ export default function ViewResidentModal(
                           )}
                         />
                       </div>
-                    </div>
-                    <div className="col-span-4 grid grid-cols-3 gap-4 mt-4">
-                      <FormField
-                        control={form.control}
-                        name="is_registered_voter"
-                        render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2">
-                            <FormControl>
-                              <input
-                                type="checkbox"
-                                checked={field.value}
-                                onChange={field.onChange}
-                                className="mr-2"
-                              />
-                            </FormControl>
-                            <FormLabel className="text-black">
-                              Registered Voter
-                            </FormLabel>
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="is_pwd"
-                        render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2">
-                            <FormControl>
-                              <input
-                                type="checkbox"
-                                checked={field.value}
-                                onChange={field.onChange}
-                                className="mr-2"
-                              />
-                            </FormControl>
-                            <FormLabel className="text-black">PWD</FormLabel>
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="is_senior"
-                        render={({ field }) => (
-                          <FormItem className="flex items-center space-x-2">
-                            <FormControl>
-                              <input
-                                type="checkbox"
-                                checked={field.value}
-                                onChange={field.onChange}
-                                className="mr-2"
-                              />
-                            </FormControl>
-                            <FormLabel className="text-black">
-                              Senior Citizen
-                            </FormLabel>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
 
-                    <div className="flex justify-end pt-4">
-                      <Button type="button" onClick={() => setStep(2)}>
-                        Next
-                      </Button>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="occupation"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Occupation</FormLabel>
+                              <FormControl>
+                                <Input
+                                  placeholder="Enter occupation"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="col-span-4 flex flex-wrap items-center gap-11">
+                        <FormField
+                          control={form.control}
+                          name="is_registered_voter"
+                          render={({ field }) => (
+                            <FormItem className="flex items-center space-x-2">
+                              <FormControl>
+                                <input
+                                  type="checkbox"
+                                  checked={field.value}
+                                  onChange={field.onChange}
+                                  className="mr-2"
+                                />
+                              </FormControl>
+                              <FormLabel className="text-black">
+                                Registered Voter
+                              </FormLabel>
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="is_pwd"
+                          render={({ field }) => (
+                            <FormItem className="flex items-center space-x-2">
+                              <FormControl>
+                                <input
+                                  type="checkbox"
+                                  checked={field.value}
+                                  onChange={field.onChange}
+                                  className="mr-2"
+                                />
+                              </FormControl>
+                              <FormLabel className="text-black">PWD</FormLabel>
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="is_senior"
+                          render={({ field }) => (
+                            <FormItem className="flex items-center space-x-2">
+                              <FormControl>
+                                <input
+                                  type="checkbox"
+                                  checked={field.value}
+                                  onChange={field.onChange}
+                                  className="mr-2"
+                                />
+                              </FormControl>
+                              <FormLabel className="text-black">
+                                Senior Citizen
+                              </FormLabel>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
                   </>
                 )}
+
                 {step === 2 && (
                   <>
                     <h2 className="text-md font-semibold text-gray-900 mt-2">
@@ -661,30 +619,32 @@ export default function ViewResidentModal(
                           control={form.control}
                           name="zone"
                           render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Zone/Purok</FormLabel>
-                              <FormControl>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                >
+                            <FormItem className="w-full">
+                              <FormLabel
+                                htmlFor="zone"
+                                className="text-black font-bold text-xs"
+                              >
+                                Zone
+                              </FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
                                   <SelectTrigger className="w-full text-black border-black/15">
-                                    <SelectValue
-                                      placeholder={"Please select the zone"}
-                                    />
+                                    <SelectValue placeholder="Select zone" />
                                   </SelectTrigger>
-                                  <SelectContent>
-                                    {["1", "2", "3", "4", "5", "6", "7", "8"].map(
-                                      (option, i) => (
-                                        <SelectItem value={option} key={i}>
-                                          {option}
-                                        </SelectItem>
-                                      )
-                                    )}
-                                  </SelectContent>
-                                </Select>
-                              </FormControl>
-                              <FormMessage />
+                                </FormControl>
+                                <SelectContent>
+                                  {["1", "2", "3", "4", "5", "6", "7", "8"].map(
+                                    (option, i) => (
+                                      <SelectItem value={option} key={i}>
+                                        {option}
+                                      </SelectItem>
+                                    )
+                                  )}
+                                </SelectContent>
+                              </Select>
                             </FormItem>
                           )}
                         />
@@ -716,7 +676,7 @@ export default function ViewResidentModal(
                           name="town"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Town</FormLabel>
+                              <FormLabel>City/Town</FormLabel>
                               <FormControl>
                                 <Input
                                   id="town"
@@ -752,25 +712,27 @@ export default function ViewResidentModal(
                           )}
                         />
                       </div>
+                      {/* --- Household Number field --- */}
                       <div className="col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="household_number"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Household Number</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="text"
-                              placeholder="Enter household number"
-                              {...field}
-                              className="text-black"
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                        <FormField
+                          control={form.control}
+                          name="household_number"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Household Number</FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="text"
+                                  placeholder="Enter household number"
+                                  {...field}
+                                  className="text-black"
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      {/* --- Role in Household field --- */}
                       <div className="col-span-2">
                         <FormField
                           control={form.control}
@@ -806,7 +768,7 @@ export default function ViewResidentModal(
                                       "Grandmother",
                                       "Grandson",
                                       "Grandson in law",
-                                      "House main/helper",
+                                      "House maid/helper",
                                       "Mother",
                                       "Mother in law",
                                       "Nephew",
@@ -823,20 +785,60 @@ export default function ViewResidentModal(
                                       "Stepmother",
                                       "Stepgranddaughter",
                                       "Stepgranddaughter in law",
-                                      "Step grandson",
+                                      "Stepgrandson",
+                                      "Stepgrandson in law",
                                       "Stepsister",
                                       "Stepson",
                                       "Stepson in law",
                                       "Tenant",
                                       "Uncle",
                                       "Others",
-                                    ].map((role) => (
-                                      <SelectItem key={role} value={role}>
-                                        {role}
+                                    ].map((option) => (
+                                      <SelectItem key={option} value={option}>
+                                        {option}
                                       </SelectItem>
                                     ))}
                                   </SelectContent>
                                 </Select>
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="source_of_income"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Source of Income</FormLabel>
+                              <FormControl>
+                                <Input
+                                  placeholder="Enter source of income"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <FormField
+                          control={form.control}
+                          name="average_monthly_income"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Average Monthly Income</FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="number"
+                                  placeholder="Enter amount"
+                                  {...field}
+                                  onChange={(e) =>
+                                    field.onChange(Number(e.target.value))
+                                  }
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -983,35 +985,6 @@ export default function ViewResidentModal(
                       Name of Mother
                     </h2>
                     <div className="grid grid-cols-4 gap-2">
-                      <div className="col-span-4">
-                        <FormField
-                          control={form.control}
-                          name="mother_prefix"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Prefix</FormLabel>
-                              <FormControl>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                >
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select Prefix" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {prefixOptions.map((option) => (
-                                      <SelectItem key={option} value={option}>
-                                        {option}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                              </FormControl>
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
                       <div className="col-span-2">
                         <FormField
                           control={form.control}
@@ -1114,4 +1087,3 @@ export default function ViewResidentModal(
     </>
   );
 }
-

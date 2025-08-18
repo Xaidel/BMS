@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from '@tauri-apps/api/core'
+import { eventSchema } from "@/types/formSchema";
 
 const selectOption: string[] = [
   "Seminar",
@@ -22,35 +23,7 @@ const selectOption: string[] = [
 
 const statusOption = ["Upcoming", "Ongoing", "Finished", "Cancelled"] as const;
 
-const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Event name is too short"
-  }).max(50, {
-    message: "Event name is too long, put other details on the 'details' form"
-  }),
-  type_: z.string().min(2, {
-    message: "Event type is too short"
-  }).max(50, {
-    message: "Event type is too long."
-  }),
-  date: z.date({
-    required_error: "Please specify the event date"
-  }),
-  venue: z.string().min(2, {
-    message: "Event venue is too short"
-  }).max(50, {
-    message: "Event venue is too long"
-  }),
-  attendee: z.string().min(2, {
-    message: "Attendee too long"
-  }).max(50, {
-    message: "Event venue is too long"
-  }),
-  notes: z.string().max(1000, {
-    message: "Important notes is too long"
-  }),
-  status: z.enum(statusOption)
-})
+
 
 type AddEventModalProps = {
   onSave?: () => void;
@@ -59,8 +32,8 @@ type AddEventModalProps = {
 export default function AddEventModal({ onSave }: AddEventModalProps) {
   const [openCalendar, setOpenCalendar] = useState(false)
   const [openModal, setOpenModal] = useState(false)
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof eventSchema>>({
+    resolver: zodResolver(eventSchema),
     defaultValues: {
       name: "",
       type_: "",
@@ -72,7 +45,7 @@ export default function AddEventModal({ onSave }: AddEventModalProps) {
     }
   })
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof eventSchema>) {
     try {
       await invoke("insert_event_command", {
         event: {

@@ -59,7 +59,7 @@ pub fn fetch_residents_by_household_number(household_number: String) -> Result<V
          town_of_birth, province_of_birth, zone, barangay, town, province,
          household_number, role_in_household,
          father_prefix, father_first_name, father_middle_name, father_last_name, father_suffix,
-         mother_prefix, mother_first_name, mother_middle_name, mother_last_name, status, photo,
+         mother_first_name, mother_middle_name, mother_last_name, status, photo,
          is_registered_voter, is_pwd, is_senior
          FROM residents
          WHERE household_number = ?1"
@@ -96,15 +96,14 @@ pub fn fetch_residents_by_household_number(household_number: String) -> Result<V
                 father_middle_name: row.get(25)?,
                 father_last_name: row.get(26)?,
                 father_suffix: row.get(27)?,
-                mother_prefix: row.get(28)?,
-                mother_first_name: row.get(29)?,
-                mother_middle_name: row.get(30)?,
-                mother_last_name: row.get(31)?,
-                status: row.get(32)?,
-                photo: row.get(33)?,
-                is_registered_voter: row.get(34)?,
-                is_pwd: row.get(35)?,
-                is_senior: row.get(36)?,
+                mother_first_name: row.get(28)?,
+                mother_middle_name: row.get(29)?,
+                mother_last_name: row.get(30)?,
+                status: row.get(31)?,
+                photo: row.get(32)?,
+                is_registered_voter: row.get(33)?,
+                is_pwd: row.get(34)?,
+                is_senior: row.get(35)?,
             })
         })
         .map_err(|e| e.to_string())?;

@@ -31,6 +31,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { expenseSchema } from "@/types/formSchema";
 import { invoke } from "@tauri-apps/api/core";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type ViewPropsExpense = {
   id?: number;
@@ -114,20 +121,20 @@ export default function ViewExpenseModal(props: ViewPropsExpense) {
                         Category
                       </FormLabel>
                       <FormControl>
-                        <select
-                          className="text-black border rounded p-2 w-full"
-                          value={field.value}
-                          onChange={field.onChange}
-                        >
-                          <option value="">Select category</option>
-                          <option value="Infrastructure">Infrastructure</option>
-                          <option value="Honoraria">Honoraria</option>
-                          <option value="Utilities">Utilities</option>
-                          <option value="Local Funds">Local Funds</option>
-                          <option value="Foods">Foods</option>
-                          <option value="IRA">IRA</option>
-                          <option value="Others">Others</option>
-                        </select>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <SelectTrigger className="text-black w-full">
+                            <SelectValue placeholder="Select category" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Infrastructure">Infrastructure</SelectItem>
+                            <SelectItem value="Honoraria">Honoraria</SelectItem>
+                            <SelectItem value="Utilities">Utilities</SelectItem>
+                            <SelectItem value="Local Funds">Local Funds</SelectItem>
+                            <SelectItem value="Foods">Foods</SelectItem>
+                            <SelectItem value="IRA">IRA</SelectItem>
+                            <SelectItem value="Others">Others</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

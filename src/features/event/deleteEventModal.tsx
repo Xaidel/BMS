@@ -53,7 +53,7 @@ export default function DeleteEventModal({ id, name, onDelete }: Props) {
         </div>
         <div className="flex w-full gap-3 justify-end">
           <DialogClose asChild>
-            <Button variant="ghost" className="text-black">
+            <Button variant="outline" className="text-black border-gray-200">
               Cancel
             </Button>
           </DialogClose>

@@ -91,7 +91,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       father_middle_name: "",
       father_last_name: "",
       father_prefix: "",
-      mother_prefix: "",
       mother_first_name: "",
       mother_middle_name: "",
       mother_last_name: "",
@@ -1026,7 +1025,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   Mother's Maiden Name
                 </h2>
                 <div className="grid grid-cols-4 gap-2">
-
                   <div className="col-span-2">
                     <FormField
                       control={form.control}

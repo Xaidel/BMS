@@ -6,6 +6,8 @@ export default function SidebarLayout({ children }: { children: React.ReactNode 
     <SidebarProvider>
       <AppSidebar onHover={function (): void {
         throw new Error("Function not implemented.");
+      } } onOut={function (): void {
+        throw new Error("Function not implemented.");
       } } />
       <main>
         {children}

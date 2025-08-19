@@ -3,7 +3,7 @@ import appnadoLogo from "../../assets/appnado_logo.png";
 import { useEffect, useState } from "react";
 
 export default function Header() {
-  const [username, setUsername] = useState("");
+  const [, setUsername] = useState("");
 
   useEffect(() => {
     const stored = localStorage.getItem("username");

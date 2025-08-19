@@ -43,6 +43,7 @@ export default function BarangayMapPage() {
     Map<L.Marker, Resident>
   >(new Map());
   const mapRef = useRef<L.Map | null>(null);
+  const markerLayerRef = useRef<L.LayerGroup | null>(null);
   const [, setNewMarker] = useState<L.Marker | null>(null);
   const [households, setHouseholds] = useState<
     {
@@ -50,7 +51,7 @@ export default function BarangayMapPage() {
       name: string;
       x: number;
       y: number;
-      houseNumber: string;
+      house_number: string;
       zone: string;
       section: string;
     }[]
@@ -74,7 +75,7 @@ export default function BarangayMapPage() {
       name: string;
       x: number;
       y: number;
-      houseNumber: string;
+      house_number: string;
       zone: string;
       section: string;
     };
@@ -153,27 +154,28 @@ export default function BarangayMapPage() {
       });
     }
 
-    // Render markers for all households
-    households.forEach((h) => {
+    if (!mapRef.current) return;
 
-      const marker = L.marker([h.y, h.x]).addTo(mapRef.current!);
-      marker.bindTooltip(`${h.name} (${h.houseNumber})`, {
+    if (!markerLayerRef.current) {
+      markerLayerRef.current = L.layerGroup().addTo(mapRef.current);
+    }
+
+    markerLayerRef.current.clearLayers();
+
+    households.forEach((h) => {
+      const marker = L.marker([h.y, h.x]).bindTooltip(`${h.name} (${h.house_number})`, {
         permanent: false,
         direction: "top",
         offset: L.point(0, -20),
       });
 
-      marker.on("click", async (evt) => {
+      marker.on("click", (evt) => {
         evt.originalEvent.preventDefault();
         evt.originalEvent.stopPropagation();
-        // Find household corresponding to this marker
-        const household = households.find(
-          (house) => house.x === h.x && house.y === h.y && house.id === h.id
-        );
-        if (household) {
-          setDeleteHousehold({ household, marker });
-        }
+        setDeleteHousehold({ household: h, marker });
       });
+
+      markerLayerRef.current!.addLayer(marker);
     });
   }, [households]);
 
@@ -189,7 +191,7 @@ export default function BarangayMapPage() {
     name: string;
     x: number;
     y: number;
-    houseNumber: string;
+    house_number: string;
     zone: string;
     section: string;
   }) {
@@ -243,7 +245,7 @@ export default function BarangayMapPage() {
           name: data.name,
           x: data.x,
           y: data.y,
-          houseNumber: data.houseNumber,
+          house_number: data.house_number,
           zone: data.zone,
           section: data.section,
         },
@@ -337,7 +339,7 @@ export default function BarangayMapPage() {
                           setOpen(false);
                         }}
                       >
-                        {h.name} ({h.houseNumber})
+                        {h.name} ({h.house_number})
                       </CommandItem>
                     );
                   }}
@@ -381,7 +383,6 @@ export default function BarangayMapPage() {
               return newMap;
             });
             setDeleteHousehold(null);
-            window.location.reload();
           }
         }}
       />

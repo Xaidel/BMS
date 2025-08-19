@@ -6,7 +6,7 @@ pub struct BarangayMap {
     pub name: String,
     pub x: f64,
     pub y: f64,
-    pub houseNumber: String,
+    pub house_number: String,
     pub zone: String,
     pub section: String,
 }

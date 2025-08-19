@@ -23,7 +23,7 @@ type ViewMapModalProps = {
     name: string;
     x: number;
     y: number;
-    houseNumber: string;
+    house_number: string;
     zone: string;
     section: string;
   }) => void;
@@ -32,7 +32,7 @@ type ViewMapModalProps = {
     name: string;
     x: number;
     y: number;
-    houseNumber: string;
+    house_number: string;
     zone: string;
     section: string;
     residentId?: number;
@@ -50,7 +50,7 @@ export default function ViewMapModal({
   const [name, setName] = useState("");
   const [x, setX] = useState<number>(markerLatLng ? markerLatLng.lng : 0);
   const [y, setY] = useState<number>(markerLatLng ? markerLatLng.lat : 0);
-  const [houseNumber, setHouseNumber] = useState("");
+  const [house_number, setHouseNumber] = useState("");
   const [zone, setZone] = useState("");
   const [section, setSection] = useState("");
   const [selectedResidentId, setSelectedResidentId] = useState<string>("");
@@ -62,7 +62,7 @@ export default function ViewMapModal({
       setName(household.name);
       setX(household.x);
       setY(household.y);
-      setHouseNumber(household.houseNumber);
+      setHouseNumber(household.house_number);
       setZone(household.zone);
       setSection(household.section);
       setSelectedResidentId(household.residentId?.toString() || "");
@@ -135,14 +135,14 @@ export default function ViewMapModal({
         name,
         x,
         y,
-        houseNumber: houseNumber,
+        house_number: house_number,
         zone,
         section,
         residentId: selectedResidentId ? Number(selectedResidentId) : undefined,
       });
 
       alert(`Household for ${name} saved successfully!`);
-      onSave({ name, x, y, houseNumber: houseNumber, zone, section });
+      onSave({ name, x, y, house_number: house_number, zone, section });
       onClose();
     } catch (err) {
       alert("Failed to save household. Check console for details.");
@@ -238,7 +238,7 @@ export default function ViewMapModal({
           { label: "Name", value: name, setter: setName },
           { label: "X (Longitude)", value: x, setter: setX, type: "number" },
           { label: "Y (Latitude)", value: y, setter: setY, type: "number" },
-          { label: "House Number", value: houseNumber, setter: setHouseNumber },
+          { label: "House Number", value: house_number, setter: setHouseNumber },
           { label: "Zone", value: zone, setter: setZone },
           { label: "Section", value: section, setter: setSection },
         ].map((field, idx) => (

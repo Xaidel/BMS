@@ -103,7 +103,7 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             name TEXT NOT NULL,
             x REAL NOT NULL,
             y REAL NOT NULL,
-            houseNumber TEXT,
+            house_number TEXT,
             zone TEXT,
             section TEXT
         );

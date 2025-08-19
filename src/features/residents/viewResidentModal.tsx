@@ -51,7 +51,6 @@ const civilStatusOptions = [
 const statusOption = ["Active", "Dead", "Missing", "Moved Out"];
 const genderOptions = ["Male", "Female"];
 const suffixOptions = ["Jr.", "Sr.", "II", "III"];
-const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
 export default function ViewResidentModal(
   props: Resident & { onSave: () => void }

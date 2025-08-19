@@ -52,7 +52,6 @@ const civilStatusOptions = [
 const statusOption = ["Active", "Dead", "Missing", "Moved Out"];
 const genderOptions = ["Male", "Female"];
 const suffixOptions = ["Jr.", "Sr.", "II", "III"];
-const prefixOptions = ["Mr.", "Mrs.", "Ms."];
 
 export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -63,7 +62,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   const form = useForm<z.infer<typeof residentSchema>>({
     resolver: zodResolver(residentSchema),
     defaultValues: {
-      prefix: "",
       first_name: "",
       middle_name: "",
       last_name: "",
@@ -74,12 +72,11 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       mobile_number: "",
       religion: "",
       occupation: "",
-      source_of_income: "",
       average_monthly_income: 0,
       date_of_birth: undefined,
       town_of_birth: "",
       province_of_birth: "",
-      nationality: "",
+      nationality: "Filipino",
       zone: "",
       barangay: "",
       town: "",
@@ -90,7 +87,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       father_first_name: "",
       father_middle_name: "",
       father_last_name: "",
-      father_prefix: "",
       mother_first_name: "",
       mother_middle_name: "",
       mother_last_name: "",
@@ -122,6 +118,22 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
 
   async function onSubmit(values: z.infer<typeof residentSchema>) {
     try {
+      // --- Compute age and set is_senior if applicable ---
+      if (values.date_of_birth instanceof Date) {
+        const today = new Date();
+        let age = today.getFullYear() - values.date_of_birth.getFullYear();
+        const m = today.getMonth() - values.date_of_birth.getMonth();
+        if (
+          m < 0 ||
+          (m === 0 && today.getDate() < values.date_of_birth.getDate())
+        ) {
+          age--;
+        }
+        if (age >= 60) {
+          values.is_senior = true;
+        }
+      }
+
       await invoke("insert_resident_command", {
         resident: {
           ...values,
@@ -146,7 +158,33 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
   }
 
   return (
-    <Dialog open={openModal} onOpenChange={setOpenModal}>
+    <Dialog
+      open={openModal}
+      onOpenChange={async (open) => {
+        setOpenModal(open);
+        if (open) {
+          setStep(1);
+
+          try {
+            const settings = (await invoke("fetch_settings_command")) as z.infer<
+              typeof settingsSchema
+            >;
+            if (settings) {
+              form.reset({
+                ...form.getValues(),
+                barangay: settings.barangay || "",
+                town: settings.municipality || "",
+                province: settings.province || "",
+              });
+            }
+          } catch (error) {
+            console.error("Failed to load default location from settings:", error);
+          }
+        } else {
+          form.reset();
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button size="lg">
           <Plus /> Add Resident
@@ -169,36 +207,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   Personal Information
                 </h2>
                 <div className="grid grid-cols-4 gap-5">
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="prefix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Prefix</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select Prefix" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {prefixOptions.map((option) => (
-                                  <SelectItem key={option} value={option}>
-                                    {option}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-2">
+                  <div className="col-span-4">
                     <FormField
                       control={form.control}
                       name="photo"
@@ -264,7 +273,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               id="middle_name"
                               type="text"
                               placeholder="Enter middle name"
-                              required
                               {...field}
                               className="text-black"
                             />
@@ -338,6 +346,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               type="text"
                               placeholder="Enter nationality"
                               required
+                              defaultValue="Filipino"
                               {...field}
                               className="text-black"
                             />
@@ -376,7 +385,31 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                         <FormItem>
                           <FormLabel>Religion</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter religion" {...field} />
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Religion" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {[
+                                  "Born Again",
+                                  "Christian",
+                                  "Iglesia Ni Cristo",
+                                  "Islam",
+                                  "Jehovah's Witness",
+                                  "Protestant",
+                                  "Roman Catholic",
+                                  "Seventh Day Adventist",
+                                  "Others",
+                                ].map((option) => (
+                                  <SelectItem key={option} value={option}>
+                                    {option}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -467,58 +500,37 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               <Calendar
                                 mode="single"
                                 selected={field.value}
-                                onSelect={field.onChange}
+                                onSelect={(date) => {
+                                  field.onChange(date);
+
+                                  if (date) {
+                                    const today = new Date();
+                                    let age =
+                                      today.getFullYear() - date.getFullYear();
+                                    const m =
+                                      today.getMonth() - date.getMonth();
+                                    if (
+                                      m < 0 ||
+                                      (m === 0 &&
+                                        today.getDate() < date.getDate())
+                                    ) {
+                                      age--;
+                                    }
+
+                                    if (age >= 60) {
+                                      form.setValue("is_senior", true);
+                                    } else {
+                                      form.setValue("is_senior", false);
+                                    }
+                                  }
+                                }}
                                 captionLayout="dropdown"
                                 fromYear={1900}
                                 toYear={new Date().getFullYear()}
+                                disabled={(date) => date > new Date()}
                               />
                             </PopoverContent>
                           </Popover>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="status"
-                      render={({ field }) => (
-                        <FormItem className="min-w-[150px]">
-                          <FormLabel>Status</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select Status" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {statusOption.map((option) => (
-                                  <SelectItem key={option} value={option}>
-                                    {option}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="col-span-2">
-                    <FormField
-                      control={form.control}
-                      name="occupation"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Occupation</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Enter occupation" {...field} />
-                          </FormControl>
-                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -579,6 +591,34 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                           <FormLabel className="text-black">
                             Senior Citizen
                           </FormLabel>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <div className="col-span-2">
+                    <FormField
+                      control={form.control}
+                      name="status"
+                      render={({ field }) => (
+                        <FormItem className="min-w-[150px]">
+                          <FormLabel>Status</FormLabel>
+                          <FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Status" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {statusOption.map((option) => (
+                                  <SelectItem key={option} value={option}>
+                                    {option}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
                         </FormItem>
                       )}
                     />
@@ -695,7 +735,9 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               placeholder="Enter present barangay"
                               required
                               {...field}
+                              defaultValue={field.value}
                               className="text-black"
+                              readOnly
                             />
                           </FormControl>
                         </FormItem>
@@ -716,7 +758,9 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               placeholder="Enter present town"
                               required
                               {...field}
+                              defaultValue={field.value}
                               className="text-black"
+                              readOnly
                             />
                           </FormControl>
                         </FormItem>
@@ -737,7 +781,9 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               placeholder="Enter present province"
                               required
                               {...field}
+                              defaultValue={field.value}
                               className="text-black"
+                              readOnly
                             />
                           </FormControl>
                         </FormItem>
@@ -840,15 +886,12 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
-                      name="source_of_income"
+                      name="occupation"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Source of Income</FormLabel>
+                          <FormLabel>Occupation</FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="Enter source of income"
-                              {...field}
-                            />
+                            <Input placeholder="Enter occupation" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -897,35 +940,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                   Name of Father
                 </h2>
                 <div className="grid grid-cols-4 gap-4">
-                  <div className="col-span-4">
-                    <FormField
-                      control={form.control}
-                      name="father_prefix"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Prefix</FormLabel>
-                          <FormControl>
-                            <Select
-                              onValueChange={field.onChange}
-                              defaultValue={field.value}
-                            >
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select Prefix" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                {prefixOptions.map((option) => (
-                                  <SelectItem key={option} value={option}>
-                                    {option}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
                   <div className="col-span-2">
                     <FormField
                       control={form.control}
@@ -960,7 +974,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               id="father_middleName"
                               type="text"
                               placeholder="Enter middle name"
-                              required
                               {...field}
                               className="text-black"
                             />
@@ -1059,7 +1072,6 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                               id="mothermiddleName"
                               type="text"
                               placeholder="Enter middle name"
-                              required
                               {...field}
                               className="text-black"
                             />

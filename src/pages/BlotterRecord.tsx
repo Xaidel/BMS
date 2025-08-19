@@ -397,7 +397,7 @@ export default function Blotters() {
               return (
                 <div className="flex gap-3">
                   <ViewBlotterModal {...row.original} onSave={fetchBlotters} />
-                  {status !== "Active" && (
+                  {status !== "Active" && status !== "On Going" && (
                     <DeleteBlotterModal
                       {...row.original}
                       onDelete={fetchBlotters}

@@ -46,9 +46,8 @@ export const eventSchema = z.object({
 })
 
 export const residentSchema = z.object({
-  prefix: z.string(),
   first_name: z.string().min(1),
-  middle_name: z.string().optional(),
+  middle_name: z.string().nullable().optional(),
   last_name: z.string().min(1),
   suffix: z.string().optional().nullable(),
   civil_status: z.string().min(1),
@@ -64,13 +63,12 @@ export const residentSchema = z.object({
   province: z.string().min(1),
   household_number: z.string().min(1),
   role_in_household: z.string().min(1),
-  father_prefix: z.string().min(1),
   father_first_name: z.string().min(1),
-  father_middle_name: z.string().min(1),
+  father_middle_name: z.string().nullable().optional(),
   father_last_name: z.string().min(1),
   father_suffix: z.string().optional().nullable(),
   mother_first_name: z.string().min(1),
-  mother_middle_name: z.string().min(1),
+  mother_middle_name: z.string().nullable().optional(),
   mother_last_name: z.string().min(1),
   status: z.string().min(1),
   photo: z.any(),
@@ -79,7 +77,6 @@ export const residentSchema = z.object({
   is_senior: z.boolean().default(false),
   religion: z.string().optional(),
   occupation: z.string().optional(),
-  source_of_income: z.string().optional(),
   average_monthly_income: z.number().optional(),
 });
 

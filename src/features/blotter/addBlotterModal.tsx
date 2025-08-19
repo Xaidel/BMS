@@ -30,10 +30,13 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { blotterSchema } from "@/types/formSchema";
-
-
-
-
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 
 export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
   const [openCalendar, setOpenCalendar] = useState(false);
@@ -216,7 +219,7 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
                       name="location"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Barangay</FormLabel>
+                          <FormLabel>Location</FormLabel>
                           <FormControl>
                             <Input
                               id="location"
@@ -237,18 +240,32 @@ export default function AddBlotterModal({ onSave }: { onSave?: () => void }) {
                       control={form.control}
                       name="zone"
                       render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Zone</FormLabel>
-                          <FormControl>
-                            <Input
-                              id="zone"
-                              type="text"
-                              placeholder="Enter Zone/Purok"
-                              required
-                              {...field}
-                              className="text-black"
-                            />
-                          </FormControl>
+                        <FormItem className="w-full">
+                          <FormLabel
+                            htmlFor="zone"
+                            className="text-black font-bold text-xs"
+                          >
+                            Zone
+                          </FormLabel>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger className="w-full text-black border-black/15">
+                                <SelectValue placeholder="Select zone" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {["1", "2", "3", "4", "5", "6", "7", "8"].map(
+                                (option, i) => (
+                                  <SelectItem value={option} key={i}>
+                                    Zone {option}
+                                  </SelectItem>
+                                )
+                              )}
+                            </SelectContent>
+                          </Select>
                         </FormItem>
                       )}
                     />

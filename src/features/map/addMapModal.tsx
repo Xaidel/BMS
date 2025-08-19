@@ -175,7 +175,10 @@ export default function AddMapModal({
         alignItems: "center",
         zIndex: 10000,
       }}
-      onClick={onClose}
+      onClick={() => {
+        onClose();
+        window.location.reload();
+      }}
     >
       <div
         style={{
@@ -257,7 +260,11 @@ export default function AddMapModal({
           { label: "Name", value: name, setter: setName },
           { label: "X (Longitude)", value: x, setter: setX, type: "number" },
           { label: "Y (Latitude)", value: y, setter: setY, type: "number" },
-          { label: "House Number", value: house_number, setter: setHouseNumber },
+          {
+            label: "House Number",
+            value: house_number,
+            setter: setHouseNumber,
+          },
           { label: "Zone", value: zone, setter: setZone },
           { label: "Section", value: section, setter: setSection },
         ].map((field, idx) => (
@@ -293,7 +300,10 @@ export default function AddMapModal({
         {/* Buttons */}
         <div style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
           <button
-            onClick={onClose}
+            onClick={() => {
+              onClose();
+              window.location.reload();
+            }}
             style={{
               padding: "8px 16px",
               borderRadius: 4,

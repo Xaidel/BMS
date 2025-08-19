@@ -282,23 +282,30 @@ export default function ViewBlotterModal(props: Blotter & { onSave: () => void }
                         control={form.control}
                         name="zone"
                         render={({ field }) => (
-                          <FormItem>
+                          <FormItem className="w-full">
                             <FormLabel
                               htmlFor="zone"
                               className="text-black font-bold text-xs"
                             >
                               Zone/Purok
                             </FormLabel>
-                            <FormControl>
-                              <Input
-                                id="zone"
-                                type="text"
-                                placeholder="Enter full name"
-                                required
-                                {...field}
-                                className="text-black"
-                              />
-                            </FormControl>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value || ""}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="w-full text-black border-black/15">
+                                  <SelectValue placeholder="Select zone" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {Array.from({ length: 8 }, (_, i) => (
+                                  <SelectItem value={`${i + 1}`} key={i + 1}>
+                                    {`Zone ${i + 1}`}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                             <FormMessage />
                           </FormItem>
                         )}

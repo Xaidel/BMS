@@ -14,7 +14,6 @@ export type Resident = {
   is_registered_voter: boolean;
   is_pwd: boolean;
   is_senior: boolean;
-  prefix: string;
   first_name: string;
   middle_name?: string;
   last_name: string;
@@ -26,7 +25,6 @@ export type Resident = {
   mobile_number: string;
   religion: string;
   occupation: string;
-  source_of_income: string;
   average_monthly_income: number;
   date_of_birth: Date;
   town_of_birth: string;
@@ -37,13 +35,12 @@ export type Resident = {
   province: string;
   household_number: string;
   role_in_household: string;
-  father_prefix: string;
   father_first_name: string;
-  father_middle_name: string;
+  father_middle_name?: string;
   father_last_name: string;
   father_suffix: string;
   mother_first_name: string;
-  mother_middle_name: string;
+  mother_middle_name?: string;
   mother_last_name: string;
   status: "Moved Out" | "Active" | "Dead" | "Missing";
   photo?: any;

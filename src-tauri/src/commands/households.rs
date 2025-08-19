@@ -1,13 +1,12 @@
 use rusqlite::params;
 use serde::{Deserialize, Serialize};
 
-use crate::{commands::residents::Resident, database::connection::establish_connection};
+use crate::{models::resident::Resident, database::connection::establish_connection};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct ResidentHead {
     pub id: Option<i32>,
     pub household_number: String,
-    pub prefix: String,
     pub first_name: String,
     pub middle_name: Option<String>,
     pub last_name: String,
@@ -22,7 +21,7 @@ pub fn fetch_household_heads_command() -> Result<Vec<ResidentHead>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     let mut stmt = conn.prepare(
-        "SELECT id, household_number, prefix, first_name, middle_name, last_name, suffix, zone, date_of_birth, status
+        "SELECT id, household_number, first_name, middle_name, last_name, suffix, zone, date_of_birth, status
          FROM residents WHERE role_in_household = 'Head'"
     ).map_err(|e| e.to_string())?;
 
@@ -30,14 +29,13 @@ pub fn fetch_household_heads_command() -> Result<Vec<ResidentHead>, String> {
         Ok(ResidentHead {
             id: row.get(0)?,
             household_number: row.get(1)?,
-            prefix: row.get(2)?,
-            first_name: row.get(3)?,
-            middle_name: row.get(4)?,
-            last_name: row.get(5)?,
-            suffix: row.get(6)?,
-            zone: row.get(7)?,
-            date_of_birth: row.get(8)?,
-            status: row.get(9)?,
+            first_name: row.get(2)?,
+            middle_name: row.get(3)?,
+            last_name: row.get(4)?,
+            suffix: row.get(5)?,
+            zone: row.get(6)?,
+            date_of_birth: row.get(7)?,
+            status: row.get(8)?,
         })
     }).map_err(|e| e.to_string())?;
 
@@ -54,11 +52,11 @@ pub fn fetch_residents_by_household_number(household_number: String) -> Result<V
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     let mut stmt = conn.prepare(
-        "SELECT id, prefix, first_name, middle_name, last_name, suffix, civil_status, gender, nationality,
-         mobile_number, religion, occupation, source_of_income, average_monthly_income, date_of_birth,
+        "SELECT id, first_name, middle_name, last_name, suffix, civil_status, gender, nationality,
+         mobile_number, religion, occupation, average_monthly_income, date_of_birth,
          town_of_birth, province_of_birth, zone, barangay, town, province,
          household_number, role_in_household,
-         father_prefix, father_first_name, father_middle_name, father_last_name, father_suffix,
+         father_first_name, father_middle_name, father_last_name, father_suffix,
          mother_first_name, mother_middle_name, mother_last_name, status, photo,
          is_registered_voter, is_pwd, is_senior
          FROM residents
@@ -69,41 +67,38 @@ pub fn fetch_residents_by_household_number(household_number: String) -> Result<V
         .query_map(params![household_number], |row| {
             Ok(Resident {
                 id: row.get(0)?,
-                prefix: row.get(1)?,
-                first_name: row.get(2)?,
-                middle_name: row.get(3)?,
-                last_name: row.get(4)?,
-                suffix: row.get(5)?,
-                civil_status: row.get(6)?,
-                gender: row.get(7)?,
-                nationality: row.get(8)?,
-                mobile_number: row.get(9)?,
-                religion: row.get(10)?,
-                occupation: row.get(11)?,
-                source_of_income: row.get(12)?,
-                average_monthly_income: row.get(13)?,
-                date_of_birth: row.get(14)?,
-                town_of_birth: row.get(15)?,
-                province_of_birth: row.get(16)?,
-                zone: row.get(17)?,
-                barangay: row.get(18)?,
-                town: row.get(19)?,
-                province: row.get(20)?,
-                household_number: row.get(21)?,
-                role_in_household: row.get(22)?,
-                father_prefix: row.get(23)?,
-                father_first_name: row.get(24)?,
-                father_middle_name: row.get(25)?,
-                father_last_name: row.get(26)?,
-                father_suffix: row.get(27)?,
-                mother_first_name: row.get(28)?,
-                mother_middle_name: row.get(29)?,
-                mother_last_name: row.get(30)?,
-                status: row.get(31)?,
-                photo: row.get(32)?,
-                is_registered_voter: row.get(33)?,
-                is_pwd: row.get(34)?,
-                is_senior: row.get(35)?,
+                first_name: row.get(1)?,
+                middle_name: row.get(2)?,
+                last_name: row.get(3)?,
+                suffix: row.get(4)?,
+                civil_status: row.get(5)?,
+                gender: row.get(6)?,
+                nationality: row.get(7)?,
+                mobile_number: row.get(8)?,
+                religion: row.get(9)?,
+                occupation: row.get(10)?,
+                average_monthly_income: row.get(11)?,
+                date_of_birth: row.get(12)?,
+                town_of_birth: row.get(13)?,
+                province_of_birth: row.get(14)?,
+                zone: row.get(15)?,
+                barangay: row.get(16)?,
+                town: row.get(17)?,
+                province: row.get(18)?,
+                household_number: row.get(19)?,
+                role_in_household: row.get(20)?,
+                father_first_name: row.get(21)?,
+                father_middle_name: row.get(22)?,
+                father_last_name: row.get(23)?,
+                father_suffix: row.get(24)?,
+                mother_first_name: row.get(25)?,
+                mother_middle_name: row.get(26)?,
+                mother_last_name: row.get(27)?,
+                status: row.get(28)?,
+                photo: row.get(29)?,
+                is_registered_voter: row.get(30)?,
+                is_pwd: row.get(31)?,
+                is_senior: row.get(32)?,
             })
         })
         .map_err(|e| e.to_string())?;

@@ -18,7 +18,7 @@ type Resident = {
   average_monthly_income: number;
 };
 
-export default function ViewHouseholdModal({ household_number, head_name, onClose, onTotalIncomeCalculated }: Props) {
+export default function ViewhouseholdModal({ household_number, head_name, onClose, onTotalIncomeCalculated }: Props) {
   const [members, setMembers] = useState<Resident[]>([]);
 
   useEffect(() => {

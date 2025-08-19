@@ -24,6 +24,7 @@ import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
 import ViewhouseholdModal from "@/features/households/viewhouseholdModal";
 
+
 export default function Households() {
   // Map household_number (as string) -> total income (as string)
   const [householdIncomeMap, setHouseholdIncomeMap] = useState<
@@ -352,7 +353,6 @@ export default function Households() {
 
   const total = data.length;
 
-  // Handler to receive totalIncome from ViewHouseholdModal
   const onTotalIncomeCalculated = (income: number) => {
     console.log("Household income calculated in modal:", income);
   };

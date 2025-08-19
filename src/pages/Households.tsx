@@ -22,7 +22,7 @@ import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 import Filter from "@/components/ui/filter";
 import { sortResidents } from "@/service/household/householdSort";
 import { Resident } from "@/types/types";
-import ViewHouseholdModal from "@/features/households/viewhouseholdModal";
+import ViewhouseholdModal from "@/features/households/viewhouseholdModal";
 
 export default function Households() {
   // Map household_number (as string) -> total income (as string)
@@ -593,7 +593,7 @@ export default function Households() {
             </DialogDescription>
           </DialogHeader>
           {selectedHousehold && (
-            <ViewHouseholdModal
+            <ViewhouseholdModal
               household_number={selectedHousehold.household_number}
               head_name={selectedHousehold.full_name}
               onClose={() => setIsModalOpen(false)}

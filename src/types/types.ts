@@ -134,7 +134,7 @@ export type BarangayMap = {
   name: string;
   x: number;
   y: number;
-  houseNumber: string;
+  house_number: string;
   zone: string;
   section: string;
 };

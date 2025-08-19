@@ -9,7 +9,7 @@ pub struct BarangayMap {
     pub name: String,
     pub x: f64,
     pub y: f64,
-    pub houseNumber: String,
+    pub house_number: String,
     pub zone: String,
     pub section: String,
 }
@@ -17,7 +17,7 @@ pub struct BarangayMap {
 pub fn fetch_households() -> Result<Vec<BarangayMap>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
     let mut stmt = conn
-        .prepare("SELECT id, name, x, y, houseNumber, zone, section FROM barangay_map") // table name
+        .prepare("SELECT id, name, x, y, house_number, zone, section FROM barangay_map") // table name
         .map_err(|e| e.to_string())?;
 
     let household_iter = stmt
@@ -27,7 +27,7 @@ pub fn fetch_households() -> Result<Vec<BarangayMap>, String> {
                 name: row.get(1)?,
                 x: row.get(2)?,
                 y: row.get(3)?,
-                houseNumber: row.get(4)?,
+                house_number: row.get(4)?,
                 zone: row.get(5)?,
                 section: row.get(6)?,
             })
@@ -48,14 +48,14 @@ pub fn update_household(
     name: String,
     x: f64,
     y: f64,
-    houseNumber: String,
+    house_number: String,
     zone: String,
     section: String,
 ) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
     conn.execute(
-        "UPDATE barangay_map SET name = ?1, x = ?2, y = ?3, houseNumber = ?4, zone = ?5, section = ?6 WHERE id = ?7",
-        params![name, x, y, houseNumber, zone, section, id],
+        "UPDATE barangay_map SET name = ?1, x = ?2, y = ?3, house_number = ?4, zone = ?5, section = ?6 WHERE id = ?7",
+        params![name, x, y, house_number, zone, section, id],
     )
     .map_err(|e| e.to_string())?;
     Ok(())
@@ -74,7 +74,7 @@ pub fn save_household(
     resident_id: i32,
     x: f64,
     y: f64,
-    houseNumber: String,
+    house_number: String,
     zone: String,
     section: String,
 ) -> Result<(), String> {
@@ -109,9 +109,9 @@ pub fn save_household(
         ); // debug log
 
         conn.execute(
-            "INSERT INTO barangay_map (name, x, y, houseNumber, zone, section)
+            "INSERT INTO barangay_map (name, x, y, house_number, zone, section)
              VALUES (?1, ?2, ?3, ?4, ?5, ?6)",
-            params![full_name, x, y, houseNumber, zone, section],
+            params![full_name, x, y, house_number, zone, section],
         )
         .map_err(|e| e.to_string())?;
 
@@ -129,7 +129,7 @@ pub fn insert_household(
     name: String,
     x: f64,
     y: f64,
-    houseNumber: String,
+    house_number: String,
     zone: String,
     section: String,
 ) -> Result<(), String> {
@@ -137,9 +137,9 @@ pub fn insert_household(
 
     // Insert the household
     conn.execute(
-        "INSERT INTO barangay_map (name, x, y, houseNumber, zone, section)
+        "INSERT INTO barangay_map (name, x, y, house_number, zone, section)
          VALUES (?1, ?2, ?3, ?4, ?5, ?6)",
-        params![name, x, y, houseNumber, zone, section],
+        params![name, x, y, house_number, zone, section],
     )
     .map_err(|e| e.to_string())?;
 

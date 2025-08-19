@@ -24,7 +24,7 @@ type AddMapModalProps = {
     name: string;
     x: number;
     y: number;
-    houseNumber: string;
+    house_number: string;
     zone: string;
     section: string;
   }) => void;
@@ -41,7 +41,7 @@ export default function AddMapModal({
   const [name, setName] = useState("");
   const [x, setX] = useState<number>(markerLatLng ? markerLatLng.lng : 0);
   const [y, setY] = useState<number>(markerLatLng ? markerLatLng.lat : 0);
-  const [houseNumber, setHouseNumber] = useState("");
+  const [house_number, setHouseNumber] = useState("");
   const [zone, setZone] = useState("");
   const [section, setSection] = useState("");
   const [selectedResidentId, setSelectedResidentId] = useState<string>("");
@@ -120,7 +120,7 @@ export default function AddMapModal({
         name,
         x,
         y,
-        houseNumber: houseNumber,
+        houseNumber: house_number,
         zone,
         section,
         residentId: Number(selectedResidentId),
@@ -132,7 +132,7 @@ export default function AddMapModal({
         name,
         x,
         y,
-        houseNumber: houseNumber,
+        house_number: house_number,
         zone,
         section,
       });
@@ -257,7 +257,7 @@ export default function AddMapModal({
           { label: "Name", value: name, setter: setName },
           { label: "X (Longitude)", value: x, setter: setX, type: "number" },
           { label: "Y (Latitude)", value: y, setter: setY, type: "number" },
-          { label: "House Number", value: houseNumber, setter: setHouseNumber },
+          { label: "House Number", value: house_number, setter: setHouseNumber },
           { label: "Zone", value: zone, setter: setZone },
           { label: "Section", value: section, setter: setSection },
         ].map((field, idx) => (

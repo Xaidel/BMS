@@ -1,6 +1,17 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+delete (L.Icon.Default.prototype as any)._getIconUrl;
+
+(L.Icon.Default as any).mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
 import { invoke } from "@tauri-apps/api/core";
 import AddMapModal from "@/features/map/addMapModal";
 import { Button } from "@/components/ui/button";
@@ -15,23 +26,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ChevronsUpDown, MapPin } from "lucide-react";
-import ReactDOMServer from "react-dom/server";
+import { ChevronsUpDown } from "lucide-react";
 import { Virtuoso } from "react-virtuoso";
 import DeleteMapModal from "@/features/map/deleteMapModal";
 import { searchHouseholds } from "@/service/map/mapSearch";
-
-function createMapPinIcon() {
-  const svgString = ReactDOMServer.renderToStaticMarkup(
-    <MapPin color="black" size={28} />
-  );
-  return L.divIcon({
-    html: svgString,
-    className: "",
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-  });
-}
 
 type Resident = {
   zone: string;
@@ -176,14 +174,11 @@ export default function BarangayMapPage() {
     markerLayerRef.current.clearLayers();
 
     households.forEach((h) => {
-      const marker = L.marker([h.y, h.x], { icon: createMapPinIcon() }).bindTooltip(
-        `${h.name} (${h.house_number})`,
-        {
-          permanent: false,
-          direction: "top",
-          offset: L.point(0, -20),
-        }
-      );
+      const marker = L.marker([h.y, h.x]).bindTooltip(`${h.name} (${h.house_number})`, {
+        permanent: false,
+        direction: "top",
+        offset: L.point(0, -20),
+      });
 
       marker.on("click", (evt) => {
         evt.originalEvent.preventDefault();

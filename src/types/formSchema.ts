@@ -75,6 +75,7 @@ export const residentSchema = z.object({
   is_registered_voter: z.boolean().default(false),
   is_pwd: z.boolean().default(false),
   is_senior: z.boolean().default(false),
+  is_solo_parent: z.boolean().default(false),
   religion: z.string().optional(),
   occupation: z.string().optional(),
   average_monthly_income: z.number().optional(),

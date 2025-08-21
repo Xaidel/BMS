@@ -58,7 +58,7 @@ pub fn fetch_residents_by_household_number(household_number: String) -> Result<V
          household_number, role_in_household,
          father_first_name, father_middle_name, father_last_name, father_suffix,
          mother_first_name, mother_middle_name, mother_last_name, status, photo,
-         is_registered_voter, is_pwd, is_senior
+         is_registered_voter, is_pwd, is_senior, is_solo_parent
          FROM residents
          WHERE household_number = ?1"
     ).map_err(|e| e.to_string())?;
@@ -99,6 +99,7 @@ pub fn fetch_residents_by_household_number(household_number: String) -> Result<V
                 is_registered_voter: row.get(30)?,
                 is_pwd: row.get(31)?,
                 is_senior: row.get(32)?,
+                is_solo_parent: row.get(33)?,
             })
         })
         .map_err(|e| e.to_string())?;

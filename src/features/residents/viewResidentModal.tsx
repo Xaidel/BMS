@@ -486,7 +486,7 @@ export default function ViewResidentModal(
                       />
                     </div>
 
-                    <div className="col-span-4 flex flex-wrap items-center gap-11">
+                    <div className="col-span-4 flex flex-wrap items-center gap-2">
                       <FormField
                         control={form.control}
                         name="is_registered_voter"
@@ -544,6 +544,25 @@ export default function ViewResidentModal(
                           </FormItem>
                         )}
                       />
+                      <FormField
+                      control={form.control}
+                      name="is_solo_parent"
+                      render={({ field }) => (
+                        <FormItem className="flex items-center space-x-2">
+                          <FormControl>
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="mr-2"
+                            />
+                          </FormControl>
+                          <FormLabel className="text-black">
+                            Solo Parent
+                          </FormLabel>
+                        </FormItem>
+                      )}
+                    />
                     </div>
                   </div>
 

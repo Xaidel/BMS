@@ -35,4 +35,5 @@ pub struct Resident {
     pub is_registered_voter: bool,
     pub is_pwd: bool,
     pub is_senior: bool,
+    pub is_solo_parent: bool,
 }

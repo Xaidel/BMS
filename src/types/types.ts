@@ -14,6 +14,7 @@ export type Resident = {
   is_registered_voter: boolean;
   is_pwd: boolean;
   is_senior: boolean;
+  is_solo_parent: boolean;
   first_name: string;
   middle_name?: string;
   last_name: string;

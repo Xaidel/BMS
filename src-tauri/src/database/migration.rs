@@ -92,7 +92,8 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             photo TEXT,
             is_registered_voter BOOLEAN NOT NULL DEFAULT 0,
             is_pwd BOOLEAN NOT NULL DEFAULT 0,
-            is_senior BOOLEAN NOT NULL DEFAULT 0
+            is_senior BOOLEAN NOT NULL DEFAULT 0,
+            is_solo_parent BOOLEAN NOT NULL DEFAULT 0
         );
         CREATE TABLE IF NOT EXISTS barangay_map (
             id INTEGER PRIMARY KEY AUTOINCREMENT,

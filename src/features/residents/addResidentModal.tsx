@@ -67,7 +67,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       last_name: "",
       suffix: "",
       civil_status: "",
-      status: "",
+      status: "Active",
       gender: "",
       mobile_number: "",
       religion: "",
@@ -94,6 +94,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
       is_registered_voter: false,
       is_pwd: false,
       is_senior: false,
+      is_solo_parent: false,
     },
   });
 
@@ -166,9 +167,9 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
           setStep(1);
 
           try {
-            const settings = (await invoke("fetch_settings_command")) as z.infer<
-              typeof settingsSchema
-            >;
+            const settings = (await invoke(
+              "fetch_settings_command"
+            )) as z.infer<typeof settingsSchema>;
             if (settings) {
               form.reset({
                 ...form.getValues(),
@@ -178,7 +179,10 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
               });
             }
           } catch (error) {
-            console.error("Failed to load default location from settings:", error);
+            console.error(
+              "Failed to load default location from settings:",
+              error
+            );
           }
         } else {
           form.reset();
@@ -536,7 +540,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                     />
                   </div>
 
-                  <div className="col-span-4 flex flex-wrap items-center gap-11">
+                  <div className="col-span-4 flex flex-wrap items-center gap-2">
                     <FormField
                       control={form.control}
                       name="is_registered_voter"
@@ -552,6 +556,26 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                           </FormControl>
                           <FormLabel className="text-black">
                             Registered Voter
+                          </FormLabel>
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="is_solo_parent"
+                      render={({ field }) => (
+                        <FormItem className="flex items-center space-x-2">
+                          <FormControl>
+                            <input
+                              type="checkbox"
+                              checked={field.value}
+                              onChange={field.onChange}
+                              className="mr-2"
+                            />
+                          </FormControl>
+                          <FormLabel className="text-black">
+                            Solo Parent
                           </FormLabel>
                         </FormItem>
                       )}
@@ -595,7 +619,7 @@ export default function AddResidentModal({ onSave }: { onSave: () => void }) {
                       )}
                     />
                   </div>
-                  <div className="col-span-2">
+                  <div className="col-span-4">
                     <FormField
                       control={form.control}
                       name="status"

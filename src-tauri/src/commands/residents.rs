@@ -12,7 +12,7 @@ pub fn fetch_all_residents_command() -> Result<Vec<Resident>, String> {
            household_number, role_in_household,
            father_first_name, father_middle_name, father_last_name, father_suffix,
             mother_first_name, mother_middle_name, mother_last_name, status, photo,
-           is_registered_voter, is_pwd, is_senior
+           is_registered_voter, is_pwd, is_senior, is_solo_parent
          FROM residents"
     ).map_err(|e| e.to_string())?;
 
@@ -52,6 +52,7 @@ pub fn fetch_all_residents_command() -> Result<Vec<Resident>, String> {
                 is_registered_voter: row.get(30)?,
                 is_pwd: row.get(31)?,
                 is_senior: row.get(32)?,
+                is_solo_parent: row.get(33)?,
             })
         })
         .map_err(|e| e.to_string())?;
@@ -76,9 +77,9 @@ pub fn insert_resident_command(resident: Resident) -> Result<(), String> {
             household_number, role_in_household,
             father_first_name, father_middle_name, father_last_name, father_suffix,
              mother_first_name, mother_middle_name, mother_last_name, status, photo,
-            is_registered_voter, is_pwd, is_senior
+            is_registered_voter, is_pwd, is_senior, is_solo_parent
         ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18,
-                  ?19, ?20, ?21, ?22, ?23, ?24, ?25, ?26, ?27, ?28, ?29, ?30, ?31, ?32)",
+                  ?19, ?20, ?21, ?22, ?23, ?24, ?25, ?26, ?27, ?28, ?29, ?30, ?31, ?32, ?33)",
         params![
             resident.first_name,
             resident.middle_name,
@@ -112,6 +113,7 @@ pub fn insert_resident_command(resident: Resident) -> Result<(), String> {
             resident.is_registered_voter,
             resident.is_pwd,
             resident.is_senior,
+            resident.is_solo_parent
         ],
     ).map_err(|e| e.to_string())?;
 
@@ -132,7 +134,7 @@ pub fn update_resident_command(resident: Resident) -> Result<(), String> {
             household_number = ?19, role_in_household = ?20,
             father_first_name = ?21, father_middle_name = ?22, father_last_name = ?23, father_suffix = ?24,
             mother_first_name = ?25, mother_middle_name = ?26, mother_last_name = ?27,
-            status = ?28, photo = ?29, is_registered_voter = ?30, is_pwd = ?31, is_senior = ?32
+            status = ?28, photo = ?29, is_registered_voter = ?30, is_pwd = ?31, is_senior = ?32, is_solo_parent = ?33
          WHERE id = ?33",
         params![
             resident.first_name,
@@ -167,6 +169,7 @@ pub fn update_resident_command(resident: Resident) -> Result<(), String> {
             resident.is_registered_voter,
             resident.is_pwd,
             resident.is_senior,
+            resident.is_solo_parent,
             resident.id
         ],
     ).map_err(|e| e.to_string())?;

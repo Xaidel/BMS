@@ -20,7 +20,7 @@ export default function Header() {
     <div className="min-w-screen bg-white py-3 px-24 font-redhat text-black flex items-center">
       <div className="flex items-center gap-4">
         <img src={logo} alt="logo" className="ml-19 max-w-[3rem]" />
-       <p className="ml-3 text-xl font-bold">Barangay Management System</p>
+       <p className="ml-3 text-xl font-semi-bold">Barangay Management System</p>
         <img
           src={appnadoLogo}
           alt="company logo"

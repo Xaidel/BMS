@@ -62,6 +62,7 @@ export default function Clearance() {
   const [amount, setAmount] = useState("10.00");
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
+  const [residencyYear, setResidencyYear] = useState(""); // Add state for residency year
   const civilStatusOptions = [
     "Single",
     "Lived-in",
@@ -305,6 +306,29 @@ export default function Clearance() {
             </div>
             <div className="mt-4">
               <label
+                htmlFor="residency_year"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Date of Residency
+              </label>
+              <Select value={residencyYear} onValueChange={setResidencyYear}>
+                <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                  <SelectValue placeholder="-- Select Year --" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from(
+                    { length: new Date().getFullYear() - 1900 + 1 },
+                    (_, i) => (1900 + i).toString()
+                  ).map((year) => (
+                    <SelectItem key={year} value={year}>
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="mt-4">
+              <label
                 htmlFor="amount"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
@@ -458,10 +482,8 @@ export default function Clearance() {
                           <Text style={{ fontWeight: "bold" }}>
                             {`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}
                           </Text>
-                          {`, ${age || "___"} years old, ${
-                            civilStatus || "___"
-                         }, a resident of zone ${selectedResident.zone}, Barangay ${settings?.barangay || "________________"}, ${settings?.municipality || "________________"}, ${settings?.province || "________________"}.`}
-                          He is known to me of good moral character and at
+                          {`, ${age || "___"} years old, ${civilStatus || "___"}, and a resident of zone ${selectedResident.zone}, Barangay ${settings?.barangay || "________________"}, ${settings?.municipality || "________________"}, ${settings?.province || "________________"} since ${residencyYear || "____"}. `}
+                           He/She is known to me of good moral character and at
                           present has no any criminal records and/or any case in
                           this Barangay.
                         </Text>

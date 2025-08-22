@@ -135,7 +135,7 @@ pub fn update_resident_command(resident: Resident) -> Result<(), String> {
             father_first_name = ?21, father_middle_name = ?22, father_last_name = ?23, father_suffix = ?24,
             mother_first_name = ?25, mother_middle_name = ?26, mother_last_name = ?27,
             status = ?28, photo = ?29, is_registered_voter = ?30, is_pwd = ?31, is_senior = ?32, is_solo_parent = ?33
-         WHERE id = ?33",
+         WHERE id = ?34",
         params![
             resident.first_name,
             resident.middle_name,

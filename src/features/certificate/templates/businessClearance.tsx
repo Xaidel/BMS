@@ -473,7 +473,9 @@ export default function BusinessClearance() {
                       >
                         This is to certify that the above-named individual is a
                         bona fide resident of Barangay{" "}
-                        {settings?.barangay || "________________"} and is duly
+                        {settings?.barangay || "________________"}, 
+                        {settings?.municipality || "________________"}, 
+                        {settings?.province || "________________"}, and is duly
                         authorized to operate his/her business within the
                         jurisdiction of this Barangay.
                       </Text>

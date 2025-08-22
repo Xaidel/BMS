@@ -32,6 +32,14 @@ import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Official } from "@/types/types";
 
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+
 if (!window.Buffer) {
   window.Buffer = Buffer;
 }
@@ -47,6 +55,7 @@ type Resident = {
 };
 
 export default function Residency() {
+  const [residencyYear, setResidencyYear] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -277,6 +286,29 @@ export default function Residency() {
               />
             </div>
             <div className="mt-4">
+              <label
+                htmlFor="residency_year"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Residency Year
+              </label>
+              <Select value={residencyYear} onValueChange={setResidencyYear}>
+                <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                  <SelectValue placeholder="-- Select Residency Year --" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from(
+                    { length: new Date().getFullYear() - 1900 + 1 },
+                    (_, i) => (1900 + i).toString()
+                  ).map((year) => (
+                    <SelectItem key={year} value={year}>
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Enter Amount
               </label>
@@ -431,11 +463,10 @@ export default function Residency() {
                           </Text>
                           <Text>
                             , {age || "___"} years old, {civilStatus || "___"},
-                            is a bonafide resident of  
-                          {settings ? settings.barangay : "________________"}
-                        ,{settings ? settings.municipality : "________________"}
-                        ,{settings ? settings.province : "________________"}
-                            Camarines Sur.
+                            is a bonafide resident of{" "}
+                            {settings ? settings.barangay : "________________"},{" "}
+                            {settings ? settings.municipality : "________________"},{" "}
+                            {settings ? settings.province : "________________"} since {residencyYear || "____"}. 
                           </Text>
                         </Text>
                         <Text

@@ -338,9 +338,10 @@ export default function Unemployment() {
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                           <Text style={{ fontWeight: "bold" }}>This is to certify that </Text>
                           <Text style={{ fontWeight: "bold" }}>{`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}</Text>
-                          <Text>, {age}, {civilStatus.toLowerCase() || "civil status"}, is a resident of Barangay {settings ? settings.barangay : "________________"}
-                        ,{settings ? settings.municipality : "________________"}
-                        ,{settings ? settings.province : "________________"}.</Text>
+                          <Text>, {age}, {civilStatus.toLowerCase() || "civil status"}, is a resident of Barangay{" "}
+                         {settings ? settings.barangay : "________________"},{" "}
+                        {settings ? settings.municipality : "________________"},{" "}
+                        {settings ? settings.province : "________________"}.</Text>
                         </Text>
                         <Text style={[styles.bodyText, { textAlign: "justify", marginBottom: 8 }]}>
                           This certifies further that the above-named person is currently <Text style={{ fontWeight: "bold" }}>unemployed</Text> and is actively seeking employment.

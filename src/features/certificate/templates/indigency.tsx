@@ -62,6 +62,7 @@ type Official = {
 };
 
 export default function Indigency() {
+  const [residencyYear, setResidencyYear] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -290,6 +291,29 @@ export default function Indigency() {
               </Select>
             </div>
             <div className="mt-4">
+              <label
+                htmlFor="residency_year"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Residency Year
+              </label>
+              <Select value={residencyYear} onValueChange={setResidencyYear}>
+                <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                  <SelectValue placeholder="-- Select Residency Year --" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Array.from(
+                    { length: new Date().getFullYear() - 1900 + 1 },
+                    (_, i) => (1900 + i).toString()
+                  ).map((year) => (
+                    <SelectItem key={year} value={year}>
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="mt-4">
               <label className="block mb-1 text-sm font-medium text-gray-700">
                 Amount (PHP)
               </label>
@@ -445,13 +469,14 @@ export default function Indigency() {
                           </Text>
                           <Text>
                             , {age || "___"} years old, {civilStatus || "___"},
-                            is a resident of Barangay , at{" "}
-                            {settings ? settings.barangay : "________________"},
+                            is a resident of Barangay{" "}
+                            {settings ? settings.barangay : "________________"},{" "}
                             {settings
                               ? settings.municipality
                               : "________________"}
-                            ,{settings ? settings.province : "________________"}
-                            Sur.
+                            ,{" "}
+                            {settings ? settings.province : "________________"}{" "}
+                            since {residencyYear || "____"}. Sur.
                           </Text>
                         </Text>
                         <Text

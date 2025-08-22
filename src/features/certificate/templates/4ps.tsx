@@ -67,6 +67,7 @@ export default function Fourps() {
   const [residents, setResidents] = useState<Resident[]>([]);
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
+  const [residencyYear, setResidencyYear] = useState("");
   const [captainName, setCaptainName] = useState<string | null>(null);
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
@@ -312,6 +313,29 @@ export default function Fourps() {
               </div>
               <div className="mt-4">
                 <label
+                  htmlFor="residency_year"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Residency Year
+                </label>
+                <Select value={residencyYear} onValueChange={setResidencyYear}>
+                  <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                    <SelectValue placeholder="-- Select Residency Year --" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Array.from(
+                      { length: new Date().getFullYear() - 1900 + 1 },
+                      (_, i) => (1900 + i).toString()
+                    ).map((year) => (
+                      <SelectItem key={year} value={year}>
+                        {year}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="mt-4">
+                <label
                   htmlFor="amount"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
@@ -470,13 +494,13 @@ export default function Fourps() {
                           </Text>
                           <Text>
                             , {age || "___"} years old, {civilStatus || "___"},
-                            is a resident of Barangay{" "}
+                            and a resident of Barangay{" "}
                             {settings ? settings.barangay : "________________"},
                             {settings
                               ? settings.municipality
                               : "________________"}
-                            ,{settings ? settings.province : "________________"}
-                            Sur.
+                            ,{settings ? settings.province : "________________"}{" "}
+                            since {residencyYear || "____"}.
                           </Text>
                         </Text>
                         <Text

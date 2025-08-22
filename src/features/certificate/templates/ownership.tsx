@@ -173,11 +173,11 @@ export default function Fourps() {
                 className="h-8 w-8"
                 onClick={() => navigate(-1)}
               />
-              4ps Certificate
+              Certificate of Ownership
             </CardTitle>
             <CardDescription className="text-start">
-              Please fill out the necessary information needed for 4ps
-              Certification
+              Please fill out the necessary information needed for 
+              Certification of Ownership
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -482,11 +482,9 @@ export default function Fourps() {
                           <Text>
                             , {age || "___"} years old, {civilStatus || "___"},
                             a resident of Barangay , at{" "}
-                            {settings ? settings.barangay : "________________"},
-                            {settings
-                              ? settings.municipality
-                              : "________________"}
-                            ,{settings ? settings.province : "________________"}{" "}
+                            {settings ? settings.barangay : "________________"},{" "}
+                            {settings ? settings.municipality : "________________"},{" "}
+                            {settings ? settings.province : "________________"}{" "}
                             is the owner of{ownershipText ? ` ` : ""}
                             {ownershipText && (
                               <Text style={{ fontWeight: "bold" }}>

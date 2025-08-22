@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
+import { View, Text, Image } from "@react-pdf/renderer";
 
 type Settings = {
   barangay: string;

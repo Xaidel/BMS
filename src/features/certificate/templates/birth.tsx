@@ -66,7 +66,7 @@ export default function Birth() {
   const [amount, setAmount] = useState("10.00");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
   const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
-  const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
+  const [, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
   console.log(age)
   // Resident selector state for Select Resident dropdown
   const [open, setOpen] = useState(false);

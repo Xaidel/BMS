@@ -1,9 +1,3 @@
-import { Buffer } from "buffer";
-
-if (!window.Buffer) {
-  window.Buffer = Buffer;
-}
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandInput, CommandItem } from "@/components/ui/command";
@@ -12,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { toast } from "sonner";
@@ -22,7 +15,11 @@ import { Virtuoso } from "react-virtuoso";
 import { Official } from "@/types/types";
 import CertificateHeader from "../certificateHeader";
 import CertificateFooter from "../certificateFooter";
+import { Buffer } from "buffer";
 
+if (!window.Buffer) {
+  window.Buffer = Buffer;
+}
 type Resident = {
   id?: number;
   first_name: string;
@@ -66,8 +63,8 @@ export default function Marriage() {
   const selectedResident2 = useMemo(() => {
     return allResidents.find((res) => res.value === value2)?.data;
   }, [allResidents, value2])
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null)
-  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
+  const [, setLogoDataUrl] = useState<string | null>(null)
+  const [, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const [settings, setSettings] = useState<{ barangay: string; municipality: string; province: string } | null>(null);
 
   useEffect(() => {
@@ -445,13 +442,6 @@ export default function Marriage() {
                     ) : (
                       <Text style={styles.bodyText}>Please select a resident to view certificate.</Text>
                     )}
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        marginTop: 40,
-                      }}
-                    >
                       <CertificateFooter
                       styles={styles}
                       captainName={captainName}

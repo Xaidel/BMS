@@ -24,7 +24,6 @@ import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { toast } from "sonner";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -83,8 +82,8 @@ export default function Residency() {
   const selectedResident = useMemo(() => {
     return allResidents.find((res) => res.value === value)?.data;
   }, [allResidents, value]);
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
-  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
+  const [, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
@@ -477,13 +476,6 @@ export default function Residency() {
                         Please select a resident to view certificate.
                       </Text>
                     )}
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        marginTop: 40,
-                      }}
-                    >
                       <CertificateFooter
                       styles={styles}
                       captainName={captainName}

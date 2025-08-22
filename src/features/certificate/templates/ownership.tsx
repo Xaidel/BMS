@@ -24,7 +24,6 @@ import { cn } from "@/lib/utils";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -81,8 +80,8 @@ export default function Fourps() {
   }, [allResidents, value]);
   const [amount, setAmount] = useState("10.00");
   const [ownershipText, setOwnershipText] = useState("");
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
-  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
+  const [, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
@@ -459,13 +458,6 @@ export default function Fourps() {
                         Please select a resident to view certificate.
                       </Text>
                     )}
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        marginTop: 40,
-                      }}
-                    >
                       <CertificateFooter
                       styles={styles}
                       captainName={captainName}

@@ -24,7 +24,6 @@ import { cn } from "@/lib/utils";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -68,8 +67,8 @@ export default function BusinessPermit() {
       res.label.toLowerCase().includes(search.toLowerCase())
     );
   }, [allResidents, search]);
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
-  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<
+  const [, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoMunicipalityDataUrl] = useState<
     string | null
   >(null);
   const [settings, setSettings] = useState<{

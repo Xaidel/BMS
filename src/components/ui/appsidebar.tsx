@@ -9,6 +9,11 @@ const items = [
     icon: LayoutDashboard
   },
   {
+    title: "Certificate",
+    url: "/certificates",
+    icon: FileBadge2
+  },
+  {
     title: "Event",
     url: "/event",
     icon: Calendar
@@ -29,9 +34,9 @@ const items = [
     icon: MapIcon
   },
   {
-    title: "Certificate",
-    url: "/certificates",
-    icon: FileBadge2
+    title: "Blotter Records",
+    url: "/blotter",
+    icon: Files
   },
   {
     title: "Income",
@@ -42,11 +47,6 @@ const items = [
     title: "Expense",
     url: "/expense",
     icon: BanknoteArrowUpIcon
-  },
-  {
-    title: "Blotter Records",
-    url: "/blotter",
-    icon: Files
   },
   {
     title: "Officials and Staffs",

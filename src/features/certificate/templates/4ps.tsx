@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
+
 import { invoke } from "@tauri-apps/api/core";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -90,8 +90,8 @@ export default function Fourps() {
     return allResidents.find((res) => res.value === value)?.data;
   }, [allResidents, value]);
   const [amount, setAmount] = useState("10.00");
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
-  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<
+  const [, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoMunicipalityDataUrl] = useState<
     string | null
   >(null);
   const [settings, setSettings] = useState<{

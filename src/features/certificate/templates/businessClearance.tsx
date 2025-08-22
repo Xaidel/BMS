@@ -32,6 +32,7 @@ import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import CertificateFooter from "../certificateFooter";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -473,8 +474,8 @@ export default function BusinessClearance() {
                       >
                         This is to certify that the above-named individual is a
                         bona fide resident of Barangay{" "}
-                        {settings?.barangay || "________________"}, 
-                        {settings?.municipality || "________________"}, 
+                        {settings?.barangay || "________________"},
+                        {settings?.municipality || "________________"},
                         {settings?.province || "________________"}, and is duly
                         authorized to operate his/her business within the
                         jurisdiction of this Barangay.
@@ -516,34 +517,11 @@ export default function BusinessClearance() {
                         the signature of the Punong Barangay.
                       </Text>
                     </>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 6 },
-                      ]}
-                    >
-                      Certifying Officer,
-                    </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
-                    >
-                      HON. {captainName || "________________"}
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>
-                      Amount: PHP {amount || "_________"}
-                    </Text>
+                    <CertificateFooter
+                      styles={styles}
+                      captainName={captainName}
+                      amount={amount}
+                    />
                   </View>
                 </View>
               </Page>

@@ -37,6 +37,8 @@ import {
 } from "@/components/ui/select";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { Buffer } from "buffer";
+import CertificateHeader from "../certificateHeader";
+import CertificateFooter from "../certificateFooter";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -68,6 +70,8 @@ export default function Fourps() {
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
   const [residencyYear, setResidencyYear] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [customPurpose, setCustomPurpose] = useState("");
   const [captainName, setCaptainName] = useState<string | null>(null);
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
@@ -87,6 +91,9 @@ export default function Fourps() {
   }, [allResidents, value]);
   const [amount, setAmount] = useState("10.00");
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
+  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<
+    string | null
+  >(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
@@ -100,6 +107,12 @@ export default function Fourps() {
     "Married",
     "Widowed",
     "Separated",
+  ];
+  const purposeOptions = [
+    "Scholarship",
+    "Employment",
+    "Financial Assistance",
+    "Identification",
   ];
 
   useEffect(() => {
@@ -118,6 +131,12 @@ export default function Fourps() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+          if (s.logo) {
+            setLogoDataUrl(s.logo);
+          }
+          if (s.logo_municipality) {
+            setLogoMunicipalityDataUrl(s.logo_municipality);
+          }
         }
       })
       .catch(console.error);
@@ -336,6 +355,38 @@ export default function Fourps() {
               </div>
               <div className="mt-4">
                 <label
+                  htmlFor="purpose"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Purpose of Certificate
+                </label>
+                <Select value={purpose} onValueChange={setPurpose}>
+                  <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                    <SelectValue placeholder="-- Select Purpose --" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {purposeOptions.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                    <SelectItem value="custom">
+                      Other (please specify)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                {purpose === "custom" && (
+                  <input
+                    type="text"
+                    value={customPurpose}
+                    onChange={(e) => setCustomPurpose(e.target.value)}
+                    className="w-full border rounded px-3 py-2 text-sm mt-2"
+                    placeholder="Please specify the purpose"
+                  />
+                )}
+              </div>
+              <div className="mt-4">
+                <label
                   htmlFor="amount"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
@@ -372,6 +423,8 @@ export default function Fourps() {
                       civil_status: civilStatus || "",
                       ownership_text: "",
                       amount: amount || "",
+                      purpose:
+                        purpose === "custom" ? customPurpose || "" : purpose,
                     },
                   });
 
@@ -393,199 +446,108 @@ export default function Fourps() {
             <Document>
               <Page size="A4" style={styles.page}>
                 <View style={{ position: "relative" }}>
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: 10,
-                        left: 30,
-                        width: 90,
-                        height: 90,
-                      }}
-                    />
-                  )}
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: "35%",
-                        left: "23%",
-                        transform: "translate(-50%, -50%)",
-                        width: 400,
-                        height: 400,
-                        opacity: 0.1,
-                      }}
-                    />
-                  )}
-                  <View style={styles.section}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginBottom: 10,
-                      }}
-                    >
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ textAlign: "center" }}>
-                          Republic of the Philippines
+                  <CertificateHeader />
+                  <Text
+                    style={[
+                      styles.bodyText,
+                      { marginBottom: 10, marginTop: 10 },
+                    ]}
+                  >
+                    TO WHOM IT MAY CONCERN:
+                  </Text>
+                  {selectedResident ? (
+                    <>
+                      <Text
+                        style={[
+                          styles.bodyText,
+                          { textAlign: "justify", marginBottom: 8 },
+                        ]}
+                      >
+                        <Text style={{ fontWeight: "bold" }}>
+                          This is to certify that{" "}
                         </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Province of {settings?.province || "Province"}
+                        <Text style={{ fontWeight: "bold" }}>
+                          {`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}
                         </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Municipality of{" "}
-                          {settings?.municipality || "Municipality"}
-                        </Text>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            marginBottom: 10,
-                          }}
-                        >
-                          BARANGAY{" "}
-                          {settings?.barangay?.toUpperCase() || "Barangay"}
-                        </Text>
-                      </View>
-                    </View>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 16,
-                        marginBottom: 10,
-                      }}
-                    >
-                      OFFICE OF THE PUNONG BARANGAY
-                    </Text>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 18,
-                        marginBottom: 10,
-                      }}
-                    >
-                      C E R T I F I C A T I O N
-                    </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginBottom: 10, marginTop: 10 },
-                      ]}
-                    >
-                      TO WHOM IT MAY CONCERN:
-                    </Text>
-                    {selectedResident ? (
-                      <>
-                        <Text
-                          style={[
-                            styles.bodyText,
-                            { textAlign: "justify", marginBottom: 8 },
-                          ]}
-                        >
-                          <Text style={{ fontWeight: "bold" }}>
-                            This is to certify that{" "}
-                          </Text>
-                          <Text style={{ fontWeight: "bold" }}>
-                            {`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}
-                          </Text>
-                          <Text>
-                            , {age || "___"} years old, {civilStatus || "___"},
-                            and a resident of Barangay{" "}
-                            {settings ? settings.barangay : "________________"},
-                            {settings
-                              ? settings.municipality
-                              : "________________"}
-                            ,{settings ? settings.province : "________________"}{" "}
-                            since {residencyYear || "____"}.
-                          </Text>
-                        </Text>
-                        <Text
-                          style={[
-                            styles.bodyText,
-                            { textAlign: "justify", marginBottom: 8 },
-                          ]}
-                        >
-                          This certifies further that the above-named person is
-                          a member of the{" "}
-                          <Text style={{ fontWeight: "bold" }}>
-                            4Ps (Programang Pantawid Pamilyang Pilipino)
-                          </Text>{" "}
-                          in this Barangay and has been transpired at{" "}
+                        <Text>
+                          , {age || "___"} years old, {civilStatus || "___"},
+                          and a resident of Barangay{" "}
                           {settings ? settings.barangay : "________________"},
                           {settings
                             ? settings.municipality
                             : "________________"}
-                          ,{settings ? settings.province : "________________"}
+                          ,{settings ? settings.province : "________________"}{" "}
+                          since {residencyYear || "____"}.
                         </Text>
-                        <Text
-                          style={[
-                            styles.bodyText,
-                            { textAlign: "justify", marginBottom: 8 },
-                          ]}
-                        >
-                          This certification is issued upon request of the
-                          interested party for record and reference purposes.
-                        </Text>
-                        <Text
-                          style={[styles.bodyText, { marginTop: 8 }]}
-                        ></Text>
-                        <Text
-                          style={[
-                            styles.bodyText,
-                            { marginTop: 10, marginBottom: 8 },
-                          ]}
-                        >
-                          Given this{" "}
-                          {new Date().toLocaleDateString("en-PH", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })}
-                          , at{" "}
-                          {settings ? settings.barangay : "________________"},
-                          {settings
-                            ? settings.municipality
-                            : "________________"}
-                          ,{settings ? settings.province : "________________"}
-                        </Text>
-                      </>
-                    ) : (
-                      <Text style={styles.bodyText}>
-                        Please select a resident to view certificate.
                       </Text>
-                    )}
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
-                      ]}
-                    >
-                      Certifying Officer,
+                      <Text
+                        style={[
+                          styles.bodyText,
+                          { textAlign: "justify", marginBottom: 8 },
+                        ]}
+                      >
+                        This certifies further that the above-named person is a
+                        member of the{" "}
+                        <Text style={{ fontWeight: "bold" }}>
+                          4Ps (Programang Pantawid Pamilyang Pilipino)
+                        </Text>{" "}
+                        in this Barangay and has been transpired at{" "}
+                        {settings ? settings.barangay : "________________"},
+                        {settings ? settings.municipality : "________________"},
+                        {settings ? settings.province : "________________"}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.bodyText,
+                          { textAlign: "justify", marginBottom: 8 },
+                        ]}
+                      >
+                        This certification is issued upon request of the
+                        interested party for record and reference purposes.
+                      </Text>
+                      <Text style={[styles.bodyText, { marginTop: 8 }]}></Text>
+                      <Text
+                        style={[
+                          styles.bodyText,
+                          { marginTop: 10, marginBottom: 8 },
+                        ]}
+                      >
+                        {purpose || customPurpose
+                          ? `Purpose: ${
+                              purpose === "custom"
+                                ? customPurpose || "________________"
+                                : purpose
+                            }`
+                          : ""}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.bodyText,
+                          { marginTop: 0, marginBottom: 8 },
+                        ]}
+                      >
+                        Given this{" "}
+                        {new Date().toLocaleDateString("en-PH", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                        , at {settings ? settings.barangay : "________________"}
+                        ,{settings ? settings.municipality : "________________"}
+                        ,{settings ? settings.province : "________________"}
+                      </Text>
+                    </>
+                  ) : (
+                    <Text style={styles.bodyText}>
+                      Please select a resident to view certificate.
                     </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
-                    >
-                      HON. {captainName || "________________"}
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>Amount: PHP {amount}</Text>
+                  )}
+                    <CertificateFooter
+                      styles={styles}
+                      captainName={captainName}
+                      amount={amount}
+                    />
                   </View>
-                </View>
               </Page>
             </Document>
           </PDFViewer>

@@ -1,3 +1,4 @@
+import { log } from "console";
 import { z } from "zod"
 
 export const loginSchema = z.object({
@@ -184,6 +185,7 @@ export const settingsSchema = z.object({
   phone_number: z.string().min(1),
   email: z.string().email(),
   logo: z.string(),
+  logo_municipality: z.string(),
 });
 
 

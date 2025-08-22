@@ -42,6 +42,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ArrowLeftCircleIcon, ChevronsUpDown, Check } from "lucide-react";
+import CertificateFooter from "../certificateFooter";
 
 type Resident = {
   id?: number;
@@ -63,6 +64,8 @@ type Official = {
 
 export default function Indigency() {
   const [residencyYear, setResidencyYear] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [customPurpose, setCustomPurpose] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -70,6 +73,7 @@ export default function Indigency() {
   const [amount, setAmount] = useState("10.00");
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
+  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const civilStatusOptions = [
     "Single",
     "Lived-in",
@@ -77,6 +81,12 @@ export default function Indigency() {
     "Married",
     "Widowed",
     "Separated",
+  ];
+  const purposeOptions = [
+    "Scholarship",
+    "Employment",
+    "Financial Assistance",
+    "Identification",
   ];
   const allResidents = useMemo(() => {
     return residents.map((res) => ({
@@ -118,6 +128,9 @@ export default function Indigency() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+          if (s.logo_municipality) {
+            setLogoMunicipalityDataUrl(s.logo_municipality);
+          }
         }
       })
       .catch(console.error);
@@ -314,6 +327,36 @@ export default function Indigency() {
               </Select>
             </div>
             <div className="mt-4">
+              <label
+                htmlFor="purpose"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Purpose of Certificate
+              </label>
+              <Select value={purpose} onValueChange={setPurpose}>
+                <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                  <SelectValue placeholder="-- Select Purpose --" />
+                </SelectTrigger>
+                <SelectContent>
+                  {purposeOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value="custom">Other (please specify)</SelectItem>
+                </SelectContent>
+              </Select>
+              {purpose === "custom" && (
+                <input
+                  type="text"
+                  value={customPurpose}
+                  onChange={(e) => setCustomPurpose(e.target.value)}
+                  className="w-full border rounded px-3 py-2 text-sm mt-2"
+                  placeholder="Please specify the purpose"
+                />
+              )}
+            </div>
+            <div className="mt-4">
               <label className="block mb-1 text-sm font-medium text-gray-700">
                 Amount (PHP)
               </label>
@@ -347,6 +390,8 @@ export default function Indigency() {
                       civil_status: civilStatus || "",
                       ownership_text: "",
                       amount: amount || "",
+                      purpose:
+                        purpose === "custom" ? customPurpose || "" : purpose,
                     },
                   });
 
@@ -375,6 +420,18 @@ export default function Indigency() {
                         position: "absolute",
                         top: 10,
                         left: 30,
+                        width: 90,
+                        height: 90,
+                      }}
+                    />
+                  )}
+                  {logoMunicipalityDataUrl && (
+                    <Image
+                      src={logoMunicipalityDataUrl}
+                      style={{
+                        position: "absolute",
+                        top: 10,
+                        right: 30,
                         width: 90,
                         height: 90,
                       }}
@@ -502,8 +559,19 @@ export default function Indigency() {
                           serve.
                         </Text>
                         <Text
-                          style={[styles.bodyText, { marginTop: 8 }]}
-                        ></Text>
+                          style={[
+                            styles.bodyText,
+                            { marginTop: 10, marginBottom: 8 },
+                          ]}
+                        >
+                          {purpose || customPurpose
+                            ? `Purpose: ${
+                                purpose === "custom"
+                                  ? customPurpose || "________________"
+                                  : purpose
+                              }`
+                            : ""}
+                        </Text>
                         <Text
                           style={[
                             styles.bodyText,
@@ -529,32 +597,11 @@ export default function Indigency() {
                         Please select a resident to view certificate.
                       </Text>
                     )}
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
-                      ]}
-                    >
-                      Certifying Officer,
-                    </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
-                    >
-                      HON. {captainName || "________________"}
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>Amount: PHP {amount}</Text>
+                    <CertificateFooter
+                      styles={styles}
+                      captainName={captainName}
+                      amount={amount}
+                    />
                   </View>
                 </View>
               </Page>

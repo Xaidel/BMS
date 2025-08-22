@@ -7,7 +7,7 @@ pub fn fetch_all_certificates_command() -> Result<Vec<Certificate>, String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
     let mut stmt = conn.prepare(
-        "SELECT id, resident_name, type_, age, civil_status, ownership_text, amount, issued_date FROM certificates"
+        "SELECT id, resident_name, type_, age, civil_status, ownership_text, amount, issued_date, purpose FROM certificates"
     ).map_err(|e| e.to_string())?;
 
     let certs_iter = stmt.query_map([], |row| {
@@ -20,6 +20,7 @@ pub fn fetch_all_certificates_command() -> Result<Vec<Certificate>, String> {
             ownership_text: row.get(5)?,
             amount: row.get(6)?,
             issued_date: row.get(7)?,
+            purpose: row.get(8)?,
         })
     }).map_err(|e| e.to_string())?;
 
@@ -37,8 +38,8 @@ pub fn insert_certificate_command(cert: Certificate) -> Result<(), String> {
 
     conn.execute(
         "INSERT INTO certificates (
-            resident_name, type_, age, civil_status, ownership_text, amount, issued_date
-        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)",
+            resident_name, type_, age, civil_status, ownership_text, amount, issued_date, purpose
+        ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)",
         params![
             cert.resident_name,
             cert.type_,
@@ -46,7 +47,8 @@ pub fn insert_certificate_command(cert: Certificate) -> Result<(), String> {
             cert.civil_status,
             cert.ownership_text,
             cert.amount,
-            cert.issued_date
+            cert.issued_date,
+            cert.purpose
         ],
     ).map_err(|e| e.to_string())?;
     Ok(())
@@ -65,6 +67,7 @@ pub fn update_certificate_command(cert: Certificate) -> Result<(), String> {
             ownership_text = ?5,
             amount = ?6,
             issued_date = ?7
+            purpose = ?8
         WHERE id = ?8",
         params![
             cert.resident_name,
@@ -74,6 +77,7 @@ pub fn update_certificate_command(cert: Certificate) -> Result<(), String> {
             cert.ownership_text,
             cert.amount,
             cert.issued_date,
+            cert.purpose,
             cert.id
         ],
     ).map_err(|e| e.to_string())?;

@@ -78,6 +78,7 @@ export type Certificate = {
   ownership_text?: string;
   amount?: string;
   issued_date?: string;
+  purpose?: string;
 };
 
 export type Blotter = {
@@ -105,6 +106,7 @@ export type Settings = {
   phone_number: string;
   email: string;
   logo?: string;
+  logo_municipality?: string;
 };
 
 

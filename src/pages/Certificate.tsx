@@ -4,7 +4,6 @@ import { BaseDirectory, writeFile } from "@tauri-apps/plugin-fs";
 import { pdf } from "@react-pdf/renderer";
 import { CertificatePDF } from "@/components/pdf/certificatepdf";
 import { useSearchParams } from "react-router-dom";
-
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import DataTable from "@/components/ui/datatable";
@@ -38,6 +37,7 @@ type Certificate = {
   name: string;
   type_: string;
   issued_date: Date;
+  purpose?: string;
 };
 
 const columns: ColumnDef<Certificate>[] = [
@@ -76,9 +76,13 @@ const columns: ColumnDef<Certificate>[] = [
     accessorKey: "type_",
   },
   {
+    header: "Purpose",
+    accessorKey: "purpose",
+  },
+  {
     header: "Issued On",
     accessorKey: "issued_date",
-    cell: ({ row }) => <div>{format(row.original.issued_date, "MMMM do, yyyy")}</div>,
+    cell: ({ row }) => <div>{format(row.original.issued_date, "MMMM d, yyyy")}</div>,
   },
   {
     header: "Expires On",
@@ -86,7 +90,7 @@ const columns: ColumnDef<Certificate>[] = [
       const issued = new Date(row.original.issued_date);
       const expiry = new Date(issued);
       expiry.setFullYear(issued.getFullYear() + 1);
-      return <div>{format(expiry, "MMMM do, yyyy")}</div>;
+      return <div>{format(expiry, "MMMM d, yyyy")}</div>;
     },
   },
   {
@@ -118,6 +122,7 @@ export default function Certificate() {
             name: cert.resident_name,
             type_: cert.type_,
             issued_date: isNaN(issuedDate.getTime()) ? new Date() : issuedDate,
+            purpose: cert.purpose,
           };
         });
         setData(parsed);
@@ -140,6 +145,16 @@ export default function Certificate() {
     expiry.setFullYear(expiry.getFullYear() + 1);
     return new Date() > expiry;
   }).length;
+
+  const issuedTodayCertificates = data.filter((cert) => {
+    const issuedDate = new Date(cert.issued_date);
+    const today = new Date();
+    return (
+      issuedDate.getDate() === today.getDate() &&
+      issuedDate.getMonth() === today.getMonth() &&
+      issuedDate.getFullYear() === today.getFullYear()
+    );
+  });
 
   const filteredData = useMemo(() => {
     const sortValue = searchParams.get("sort") ?? "All Certificates";
@@ -199,6 +214,30 @@ export default function Certificate() {
             } catch (e) {
               toast.error("Error", {
                 description: "Failed to save the certificate record",
+              });
+            }
+          }}
+        />
+        <SummaryCard
+          title="Issued Certificates Today"
+          value={issuedTodayCertificates.length}
+          icon={<CheckCircle size={50} />}
+          onClick={async () => {
+            const blob = await pdf(
+              <CertificatePDF filter="Issued Certificates Today" certificates={issuedTodayCertificates.map(cert => ({ ...cert, issued_date: cert.issued_date.toISOString() }))} />
+            ).toBlob();
+            const buffer = await blob.arrayBuffer();
+            const contents = new Uint8Array(buffer);
+            try {
+              await writeFile("IssuedTodayCertificates.pdf", contents, {
+                baseDir: BaseDirectory.Document,
+              });
+              toast.success("Issued Today Certificate Record successfully downloaded", {
+                description: "Saved in Documents folder",
+              });
+            } catch (e) {
+              toast.error("Error", {
+                description: "Failed to save today's certificate record",
               });
             }
           }}

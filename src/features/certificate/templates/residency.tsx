@@ -39,6 +39,8 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import CertificateHeader from "../certificateHeader";
+import CertificateFooter from "../certificateFooter";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -56,6 +58,8 @@ type Resident = {
 
 export default function Residency() {
   const [residencyYear, setResidencyYear] = useState("");
+  const [purpose, setPurpose] = useState("");
+  const [customPurpose, setCustomPurpose] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
@@ -80,12 +84,20 @@ export default function Residency() {
     return allResidents.find((res) => res.value === value)?.data;
   }, [allResidents, value]);
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
+  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
     province: string;
   } | null>(null);
   const [captainName, setCaptainName] = useState<string | null>(null);
+
+  const purposeOptions = [
+    "Scholarship",
+    "Employment",
+    "Financial Assistance",
+    "Identification",
+  ];
 
   useEffect(() => {
     invoke("fetch_logo_command")
@@ -103,6 +115,12 @@ export default function Residency() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+          if (s.logo) {
+            setLogoDataUrl(s.logo);
+          }
+          if (s.logo_municipality) {
+            setLogoMunicipalityDataUrl(s.logo_municipality);
+          }
         }
       })
       .catch(console.error);
@@ -309,6 +327,36 @@ export default function Residency() {
               </Select>
             </div>
             <div className="mt-4">
+              <label
+                htmlFor="purpose"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Purpose of Certificate
+              </label>
+              <Select value={purpose} onValueChange={setPurpose}>
+                <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                  <SelectValue placeholder="-- Select Purpose --" />
+                </SelectTrigger>
+                <SelectContent>
+                  {purposeOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value="custom">Other (please specify)</SelectItem>
+                </SelectContent>
+              </Select>
+              {purpose === "custom" && (
+                <input
+                  type="text"
+                  value={customPurpose}
+                  onChange={(e) => setCustomPurpose(e.target.value)}
+                  className="w-full border rounded px-3 py-2 text-sm mt-2"
+                  placeholder="Please specify the purpose"
+                />
+              )}
+            </div>
+            <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Enter Amount
               </label>
@@ -341,6 +389,7 @@ export default function Residency() {
                       civil_status: civilStatus || "",
                       ownership_text: "",
                       amount: amount || "",
+                      purpose: purpose === "custom" ? customPurpose || "" : purpose,
                     },
                   });
 
@@ -362,83 +411,7 @@ export default function Residency() {
             <Document>
               <Page size="A4" style={styles.page}>
                 <View style={{ position: "relative" }}>
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: 10,
-                        left: 30,
-                        width: 90,
-                        height: 90,
-                      }}
-                    />
-                  )}
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: "35%",
-                        left: "23%",
-                        transform: "translate(-50%, -50%)",
-                        width: 400,
-                        height: 400,
-                        opacity: 0.1,
-                      }}
-                    />
-                  )}
-                  <View style={styles.section}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginBottom: 10,
-                      }}
-                    >
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ textAlign: "center" }}>
-                          Republic of the Philippines
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Province of {settings?.province || "Province"}
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Municipality of{" "}
-                          {settings?.municipality || "Municipality"}
-                        </Text>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            marginBottom: 10,
-                          }}
-                        >
-                          BARANGAY{" "}
-                          {settings?.barangay?.toUpperCase() || "Barangay"}
-                        </Text>
-                      </View>
-                    </View>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 16,
-                        marginBottom: 10,
-                      }}
-                    >
-                      OFFICE OF THE PUNONG BARANGAY
-                    </Text>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 18,
-                        marginBottom: 10,
-                      }}
-                    >
-                      C E R T I F I C A T I O N
-                    </Text>
+                  <CertificateHeader />
                     <Text
                       style={[
                         styles.bodyText,
@@ -477,7 +450,7 @@ export default function Residency() {
                         >
                           This certification is being issued upon the request of
                           the aforementioned person for residency verification
-                          and whatever legal purpose it may serve.
+                          and for the following purpose: {purpose === "custom" ? (customPurpose || "________________") : (purpose || "________________")}.
                         </Text>
                         <Text
                           style={[
@@ -504,36 +477,19 @@ export default function Residency() {
                         Please select a resident to view certificate.
                       </Text>
                     )}
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
-                      ]}
+                    <View
+                      style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        marginTop: 40,
+                      }}
                     >
-                      Certifying Officer,
-                    </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
-                    >
-                      HON. {captainName || "________________"}
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>
-                      Amount: PHP {amount || "_____"}
-                    </Text>
+                      <CertificateFooter
+                      styles={styles}
+                      captainName={captainName}
+                      amount={amount}
+                    />
                   </View>
-                </View>
               </Page>
             </Document>
           </PDFViewer>

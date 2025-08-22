@@ -38,6 +38,8 @@ import {
 } from "@/components/ui/select";
 import { Official } from "@/types/types";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
+import CertificateHeader from "../certificateHeader";
+import CertificateFooter from "../certificateFooter";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -63,6 +65,20 @@ export default function Clearance() {
   const [age, setAge] = useState("");
   const [civilStatus, setCivilStatus] = useState("");
   const [residencyYear, setResidencyYear] = useState(""); // Add state for residency year
+  // Purpose state
+  const [purpose, setPurpose] = useState("");
+  const [customPurpose, setCustomPurpose] = useState("");
+  const purposeOptions = [
+    "Employment",
+    "Bank Requirement",
+    "School Requirement",
+    "SSS/GSIS",
+    "Postal ID",
+    "Driver's License",
+    "Police Clearance",
+    "Travel/Passport",
+    "Other",
+  ];
   const civilStatusOptions = [
     "Single",
     "Lived-in",
@@ -88,6 +104,7 @@ export default function Clearance() {
     return allResidents.find((res) => res.value === value)?.data;
   }, [allResidents, value]);
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
+  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
@@ -111,6 +128,12 @@ export default function Clearance() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+          if (s.logo) {
+            setLogoDataUrl(s.logo);
+          }
+          if (s.logo_municipality) {
+            setLogoMunicipalityDataUrl(s.logo_municipality);
+          }
         }
       })
       .catch(console.error);
@@ -327,6 +350,37 @@ export default function Clearance() {
                 </SelectContent>
               </Select>
             </div>
+            {/* Purpose of Certificate */}
+            <div className="mt-4">
+              <label
+                htmlFor="purpose"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Purpose of Certificate
+              </label>
+              <Select value={purpose} onValueChange={setPurpose}>
+                <SelectTrigger className="w-full border rounded px-3 py-2 text-sm">
+                  <SelectValue placeholder="-- Select Purpose --" />
+                </SelectTrigger>
+                <SelectContent>
+                  {purposeOptions.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      {option}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value="custom">Custom</SelectItem>
+                </SelectContent>
+              </Select>
+              {purpose === "custom" && (
+                <input
+                  type="text"
+                  className="w-full border rounded px-3 py-2 text-sm mt-2"
+                  placeholder="Enter custom purpose"
+                  value={customPurpose}
+                  onChange={(e) => setCustomPurpose(e.target.value)}
+                />
+              )}
+            </div>
             <div className="mt-4">
               <label
                 htmlFor="amount"
@@ -364,6 +418,8 @@ export default function Clearance() {
                       civil_status: civilStatus || "",
                       ownership_text: "",
                       amount: amount || "",
+                      purpose:
+                        purpose === "custom" ? customPurpose || "" : purpose,
                     },
                   });
 
@@ -385,83 +441,7 @@ export default function Clearance() {
             <Document>
               <Page size="A4" style={styles.page}>
                 <View style={{ position: "relative" }}>
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: 10,
-                        left: 30,
-                        width: 90,
-                        height: 90,
-                      }}
-                    />
-                  )}
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: "35%",
-                        left: "23%",
-                        transform: "translate(-50%, -50%)",
-                        width: 400,
-                        height: 400,
-                        opacity: 0.1,
-                      }}
-                    />
-                  )}
-                  <View style={styles.section}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginBottom: 10,
-                      }}
-                    >
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ textAlign: "center" }}>
-                          Republic of the Philippines
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Province of {settings?.province || "Province"}
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Municipality of{" "}
-                          {settings?.municipality || "Municipality"}
-                        </Text>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            marginBottom: 10,
-                          }}
-                        >
-                          BARANGAY{" "}
-                          {settings?.barangay?.toUpperCase() || "Barangay"}
-                        </Text>
-                      </View>
-                    </View>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 16,
-                        marginBottom: 10,
-                      }}
-                    >
-                      OFFICE OF THE PUNONG BARANGAY
-                    </Text>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 18,
-                        marginBottom: 10,
-                      }}
-                    >
-                      C E R T I F I C A T I O N
-                    </Text>
+                  <CertificateHeader />
                     {selectedResident ? (
                       <>
                         <Text
@@ -482,10 +462,30 @@ export default function Clearance() {
                           <Text style={{ fontWeight: "bold" }}>
                             {`${selectedResident.first_name} ${selectedResident.last_name}`.toUpperCase()}
                           </Text>
-                          {`, ${age || "___"} years old, ${civilStatus || "___"}, and a resident of zone ${selectedResident.zone}, Barangay ${settings?.barangay || "________________"}, ${settings?.municipality || "________________"}, ${settings?.province || "________________"} since ${residencyYear || "____"}. `}
-                           He/She is known to me of good moral character and at
+                          {`, ${age || "___"} years old, ${
+                            civilStatus || "___"
+                          }, and a resident of zone ${
+                            selectedResident.zone
+                          }, Barangay ${
+                            settings?.barangay || "________________"
+                          }, ${settings?.municipality || "________________"}, ${
+                            settings?.province || "________________"
+                          } since ${residencyYear || "____"}. `}
+                          He/She is known to me of good moral character and at
                           present has no any criminal records and/or any case in
                           this Barangay.
+                        </Text>
+                        {/* Purpose line */}
+                        <Text
+                          style={[
+                            styles.bodyText,
+                            { textAlign: "justify", marginBottom: 8 },
+                          ]}
+                        >
+                          Purpose of Certificate:{" "}
+                          {purpose === "custom"
+                            ? customPurpose || "________________"
+                            : purpose || "________________"}
                         </Text>
                         <Text
                           style={[
@@ -522,34 +522,12 @@ export default function Clearance() {
                         Please select a resident to view certificate.
                       </Text>
                     )}
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
-                      ]}
-                    >
-                      Certifying Officer,
-                    </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
-                    >
-                      HON. {captainName || "________________"}
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>Amount: PHP {amount}</Text>
+                    <CertificateFooter
+                      styles={styles}
+                      captainName={captainName}
+                      amount={amount}
+                    />
                   </View>
-                </View>
               </Page>
             </Document>
           </PDFViewer>

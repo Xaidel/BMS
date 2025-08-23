@@ -17,7 +17,6 @@ import {
   Banknote,
   Gift,
   Coins,
-  Layers,
   HousePlus,
 } from "lucide-react"; // or custom icons
 import SummaryCardIncome from "@/components/summary-card/income";

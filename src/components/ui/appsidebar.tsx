@@ -1,4 +1,4 @@
-import { LayoutDashboard, Calendar, Users, House, FileBadge2, TrendingUp, BanknoteArrowUpIcon, Files, Settings, LogOut, MapIcon } from "lucide-react";
+import { ClipboardCheck, LayoutDashboard, Calendar, Users, House, FileBadge2, TrendingUp, BanknoteArrowUpIcon, Files, Settings, LogOut, MapIcon } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger } from "./sidebar";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -17,6 +17,11 @@ const items = [
     title: "Event",
     url: "/event",
     icon: Calendar
+  },
+  {
+    title: "Logbook",
+    url: "/logbook",
+    icon: ClipboardCheck
   },
   {
     title: "Residents",

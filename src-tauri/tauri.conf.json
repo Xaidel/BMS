@@ -13,7 +13,8 @@
     "windows": [
       {
         "title": "Barangay Management System",
-        "fullscreen": true,
+        "fullscreen": false,
+        "maximized": true,
         "height": 800
       }
     ],

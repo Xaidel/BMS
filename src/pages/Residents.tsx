@@ -17,6 +17,9 @@ import searchResident from "@/service/resident/searchResident";
 import SummaryCardResidents from "@/components/summary-card/residents";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
+import { ResidentPDF } from "@/components/pdf/residentpdf";
+import { pdf } from "@react-pdf/renderer";
+import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 
 const filters = ["All Residents", "Alphabetical", "Moved Out", "Active", "Dead", "Missing"];
 
@@ -167,10 +170,6 @@ export default function Residents() {
           value={total}
           icon={<Users size={50} />}
           onClick={async () => {
-            const { pdf } = await import("@react-pdf/renderer");
-            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-            const { toast } = await import("sonner");
-            const { ResidentPDF } = await import("@/components/pdf/residentpdf");
 
             const casted: Resident[] = data.map((r) => ({
               ...r,
@@ -181,7 +180,7 @@ export default function Residents() {
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
             try {
-              await writeFile("ResidentRecords.pdf", contents, {
+              writeFile("ResidentRecords.pdf", contents, {
                 baseDir: BaseDirectory.Document,
               });
               toast.success("Resident Record successfully downloaded", {
@@ -195,11 +194,6 @@ export default function Residents() {
           }}
         />
         <SummaryCardResidents title="Male" value={male} icon={<Mars size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.gender === "Male");
           const casted: Resident[] = filtered.map((r) => ({
             ...r,
@@ -223,11 +217,6 @@ export default function Residents() {
           }
         }} />
         <SummaryCardResidents title="Female" value={female} icon={<Venus size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.gender === "Female");
           const casted: Resident[] = filtered.map((r) => ({
             ...r,
@@ -251,11 +240,6 @@ export default function Residents() {
           }
         }} />
         <SummaryCardResidents title="Senior" value={senior} icon={<User size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.is_senior === true);
           const casted: Resident[] = filtered.map((r) => ({
             ...r,
@@ -279,11 +263,6 @@ export default function Residents() {
           }
         }} />
         <SummaryCardResidents title="PWD" value={pwd} icon={<Accessibility size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.is_pwd === true);
           const casted: Resident[] = filtered.map((r) => ({
             ...r,
@@ -307,11 +286,6 @@ export default function Residents() {
           }
         }} />
         <SummaryCardResidents title="Registered Voters" value={registered} icon={<Fingerprint size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.is_registered_voter === true);
           const casted: Resident[] = filtered.map((r) => ({
             ...r,
@@ -335,11 +309,6 @@ export default function Residents() {
           }
         }} />
         <SummaryCardResidents title="Active" value={active} icon={<UserCheck size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.status === "Active");
           const casted: Resident[] = filtered.map((r) => ({
             ...r,
@@ -363,11 +332,6 @@ export default function Residents() {
           }
         }} />
         <SummaryCardResidents title="Moved Out" value={movedOut} icon={<UserMinus size={50} />} onClick={async () => {
-          const { pdf } = await import("@react-pdf/renderer");
-          const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-          const { toast } = await import("sonner");
-          const { ResidentPDF } = await import("@/components/pdf/residentpdf");
-
           const filtered = data.filter((r) => r.status === "Moved Out");
           const casted: Resident[] = filtered.map((r) => ({
             ...r,

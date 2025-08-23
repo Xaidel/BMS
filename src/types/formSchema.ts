@@ -184,6 +184,7 @@ export const settingsSchema = z.object({
   phone_number: z.string().min(1),
   email: z.string().email(),
   logo: z.string(),
+  logo_municipality: z.string(),
 });
 
 
@@ -207,4 +208,17 @@ export const barangayMapSchema = z.object({
   y: z.number().min(0, { message: "Y coordinate must be zero or greater" }),
   zone: z.string().min(1, { message: "Zone is required" }),
   section: z.string().min(1, { message: "Section is required" }),
+});
+
+export const logbookSchema = z.object({
+  id: z.number().optional(),
+  official_name: z.string().min(1, "Please select an official"),
+  date: z.date({ required_error: "Please specify the log date" }),
+  time_in_am: z.string().optional(),
+  time_out_am: z.string().optional(),
+  time_in_pm: z.string().optional(),
+  time_out_pm: z.string().optional(),
+  remarks: z.string().optional(),
+  status: z.string().optional(),
+  total_hours: z.number().optional(),
 });

@@ -1,11 +1,12 @@
-type SummaryCardCertificateProps = {
+// @/components/ui/summarycardLogbook.tsx
+type SummaryCardLogbookProps = {
   title: string;
-  value: number;
+  value: number | string;
   icon: JSX.Element;
   onClick?: () => void;
 };
 
-export default function SummaryCardCertificate({ title, value, icon, onClick }: SummaryCardCertificateProps) {
+export default function SummaryCardLogbook({ title, value, icon, onClick }: SummaryCardLogbookProps) {
   return (
     <div
       onClick={onClick}

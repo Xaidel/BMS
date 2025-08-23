@@ -24,7 +24,6 @@ import { cn } from "@/lib/utils";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -38,6 +37,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Official } from "@/types/types";
+import CertificateHeader from "../certificateHeader";
+import CertificateFooter from "../certificateFooter";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -79,7 +80,8 @@ export default function Fourps() {
   }, [allResidents, value]);
   const [amount, setAmount] = useState("10.00");
   const [ownershipText, setOwnershipText] = useState("");
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoMunicipalityDataUrl] = useState<string | null>(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
@@ -111,6 +113,9 @@ export default function Fourps() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+          if (s.logo_municipality) {
+            setLogoMunicipalityDataUrl(s.logo_municipality);
+          }
         }
       })
       .catch(console.error);
@@ -380,83 +385,7 @@ export default function Fourps() {
             <Document>
               <Page size="A4" style={styles.page}>
                 <View style={{ position: "relative" }}>
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: 10,
-                        left: 30,
-                        width: 90,
-                        height: 90,
-                      }}
-                    />
-                  )}
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: "35%",
-                        left: "23%",
-                        transform: "translate(-50%, -50%)",
-                        width: 400,
-                        height: 400,
-                        opacity: 0.1,
-                      }}
-                    />
-                  )}
-                  <View style={styles.section}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginBottom: 10,
-                      }}
-                    >
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ textAlign: "center" }}>
-                          Republic of the Philippines
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Province of {settings?.province || "Province"}
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Municipality of{" "}
-                          {settings?.municipality || "Municipality"}
-                        </Text>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            marginBottom: 10,
-                          }}
-                        >
-                          BARANGAY{" "}
-                          {settings?.barangay?.toUpperCase() || "Barangay"}
-                        </Text>
-                      </View>
-                    </View>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 16,
-                        marginBottom: 10,
-                      }}
-                    >
-                      OFFICE OF THE PUNONG BARANGAY
-                    </Text>
-                    <Text
-                      style={{
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 18,
-                        marginBottom: 10,
-                      }}
-                    >
-                      C E R T I F I C A T I O N
-                    </Text>
+                  <CertificateHeader />
                     <Text
                       style={[
                         styles.bodyText,
@@ -529,34 +458,12 @@ export default function Fourps() {
                         Please select a resident to view certificate.
                       </Text>
                     )}
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
-                      ]}
-                    >
-                      Certifying Officer,
-                    </Text>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
-                    >
-                      HON. {captainName || "________________"}
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>Amount: PHP {amount}</Text>
+                      <CertificateFooter
+                      styles={styles}
+                      captainName={captainName}
+                      amount={amount}
+                    />
                   </View>
-                </View>
               </Page>
             </Document>
           </PDFViewer>

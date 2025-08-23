@@ -1,4 +1,3 @@
-// OfficialsPage.tsx
 import { useState, useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import ViewOfficialModal from "@/features/official/viewOfficialModal";

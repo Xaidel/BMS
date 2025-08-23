@@ -10,4 +10,5 @@ pub struct Certificate {
     pub ownership_text: Option<String>,
     pub amount: Option<String>,
     pub issued_date: Option<String>,
+    pub purpose: Option<String>,
 }

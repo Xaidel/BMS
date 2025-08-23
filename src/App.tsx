@@ -9,6 +9,7 @@ import LoginPage from './pages/Login';
 import AppLayout from './components/ui/applayout';
 import Dashboard from './pages/Dashboard';
 import Event from './pages/Event';
+import Logbook from './pages/Logbook';
 import Residents from './pages/Residents';
 import Certificate from './pages/Certificate';
 import Income from './pages/Income';
@@ -37,6 +38,7 @@ function App() {
             element={<AppLayout />}
           >
             <Route path='dashboard' element={<Dashboard />} />
+            <Route path='logbook' element={<Logbook />} />
             <Route path='event' element={<Event />} />
             <Route path='residents' element={<Residents />} />
             <Route path='households' element={<Households />} />

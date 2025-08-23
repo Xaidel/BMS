@@ -9,3 +9,4 @@ pub mod certificates;
 pub mod user;
 pub mod households;
 pub mod barangay_map;
+pub mod logbook;

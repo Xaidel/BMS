@@ -57,7 +57,8 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             province TEXT,
             phone_number TEXT,
             email TEXT,
-            logo TEXT  -- base64 or file path
+            logo TEXT,  -- base64 or file path
+            logo_municipality TEXT  -- base64 or file path
             );
         CREATE TABLE IF NOT EXISTS residents (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -125,8 +126,24 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             civil_status TEXT,
             ownership_text TEXT,
             amount TEXT,
-            issued_date TEXT
+            issued_date TEXT,
+            purpose TEXT
         );
+        CREATE TABLE IF NOT EXISTS logbook (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            official_name TEXT NOT NULL,
+            date TEXT NOT NULL,
+            time_in_am TEXT,
+            time_out_am TEXT,
+            time_in_pm TEXT,
+            time_out_pm TEXT,
+            remarks TEXT,
+            status TEXT,
+            total_hours REAL,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
+
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT NOT NULL UNIQUE,

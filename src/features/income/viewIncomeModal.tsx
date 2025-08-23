@@ -130,7 +130,7 @@ export default function ViewIncomeModal(props: ViewPropsIncome) {
                             <SelectItem value="Government Grants">Government Grants</SelectItem>
                             <SelectItem value="Service Revenue">Service Revenue</SelectItem>
                             <SelectItem value="Rental Income">Rental Income</SelectItem>
-                            <SelectItem value="Government Funds">Government Funds</SelectItem>
+                            <SelectItem value="Water System">Water System</SelectItem>
                             <SelectItem value="Others">Others</SelectItem>
                           </SelectContent>
                         </Select>

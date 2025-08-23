@@ -22,7 +22,9 @@ import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
 import { toast } from "sonner";
-
+import { EventPDF } from "@/components/pdf/eventpdf";
+import { pdf } from "@react-pdf/renderer";
+import { writeFile, BaseDirectory } from "@tauri-apps/plugin-fs";
 
 const filters = [
   "All Events",
@@ -205,11 +207,6 @@ export default function Events() {
           value={total}
           icon={<CalendarClock size={50} />}
           onClick={async () => {
-            const { pdf } = await import("@react-pdf/renderer");
-            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-            const { toast } = await import("sonner");
-            const { EventPDF } = await import("@/components/pdf/eventpdf");
-
             const blob = await pdf(<EventPDF filter="All Events" events={data} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -233,11 +230,6 @@ export default function Events() {
           icon={<CalendarPlus size={50} />}
           onClick={async () => {
             const filtered = data.filter((d) => d.status === "Upcoming");
-            const { pdf } = await import("@react-pdf/renderer");
-            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-            const { toast } = await import("sonner");
-            const { EventPDF } = await import("@/components/pdf/eventpdf");
-
             const blob = await pdf(<EventPDF filter="Upcoming Events" events={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -261,11 +253,6 @@ export default function Events() {
           icon={<CalendarCheck size={50} />}
           onClick={async () => {
             const filtered = data.filter((d) => d.status === "Finished");
-            const { pdf } = await import("@react-pdf/renderer");
-            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-            const { toast } = await import("sonner");
-            const { EventPDF } = await import("@/components/pdf/eventpdf");
-
             const blob = await pdf(<EventPDF filter="Finished Events" events={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
@@ -289,11 +276,6 @@ export default function Events() {
           icon={<CalendarX2 size={50} />}
           onClick={async () => {
             const filtered = data.filter((d) => d.status === "Cancelled");
-            const { pdf } = await import("@react-pdf/renderer");
-            const { writeFile, BaseDirectory } = await import("@tauri-apps/plugin-fs");
-            const { toast } = await import("sonner");
-            const { EventPDF } = await import("@/components/pdf/eventpdf");
-
             const blob = await pdf(<EventPDF filter="Cancelled Events" events={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);

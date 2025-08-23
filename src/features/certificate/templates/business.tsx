@@ -24,7 +24,6 @@ import { cn } from "@/lib/utils";
 import { PDFViewer } from "@react-pdf/renderer";
 import { Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { useEffect } from "react";
-import { Image } from "@react-pdf/renderer";
 import { invoke } from "@tauri-apps/api/core";
 import { ArrowLeftCircleIcon, Check, ChevronsUpDown } from "lucide-react";
 import { useMemo, useState } from "react";
@@ -32,6 +31,8 @@ import { useNavigate } from "react-router-dom";
 import { Virtuoso } from "react-virtuoso";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import CertificateHeader from "../certificateHeader";
+import CertificateFooter from "../certificateFooter";
 
 if (!window.Buffer) {
   window.Buffer = Buffer;
@@ -66,7 +67,10 @@ export default function BusinessPermit() {
       res.label.toLowerCase().includes(search.toLowerCase())
     );
   }, [allResidents, search]);
-  const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoDataUrl] = useState<string | null>(null);
+  const [, setLogoMunicipalityDataUrl] = useState<
+    string | null
+  >(null);
   const [settings, setSettings] = useState<{
     barangay: string;
     municipality: string;
@@ -100,6 +104,9 @@ export default function BusinessPermit() {
             municipality: s.municipality || "",
             province: s.province || "",
           });
+          if (s.logo_municipality) {
+            setLogoMunicipalityDataUrl(s.logo_municipality);
+          }
         }
       })
       .catch(console.error);
@@ -332,218 +339,128 @@ export default function BusinessPermit() {
             <Document>
               <Page size="A4" style={styles.page}>
                 <View style={{ position: "relative" }}>
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: 10,
-                        left: 30,
-                        width: 90,
-                        height: 90,
-                      }}
-                    />
-                  )}
-                  {logoDataUrl && (
-                    <Image
-                      src={logoDataUrl}
-                      style={{
-                        position: "absolute",
-                        top: "35%",
-                        left: "23%",
-                        transform: "translate(-50%, -50%)",
-                        width: 400,
-                        height: 400,
-                        opacity: 0.1,
-                      }}
-                    />
-                  )}
-                  <View style={styles.section}>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginBottom: 10,
-                      }}
-                    >
-                      <View style={{ flex: 1 }}>
-                        <Text style={{ textAlign: "center" }}>
-                          Republic of the Philippines
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Province of {settings?.province || "Province"}
-                        </Text>
-                        <Text style={{ textAlign: "center" }}>
-                          Municipality of{" "}
-                          {settings?.municipality || "Municipality"}
-                        </Text>
-                        <Text
-                          style={{
-                            textAlign: "center",
-                            marginTop: 10,
-                            marginBottom: 10,
-                          }}
-                        >
-                          BARANGAY{" "}
-                          {settings?.barangay?.toUpperCase() || "Barangay"}
-                        </Text>
-                      </View>
-                    </View>
+                  <CertificateHeader />
+                  <Text
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontSize: 18,
+                      marginBottom: 10,
+                    }}
+                  >
+                    BARANGAY BUSINESS PERMIT
+                  </Text>
+                  <View
+                    style={{
+                      border: "2pt solid black",
+                      padding: 20,
+                      marginBottom: 20,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
                     <Text
                       style={{
-                        textAlign: "center",
+                        fontSize: 19,
                         fontWeight: "bold",
-                        fontSize: 16,
-                        marginBottom: 10,
+                        marginBottom: 4,
                       }}
                     >
-                      OFFICE OF THE PUNONG BARANGAY
+                      {businessName || "________________"}
+                    </Text>
+                    <Text style={{ fontSize: 14, marginBottom: 10 }}>
+                      Business Name
                     </Text>
                     <Text
                       style={{
-                        textAlign: "center",
+                        fontSize: 19,
                         fontWeight: "bold",
-                        fontSize: 18,
-                        marginBottom: 10,
+                        marginBottom: 4,
                       }}
                     >
-                      BARANGAY BUSINESS PERMIT
+                      {businessType || "________________"}
                     </Text>
-                    <View
+                    <Text style={{ fontSize: 14, marginBottom: 10 }}>
+                      Type of Business
+                    </Text>
+                    <Text
                       style={{
-                        border: "2pt solid black",
-                        padding: 20,
-                        marginBottom: 20,
-                        alignItems: "center",
-                        justifyContent: "center",
+                        fontSize: 19,
+                        fontWeight: "bold",
+                        marginBottom: 4,
                       }}
                     >
-                      <Text
-                        style={{
-                          fontSize: 19,
-                          fontWeight: "bold",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {businessName || "________________"}
-                      </Text>
-                      <Text style={{ fontSize: 14, marginBottom: 10 }}>
-                        Business Name
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 19,
-                          fontWeight: "bold",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {businessType || "________________"}
-                      </Text>
-                      <Text style={{ fontSize: 14, marginBottom: 10 }}>
-                        Type of Business
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 19,
-                          fontWeight: "bold",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {businessLocation || "________________"}
-                      </Text>
-                      <Text style={{ fontSize: 14, marginBottom: 10 }}>
-                        Location
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 19,
-                          fontWeight: "bold",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {businessOwner || "________________"}
-                      </Text>
-                      <Text style={{ fontSize: 14 }}>Owner</Text>
-                    </View>
-                    <>
-                      <Text
-                        style={[
-                          styles.bodyText,
-                          { textAlign: "justify", marginBottom: 8 },
-                        ]}
-                      >
-                        And which said person had accomplish{" "}
-                        <Text style={{ fontWeight: "bold" }}>
-                          Barangay Ordinance No.14
-                        </Text>
-                        . This ordinance is imposing Barangay Permit fee and it
-                        is required for every business Trade or any transaction
-                        within the jurisdiction of this Barangay.
-                      </Text>
-                      <Text
-                        style={[
-                          styles.bodyText,
-                          { textAlign: "justify", marginBottom: 8 },
-                        ]}
-                      >
-                        This Barangay permit on business indorsed to this
-                        Municipality for registration purposes only.
-                      </Text>
-                      <Text
-                        style={[
-                          styles.bodyText,
-                          { marginTop: 10, marginBottom: 8 },
-                        ]}
-                      >
-                        Given this{" "}
-                        {new Date().toLocaleDateString("en-PH", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        })}
-                        , at {settings ? settings.barangay : "________________"}
-                        ,{settings ? settings.municipality : "________________"}
-                        ,{settings ? settings.province : "________________"}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.bodyText,
-                          { textAlign: "justify", marginBottom: 8 },
-                        ]}
-                      >
-                        This Barangay Permit is not valid without official
-                        receipt.
-                      </Text>
-                    </>
-                    <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 40, marginBottom: 6 },
-                      ]}
-                    >
-                      Certifying Officer,
+                      {businessLocation || "________________"}
+                    </Text>
+                    <Text style={{ fontSize: 14, marginBottom: 10 }}>
+                      Location
                     </Text>
                     <Text
-                      style={[
-                        styles.bodyText,
-                        { marginTop: 20, marginBottom: 4, fontWeight: "bold" },
-                      ]}
+                      style={{
+                        fontSize: 19,
+                        fontWeight: "bold",
+                        marginBottom: 4,
+                      }}
                     >
-                      HON. {captainName || "________________"}
+                      {businessOwner || "________________"}
                     </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 10 }]}>
-                      Punong Barangay
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      O.R. No.: ____________________
-                    </Text>
-                    <Text style={[styles.bodyText, { marginBottom: 4 }]}>
-                      Date: _________________________
-                    </Text>
-                    <Text style={styles.bodyText}>
-                      Amount: PHP {amount || "_________"}
-                    </Text>
+                    <Text style={{ fontSize: 14 }}>Owner</Text>
                   </View>
+                  <>
+                    <Text
+                      style={[
+                        styles.bodyText,
+                        { textAlign: "justify", marginBottom: 8 },
+                      ]}
+                    >
+                      And which said person had accomplish{" "}
+                      <Text style={{ fontWeight: "bold" }}>
+                        Barangay Ordinance No.14
+                      </Text>
+                      . This ordinance is imposing Barangay Permit fee and it is
+                      required for every business Trade or any transaction
+                      within the jurisdiction of this Barangay.
+                    </Text>
+                    <Text
+                      style={[
+                        styles.bodyText,
+                        { textAlign: "justify", marginBottom: 8 },
+                      ]}
+                    >
+                      This Barangay permit on business indorsed to this
+                      Municipality for registration purposes only.
+                    </Text>
+                    <Text
+                      style={[
+                        styles.bodyText,
+                        { marginTop: 10, marginBottom: 8 },
+                      ]}
+                    >
+                      Given this{" "}
+                      {new Date().toLocaleDateString("en-PH", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                      , at {settings ? settings.barangay : "________________"},
+                      {settings ? settings.municipality : "________________"},
+                      {settings ? settings.province : "________________"}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.bodyText,
+                        { textAlign: "justify", marginBottom: 8 },
+                      ]}
+                    >
+                      This Barangay Permit is not valid without official
+                      receipt.
+                    </Text>
+                  </>
+                  <CertificateFooter
+                    styles={styles}
+                    captainName={captainName}
+                    amount={amount}
+                  />
                 </View>
               </Page>
             </Document>

@@ -10,14 +10,13 @@ import { sort } from "@/service/income/incomeSort";
 import type { Income } from "@/types/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
-import { CircleEllipsis, HandCoins, PhilippinePeso, Trash } from "lucide-react";
+import { CircleEllipsis, Droplets, HandCoins, PhilippinePeso, Trash } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
   Banknote,
   Gift,
   Coins,
-  Layers,
   HousePlus,
 } from "lucide-react"; // or custom icons
 import SummaryCardIncome from "@/components/summary-card/income";
@@ -274,21 +273,21 @@ export default function IncomePage() {
           }}
         />
         <SummaryCardIncome
-          title="Government Funds (IRA)"
+          title="Water System"
           value={Intl.NumberFormat("en-US").format(filteredData
-            .filter((d) => d.category === "Government Funds")
+            .filter((d) => d.category === "Water System")
             .reduce((acc, item) => acc + item.amount, 0))}
-          icon={<Layers size={50} />}
+          icon={<Droplets size={50} />}
           onClick={async () => {
-            const filtered = filteredData.filter((d) => d.category === "Government Funds");
-            const blob = await pdf(<IncomePDF filter="Government Funds" incomes={filtered} />).toBlob();
+            const filtered = filteredData.filter((d) => d.category === "Water System");
+            const blob = await pdf(<IncomePDF filter="Water System" incomes={filtered} />).toBlob();
             const buffer = await blob.arrayBuffer();
             const contents = new Uint8Array(buffer);
             try {
-              await writeFile("GovernmentFunds.pdf", contents, { baseDir: BaseDirectory.Document });
-              toast.success("Government Funds PDF saved", { description: "Saved in Documents folder" });
+              await writeFile("WaterSystem.pdf", contents, { baseDir: BaseDirectory.Document });
+              toast.success("Water System PDF saved", { description: "Saved in Documents folder" });
             } catch (e) {
-              toast.error("Error", { description: "Failed to save Government Funds PDF" });
+              toast.error("Error", { description: "Failed to save Water System PDF" });
             }
           }}
         />

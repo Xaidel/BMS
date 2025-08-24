@@ -291,27 +291,6 @@ export default function AddLogbookModal({ onSave }: { onSave: () => void }) {
                     </FormItem>
                   )}
                 />
-                {/* Status */}
-                <FormField
-                  control={form.control}
-                  name="status"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-black font-bold text-xs">
-                        Status
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          placeholder="Enter status"
-                          {...field}
-                          className="text-black"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 {/* Total Hours */}
                 <FormField
                   control={form.control}

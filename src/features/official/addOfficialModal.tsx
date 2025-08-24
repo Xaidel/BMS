@@ -20,7 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { CalendarIcon, Plus } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { invoke } from "@tauri-apps/api/core";
 import { officialSchema } from "@/types/formSchema";
@@ -38,12 +38,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Official } from "@/types/types";
 
 export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
   const [openCalendarTermStart, setOpenCalendarTermStart] = useState(false);
   const [openCalendarTermEnd, setOpenCalendarTermEnd] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [imagePreview, setImagePreview] = useState("");
+  const [existingOfficials, setExistingOfficials] = useState<Official[]>([]);
 
   const form = useForm<z.infer<typeof officialSchema>>({
     resolver: zodResolver(officialSchema),
@@ -59,13 +61,34 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
       zone: "",
     },
   });
-  console.log(imagePreview)
+  console.log(imagePreview);
+  useEffect(() => {
+    if (openModal) {
+      invoke("fetch_all_officials_command")
+        .then((res: any) => setExistingOfficials(res))
+        .catch((err) => {
+          console.error("Failed to fetch officials:", err);
+          toast.error("Could not load existing officials");
+        });
+    }
+  }, [openModal]);
   async function onSubmit(values: z.infer<typeof officialSchema>) {
+    const duplicate = existingOfficials.find(
+      (o) =>
+        o.name.toLowerCase() === values.name.toLowerCase() &&
+        o.section === values.section
+    );
+
+    if (duplicate) {
+      toast.error("An official with this name and section already exists!");
+      return;
+    }
+
     try {
       await invoke("insert_official_command", {
         official: {
           ...values,
-          term_start: values.term_start?.toISOString().split("T")[0], // must be string for Rust
+          term_start: values.term_start?.toISOString().split("T")[0],
           term_end: values.term_end?.toISOString().split("T")[0],
         },
       });
@@ -76,9 +99,8 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
 
       setOpenModal(false);
       form.reset();
-      setImagePreview("")
-      ;
-      onSave(); // refresh the data in parent
+      setImagePreview("");
+      onSave();
     } catch (err) {
       console.error("Insert official failed:", err);
       toast.error("Failed to add official");
@@ -110,7 +132,10 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="text-center text-black space-y-4">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="text-center text-black space-y-4"
+          >
             <DialogHeader>
               <DialogTitle className="text-black">Create Official</DialogTitle>
               <DialogDescription className="text-sm">
@@ -150,16 +175,25 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
                       Section
                     </FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger className="w-full text-black border-black/15">
                             <SelectValue placeholder="Select section" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="Barangay Officials">Barangay Officials</SelectItem>
-                          <SelectItem value="SK Officials">SK Officials</SelectItem>
-                          <SelectItem value="Tanod Officials">Tanod Officials</SelectItem>
+                          <SelectItem value="Barangay Officials">
+                            Barangay Officials
+                          </SelectItem>
+                          <SelectItem value="SK Officials">
+                            SK Officials
+                          </SelectItem>
+                          <SelectItem value="Tanod Officials">
+                            Tanod Officials
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                     </FormControl>
@@ -177,7 +211,10 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
                       Role
                     </FormLabel>
                     <FormControl>
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select
+                        onValueChange={field.onChange}
+                        value={field.value}
+                      >
                         <FormControl>
                           <SelectTrigger className="w-full text-black border-black/15">
                             <SelectValue placeholder="Select role" />
@@ -186,24 +223,48 @@ export default function AddOfficialModal({ onSave }: { onSave: () => void }) {
                         <SelectContent>
                           {form.watch("section") === "Barangay Officials" && (
                             <>
-                              <SelectItem value="Barangay Captain">Barangay Captain</SelectItem>
-                              <SelectItem value="Barangay Councilor">Barangay Councilor</SelectItem>
-                              <SelectItem value="Secretary">Secretary</SelectItem>
-                              <SelectItem value="Treasurer">Treasurer</SelectItem>
+                              <SelectItem value="Barangay Captain">
+                                Barangay Captain
+                              </SelectItem>
+                              <SelectItem value="Barangay Councilor">
+                                Barangay Councilor
+                              </SelectItem>
+                              <SelectItem value="Secretary">
+                                Secretary
+                              </SelectItem>
+                              <SelectItem value="Treasurer">
+                                Treasurer
+                              </SelectItem>
+                              <SelectItem value="Encoder">
+                                Encoder
+                              </SelectItem>
                               <SelectItem value="Driver">Driver</SelectItem>
-                              <SelectItem value="Care Taker">Care Taker</SelectItem>
+                              <SelectItem value="Care Taker">
+                                Care Taker
+                              </SelectItem>
+                              <SelectItem value="Others">
+                                Others
+                              </SelectItem>
                             </>
                           )}
                           {form.watch("section") === "SK Officials" && (
                             <>
-                              <SelectItem value="SK Chairman">SK Chairman</SelectItem>
-                              <SelectItem value="SK Councilor">SK Councilor</SelectItem>
+                              <SelectItem value="SK Chairman">
+                                SK Chairman
+                              </SelectItem>
+                              <SelectItem value="SK Councilor">
+                                SK Councilor
+                              </SelectItem>
                             </>
                           )}
                           {form.watch("section") === "Tanod Officials" && (
                             <>
-                              <SelectItem value="Chief Tanod">Chief Tanod</SelectItem>
-                              <SelectItem value="Tanod Member">Tanod Member</SelectItem>
+                              <SelectItem value="Chief Tanod">
+                                Chief Tanod
+                              </SelectItem>
+                              <SelectItem value="Tanod Member">
+                                Tanod Member
+                              </SelectItem>
                             </>
                           )}
                         </SelectContent>

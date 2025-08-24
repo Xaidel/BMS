@@ -42,6 +42,20 @@ pub fn fetch_all_officials_command() -> Result<Vec<Official>, String> {
 pub fn insert_official_command(official: Official) -> Result<(), String> {
     let conn = establish_connection().map_err(|e| e.to_string())?;
 
+    // Check for duplicate first
+    let mut stmt = conn
+        .prepare("SELECT COUNT(*) FROM officials WHERE LOWER(name) = LOWER(?1) AND section = ?2")
+        .map_err(|e| e.to_string())?;
+
+    let count: i32 = stmt
+        .query_row(params![official.name, official.section], |row| row.get(0))
+        .map_err(|e| e.to_string())?;
+
+    if count > 0 {
+        return Err("An official with this name and section already exists.".into());
+    }
+
+    // Insert official if no duplicate
     conn.execute(
         "INSERT INTO officials (name, role, image, section, age, contact, term_start, term_end, zone)
          VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",

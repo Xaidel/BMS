@@ -97,6 +97,7 @@ export default function ViewOfficialModal({ person, onClose }) {
       });
       toast.success("Official deleted successfully!");
       onClose();
+      window.location.reload()
     } catch (error) {
       toast.error("Failed to delete official");
       console.error(error);

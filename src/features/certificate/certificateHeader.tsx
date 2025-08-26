@@ -10,7 +10,9 @@ type Settings = {
 
 export default function CertificateHeader() {
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
-  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<string | null>(null);
+  const [logoMunicipalityDataUrl, setLogoMunicipalityDataUrl] = useState<
+    string | null
+  >(null);
   const [settings, setSettings] = useState<Settings | null>(null);
 
   useEffect(() => {
@@ -30,7 +32,8 @@ export default function CertificateHeader() {
             province: s.province || "",
           });
           if (s.logo) setLogoDataUrl(s.logo);
-          if (s.logo_municipality) setLogoMunicipalityDataUrl(s.logo_municipality);
+          if (s.logo_municipality)
+            setLogoMunicipalityDataUrl(s.logo_municipality);
         }
       })
       .catch(console.error);
@@ -77,15 +80,24 @@ export default function CertificateHeader() {
         />
       )}
 
-      <View style={{ marginBottom: 10 }}>
-        <Text style={{ textAlign: "center" }}>Republic of the Philippines</Text>
-        <Text style={{ textAlign: "center" }}>
+      <View style={{ marginBottom: 10, marginTop: 10 }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>
+          Republic of the Philippines
+        </Text>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>
           Province of {settings?.province || "Province"}
         </Text>
-        <Text style={{ textAlign: "center" }}>
+        <Text style={{ textAlign: "center", fontSize: 16 }}>
           Municipality of {settings?.municipality || "Municipality"}
         </Text>
-        <Text style={{ textAlign: "center", marginVertical: 10 }}>
+        <Text
+          style={{
+            textAlign: "center",
+            marginVertical: 3,
+            fontSize: 16,
+            fontWeight: "bold",
+          }}
+        >
           BARANGAY {settings?.barangay?.toUpperCase() || "Barangay"}
         </Text>
       </View>
@@ -104,11 +116,12 @@ export default function CertificateHeader() {
         style={{
           textAlign: "center",
           fontWeight: "bold",
-          fontSize: 18,
+          fontSize: 32,
           marginBottom: 10,
+          fontFamily: "Times-Roman",
         }}
       >
-        C E R T I F I C A T I O N
+        CERTIFICATION
       </Text>
     </View>
   );

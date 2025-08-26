@@ -16,8 +16,6 @@ export function logbookSort(data: Logbook[], term: string): Logbook[] {
       return filterByActiveToday(data);
     case "All Logbook Entries":
       return [...data];
-    case "Remarks":
-      return sortByRemarks(data);
     case "This Month":
       return filterByThisMonth(data);
     default:
@@ -48,9 +46,6 @@ function filterByActiveToday(data: Logbook[]): Logbook[] {
     entryDate.setHours(0, 0, 0, 0);
     return entryDate.getTime() === today.getTime();
   });
-}
-function sortByRemarks(data: Logbook[]): Logbook[] {
-  return [...data].sort((a, b) => (a.remarks ?? "").localeCompare(b.remarks ?? ""));
 }
 function filterByThisMonth(data: Logbook[]): Logbook[] {
   const today = new Date();

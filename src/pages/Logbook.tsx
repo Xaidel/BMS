@@ -35,10 +35,8 @@ const filters = [
   "Absent",
   "Status",
   "Active Today",
-  "Remarks",
   "This Month",
 ];
-
 
 const columns: ColumnDef<Logbook>[] = [
   {

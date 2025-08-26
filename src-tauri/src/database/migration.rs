@@ -105,7 +105,6 @@ pub fn migrate(conn: &Connection) -> Result<()> {
             zone TEXT,
             section TEXT
         );
-        DROP TABLE IF EXISTS officials; -- Ensure no conflicts with existing table
         CREATE TABLE IF NOT EXISTS officials (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL,

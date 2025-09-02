@@ -30,7 +30,6 @@ const filters = [
   "All Events",
   "Date ASC",
   "Date DESC",
-  "Venue",
   "Upcoming",
   "Ongoing",
   "Finished",

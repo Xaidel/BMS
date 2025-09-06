@@ -21,6 +21,7 @@ import {
 import searchCertificate from "@/service/certificate/searchCertificate";
 import SummaryCard from "@/components/summary-card/certificate";
 import { invoke } from "@tauri-apps/api/core";
+import SummaryCardCertificate from "@/components/summary-card/certificate";
 
 const filters = [
   "All Certificates",
@@ -194,7 +195,7 @@ export default function Certificate() {
   return (
     <>
       <div className="flex flex-wrap gap-5 justify-around mb-5 mt-1">
-        <SummaryCard
+        <SummaryCardCertificate
           title="Total Certificates"
           value={totalCertificates}
           icon={<FileText size={50} />}
@@ -218,7 +219,7 @@ export default function Certificate() {
             }
           }}
         />
-        <SummaryCard
+        <SummaryCardCertificate
           title="Issued Certificates Today"
           value={issuedTodayCertificates.length}
           icon={<CheckCircle size={50} />}
@@ -242,7 +243,7 @@ export default function Certificate() {
             }
           }}
         />
-        <SummaryCard
+        <SummaryCardCertificate
           title="Active Certificates"
           value={activeCertificates}
           icon={<CheckCircle size={50} />}
@@ -271,7 +272,7 @@ export default function Certificate() {
             }
           }}
         />
-        <SummaryCard
+        <SummaryCardCertificate
           title="Expired Certificates"
           value={expiredCertificates}
           icon={<XCircle size={50} />}
